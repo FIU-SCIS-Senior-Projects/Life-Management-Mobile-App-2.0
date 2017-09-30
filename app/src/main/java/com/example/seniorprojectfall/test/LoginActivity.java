@@ -20,6 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+//import in.goodiebag.carouselpicker.CarouselPicker;
+
 public class LoginActivity extends AppCompatActivity {
 
 
@@ -62,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         registerUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this,CreateUserActivity.class);
+                Intent i = new Intent(LoginActivity.this,MainActivity2.class);
                 startActivity(i);
             }
         });

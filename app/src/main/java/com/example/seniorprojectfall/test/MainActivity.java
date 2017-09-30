@@ -39,14 +39,6 @@ public class MainActivity extends AppCompatActivity {
             androidRightArrowButton.startAnimation(zoomAnimation);
 
 
-
-
-
-
-
-
-
-
         }
 
 }

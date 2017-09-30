@@ -54,7 +54,7 @@ public class SecondScreenActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v){
-                Intent i = new Intent(SecondScreenActivity.this,activity_fourth_screen.class);
+                Intent i = new Intent(SecondScreenActivity.this,ThirdScreenActivity.class);
                 startActivity(i);
             }
         });

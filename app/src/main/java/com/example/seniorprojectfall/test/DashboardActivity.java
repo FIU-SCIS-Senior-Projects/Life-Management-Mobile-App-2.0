@@ -1,8 +1,15 @@
 package com.example.seniorprojectfall.test;
 
+
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,30 +23,81 @@ import android.view.MenuItem;
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_test);
+
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+
+            ViewPager vp_pages= (ViewPager)findViewById(R.id.vp_pages);
+            PagerAdapter pagerAdapter=new FragmentAdapter (getSupportFragmentManager());
+            vp_pages.setAdapter(pagerAdapter);
+
+            int[] tabIcons = {R.drawable.joy,R.drawable.passion,R.drawable.giving_back};
+            TabLayout tbl_pages= (TabLayout)findViewById(R.id.tbl_pages);
+            tbl_pages.setupWithViewPager(vp_pages);
+            tbl_pages.getTabAt(0).setIcon(tabIcons[0]);
+            tbl_pages.getTabAt(1).setIcon(tabIcons[1]);
+            tbl_pages.getTabAt(2).setIcon(tabIcons[2]);
+
+
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.setDrawerListener(toggle);
+            toggle.syncState();
+
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+        }
+
+
+
+
+
+    class FragmentAdapter extends FragmentPagerAdapter {
+
+        public FragmentAdapter(FragmentManager fm){
+            super(fm);
+        }
+        @Override
+        public android.support.v4.app.Fragment getItem(int position){
+            switch (position){
+                case 0:
+                    return new FragmentJoy();
+                case 1:
+                    return new FragmentPassion();
+                case 2:
+                    return new FragmentContribution();
+
             }
-        });
+            return null;
+        }
+        @Override
+        public int getCount(){
+            return 3;
+        }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        @Override
+        public CharSequence getPageTitle(int position){
+            switch (position){
+                case 0:
+                    return "";
+                case 1:
+                    return "";
+                case 2:
+                    return "";
+                default:return null;
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+            }
+        }
+
+
     }
 
     @Override
@@ -55,7 +113,7 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.dashboard, menu);
+        getMenuInflater().inflate(R.menu.test, menu);
         return true;
     }
 
@@ -67,7 +125,7 @@ public class DashboardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_signout) {
             return true;
         }
 
@@ -80,17 +138,26 @@ public class DashboardActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_new_cycle) {
+            // Handle new cycle action
+        } else if (id == R.id.nav_current_cycle) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_prev_cycle) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_settings) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_view_coaches) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_share_progress) {
+
+        }
+        else if (id == R.id.nav_chat) {
+
+        }
+        else if (id == R.id.nav_update_calendar) {
+
+        }
+        else if (id == R.id.nav_invite_friend) {
 
         }
 

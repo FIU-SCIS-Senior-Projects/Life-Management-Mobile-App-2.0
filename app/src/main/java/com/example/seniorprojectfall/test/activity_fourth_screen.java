@@ -20,7 +20,7 @@ import com.google.android.youtube.player.YouTubePlayer.Provider;
 
 
 
-public class    activity_fourth_screen extends YouTubeBaseActivity {
+public class activity_fourth_screen extends YouTubeBaseActivity {
 
     private YouTubePlayerView youTubePlayerView;
     private YouTubePlayer.OnInitializedListener onInitializedListener;
