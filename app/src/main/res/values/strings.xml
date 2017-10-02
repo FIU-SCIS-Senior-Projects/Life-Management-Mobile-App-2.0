@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Life Management First</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_signout">Sign Out</string>
+    <string name="action_joy">JOY</string>
+    <string name="action_passion">PASSION</string>
+    <string name="action_givingback">GIVING BACK</string>
+</resources>
