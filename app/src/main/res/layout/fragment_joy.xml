@@ -45,7 +45,7 @@
                 android:textSize="18sp"
                 android:gravity="center"
                 android:padding="2dp"
-                android:text="03/23/2017"
+                android:text="03/16/2017"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
             <TextView
@@ -183,7 +183,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textViewAct1"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -202,7 +202,7 @@
                 android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
-                android:background="#FFE4C70A"
+                android:background="#FFF5F515"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="16"
@@ -490,7 +490,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="#FFE4C70A"
+                android:background="#FFF5F515"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="9"
@@ -502,23 +502,22 @@
                 android:layout_width="62dp"
                 android:layout_height="62dp"
                 android:layout_gravity="center"
-                android:background="#ffffff" >
+                android:background="#ffffff">
 
-                <com.sccomponents.gauges.ScArcGauge
-                    xmlns:sc="http://schemas.android.com/apk/res-auto"
+                <com.sccomponents.gauges.ScArcGauge xmlns:sc="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/gauge_joy_activity1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    sc:angleStart="135"
-                    sc:angleSweep="270"
-                    sc:progressColor="#FFE4690A"
-                    sc:progressSize="10dp"
-                    sc:strokeColor="#e4e1e1"
-                    sc:strokeSize="10dp"
                     android:paddingBottom="20dp"
                     android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:paddingTop="10dp"
-                    android:paddingRight="10dp"/>
+                    sc:angleStart="135"
+                    sc:angleSweep="270"
+                    sc:progressColor="#FF1BF41F"
+                    sc:progressSize="10dp"
+                    sc:strokeColor="#e4e1e1"
+                    sc:strokeSize="10dp" />
 
 
                 <TextView
@@ -527,8 +526,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="0%"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16dp"/>
+                    android:textStyle="bold"
+                    android:textColor="#FF18DB1B"
+                    android:textSize="16dp" />
 
             </FrameLayout>
 
@@ -542,6 +542,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textViewAct2"
                 android:layout_width="91dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -560,7 +561,7 @@
                 android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
-                android:background="#FFE4C70A"
+                android:background="#FFF5F515"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="16"
@@ -847,7 +848,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="#FFE4C70A"
+                android:background="#FFF5F515"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="9"
@@ -868,7 +869,7 @@
                     android:layout_height="wrap_content"
                     sc:angleStart="135"
                     sc:angleSweep="270"
-                    sc:progressColor="#FFE4690A"
+                    sc:progressColor="#FF1BF41F"
                     sc:progressSize="10dp"
                     sc:strokeColor="#e4e1e1"
                     sc:strokeSize="10dp"
@@ -884,7 +885,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="0%"
-                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textColor="#FF18DB1B"
                     android:textSize="16dp"/>
 
             </FrameLayout>
@@ -899,7 +901,8 @@
             android:background="#ffffff">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textViewCategScore"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:background="@color/colorPrimary"
@@ -924,7 +927,7 @@
                     android:layout_height="wrap_content"
                     sc:angleStart="135"
                     sc:angleSweep="270"
-                    sc:progressColor="#FFE4690A"
+                    sc:progressColor="#FFF47D15"
                     sc:progressSize="10dp"
                     sc:strokeColor="#e4e1e1"
                     sc:strokeSize="10dp"
@@ -940,7 +943,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="0%"
-                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textColor="#FFF47D15"
                     android:textSize="16dp"/>
 
             </FrameLayout>
@@ -972,7 +976,7 @@
                     android:layout_height="wrap_content"
                     sc:angleStart="135"
                     sc:angleSweep="270"
-                    sc:progressColor="#FFE4690A"
+                    sc:progressColor="#FFF41D15"
                     sc:progressSize="10dp"
                     sc:strokeColor="#e4e1e1"
                     sc:strokeSize="10dp"
@@ -988,7 +992,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="0%"
-                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textColor="#FFF41D15"
                     android:textSize="16dp"/>
 
             </FrameLayout>
@@ -1001,6 +1006,8 @@
     </LinearLayout>
 
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -1011,20 +1018,19 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/colorPrimary"
             android:gravity="center"
+            android:background="@color/colorPrimary"
             android:text="Goals for this period: Please answer these 4 questions below"
-
             android:textColor="#ffffff"
             android:textStyle="bold" />
 
+
+
     </LinearLayout>
 
-
-
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -1050,7 +1056,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="-5dp"
                 android:allowUndo="false"
-                 />
+                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -1124,7 +1130,6 @@
 
         </LinearLayout>
 
-</ScrollView>
-
+    </ScrollView>
 
 </LinearLayout>

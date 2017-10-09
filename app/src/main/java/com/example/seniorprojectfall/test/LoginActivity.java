@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     Button signIn, registerUser;
     ListView listViewUsers;
 
-    List<User> listUsers; //store all the artist from firebase database
+    ArrayList<User> listUsers; //store all the artist from firebase database
 
 
     DatabaseReference databaseUsers; //our database reference object
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         registerUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this,MainActivity2.class);
+                Intent i = new Intent(LoginActivity.this,CreateUserActivity.class);
                 startActivity(i);
             }
         });
@@ -117,7 +117,20 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Logged In ", Toast.LENGTH_LONG).show();
                 isValid = true;
                 Intent i = new Intent(LoginActivity.this,DashboardActivity.class);
-                startActivity(i);
+
+
+                //temp
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("mylist", listUsers);
+                i.putExtras(bundle);
+                i.putExtra("userNameY",name);
+                i.putExtra("passwordY",pass);
+
+
+
+                this.startActivity(i);
+            }else{
+                System.out.println("VEt " + f.getUsername() + " / " + f.getPassword());
             }
         }
 

@@ -32,11 +32,9 @@ import java.util.ArrayList;
         static int counter = 0;
 
 
-
         public CoverFlowAdapter(AppCompatActivity context, ArrayList<Joy2> objects) {
             this.activity = context;
             this.data = objects;
-
         }
 
         @Override
