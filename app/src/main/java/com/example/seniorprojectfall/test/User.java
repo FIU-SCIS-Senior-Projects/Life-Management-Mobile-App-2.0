@@ -18,6 +18,7 @@ public class User implements Parcelable{
     String dob;
     boolean coachFlag;
     boolean adminFlag;
+    String id;
 
     public User(){
 
@@ -29,9 +30,10 @@ public class User implements Parcelable{
         dob = "";
         coachFlag  = false;
         adminFlag = false;
+        id = "";
     }
 
-    public User(String email, String username, String firstName, String lastName, String dob, String password, boolean admin, boolean coach) {
+    public User(String email, String username, String firstName, String lastName, String dob, String password, boolean admin, boolean coach, String id) {
         this.email = email;
         this.username = username;
         this.firstName = firstName;
@@ -40,6 +42,7 @@ public class User implements Parcelable{
         this.coachFlag = coach;
         this.adminFlag = admin;
         this.password = password;
+        this.id = id;
     }
 
     public User(Parcel in){
@@ -50,6 +53,7 @@ public class User implements Parcelable{
         this.lastName = in.readString();
         this.dob = in.readString();
 
+
         int m = 0;
         m = in.readInt();
 
@@ -57,9 +61,17 @@ public class User implements Parcelable{
         m = in.readInt();
 
         this.password = in.readString();
+        this.id = in.readString();
 
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public boolean isCoachFlag() {
         return coachFlag;
@@ -142,6 +154,7 @@ public class User implements Parcelable{
         parcel.writeInt((coachFlag) ? 1 : 0);
         parcel.writeInt((adminFlag) ? 1 : 0);
         parcel.writeString(password);
+        parcel.writeString(id);
 
     }
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="140dp"
+    android:layout_height="174dp"
+    >
+
+    <ImageView
+        android:id="@+id/imageGivingback"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/labelGivingback"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmallInverse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</FrameLayout>

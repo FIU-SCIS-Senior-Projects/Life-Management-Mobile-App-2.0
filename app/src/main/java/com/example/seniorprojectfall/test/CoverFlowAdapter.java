@@ -25,14 +25,14 @@ import java.util.ArrayList;
 
     public class CoverFlowAdapter extends BaseAdapter{
 
-        private ArrayList<Joy2> data;  //contains all the activities
+        private ArrayList<Joy> data;  //contains all the activities
         private AppCompatActivity activity;
         private ArrayList<String> n = new ArrayList<>(); //contains the activities the user will selects
         int positionSaver = 0;
         static int counter = 0;
 
 
-        public CoverFlowAdapter(AppCompatActivity context, ArrayList<Joy2> objects) {
+        public CoverFlowAdapter(AppCompatActivity context, ArrayList<Joy> objects) {
             this.activity = context;
             this.data = objects;
         }
@@ -45,7 +45,7 @@ import java.util.ArrayList;
 
 
         @Override
-        public Joy2 getItem(int position) {
+        public Joy getItem(int position) {
             return data.get(position);
         }
 

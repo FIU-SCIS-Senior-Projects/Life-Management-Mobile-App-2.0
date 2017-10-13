@@ -4,8 +4,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>   //life management title color
-        <item name="colorPrimaryDark">@color/colorPrimary</item>  //upper part of app
+        <item name="colorPrimary">@color/colorPrimary</item>
+        //life management title color
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        //upper part of app
         <item name="colorAccent">@color/colorAccent</item>
 
 

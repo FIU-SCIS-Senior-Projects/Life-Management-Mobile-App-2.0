@@ -409,16 +409,16 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         progressDialog.show();
 
         //generating unique key
-        //String id = databaseReference.push().getKey();
+        String id = databaseReference.push().getKey();
 
-        User currentUser = new User(email,currentusername,firstN,lastN,Dob,password,false,false);
+        User currentUser = new User(email,currentusername,firstN,lastN,Dob,password,false,false,id);
 
         //push()
         databaseReference.push().setValue(currentUser);
         progressDialog.dismiss();
         Toast.makeText(getApplication(),"Saved Successfully",Toast.LENGTH_LONG).show();
 
-        Intent i = new Intent(CreateUserActivity.this,MainActivity2.class);
+        Intent i = new Intent(CreateUserActivity.this,MainJoyActivity.class);
         startActivity(i);
 
     } //end of method addData

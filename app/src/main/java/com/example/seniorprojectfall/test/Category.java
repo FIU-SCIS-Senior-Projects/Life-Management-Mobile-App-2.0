@@ -5,10 +5,13 @@ import java.util.*;
 public class Category {
 
 
-    String name;
-    Category c1;
-    Category c2;
-    Category c3;
+    String endingDate;
+    String numberOfWeeks;
+    String sprintActivityid1;
+    String sprintActivityid2;
+    String sprintOverallScore;
+    String startingDate;
+
 
 
 
@@ -16,43 +19,61 @@ public class Category {
 
     }
 
-    public Category(Category c1, Category c2, Category c3, String n) {
-        this.c1 = c1;
-        this.c2 = c2;
-        this.c3 = c3;
-        this.name = n;
+    public Category(String endingDate, String numberOfWeeks, String sprintActivityid1, String sprintActivityid2, String sprintOverallScore, String startingDate) {
+        this.endingDate = endingDate;
+        this.numberOfWeeks = numberOfWeeks;
+        this.sprintActivityid1 = sprintActivityid1;
+        this.sprintActivityid2 = sprintActivityid2;
+        this.sprintOverallScore = sprintOverallScore;
+        this.startingDate = startingDate;
     }
 
-    public String getName() {
-        return name;
+    public String getEndingDate() {
+        return endingDate;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEndingDate(String endingDate) {
+        this.endingDate = endingDate;
     }
 
-    public Category getC1() {
-        return c1;
+    public String getNumberOfWeeks() {
+        return numberOfWeeks;
     }
 
-    public void setC1(Category c1) {
-        this.c1 = c1;
+    public void setNumberOfWeeks(String numberOfWeeks) {
+        this.numberOfWeeks = numberOfWeeks;
     }
 
-    public Category getC2() {
-        return c2;
+    public String getSprintActivityid1() {
+        return sprintActivityid1;
     }
 
-    public void setC2(Category c2) {
-        this.c2 = c2;
+    public void setSprintActivityid1(String sprintActivityid1) {
+        this.sprintActivityid1 = sprintActivityid1;
     }
 
-    public Category getC3() {
-        return c3;
+    public String getSprintActivityid2() {
+        return sprintActivityid2;
     }
 
-    public void setC3(Category c3) {
-        this.c3 = c3;
+    public void setSprintActivityid2(String sprintActivityid2) {
+        this.sprintActivityid2 = sprintActivityid2;
+    }
+
+    public String getSprintOverallScore() {
+        return sprintOverallScore;
+    }
+
+    public void setSprintOverallScore(String sprintOverallScore) {
+        this.sprintOverallScore = sprintOverallScore;
+    }
+
+    public String getStartingDate() {
+        return startingDate;
+    }
+
+    public void setStartingDate(String startingDate) {
+        this.startingDate = startingDate;
     }
 }
 
