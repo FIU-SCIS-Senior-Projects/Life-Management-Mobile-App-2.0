@@ -37,14 +37,19 @@ public class Dashboard extends AppCompatActivity
 
     // Lazaro code for DB
     DatabaseReference databaseCategories;
-    ArrayList<Category> currentJoyCategories; //joy categories for users
-
+    ArrayList<Category> currentJoyCategories; //joy category for user
+    ActivitiesSprint currentJoyActivity;
 
     User currentUser; //holds the information of the current logged-in user
+
 
     static String activity1Joy;    //save data from DB for user's activity1Joy into this variable
     static String endingDate;
     static String startingDate;
+    static String numberOfWeeksStatic;
+    static String sprintJoyid;
+    static String currentcategoryid;
+    static TreeMap<Integer,ActivitiesSprint> activitiesJoyMap;
     boolean pass = false;
 
 
@@ -88,21 +93,16 @@ public class Dashboard extends AppCompatActivity
         });
 
 
+        activitiesJoyMap = new TreeMap<>();
+        currentJoyCategories = new ArrayList<>();
+
         //Lazaro code for DB
 
-
-
         Intent in = getIntent();
-        String us = in.getExtras().getString("userNameY");  //has username that the user entered
-        String pa = in.getExtras().getString("passwordY");  //the password that user entered
-        String rd = in.getExtras().getString("ending");
-        String start = in.getExtras().getString("starting");
+        String usernameRef = in.getExtras().getString("userNameY");  //has username that the user entered
+        String passRef = in.getExtras().getString("passwordY");  //the password that user entered
 
-        //convert to format mm/dd/yyyy
-        endingDate = rd.substring(0,2) + "/" + rd.substring(2,4) + "/" + rd.substring(4);
 
-        //convert to format mm/dd/yyyy
-        startingDate = start.substring(0,2) + "/" + start.substring(2,4) + "/" + start.substring(4);
 
         //temp
         Bundle bundle = getIntent().getExtras();
@@ -114,8 +114,8 @@ public class Dashboard extends AppCompatActivity
 
         for(int i=0; i<arr.size();i++) {
 
-//(email,currentusername,firstN,lastN,Dob,password,false,false,id);
-            if((arr.get(i).username.toString().equals(us) && (arr.get(i).password.toString().equals(pa)))){
+    //(email,currentusername,firstN,lastN,Dob,password,false,false,id);
+            if((arr.get(i).username.toString().equals(usernameRef) && (arr.get(i).password.toString().equals(passRef)))){
                     currentUser = new User(arr.get(i).email.toString(),arr.get(i).username.toString(),
                                             arr.get(i).firstName.toString(),arr.get(i).lastName.toString(),
                                             arr.get(i).dob.toString(),arr.get(i).password.toString(),
@@ -134,22 +134,70 @@ public class Dashboard extends AppCompatActivity
         }
 
 
-        //getting the reference of artists node
-        //databaseCategories = FirebaseDatabase.getInstance().getReference("Categories");
 
-        //currentJoyCategories = new ArrayList<>();
-        //loginUser();
+        ArrayList<ActivitiesSprint> activitiesJoyList = new ArrayList<>();
 
 
-        // Finish Lazaro code for DB
+        activitiesJoyList = bundle.getParcelableArrayList("currentjoyactivitylist");
+        int j = 0;
+        for(int i=0; i<activitiesJoyList.size();i++) {
+
+            if(activitiesJoyList.get(i).userId.equals(currentUser.id)){
+
+                currentJoyActivity = new ActivitiesSprint(activitiesJoyList.get(i).activityScore,activitiesJoyList.get(i).actualPoints,
+                        activitiesJoyList.get(i).categoryId,activitiesJoyList.get(i).activityName,activitiesJoyList.get(i).sprintDailyPoints,
+                        activitiesJoyList.get(i).targetPoints,activitiesJoyList.get(i).userId);
+
+                        activitiesJoyMap.put(j,currentJoyActivity);
+                        ++j;
+            }
+        }
 
 
-        // Write code here to retrieve from DB value for user's activity1
-        // and assign this retrieved value to static variable
-        // activity 1 ( here retrieved value for user's username saved in variable us
-        // is assigned to static variable us). Then use this value to set TextView variable
-        // for activity1 in FragmentJoy.java
+        ArrayList<Category> mycategorylist = new ArrayList<>();
+        mycategorylist = bundle.getParcelableArrayList("categoriesJoyList");
 
+        int h = 0;
+        String userid = currentUser.id;
+        for(int i=0; i<mycategorylist.size();i++) {
+
+            //(email,currentusername,firstN,lastN,Dob,password,false,false,id);
+
+            String s = mycategorylist.get(i).userId;
+
+            System.out.println("testing tempsize " +  mycategorylist.size() + " f is " + userid + " s is " + s);
+
+            if(s.equals(userid)){
+
+                currentJoyCategories.add(new Category(mycategorylist.get(i).categoryid,mycategorylist.get(i).endingDate,mycategorylist.get(i).goal1,
+                        mycategorylist.get(i).goal2,mycategorylist.get(i).goal3, mycategorylist.get(i).goal4,mycategorylist.get(i).numberOfWeeks,
+                        mycategorylist.get(i).sprintActivityid1,mycategorylist.get(i).sprintActivityid2,
+                        mycategorylist.get(i).sprintOverallScore,mycategorylist.get(i).startingDate,mycategorylist.get(i).userId));
+
+                //System.out.println("passed");
+            }
+
+        }
+
+        //REMEMBER insert code here (traverse currentJoyCategories for the correct sprint, user may have more then 1 sprint)
+
+        //convert to format mm/dd/yyyy
+        endingDate = currentJoyCategories.get(0).endingDate.substring(0,2) + "/" +
+                currentJoyCategories.get(0).endingDate.substring(2,4) + "/" + currentJoyCategories.get(0).endingDate.substring(4);
+
+        //convert to format mm/dd/yyyy
+        //System.out.println("heystart " + startRef);
+        startingDate = currentJoyCategories.get(0).startingDate.substring(0,2) + "/" +
+                currentJoyCategories.get(0).startingDate.substring(2,4) + "/" + currentJoyCategories.get(0).startingDate.substring(4);
+
+
+
+        System.out.println("sprintjoyid " + sprintJoyid);
+
+        //numberOfWeeksStatic = numofWeeksRef;
+        numberOfWeeksStatic = currentJoyCategories.get(0).numberOfWeeks;
+
+        currentcategoryid = currentJoyCategories.get(0).categoryid;
 
 
 
