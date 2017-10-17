@@ -50,6 +50,8 @@ public class Dashboard extends AppCompatActivity
     static String sprintJoyid;
     static String currentcategoryid;
     static TreeMap<Integer,ActivitiesSprint> activitiesJoyMap;
+    static String actsprint1joy;
+    static String actsprint2joy;
     boolean pass = false;
 
 
@@ -178,6 +180,9 @@ public class Dashboard extends AppCompatActivity
             }
 
         }
+
+        actsprint1joy = currentJoyCategories.get(0).sprintActivityid1;
+        actsprint2joy = currentJoyCategories.get(0).sprintActivityid2;
 
         //REMEMBER insert code here (traverse currentJoyCategories for the correct sprint, user may have more then 1 sprint)
 

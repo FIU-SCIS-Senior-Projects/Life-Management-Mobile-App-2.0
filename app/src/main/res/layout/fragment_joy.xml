@@ -213,6 +213,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/textViewTarget1"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
@@ -220,7 +221,6 @@
                     android:background="#FFF5F515"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="16"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:textColor="#000000"
                     android:textSize="18sp" />
@@ -498,7 +498,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/textViewActual1"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
@@ -508,7 +508,6 @@
                     android:background="#FFF5F515"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="9"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:textColor="#000000"
                     android:textSize="18sp" />
@@ -566,12 +565,12 @@
                     android:layout_marginRight="1dp"
                     android:layout_marginTop="10dp"
                     android:inputType="textMultiLine"
-                    android:text="Programming"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textColor="#000000"
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/textViewTarget2"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
@@ -579,7 +578,6 @@
                     android:background="#FFF5F515"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="16"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:textColor="#000000"
                     android:textSize="18sp" />
@@ -857,6 +855,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/textViewActual2"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
@@ -866,7 +865,6 @@
                     android:background="#FFF5F515"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="9"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:textColor="#000000"
                     android:textSize="18sp" />

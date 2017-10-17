@@ -25,7 +25,7 @@
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="5cac1efec3816114dc0247974bd7402e8cfe03e1">
+        sha1="56e1255b770e537bb9538197b1fc27f15c23b8fb">
         <dex dex="/Users/lazaro/AndroidStudioProjects/Test/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_d9e0c13221aee9de2ce87cbf12343953ab9d75d9/classes.dex" />
     </item>
 

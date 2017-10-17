@@ -153,7 +153,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     DataSnapshot activitiesSnapshot = categorySnapshot.child("JoySprints");
 
-                    //System.out.println("heyyy66 " + );
+                    System.out.println("heyyy66 " + activitiesSnapshot.getValue());
                     String []f = activitiesSnapshot.getValue().toString().split("=");
 
                     String temp = f[0];
