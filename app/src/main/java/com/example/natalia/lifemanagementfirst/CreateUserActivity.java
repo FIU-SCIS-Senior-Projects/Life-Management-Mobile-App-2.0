@@ -160,10 +160,10 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                 }
             }
 
-                //make all first character uppercase for better look in database
-                String temp = firstN.substring(0, 1).toUpperCase();
-                firstN = temp + firstN.substring(1);
-                //Toast.makeText(this,"First Name UPPER " + firstN,Toast.LENGTH_SHORT).show();
+            //make all first character uppercase for better look in database
+            String temp = firstN.substring(0, 1).toUpperCase();
+            firstN = temp + firstN.substring(1);
+            //Toast.makeText(this,"First Name UPPER " + firstN,Toast.LENGTH_SHORT).show();
 
         }
 
@@ -193,10 +193,10 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                 }
             }
 
-                //make all first character uppercase for better look in database
-                String temp = lastN.substring(0, 1).toUpperCase();
-                lastN = temp + lastN.substring(1);
-                //Toast.makeText(this,"Last Name UPPER " + lastN,Toast.LENGTH_SHORT).show();
+            //make all first character uppercase for better look in database
+            String temp = lastN.substring(0, 1).toUpperCase();
+            lastN = temp + lastN.substring(1);
+            //Toast.makeText(this,"Last Name UPPER " + lastN,Toast.LENGTH_SHORT).show();
         }
 
         //Email
@@ -273,7 +273,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
             }
         }
 
-       //username
+        //username
         if((TextUtils.isEmpty(currentusername)) || (currentusername.length()<=1)){
             Toast.makeText(this,"Username MUST contain more characters",Toast.LENGTH_SHORT).show();
             return;
@@ -409,16 +409,16 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         progressDialog.show();
 
         //generating unique key
-        //String id = databaseReference.push().getKey();
+        String id = databaseReference.push().getKey();
 
-        User currentUser = new User(email,currentusername,firstN,lastN,Dob,password,false,false);
+        User currentUser = new User(email,currentusername,firstN,lastN,Dob,password,false,false,id);
 
         //push()
-        databaseReference.push().setValue(currentUser);
+        databaseReference.child(id).setValue(currentUser);
         progressDialog.dismiss();
         Toast.makeText(getApplication(),"Saved Successfully",Toast.LENGTH_LONG).show();
 
-        Intent i = new Intent(CreateUserActivity.this,MainActivity2.class);
+        Intent i = new Intent(CreateUserActivity.this,MainJoyActivity.class);
         startActivity(i);
 
     } //end of method addData

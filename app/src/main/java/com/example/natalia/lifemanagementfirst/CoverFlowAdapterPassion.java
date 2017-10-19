@@ -23,7 +23,7 @@ public class CoverFlowAdapterPassion extends BaseAdapter{
 
     private ArrayList<Passion> activitiesTotalPassion;  //contains all the activities (passion)
     private AppCompatActivity activity;
-    private ArrayList<String> n = new ArrayList<>(); //contains the activities the user will selects
+    static ArrayList<String> n = new ArrayList<>(); //contains the activities the user will selects
     int positionSaver = 0;
     static int counter = 0;
 

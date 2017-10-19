@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="48dp"
+    android:orientation="vertical">
+    tools:showIn="@layout/app_bar_test"
+
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +57,7 @@
                 android:textSize="18sp"
                 android:gravity="center"
                 android:padding="2dp"
-                android:text="03/23/2017"
+                android:text="03/16/2017"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
             <TextView
@@ -202,7 +214,7 @@
                 android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
-                android:background="#FFE4C70A"
+                android:background="#FFF5F515"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="16"
@@ -490,7 +502,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="#FFE4C70A"
+                android:background="#FFF5F515"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="9"
@@ -502,23 +514,22 @@
                 android:layout_width="62dp"
                 android:layout_height="62dp"
                 android:layout_gravity="center"
-                android:background="#ffffff" >
+                android:background="#ffffff">
 
-                <com.sccomponents.gauges.ScArcGauge
-                    xmlns:sc="http://schemas.android.com/apk/res-auto"
+                <com.sccomponents.gauges.ScArcGauge xmlns:sc="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/gauge_joy_activity1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    sc:angleStart="135"
-                    sc:angleSweep="270"
-                    sc:progressColor="#FFE4690A"
-                    sc:progressSize="10dp"
-                    sc:strokeColor="#e4e1e1"
-                    sc:strokeSize="10dp"
                     android:paddingBottom="20dp"
                     android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:paddingTop="10dp"
-                    android:paddingRight="10dp"/>
+                    sc:angleStart="135"
+                    sc:angleSweep="270"
+                    sc:progressColor="#FF1BF41F"
+                    sc:progressSize="10dp"
+                    sc:strokeColor="#e4e1e1"
+                    sc:strokeSize="10dp" />
 
 
                 <TextView
@@ -527,8 +538,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="0%"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16dp"/>
+                    android:textStyle="bold"
+                    android:textColor="#FF18DB1B"
+                    android:textSize="16dp" />
 
             </FrameLayout>
 
@@ -561,7 +573,7 @@
                 android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
-                android:background="#FFE4C70A"
+                android:background="#FFF5F515"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="16"
@@ -848,7 +860,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="#FFE4C70A"
+                android:background="#FFF5F515"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="9"
@@ -869,7 +881,7 @@
                     android:layout_height="wrap_content"
                     sc:angleStart="135"
                     sc:angleSweep="270"
-                    sc:progressColor="#FFE4690A"
+                    sc:progressColor="#FF1BF41F"
                     sc:progressSize="10dp"
                     sc:strokeColor="#e4e1e1"
                     sc:strokeSize="10dp"
@@ -885,7 +897,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="0%"
-                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textColor="#FF18DB1B"
                     android:textSize="16dp"/>
 
             </FrameLayout>
@@ -926,7 +939,7 @@
                     android:layout_height="wrap_content"
                     sc:angleStart="135"
                     sc:angleSweep="270"
-                    sc:progressColor="#FFE4690A"
+                    sc:progressColor="#FFF47D15"
                     sc:progressSize="10dp"
                     sc:strokeColor="#e4e1e1"
                     sc:strokeSize="10dp"
@@ -942,7 +955,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="0%"
-                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textColor="#FFF47D15"
                     android:textSize="16dp"/>
 
             </FrameLayout>
@@ -974,7 +988,7 @@
                     android:layout_height="wrap_content"
                     sc:angleStart="135"
                     sc:angleSweep="270"
-                    sc:progressColor="#FFE4690A"
+                    sc:progressColor="#FFF41D15"
                     sc:progressSize="10dp"
                     sc:strokeColor="#e4e1e1"
                     sc:strokeSize="10dp"
@@ -990,7 +1004,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="0%"
-                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textColor="#FFF41D15"
                     android:textSize="16dp"/>
 
             </FrameLayout>
@@ -1014,12 +1029,12 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:gravity="center"
             android:background="@color/colorPrimary"
-            android:text="Goals for this period"
+            android:text="Goals for this period: Please answer these 4 questions below"
             android:textColor="#ffffff"
-            android:textAppearance="@style/TextAppearance.AppCompat" />
+            android:textStyle="bold" />
 
 
 
@@ -1027,7 +1042,110 @@
 
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="5dp"
+                android:background="#f7dfad"
+                android:gravity="center"
+                android:text="On a scale 1-10, how happy were you this week and why?"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <EditText
+                android:id="@+id/q1Goals"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="-5dp"
+                android:allowUndo="false"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="-6.5dp"
+                android:background="#f7dfad"
+                android:gravity="center"
+                android:text="What were your 3 big wins for the week?"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <EditText
+                android:id="@+id/q2Goals"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="-10dp"
+                android:allowUndo="false"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="-6dp"
+                android:background="#f7dfad"
+                android:gravity="center"
+                android:text="Review your goals. Did you spend your time on the right things? If not, how will you improve next week?"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <EditText
+                android:id="@+id/q3Goals"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="-10dp"
+                android:allowUndo="false"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="-6dp"
+                android:background="#f7dfad"
+                android:gravity="center"
+                android:text="What was the biggest lesson you learned this week?"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <EditText
+                android:id="@+id/q4Goals"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="-10dp"
+                android:allowUndo="false"
+                />
+
+            <Button
+                android:id="@+id/submitButtonGoals"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="-10dp"
+                android:background="@color/colorPrimary"
+                android:text="Submit Goals"
+                android:textColor="#fdfcfc"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
 
 
-</LinearLayout>
+
+
+
+
+     </LinearLayout>
+
+</ScrollView>

@@ -44,7 +44,9 @@ public class FragmentJoy extends Fragment {
         View view = inflater.inflate(R.layout.fragment_joy,container,false);
 
         TextView textAct1 = (TextView)view.findViewById(R.id.textViewAct1);
-        textAct1.setText("Inner Peace");
+        // Assign variable textAct1 the value of static variable activity1Joy (from TestActivity.java)
+        textAct1.setText(TestActivity.activity1Joy);
+        //textAct1.setText("Inner Peace");
 
         TextView textAct2 = (TextView)view.findViewById(R.id.textViewAct2);
         textAct2.setText("Programming");
@@ -52,6 +54,7 @@ public class FragmentJoy extends Fragment {
         TextView textCategScore = (TextView)view.findViewById(R.id.textViewCategScore);
         textCategScore.setText("Joy Score");
 
+        // Buttons for Activity #1
         Button btCalendarDay1 = (Button)view.findViewById(R.id.bt1);
         btCalendarDay1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +153,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+
+        //Remove buttons(15-21) if sprint is 2 weeks
         Button btCalendarDay15 = (Button)view.findViewById(R.id.bt15);
         btCalendarDay15.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +162,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay15.setVisibility(View.GONE);
+
         Button btCalendarDay16 = (Button)view.findViewById(R.id.bt16);
         btCalendarDay16.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +171,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay16.setVisibility(View.GONE);
+
         Button btCalendarDay17 = (Button)view.findViewById(R.id.bt17);
         btCalendarDay17.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,6 +180,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay17.setVisibility(View.GONE);
+
         Button btCalendarDay18 = (Button)view.findViewById(R.id.bt18);
         btCalendarDay18.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +189,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay18.setVisibility(View.GONE);
+
         Button btCalendarDay19 = (Button)view.findViewById(R.id.bt19);
         btCalendarDay19.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,6 +198,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay19.setVisibility(View.GONE);
+
         Button btCalendarDay20 = (Button)view.findViewById(R.id.bt20);
         btCalendarDay20.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,6 +207,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay20.setVisibility(View.GONE);
+
         Button btCalendarDay21 = (Button)view.findViewById(R.id.bt21);
         btCalendarDay21.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,6 +216,9 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay21.setVisibility(View.GONE);
+
+        // Buttons for Activity #2
         Button btCalendarDay22 = (Button)view.findViewById(R.id.bt22);
         btCalendarDay22.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -297,6 +317,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+
+        //Remove buttons (36-42) if sprint is 2 weeks
         Button btCalendarDay36 = (Button)view.findViewById(R.id.bt36);
         btCalendarDay36.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -304,6 +326,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay36.setVisibility(View.GONE);
+
         Button btCalendarDay37 = (Button)view.findViewById(R.id.bt37);
         btCalendarDay37.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -311,6 +335,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay37.setVisibility(View.GONE);
+
         Button btCalendarDay38 = (Button)view.findViewById(R.id.bt38);
         btCalendarDay38.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -318,6 +344,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay38.setVisibility(View.GONE);
+
         Button btCalendarDay39 = (Button)view.findViewById(R.id.bt39);
         btCalendarDay39.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -325,6 +353,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay39.setVisibility(View.GONE);
+
         Button btCalendarDay40 = (Button)view.findViewById(R.id.bt40);
         btCalendarDay40.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -332,6 +362,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay40.setVisibility(View.GONE);
+
         Button btCalendarDay41 = (Button)view.findViewById(R.id.bt41);
         btCalendarDay41.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -339,6 +371,8 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay41.setVisibility(View.GONE);
+
         Button btCalendarDay42 = (Button)view.findViewById(R.id.bt42);
         btCalendarDay42.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -346,6 +380,7 @@ public class FragmentJoy extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay42.setVisibility(View.GONE);
 
 
         // Find the components for gaugeJoyActivity1

@@ -3,5 +3,6 @@
     <color name="alert_dialog_button_1">#6091fa</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorGreen">#066408</color>
     <color name="colorAccent">#FF4081</color>
 </resources>

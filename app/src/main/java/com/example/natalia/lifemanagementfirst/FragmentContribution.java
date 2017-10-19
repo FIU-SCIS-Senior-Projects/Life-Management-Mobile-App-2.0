@@ -52,6 +52,7 @@ public class FragmentContribution extends Fragment {
         TextView textCategScore = (TextView)view.findViewById(R.id.textViewCategScore);
         textCategScore.setText("Contribution Score");
 
+        // Buttons for Activity #1
         Button btCalendarDay1 = (Button)view.findViewById(R.id.bt1);
         btCalendarDay1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +151,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+
+        //Remove buttons(15-21) if sprint is 2 weeks
         Button btCalendarDay15 = (Button)view.findViewById(R.id.bt15);
         btCalendarDay15.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +160,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay15.setVisibility(View.GONE);
+
         Button btCalendarDay16 = (Button)view.findViewById(R.id.bt16);
         btCalendarDay16.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +169,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay16.setVisibility(View.GONE);
+
         Button btCalendarDay17 = (Button)view.findViewById(R.id.bt17);
         btCalendarDay17.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,6 +178,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay17.setVisibility(View.GONE);
+
         Button btCalendarDay18 = (Button)view.findViewById(R.id.bt18);
         btCalendarDay18.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +187,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay18.setVisibility(View.GONE);
+
         Button btCalendarDay19 = (Button)view.findViewById(R.id.bt19);
         btCalendarDay19.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,6 +196,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay19.setVisibility(View.GONE);
+
         Button btCalendarDay20 = (Button)view.findViewById(R.id.bt20);
         btCalendarDay20.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,6 +205,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay20.setVisibility(View.GONE);
+
         Button btCalendarDay21 = (Button)view.findViewById(R.id.bt21);
         btCalendarDay21.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,6 +214,9 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay21.setVisibility(View.GONE);
+
+        // Buttons for Activity #2
         Button btCalendarDay22 = (Button)view.findViewById(R.id.bt22);
         btCalendarDay22.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -297,6 +315,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+
+        //Remove buttons (36-42) if sprint is 2 weeks
         Button btCalendarDay36 = (Button)view.findViewById(R.id.bt36);
         btCalendarDay36.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -304,6 +324,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay36.setVisibility(View.GONE);
+
         Button btCalendarDay37 = (Button)view.findViewById(R.id.bt37);
         btCalendarDay37.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -311,6 +333,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay37.setVisibility(View.GONE);
+
         Button btCalendarDay38 = (Button)view.findViewById(R.id.bt38);
         btCalendarDay38.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -318,6 +342,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay38.setVisibility(View.GONE);
+
         Button btCalendarDay39 = (Button)view.findViewById(R.id.bt39);
         btCalendarDay39.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -325,6 +351,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay39.setVisibility(View.GONE);
+
         Button btCalendarDay40 = (Button)view.findViewById(R.id.bt40);
         btCalendarDay40.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -332,6 +360,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay40.setVisibility(View.GONE);
+
         Button btCalendarDay41 = (Button)view.findViewById(R.id.bt41);
         btCalendarDay41.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -339,6 +369,8 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay41.setVisibility(View.GONE);
+
         Button btCalendarDay42 = (Button)view.findViewById(R.id.bt42);
         btCalendarDay42.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -346,73 +378,74 @@ public class FragmentContribution extends Fragment {
                 onButtonClick((Button) view);
             }
         });
+        btCalendarDay42.setVisibility(View.GONE);
 
 
-        // Find the components for gaugePassionActivity1
-        final TextView counterJoyActivity1 = (TextView) view.findViewById(R.id.counter_joy_activity1);
-        ScArcGauge gaugeJoyActivity1 = (ScArcGauge) view.findViewById(R.id.gauge_joy_activity1);
+        // Find the components for gaugeContributionActivity1
+        final TextView counterContribActivity1 = (TextView) view.findViewById(R.id.counter_joy_activity1);
+        ScArcGauge gaugeContribActivity1 = (ScArcGauge) view.findViewById(R.id.gauge_joy_activity1);
 
         // Set the features stroke cap style to rounded
-        gaugeJoyActivity1.findFeature(ScArcGauge.BASE_IDENTIFIER)
+        gaugeContribActivity1.findFeature(ScArcGauge.BASE_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
-        gaugeJoyActivity1.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
+        gaugeContribActivity1.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
 
         // If you set the value from the xml that not produce an event so I will change the
         // value from code.
-        gaugeJoyActivity1.setHighValue(60);
+        gaugeContribActivity1.setHighValue(60);
 
         // Each time I will change the value I must write it inside the counter text.
-        gaugeJoyActivity1.setOnEventListener(new ScGauge.OnEventListener() {
+        gaugeContribActivity1.setOnEventListener(new ScGauge.OnEventListener() {
             @Override
             public void onValueChange(float lowValue, float highValue) {
-                counterJoyActivity1.setText((int) highValue + "%");
+                counterContribActivity1.setText((int) highValue + "%");
 
             }
         });
 
-        // Find the components for gaugeJoyActivity1
-        final TextView counterJoyActivity2 = (TextView) view.findViewById(R.id.counter_joy_activity2);
-        ScArcGauge gaugeJoyActivity2 = (ScArcGauge) view.findViewById(R.id.gauge_joy_activity2);
+        // Find the components for gaugeContributionActivity1
+        final TextView counterContribActivity2 = (TextView) view.findViewById(R.id.counter_joy_activity2);
+        ScArcGauge gaugeContribActivity2 = (ScArcGauge) view.findViewById(R.id.gauge_joy_activity2);
 
         // Set the features stroke cap style to rounded
-        gaugeJoyActivity2.findFeature(ScArcGauge.BASE_IDENTIFIER)
+        gaugeContribActivity2.findFeature(ScArcGauge.BASE_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
-        gaugeJoyActivity2.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
+        gaugeContribActivity2.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
 
         // If you set the value from the xml that not produce an event so I will change the
         // value from code.
-        gaugeJoyActivity2.setHighValue(60);
+        gaugeContribActivity2.setHighValue(60);
 
         // Each time I will change the value I must write it inside the counter text.
-        gaugeJoyActivity2.setOnEventListener(new ScGauge.OnEventListener() {
+        gaugeContribActivity2.setOnEventListener(new ScGauge.OnEventListener() {
             @Override
             public void onValueChange(float lowValue, float highValue) {
-                counterJoyActivity2.setText((int) highValue + "%");
+                counterContribActivity2.setText((int) highValue + "%");
 
             }
         });
 
-        // Find the components for gaugeJoyScore
-        final TextView counterJoyScore = (TextView) view.findViewById(R.id.counter_joy_score);
-        ScArcGauge gaugeJoyScore = (ScArcGauge) view.findViewById(R.id.gauge_joy_score);
+        // Find the components for gaugeContributionScore
+        final TextView counterContribScore = (TextView) view.findViewById(R.id.counter_joy_score);
+        ScArcGauge gaugeContribScore = (ScArcGauge) view.findViewById(R.id.gauge_joy_score);
 
         // Set the features stroke cap style to rounded
-        gaugeJoyScore.findFeature(ScArcGauge.BASE_IDENTIFIER)
+        gaugeContribScore.findFeature(ScArcGauge.BASE_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
-        gaugeJoyScore.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
+        gaugeContribScore.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
 
         // If you set the value from the xml that not produce an event so I will change the
         // value from code.
-        gaugeJoyScore.setHighValue(60);
+        gaugeContribScore.setHighValue(60);
 
         // Each time I will change the value I must write it inside the counter text.
-        gaugeJoyScore.setOnEventListener(new ScGauge.OnEventListener() {
+        gaugeContribScore.setOnEventListener(new ScGauge.OnEventListener() {
             @Override
             public void onValueChange(float lowValue, float highValue) {
-                counterJoyScore.setText((int) highValue + "%");
+                counterContribScore.setText((int) highValue + "%");
 
             }
         });

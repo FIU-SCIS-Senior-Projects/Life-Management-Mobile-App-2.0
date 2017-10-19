@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         coverflow:verticalPaddingBottom="-50dp"
-        coverflow:coverHeight="195dp"
+        coverflow:coverHeight="189dp"
         coverflow:coverWidth="150dp"
         coverflow:maxScaleFactor="1.5"
         coverflow:reflectionGap="0px"

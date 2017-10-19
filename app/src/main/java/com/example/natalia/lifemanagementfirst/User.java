@@ -1,10 +1,13 @@
 package com.example.natalia.lifemanagementfirst;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by lazaro on 9/17/17.
  */
 
-public class User {
+public class User implements Parcelable{
 
     //String id;
     String email;
@@ -13,42 +16,77 @@ public class User {
     String firstName;
     String lastName;
     String dob;
-    boolean coach;
-    boolean admin;
-
-
-
+    boolean coachFlag;
+    boolean adminFlag;
+    String id;
 
     public User(){
 
+        email = "";
+        username = "";
+        password = "";
+        firstName = "";
+        lastName = "";
+        dob = "";
+        coachFlag  = false;
+        adminFlag = false;
+        id = "";
     }
 
-    public User(String email, String username, String firstName, String lastName, String dob, String password, boolean admin, boolean coach) {
+    public User(String email, String username, String firstName, String lastName, String dob, String password, boolean admin, boolean coach, String id) {
         this.email = email;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
-        this.coach = coach;
-        this.admin = admin;
+        this.coachFlag = coach;
+        this.adminFlag = admin;
         this.password = password;
+        this.id = id;
     }
 
+    public User(Parcel in){
 
-    public boolean isCoach() {
-        return coach;
+        this.email = in.readString();
+        this.username = in.readString();
+        this.firstName = in.readString();
+        this.lastName = in.readString();
+        this.dob = in.readString();
+
+
+        int m = 0;
+        m = in.readInt();
+
+        int n = 0;
+        m = in.readInt();
+
+        this.password = in.readString();
+        this.id = in.readString();
+
     }
 
-    public void setCoach(boolean coach) {
-        this.coach = coach;
+    public String getId() {
+        return id;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public boolean isCoachFlag() {
+        return coachFlag;
+    }
+
+    public void setCoachFlag(boolean coachFlag) {
+        this.coachFlag = coachFlag;
+    }
+
+    public boolean isAdminFlag() {
+        return adminFlag;
+    }
+
+    public void setAdminFlag(boolean adminFlag) {
+        this.adminFlag = adminFlag;
     }
 
     public String getPassword() {
@@ -98,6 +136,39 @@ public class User {
     public void setDob(String dob) {
         this.dob = dob;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+        parcel.writeString(email);
+        parcel.writeString(username);
+        parcel.writeString(firstName);
+        parcel.writeString(lastName);
+        parcel.writeString(dob);
+        parcel.writeInt((coachFlag) ? 1 : 0);
+        parcel.writeInt((adminFlag) ? 1 : 0);
+        parcel.writeString(password);
+        parcel.writeString(id);
+
+    }
+
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int i) {
+            return new User[i];
+        }
+    };
 
 
 }

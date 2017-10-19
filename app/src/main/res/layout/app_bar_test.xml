@@ -30,7 +30,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="555dp">
+        android:layout_height="551dp">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_pages"
@@ -47,12 +47,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#f5f5f5"
-        app:tabSelectedTextColor="#FFE4690A"
-        app:tabIndicatorColor="@color/colorPrimary"
-        app:tabIndicatorHeight="5dp"
-        app:tabTextColor="#FFFFFF"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        app:tabIndicatorHeight="0dp"
+        app:tabTextColor="#a8a8a8"
         app:tabMode="fixed"
-        app:tabGravity="fill" />
+        app:tabGravity="fill"
+        app:tabPadding="1dp"/>
 
 
 

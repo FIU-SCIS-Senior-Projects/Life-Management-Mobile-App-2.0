@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,23 +24,34 @@ public class ActGivingbackAdapter extends BaseAdapter {
 
     private List<ActGivingback> actGivingbackList;
     private AppCompatActivity activity;
-    private int numOfActSelected;
-    private Dialog dialog;   //make it final if do not want to permit user to reselect activities
-    private TextView text1;
-    private TextView text2;
-    private ImageView image1;
-    private ImageView image2;
+    static int numOfActSelected = 0;
+    int act1position = 0;
+    static ArrayList<String> givBackActSelected = new ArrayList<>(); //to save 2 giving back activities selected by user for current sprint (make it static?)
+    //private Dialog dialog;   //make it final if do not want to permit user to reselect activities
+    //private TextView text1;
+    //private TextView text2;
+    //private ImageView image1;
+    //private ImageView image2;
+    //private Button dialogbt;
+
 
 
     public ActGivingbackAdapter(AppCompatActivity context, List<ActGivingback> actGivingbackList) {
         this.actGivingbackList = actGivingbackList;
         this.activity = context;
-        this.numOfActSelected = 0;
-        dialog = new Dialog(activity);
-        dialog.setContentView(R.layout.dialog_actgivingback_info);
-        dialog.setCancelable(true); //dismiss when touching outside
-        dialog.setTitle("Activities Selected");
+        //this.numOfActSelected = 0;
+        //dialog = new Dialog(activity);
+        //dialog.setContentView(R.layout.dialog_actgivingback_info);
+        //dialog.setCancelable(true); //dismiss when touching outside
+        //dialog.setTitle("Activities Selected");
+        //dialogbt = (Button)dialog.findViewById(R.id.continueButtonGiveDialog);
+        //text1 = (TextView) dialog.findViewById(R.id.label1Givingback);
+        //image1 = (ImageView) dialog.findViewById(R.id.image1Givingback);
+        //text2 = (TextView) dialog.findViewById(R.id.label2Givingback);
+        //image2 = (ImageView) dialog.findViewById(R.id.image2Givingback);
     }
+
+
 
     /**
      * How many items are in the data set represented by this Adapter.
@@ -110,22 +123,103 @@ public class ActGivingbackAdapter extends BaseAdapter {
         viewHolder.actGivingbackImage.setImageResource(actGivingbackList.get(position).getImageSource());
         viewHolder.actGivingbackName.setText(actGivingbackList.get(position).getName());
 
+        //GivingBackActivity.nextButton.setVisibility(View.GONE);
         convertView.setOnClickListener(onClickListener(position));
 
         return convertView;
     }
 
     private View.OnClickListener onClickListener(final int position){
+        //GivingBackActivity.nextButton.setVisibility(View.GONE);
         return new View.OnClickListener() {
+             //GivingBackActivity.nextButton.setVisibility(View.GONE);  //??????
 
             @Override
             public void onClick(View v){
-                numOfActSelected++;
+                ++numOfActSelected;
 
+            //GivingBackActivity.nextButton.setVisibility(View.GONE); //???????HERE???
+
+                final Dialog dialog;
+                dialog = new Dialog(activity);
+                dialog.setContentView(R.layout.dialog_actgivingback_info);
+                dialog.setCancelable(true); //dismiss when touching outside
+                dialog.setTitle("Activities Selected");
+
+                if (numOfActSelected == 1){
+                    GivingBackActivity.nextButton.setVisibility(View.GONE);
+
+                }
+
+                else if (numOfActSelected == 2) {
+
+                    numOfActSelected = 0;
+                    // clear givBackActSelected
+                    givBackActSelected.clear();
+
+                    TextView text1 = (TextView) dialog.findViewById(R.id.label1Givingback);
+                    text1.setText(getItem(act1position).getName());
+                    ImageView image1 = (ImageView) dialog.findViewById(R.id.image1Givingback);
+                    image1.setImageResource(getItem(act1position).getImageSource());
+
+                    TextView text2 = (TextView) dialog.findViewById(R.id.label2Givingback);
+                    text2.setText(getItem(position).getName());
+                    ImageView image2 = (ImageView) dialog.findViewById(R.id.image2Givingback);
+                    image2.setImageResource(getItem(position).getImageSource());
+
+
+                    if (text1.getText().equals(text2.getText()))
+                    {
+                        Toast.makeText(activity,"Choose 2 different activities",Toast.LENGTH_LONG).show();
+                        dialog.dismiss();
+
+
+                    }
+                    else
+                    {
+                        // at any moment this list needs to contain only 2 activities
+                        givBackActSelected.add(text1.getText().toString());
+                        givBackActSelected.add(text2.getText().toString());
+                        System.out.println("" + givBackActSelected.size());
+                        for (String e: givBackActSelected)
+                        {
+                            System.out.println(e);
+                        }
+                        dialog.show();
+                        Button dialogbt = (Button)dialog.findViewById(R.id.continueButtonGiveDialog);
+                        dialogbt.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view){
+                                dialog.dismiss();
+                                GivingBackActivity.nextButton.setVisibility(View.VISIBLE);
+                            }
+                        });
+                        //GivingBackActivity.nextButton.setVisibility(View.VISIBLE);
+
+                    }
+
+
+
+
+                }
+
+                //GivingBackActivity.nextButton.setVisibility(View.GONE);
+                act1position = position;
+
+                /*
                 if (numOfActSelected == 1) {
+                    dialog = new Dialog(activity);
+                    dialog.setContentView(R.layout.dialog_actgivingback_info);
+                    //dialog.setCancelable(true); //dismiss when touching outside
+                    dialog.setTitle("Activities Selected");
+                    //dialogbt = (Button)dialog.findViewById(R.id.continueButtonGiveDialog);
                     text1 = (TextView) dialog.findViewById(R.id.label1Givingback);
-                    text1.setText(getItem(position).getName());
                     image1 = (ImageView) dialog.findViewById(R.id.image1Givingback);
+                    //text2 = (TextView) dialog.findViewById(R.id.label2Givingback);
+                    //image2 = (ImageView) dialog.findViewById(R.id.image2Givingback);
+                    //text1 = (TextView) dialog.findViewById(R.id.label1Givingback);
+                    text1.setText(getItem(position).getName());
+                    //image1 = (ImageView) dialog.findViewById(R.id.image1Givingback);
                     image1.setImageResource(getItem(position).getImageSource());
                 }
                 else if (numOfActSelected == 2)
@@ -136,27 +230,55 @@ public class ActGivingbackAdapter extends BaseAdapter {
                     //TextView text1 = (TextView) dialog.findViewById(R.id.label1Givingback);
                     if (text1.getText().equals(text2.getText()))
                     {
-                        Toast.makeText(activity,"Choose activity #1 that is different from activity #2",Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity,"Choose activity #2 that is different from activity #1",Toast.LENGTH_LONG).show();
                         numOfActSelected=1;
                     }
                     else {
 
                         image2 = (ImageView) dialog.findViewById(R.id.image2Givingback);
                         image2.setImageResource(getItem(position).getImageSource());
+
                         numOfActSelected = 0; // do not use it if do not want allow user reselect activities
-                        text1 = null;
-                        text2 = null;
-                        image1 = null;
-                        image2 = null;
                         dialog.show();
+
+                        dialogbt = (Button)dialog.findViewById(R.id.continueButtonGiveDialog);
+                        dialogbt.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view){
+                                dialog.dismiss();
+                                //onButtonClick((Button) view);
+                            }
+                        });
+
+
+
+
+
+
+                        //numOfActSelected = 0; // do not use it if do not want allow user reselect activities
+                        //text1 = null;
+                        //text2 = null;
+                        //image1 = null;
+                        //image2 = null;
+
+                       // dialog.show();
+
                     }
                 }
 
-
+        */
+                //GivingBackActivity.nextButton.setVisibility(View.GONE);
             }
+
+
         };
+
+
     }
 
+    //public void onButtonClick(Button view){
+     //   dialog.dismiss();
+   // }
 
     private static class ViewHolder {
         private TextView actGivingbackName;

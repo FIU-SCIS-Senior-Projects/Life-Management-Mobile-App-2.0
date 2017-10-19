@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class GivingBackActivity extends AppCompatActivity {
     private FeatureCoverFlow coverFlow;
     private ActGivingbackAdapter actGivingbackAdapter;
     private List<ActGivingback> actGivingbackList = new ArrayList<>();
-    ImageButton nextButton;
+    static ImageButton nextButton;
 
 
     @Override
@@ -35,13 +37,18 @@ public class GivingBackActivity extends AppCompatActivity {
         coverFlow.setOnScrollPositionListener(onScrollListener());
 
         nextButton = (ImageButton) findViewById(R.id.nextToDashboard);
-
+        //Go to sprint setting activity when click on button
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(GivingBackActivity.this, TestActivity.class);
+                Intent intent = new Intent(GivingBackActivity.this, SprintSettingActivity.class);
                 startActivity(intent);
             }
         });
+        nextButton.setVisibility(View.GONE);
+
+        //zoom animation
+        Animation zoomAnimation = AnimationUtils.loadAnimation(this,R.anim.zoom);
+        nextButton.startAnimation(zoomAnimation);
     }
 
     private FeatureCoverFlow.OnScrollPositionListener onScrollListener() {
@@ -62,7 +69,7 @@ public class GivingBackActivity extends AppCompatActivity {
     private void initData() {
 
 
-        actGivingbackList.add(new ActGivingback("Volunteering",R.drawable.give_volunteering2));
+        actGivingbackList.add(new ActGivingback("Volunteering",R.drawable.give_volunteering));
         actGivingbackList.add(new ActGivingback("Teaching",R.drawable.give_teaching));
         actGivingbackList.add(new ActGivingback("Counseling",R.drawable.give_counseling));
         actGivingbackList.add(new ActGivingback("Mentoring",R.drawable.give_mentoring));

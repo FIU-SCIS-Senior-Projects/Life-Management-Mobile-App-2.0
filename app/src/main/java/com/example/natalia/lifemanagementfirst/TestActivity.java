@@ -2,6 +2,7 @@ package com.example.natalia.lifemanagementfirst;
 
 import android.app.Fragment;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,9 +21,28 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
+import java.util.*;
+import android.content.Intent;
+import java.util.ArrayList;
 
+
+//This is dashboard activity
 public class TestActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    // Lazaro code for DB
+    DatabaseReference databaseCategories, databaseCategories2;
+    List<Category> currentCategories;
+
+    ArrayList<Category> array;
+
+    static String activity1Joy;    //save data from DB for user's activity1Joy into this variable
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +62,77 @@ public class TestActivity extends AppCompatActivity
         tbl_pages.getTabAt(0).setIcon(tabIcons[0]);
         tbl_pages.getTabAt(1).setIcon(tabIcons[1]);
         tbl_pages.getTabAt(2).setIcon(tabIcons[2]);
+
+        tbl_pages.getTabAt(0).getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
+        tbl_pages.getTabAt(1).getIcon().setColorFilter(Color.parseColor("#a8a8a8"), PorterDuff.Mode.SRC_IN);
+        tbl_pages.getTabAt(2).getIcon().setColorFilter(Color.parseColor("#a8a8a8"), PorterDuff.Mode.SRC_IN);
+
+        tbl_pages.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab){
+                tab.getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
+        }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab){
+                tab.getIcon().setColorFilter(Color.parseColor("#a8a8a8"), PorterDuff.Mode.SRC_IN);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab){
+
+            }
+        });
+
+
+        //Lazaro code for DB
+
+        //temp
+        Bundle bundle = getIntent().getExtras();
+        ArrayList<User> arr = new ArrayList<>();
+
+        arr = bundle.getParcelableArrayList("mylist");
+
+
+        for(int i=0; i<arr.size();i++) {
+            //System.out.println("testing firstname " + f.firstName);
+            System.out.println("testing password " + arr.get(i).password);
+            System.out.println("testing firstname " + arr.get(i).firstName);
+            System.out.println("testing username " + arr.get(i).username);
+            System.out.println("testing coach " + arr.get(i).coachFlag);
+            System.out.println("testing lastname " + arr.get(i).lastName);
+            System.out.println("testing email " + arr.get(i).email);
+            System.out.println("testing admin " + arr.get(i).adminFlag);
+            System.out.println("testing dob " + arr.get(i).dob);
+            //System.out.println("testing sze " + arr.size());
+
+        }
+
+        Intent in = getIntent();
+        String us = in.getExtras().getString("userNameY");  //has username that the user entered
+        String pa = in.getExtras().getString("passwordY");  //the password that user entered
+
+        System.out.println("testing USERNAME " + us);
+        System.out.println("testing PASSWORD " + pa);
+
+
+
+        //getting the reference of artists node
+        databaseCategories = FirebaseDatabase.getInstance().getReference("Categories");
+
+        currentCategories = new ArrayList<>();
+        array = new ArrayList<Category>();
+
+        // Finish Lazaro code for DB
+
+
+        // Write code here to retrieve from DB value for user's activity1
+        // and assign this retrieved value to static variable
+        // activity 1 ( here retrieved value for user's username saved in variable us
+        // is assigned to static variable us). Then use this value to set TextView variable
+        // for activity1 in FragmentJoy.java
+
+        activity1Joy = us;
+
 
 
 
@@ -86,11 +177,11 @@ public class TestActivity extends AppCompatActivity
         public CharSequence getPageTitle(int position){
             switch (position){
                 case 0:
-                    return "";
+                    return "Joy";
                 case 1:
-                    return "";
+                    return "Passion";
                 case 2:
-                    return "";
+                    return "Contribution";
                 default:return null;
 
             }

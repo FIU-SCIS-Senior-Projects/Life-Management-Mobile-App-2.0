@@ -30,9 +30,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CreateUserActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity2" />
         <activity android:name=".CarouselScreen" />
+        <activity android:name=".MainJoyActivity" />
         <activity android:name=".MainPassionActivity" />
+        <activity android:name=".SprintSettingActivity" />
         <activity android:name=".GivingBackActivity"></activity>
     </application>
 
