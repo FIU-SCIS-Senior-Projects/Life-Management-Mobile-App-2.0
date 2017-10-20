@@ -19,6 +19,7 @@ public class ActivitiesSprint implements Parcelable{
     String sprintDailyPoints;
     String targetPoints;
     String userId;
+    String activityid;
 
     public ActivitiesSprint() {
 
@@ -30,9 +31,10 @@ public class ActivitiesSprint implements Parcelable{
         sprintDailyPoints = "";
         targetPoints = "";
         userId = "";
+        activityid = "";
     }
 
-    public ActivitiesSprint(String activityScore, String actualPoints, String categoryId, String activityName, String sprintDailyPoints, String targetPoints, String userId) {
+    public ActivitiesSprint(String activityScore, String actualPoints, String categoryId, String activityName, String sprintDailyPoints, String targetPoints, String userId, String activityid) {
 
         this.activityScore = activityScore;
         this.actualPoints = actualPoints;
@@ -41,6 +43,7 @@ public class ActivitiesSprint implements Parcelable{
         this.sprintDailyPoints = sprintDailyPoints;
         this.targetPoints = targetPoints;
         this.userId = userId;
+        this.activityid = activityid;
     }
 
     public ActivitiesSprint(Parcel in){
@@ -53,9 +56,17 @@ public class ActivitiesSprint implements Parcelable{
         this.sprintDailyPoints = in.readString();
         this.targetPoints = in.readString();
         this.userId = in.readString();
+        this.activityid = in.readString();
 
     }
 
+    public String getActivityid() {
+        return activityid;
+    }
+
+    public void setActivityid(String activityid) {
+        this.activityid = activityid;
+    }
 
     public String getActivityScore() {
         return activityScore;
@@ -130,6 +141,7 @@ public class ActivitiesSprint implements Parcelable{
         parcel.writeString(sprintDailyPoints);
         parcel.writeString(targetPoints);
         parcel.writeString(userId);
+        parcel.writeString(activityid);
 
 
     }

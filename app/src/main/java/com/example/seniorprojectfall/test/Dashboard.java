@@ -50,9 +50,12 @@ public class Dashboard extends AppCompatActivity
     static String sprintJoyid;
     static String currentcategoryid;
     static TreeMap<Integer,ActivitiesSprint> activitiesJoyMap;
-    static String actsprint1joy;
-    static String actsprint2joy;
+
     boolean pass = false;
+
+    //static
+    static ActivitiesSprint activity1_static;
+    static ActivitiesSprint activity2_static;
 
 
     @Override
@@ -94,6 +97,8 @@ public class Dashboard extends AppCompatActivity
             }
         });
 
+        activity1_static = new ActivitiesSprint();
+        activity2_static = new ActivitiesSprint();
 
         activitiesJoyMap = new TreeMap<>();
         currentJoyCategories = new ArrayList<>();
@@ -104,12 +109,12 @@ public class Dashboard extends AppCompatActivity
         String usernameRef = in.getExtras().getString("userNameY");  //has username that the user entered
         String passRef = in.getExtras().getString("passwordY");  //the password that user entered
 
+        sprintJoyid = in.getExtras().getString("joySprintId");
 
 
         //temp
         Bundle bundle = getIntent().getExtras();
         ArrayList<User> arr = new ArrayList<>();
-
 
         arr = bundle.getParcelableArrayList("mylist");
 
@@ -148,7 +153,7 @@ public class Dashboard extends AppCompatActivity
 
                 currentJoyActivity = new ActivitiesSprint(activitiesJoyList.get(i).activityScore,activitiesJoyList.get(i).actualPoints,
                         activitiesJoyList.get(i).categoryId,activitiesJoyList.get(i).activityName,activitiesJoyList.get(i).sprintDailyPoints,
-                        activitiesJoyList.get(i).targetPoints,activitiesJoyList.get(i).userId);
+                        activitiesJoyList.get(i).targetPoints,activitiesJoyList.get(i).userId,activitiesJoyList.get(i).activityid);
 
                         activitiesJoyMap.put(j,currentJoyActivity);
                         ++j;
@@ -181,8 +186,25 @@ public class Dashboard extends AppCompatActivity
 
         }
 
-        actsprint1joy = currentJoyCategories.get(0).sprintActivityid1;
-        actsprint2joy = currentJoyCategories.get(0).sprintActivityid2;
+
+        activity1_static.activityScore = in.getExtras().getString("activity1_score");
+        activity1_static.actualPoints = in.getExtras().getString("activity1_actualpoints");
+        activity1_static.categoryId = in.getExtras().getString("activity1_categoryid");
+        activity1_static.activityName = in.getExtras().getString("activity1_name");
+        activity1_static.sprintDailyPoints = in.getExtras().getString("activity1_sprintdailypoints");
+        activity1_static.targetPoints = in.getExtras().getString("activity1_targetpoints");
+        activity1_static.userId = in.getExtras().getString("activity1_userid");
+        activity1_static.activityid = in.getExtras().getString("activity1_activityid");
+
+        activity2_static.activityScore = in.getExtras().getString("activity2_score");
+        activity2_static.actualPoints = in.getExtras().getString("activity2_actualpoints");
+        activity2_static.categoryId = in.getExtras().getString("activity2_categoryid");
+        activity2_static.activityName = in.getExtras().getString("activity2_name");
+        activity2_static.sprintDailyPoints = in.getExtras().getString("activity2_sprintdailypoints");
+        activity2_static.targetPoints = in.getExtras().getString("activity2_targetpoints");
+        activity2_static.userId = in.getExtras().getString("activity2_userid");
+        activity2_static.activityid = in.getExtras().getString("activity2_activityid");
+
 
         //REMEMBER insert code here (traverse currentJoyCategories for the correct sprint, user may have more then 1 sprint)
 
@@ -204,7 +226,7 @@ public class Dashboard extends AppCompatActivity
 
         currentcategoryid = currentJoyCategories.get(0).categoryid;
 
-
+        System.out.println("currentidddduu " + currentcategoryid);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
