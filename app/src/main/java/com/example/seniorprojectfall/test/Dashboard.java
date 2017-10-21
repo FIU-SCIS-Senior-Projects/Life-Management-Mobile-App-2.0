@@ -44,9 +44,9 @@ public class Dashboard extends AppCompatActivity
 
 
     static String activity1Joy;    //save data from DB for user's activity1Joy into this variable
-    static String endingDate;
-    static String startingDate;
-    static String numberOfWeeksStatic;
+    static String endingDateFixed;
+    static String startingDateFixed;
+
     static String sprintJoyid;
     static String currentcategoryid;
     static TreeMap<Integer,ActivitiesSprint> activitiesJoyMap;
@@ -56,6 +56,7 @@ public class Dashboard extends AppCompatActivity
     //static
     static ActivitiesSprint activity1_static;
     static ActivitiesSprint activity2_static;
+    static Category joy_currentUserCategory;
 
 
     @Override
@@ -99,9 +100,10 @@ public class Dashboard extends AppCompatActivity
 
         activity1_static = new ActivitiesSprint();
         activity2_static = new ActivitiesSprint();
+        joy_currentUserCategory = new Category();
 
         activitiesJoyMap = new TreeMap<>();
-        currentJoyCategories = new ArrayList<>();
+
 
         //Lazaro code for DB
 
@@ -161,31 +163,8 @@ public class Dashboard extends AppCompatActivity
         }
 
 
-        ArrayList<Category> mycategorylist = new ArrayList<>();
-        mycategorylist = bundle.getParcelableArrayList("categoriesJoyList");
-
-        int h = 0;
-        String userid = currentUser.id;
-        for(int i=0; i<mycategorylist.size();i++) {
-
-            //(email,currentusername,firstN,lastN,Dob,password,false,false,id);
-
-            String s = mycategorylist.get(i).userId;
-
-            System.out.println("testing tempsize " +  mycategorylist.size() + " f is " + userid + " s is " + s);
-
-            if(s.equals(userid)){
-
-                currentJoyCategories.add(new Category(mycategorylist.get(i).categoryid,mycategorylist.get(i).endingDate,mycategorylist.get(i).goal1,
-                        mycategorylist.get(i).goal2,mycategorylist.get(i).goal3, mycategorylist.get(i).goal4,mycategorylist.get(i).numberOfWeeks,
-                        mycategorylist.get(i).sprintActivityid1,mycategorylist.get(i).sprintActivityid2,
-                        mycategorylist.get(i).sprintOverallScore,mycategorylist.get(i).startingDate,mycategorylist.get(i).userId));
-
-                //System.out.println("passed");
-            }
-
-        }
-
+        ArrayList<Category> totalCategoriesForUserJoy = new ArrayList<>();
+        totalCategoriesForUserJoy = bundle.getParcelableArrayList("categoriesJoyList");
 
         activity1_static.activityScore = in.getExtras().getString("activity1_score");
         activity1_static.actualPoints = in.getExtras().getString("activity1_actualpoints");
@@ -206,27 +185,36 @@ public class Dashboard extends AppCompatActivity
         activity2_static.activityid = in.getExtras().getString("activity2_activityid");
 
 
+        joy_currentUserCategory.categoryid = in.getExtras().getString("categoryJoy_categoryid");
+        joy_currentUserCategory.endingDate = in.getExtras().getString("categoryJoy_endingDate");
+        joy_currentUserCategory.goal1 = in.getExtras().getString("categoryJoy_goal1");
+        joy_currentUserCategory.goal2 = in.getExtras().getString("categoryJoy_goal2");
+        joy_currentUserCategory.goal3 = in.getExtras().getString("categoryJoy_goal3");
+        joy_currentUserCategory.goal4 = in.getExtras().getString("categoryJoy_goal4");
+        joy_currentUserCategory.numberOfWeeks = in.getExtras().getString("categoryJoy_numberofweeks");
+        joy_currentUserCategory.sprintActivityid1 = in.getExtras().getString("categoryJoy_sprintact1");
+        joy_currentUserCategory.sprintActivityid2 = in.getExtras().getString("categoryJoy_sprintact2");
+        joy_currentUserCategory.sprintOverallScore = in.getExtras().getString("categoryJoy_overallscore");
+        joy_currentUserCategory.startingDate = in.getExtras().getString("categoryJoy_startingDate");
+        joy_currentUserCategory.userId = in.getExtras().getString("categoryJoy_userId");
+
+
         //REMEMBER insert code here (traverse currentJoyCategories for the correct sprint, user may have more then 1 sprint)
 
         //convert to format mm/dd/yyyy
-        endingDate = currentJoyCategories.get(0).endingDate.substring(0,2) + "/" +
-                currentJoyCategories.get(0).endingDate.substring(2,4) + "/" + currentJoyCategories.get(0).endingDate.substring(4);
+        endingDateFixed = joy_currentUserCategory.endingDate.substring(0,2) + "/" +
+                joy_currentUserCategory.endingDate.substring(2,4) + "/" + joy_currentUserCategory.endingDate.substring(4);
 
         //convert to format mm/dd/yyyy
         //System.out.println("heystart " + startRef);
-        startingDate = currentJoyCategories.get(0).startingDate.substring(0,2) + "/" +
-                currentJoyCategories.get(0).startingDate.substring(2,4) + "/" + currentJoyCategories.get(0).startingDate.substring(4);
+        startingDateFixed = joy_currentUserCategory.startingDate.substring(0,2) + "/" +
+                joy_currentUserCategory.startingDate.substring(2,4) + "/" + joy_currentUserCategory.startingDate.substring(4);
 
 
 
         System.out.println("sprintjoyid " + sprintJoyid);
 
-        //numberOfWeeksStatic = numofWeeksRef;
-        numberOfWeeksStatic = currentJoyCategories.get(0).numberOfWeeks;
 
-        currentcategoryid = currentJoyCategories.get(0).categoryid;
-
-        System.out.println("currentidddduu " + currentcategoryid);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

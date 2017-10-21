@@ -459,6 +459,32 @@ public class LoginActivity extends AppCompatActivity {
             i.putExtra("activity2_userid",joyActivity2ForUser.userId);
             i.putExtra("activity2_activityid",joyActivity2ForUser.activityid);
 
+            //the information that we want for that user
+            System.out.println("ss5  " + currentcategoryForuser.categoryid);
+            System.out.println("ss5 " + currentcategoryForuser.endingDate);
+            System.out.println("ss5 " + currentcategoryForuser.goal1);
+            System.out.println("ss5 " + currentcategoryForuser.goal2);
+            System.out.println("ss5 " + currentcategoryForuser.goal3);
+            System.out.println("ss5 " + currentcategoryForuser.goal4);
+            System.out.println("ss5 " + currentcategoryForuser.numberOfWeeks);
+            System.out.println("ss5 sprintid1 " + currentcategoryForuser.sprintActivityid1);
+            System.out.println("ss5 sprintid2 " + currentcategoryForuser.sprintActivityid2);
+            System.out.println("ss5 overallscoe " + currentcategoryForuser.sprintOverallScore);
+            System.out.println("ss5 starting " + currentcategoryForuser.startingDate);
+            System.out.println("ss5 userid " + currentcategoryForuser.userId);
+
+            i.putExtra("categoryJoy_categoryid",currentcategoryForuser.categoryid);
+            i.putExtra("categoryJoy_endingDate",currentcategoryForuser.endingDate);
+            i.putExtra("categoryJoy_goal1",currentcategoryForuser.goal1);
+            i.putExtra("categoryJoy_goal2",currentcategoryForuser.goal2);
+            i.putExtra("categoryJoy_goal3",currentcategoryForuser.goal3);
+            i.putExtra("categoryJoy_goal4",currentcategoryForuser.goal4);
+            i.putExtra("categoryJoy_numberofweeks",currentcategoryForuser.numberOfWeeks);
+            i.putExtra("categoryJoy_sprintact1",currentcategoryForuser.sprintActivityid1);
+            i.putExtra("categoryJoy_sprintact2",currentcategoryForuser.sprintActivityid2);
+            i.putExtra("categoryJoy_overallscore",currentcategoryForuser.sprintOverallScore);
+            i.putExtra("categoryJoy_startingDate",currentcategoryForuser.startingDate);
+            i.putExtra("categoryJoy_userId",currentcategoryForuser.userId);
 
             this.startActivity(i);
 

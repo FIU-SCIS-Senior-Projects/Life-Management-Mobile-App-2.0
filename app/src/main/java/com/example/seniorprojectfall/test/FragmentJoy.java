@@ -97,10 +97,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
             TextView textStartingDate = (TextView)view.findViewById(R.id.startingDateBtn);
             //System.out.println("DATEEE444 " + test);
-            textStartingDate.setText(Dashboard.startingDate);
+            textStartingDate.setText(Dashboard.startingDateFixed);
 
             TextView textEndingDate = (TextView)view.findViewById(R.id.endingDateBtn);
-            textEndingDate.setText(Dashboard.endingDate);
+            textEndingDate.setText(Dashboard.endingDateFixed);
 
             TextView textAct1 = (TextView)view.findViewById(R.id.textViewAct1);
             // Assign variable textAct1 the value of static variable activity1Joy (from TestActivity.java)
@@ -626,6 +626,36 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                 public void onClick(View view){
 
 
+                    String temp = Dashboard.activitiesJoyMap.get(0).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay14.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    //11001001100100
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,13)+"0"+temp.substring(14);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay14.setBackgroundColor(Color.LTGRAY);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify1;
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,13)+"1"+temp.substring(14);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay14.setBackgroundColor(Color.GREEN);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify;
+                    }
+
                 }
             });
 
@@ -648,7 +678,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     if(color == Color.GREEN){
 
                         //means its already green so the user wants to DESELECT so update the database
-                        String modify1 = temp.substring(0,14)+"0";
+                        String modify1 = temp.substring(0,14)+"0"+temp.substring(15);
 
                         databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                         databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify1);
@@ -658,7 +688,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     }else{
 
                         //means the user click this button for first time
-                        String modify = temp.substring(0,13)+"1";
+                        String modify = temp.substring(0,14)+"1"+temp.substring(15);
 
                         databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                         databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify);
@@ -669,56 +699,233 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             });
 
 
-            Button btCalendarDay16 = (Button)view.findViewById(R.id.bt16);
+            final Button btCalendarDay16 = (Button)view.findViewById(R.id.bt16);
             btCalendarDay16.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    onButtonClick((Button) view);
+
+                    String temp = Dashboard.activitiesJoyMap.get(0).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay16.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    //11001001100100
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,15)+"0"+temp.substring(16);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay16.setBackgroundColor(Color.LTGRAY);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify1;
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,15)+"1"+temp.substring(16);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay16.setBackgroundColor(Color.GREEN);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify;
+                    }
                 }
             });
 
 
-            Button btCalendarDay17 = (Button)view.findViewById(R.id.bt17);
+            final Button btCalendarDay17 = (Button)view.findViewById(R.id.bt17);
             btCalendarDay17.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    onButtonClick((Button) view);
+
+                    String temp = Dashboard.activitiesJoyMap.get(0).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay17.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    //110010011001001001011
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,16)+"0"+temp.substring(17);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay17.setBackgroundColor(Color.LTGRAY);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify1;
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,16)+"1"+temp.substring(17);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay17.setBackgroundColor(Color.GREEN);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify;
+                    }
                 }
             });
 
 
-            Button btCalendarDay18 = (Button)view.findViewById(R.id.bt18);
+            final Button btCalendarDay18 = (Button)view.findViewById(R.id.bt18);
             btCalendarDay18.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    onButtonClick((Button) view);
+
+
+                    String temp = Dashboard.activitiesJoyMap.get(0).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay18.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    //110010011001001001011
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,17)+"0"+temp.substring(18);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay18.setBackgroundColor(Color.LTGRAY);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify1;
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,17)+"1"+temp.substring(18);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay18.setBackgroundColor(Color.GREEN);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify;
+                    }
                 }
             });
 
 
-            Button btCalendarDay19 = (Button)view.findViewById(R.id.bt19);
+            final Button btCalendarDay19 = (Button)view.findViewById(R.id.bt19);
             btCalendarDay19.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    onButtonClick((Button) view);
+
+                    String temp = Dashboard.activitiesJoyMap.get(0).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay19.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    //110010011001001001011
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,18)+"0"+temp.substring(19);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay19.setBackgroundColor(Color.LTGRAY);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify1;
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,18)+"1"+temp.substring(19);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay19.setBackgroundColor(Color.GREEN);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify;
+                    }
+
                 }
             });
 
 
-            Button btCalendarDay20 = (Button)view.findViewById(R.id.bt20);
+            final Button btCalendarDay20 = (Button)view.findViewById(R.id.bt20);
             btCalendarDay20.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    onButtonClick((Button) view);
+
+                    String temp = Dashboard.activitiesJoyMap.get(0).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay20.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    //110010011001001001011
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,19)+"0"+temp.substring(20);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay20.setBackgroundColor(Color.LTGRAY);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify1;
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,19)+"1"+temp.substring(20);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay20.setBackgroundColor(Color.GREEN);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify;
+                    }
+
                 }
             });
 
 
-            Button btCalendarDay21 = (Button)view.findViewById(R.id.bt21);
+            final Button btCalendarDay21 = (Button)view.findViewById(R.id.bt21);
             btCalendarDay21.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    onButtonClick((Button) view);
+
+                    String temp = Dashboard.activitiesJoyMap.get(0).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay21.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    //110010011001001001011
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,20)+"0"+temp.substring(21);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay21.setBackgroundColor(Color.LTGRAY);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify1;
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,20)+"1"+temp.substring(21);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity1_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay21.setBackgroundColor(Color.GREEN);
+                        Dashboard.activitiesJoyMap.get(0).sprintDailyPoints = modify;
+                    }
                 }
             });
 
@@ -1230,7 +1437,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     if(color == Color.GREEN){
 
                         //means its already green so the user wants to DESELECT so update the database
-                        String modify1 = temp.substring(0,13)+"0";
+                        String modify1 = temp.substring(0,13)+"0"+temp.substring(14);
 
                         databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                         databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify1);
@@ -1241,12 +1448,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     }else{
 
                         //means the user click this button for first time
-                        String modify = temp.substring(0,13)+"1";
+                        String modify = temp.substring(0,13)+"1"+temp.substring(14);
 
                         databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                         databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay35.setBackgroundColor(Color.GREEN);
-                        System.out.println("passed");
 
                         Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify;
                     }
@@ -1255,65 +1461,280 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             });
 
             //Remove buttons (36-42) if sprint is 2 weeks
-            Button btCalendarDay36 = (Button)view.findViewById(R.id.bt36);
+            final Button btCalendarDay36 = (Button)view.findViewById(R.id.bt36);
             btCalendarDay36.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    onButtonClick((Button) view);
+
+                    String temp = Dashboard.activitiesJoyMap.get(1).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay36.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,14)+"0"+temp.substring(15);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay36.setBackgroundColor(Color.LTGRAY);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,14)+"1"+temp.substring(15);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay36.setBackgroundColor(Color.GREEN);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify;
+                    }
                 }
             });
 
 
-            Button btCalendarDay37 = (Button)view.findViewById(R.id.bt37);
+            final Button btCalendarDay37 = (Button)view.findViewById(R.id.bt37);
             btCalendarDay37.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    onButtonClick((Button) view);
+
+
+                    String temp = Dashboard.activitiesJoyMap.get(1).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay37.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,15)+"0"+temp.substring(16);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay37.setBackgroundColor(Color.LTGRAY);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,15)+"1"+temp.substring(16);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay37.setBackgroundColor(Color.GREEN);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify;
+                    }
                 }
             });
 
 
-            Button btCalendarDay38 = (Button)view.findViewById(R.id.bt38);
+            final Button btCalendarDay38 = (Button)view.findViewById(R.id.bt38);
             btCalendarDay38.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    onButtonClick((Button) view);
+
+                    String temp = Dashboard.activitiesJoyMap.get(1).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay38.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,16)+"0"+temp.substring(17);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay38.setBackgroundColor(Color.LTGRAY);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,16)+"1"+temp.substring(17);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay38.setBackgroundColor(Color.GREEN);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify;
+                    }
+
                 }
             });
 
 
-            Button btCalendarDay39 = (Button)view.findViewById(R.id.bt39);
+            final Button btCalendarDay39 = (Button)view.findViewById(R.id.bt39);
             btCalendarDay39.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    onButtonClick((Button) view);
+
+                    String temp = Dashboard.activitiesJoyMap.get(1).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay39.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,17)+"0"+temp.substring(18);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay39.setBackgroundColor(Color.LTGRAY);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,17)+"1"+temp.substring(18);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay39.setBackgroundColor(Color.GREEN);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify;
+                    }
+
                 }
             });
 
 
-            Button btCalendarDay40 = (Button)view.findViewById(R.id.bt40);
+            final Button btCalendarDay40 = (Button)view.findViewById(R.id.bt40);
             btCalendarDay40.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    onButtonClick((Button) view);
+
+                    String temp = Dashboard.activitiesJoyMap.get(1).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay40.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,18)+"0"+temp.substring(19);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay40.setBackgroundColor(Color.LTGRAY);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,18)+"1"+temp.substring(19);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay40.setBackgroundColor(Color.GREEN);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify;
+                    }
+
                 }
             });
 
 
-            Button btCalendarDay41 = (Button)view.findViewById(R.id.bt41);
+            final Button btCalendarDay41 = (Button)view.findViewById(R.id.bt41);
             btCalendarDay41.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    onButtonClick((Button) view);
+
+
+                    String temp = Dashboard.activitiesJoyMap.get(1).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay41.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,19)+"0"+temp.substring(20);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay41.setBackgroundColor(Color.LTGRAY);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,19)+"1"+temp.substring(20);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay41.setBackgroundColor(Color.GREEN);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify;
+                    }
                 }
             });
 
 
-            Button btCalendarDay42 = (Button)view.findViewById(R.id.bt42);
+            final Button btCalendarDay42 = (Button)view.findViewById(R.id.bt42);
             btCalendarDay42.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    onButtonClick((Button) view);
+
+                    String temp = Dashboard.activitiesJoyMap.get(1).sprintDailyPoints;
+
+                    int color = 0;
+                    Drawable backgroundcolor = btCalendarDay42.getBackground();
+                    if (backgroundcolor instanceof ColorDrawable) {
+                        color = ((ColorDrawable)backgroundcolor).getColor();
+                    }
+
+                    if(color == Color.GREEN){
+
+                        //means its already green so the user wants to DESELECT so update the database
+                        String modify1 = temp.substring(0,20)+"0"+temp.substring(21);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify1);
+                        btCalendarDay42.setBackgroundColor(Color.LTGRAY);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
+
+                    }else{
+
+                        //means the user click this button for first time
+                        String modify = temp.substring(0,20)+"1"+temp.substring(21);
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.activity2_static.activityid).child("sprintDailyPoints").setValue(modify);
+                        btCalendarDay42.setBackgroundColor(Color.GREEN);
+
+                        Dashboard.activitiesJoyMap.get(1).sprintDailyPoints = modify;
+                    }
                 }
             });
 
@@ -1321,7 +1742,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             int d = Dashboard.activitiesJoyMap.size();  //d must be 2
 
 
-            int numberOfweeks = Integer.parseInt(Dashboard.numberOfWeeksStatic);
+            int numberOfweeks = Integer.parseInt(Dashboard.joy_currentUserCategory.numberOfWeeks);
 
             if(numberOfweeks == 1){
 
@@ -1961,7 +2382,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                 //put the selected days in dashboard
                 String sprintJoyDailypoints = Dashboard.activitiesJoyMap.get(0).sprintDailyPoints;
-                sprintJoyDailypoints = "110010011001001100100";
+
                 for(int i=0;i<21;i++){
 
                     if(sprintJoyDailypoints.substring(0,1).equals("1") && i==0){
@@ -2169,7 +2590,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                 //put the selected days in dashboard
                 String sprintJoyDailypoints2 = Dashboard.activitiesJoyMap.get(1).sprintDailyPoints;
-                sprintJoyDailypoints2 = "110010011001001100100";
+
                 for(int i=0;i<21;i++){
 
                     if(sprintJoyDailypoints2.substring(0,1).equals("1") && i==0){
