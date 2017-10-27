@@ -23,24 +23,33 @@ public class LoginActivity extends AppCompatActivity {
     EditText username,password;
     Button signIn, registerUser;
 
+    //GENERAL
+    ArrayList<ActivitiesSprint> allActivities;
+
     //JOY variables
     ArrayList<Category> userJoysprintsHelper;
     ArrayList<User> listUsers;
     ArrayList<Category> currentJoyCategories;
-    ArrayList<ActivitiesSprint> allActivities;
     String userId;
-    Map<String,String> joyIdStartingDateMap;
+    //Map<String,String> joyIdStartingDateMap;
     String sprintjoyid;
     String currentCategoryuserId; //temporary variable holding the current category user id
 
-    //PASSION varibles
+    //PASSION variables
 
-    ArrayList<Category> passionprintsForUserHelper;
+    ArrayList<Category> userPassionSprintHelper;
     ArrayList<Category> currentPassionCategories;
-    ArrayList<ActivitiesSprint> currentPassionActivities;
-    Map<String,String> currentPassionSprintidtotal;
+    Map<String,String> passionIdStartingDateMap;
     String sprintpassionid;
+    String currentPassionCategoryId; //temporary variable holding the current category user id
 
+    //GIVING BACK
+
+    ArrayList<Category> userContributionSprintHelper;
+    ArrayList<Category> currentContributionCategories;
+    Map<String,String> contributionIdStartingDateMap;
+    String sprintcontributionid;
+    String currentContributionCategoryId; //temporary variable holding the current category user id
 
     DatabaseReference databaseCategories;
     DatabaseReference databaseUsers; //our database reference object
@@ -53,16 +62,19 @@ public class LoginActivity extends AppCompatActivity {
 
         //JOY INITIALIZATIONs
         userJoysprintsHelper = new ArrayList<>();
-        joyIdStartingDateMap = new TreeMap<>();
         allActivities = new ArrayList<>();
         listUsers = new ArrayList<>();
         currentJoyCategories = new ArrayList<>();
 
         //PASSION INITIALIZATIONS
-        passionprintsForUserHelper = new ArrayList<>();
-        currentPassionSprintidtotal = new TreeMap<>();
-        currentPassionActivities = new ArrayList<>();
+        userPassionSprintHelper = new ArrayList<>();
+        passionIdStartingDateMap = new TreeMap<>();
         currentPassionCategories = new ArrayList<>();
+
+        //GIVING BACK INITIALIZATIONS
+        userContributionSprintHelper = new ArrayList<>();
+        contributionIdStartingDateMap = new TreeMap<>();
+        currentContributionCategories = new ArrayList<>();
 
 
         //getting the reference of artists node
@@ -183,11 +195,12 @@ public class LoginActivity extends AppCompatActivity {
                                 System.out.println("activitySnapshot2.getKey() " + activitySnapshot2.getKey());
                                 System.out.println("temparray[10] " + tempArray[10]);
 
-                                joyIdStartingDateMap.put(activitySnapshot2.getKey() + "", tempArray[10]); //storing the joy sprint id and its starting date
+
+                                String JoySprintId = activitySnapshot2.getKey();
 
                                 //currentJoycategories will have (endingDate, goal1, goal2, goal3, goal4, NumOfWeeks, sprintActid1, sprintactid2, overallscore, startingDate) for that logged-in user
                                 currentJoyCategories.add(new Category(tempArray[0], tempArray[1], tempArray[2], tempArray[3], tempArray[4], tempArray[5], tempArray[6],
-                                        tempArray[7], tempArray[8], tempArray[9], tempArray[10], currentCategoryuserId));
+                                        tempArray[7], tempArray[8], tempArray[9], tempArray[10], currentCategoryuserId,JoySprintId));
                                 //System.out.println("hey3 " + activitySnapshot3.getKey()+": "+ activitySnapshot3.getValue(String.class));
                                 //returning = tempArray[5];
 
@@ -199,31 +212,124 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
 
-            }
-
-                System.out.println("ss22  ");
 
 
-                for (Map.Entry<String, String> entr : joyIdStartingDateMap.entrySet()) {
-                    System.out.println("Keyw : " + entr.getKey() + " Valuew : " + entr.getValue());
+                    //PASSION
 
-                }
 
-                for (int i = 0; i < currentJoyCategories.size(); i++) {
+                    for (int i = separator.length - 1; i >= 0; i--) {
 
-                    System.out.println("ss22 categ " + currentJoyCategories.get(i).categoryid);
-                    System.out.println("ss22 ending " + currentJoyCategories.get(i).endingDate);
-                    System.out.println("ss22 gol1 " + currentJoyCategories.get(i).goal1);
-                    System.out.println("ss22 gol2 " + currentJoyCategories.get(i).goal2);
-                    System.out.println("ss22 gol3 " + currentJoyCategories.get(i).goal3);
-                    System.out.println("ss22 gol4 " + currentJoyCategories.get(i).goal4);
-                    System.out.println("ss22 numwee " + currentJoyCategories.get(i).numberOfWeeks);
-                    System.out.println("ss22 sprintid1 " + currentJoyCategories.get(i).sprintActivityid1);
-                    System.out.println("ss22 sprintid2 " + currentJoyCategories.get(i).sprintActivityid2);
-                    System.out.println("ss22 overallscoe " + currentJoyCategories.get(i).sprintOverallScore);
-                    System.out.println("ss22 starting " + currentJoyCategories.get(i).startingDate);
-                    System.out.println("ss22 starting " + currentJoyCategories.get(i).userId);
-                }
+                        if (separator[i].length() > 15 && (separator[i].contains("userId"))) {
+                            //get the userId
+                            String temp = separator[i];
+                            int g = temp.indexOf("=");
+                            ++g;
+
+
+                            currentPassionCategoryId = temp.substring(g, temp.length() - 1);
+                            System.out.println("ZZZFG THIS IS CURRENT PASSION Categoryid " + currentPassionCategoryId); //hsshs
+
+                            DataSnapshot activitiesSnapshottemp = categorySnapshot.child("PassionSprints");
+
+                            String[] f = activitiesSnapshottemp.getValue().toString().split("=");
+
+                            String temporary = f[0];
+                            //System.out.println("heyyy66 " + f[0]);
+                            String tempId = temporary.substring(1);  //joysprint unique id
+
+
+                            for (DataSnapshot activitySnapshot2 : activitiesSnapshottemp.getChildren()) { //ids
+
+                                System.out.println("posible passionsprinIDDS " + activitySnapshot2.getKey());
+
+                                String[] tempArray = new String[(int) activitySnapshot2.getChildrenCount()];
+                                int k = 0;
+                                for (DataSnapshot activitySnapshot3 : activitySnapshot2.getChildren()) { //branch
+
+
+                                    tempArray[k] = activitySnapshot3.getValue().toString();
+
+                                    System.out.println("heyy temparray[] " + k + " === " + tempArray[k]);
+                                    k++;
+
+                                }
+
+                                System.out.println("activitySnapshot2.getKey() " + activitySnapshot2.getKey());
+                                System.out.println("temparray[10] " + tempArray[10]);
+
+                                String passionSprintid = activitySnapshot2.getKey();
+
+                                //currentJoycategories will have (endingDate, goal1, goal2, goal3, goal4, NumOfWeeks, sprintActid1, sprintactid2, overallscore, startingDate) for that logged-in user
+                                currentPassionCategories.add(new Category(tempArray[0], tempArray[1], tempArray[2], tempArray[3], tempArray[4], tempArray[5], tempArray[6],
+                                        tempArray[7], tempArray[8], tempArray[9], tempArray[10], currentPassionCategoryId,passionSprintid));
+                                //System.out.println("hey3 " + activitySnapshot3.getKey()+": "+ activitySnapshot3.getValue(String.class));
+                                //returning = tempArray[5];
+
+                            }
+
+                        }
+                        break;
+
+                    }
+
+                    // GIVING BACK
+
+
+                    for (int i = separator.length - 1; i >= 0; i--) {
+
+                        if (separator[i].length() > 15 && (separator[i].contains("userId"))) {
+                            //get the userId
+                            String temp = separator[i];
+                            int g = temp.indexOf("=");
+                            ++g;
+
+
+                            currentContributionCategoryId = temp.substring(g, temp.length() - 1);
+                            System.out.println("ZZZFG THIS IS CURRENT CONTRIBUTION Categoryid " + currentContributionCategoryId); //hsshs
+
+                            DataSnapshot activitiesSnapshottemp = categorySnapshot.child("ContributionSprints");
+
+                            String[] f = activitiesSnapshottemp.getValue().toString().split("=");
+
+                            String temporary = f[0];
+                            //System.out.println("heyyy66 " + f[0]);
+                            String tempId = temporary.substring(1);  //joysprint unique id
+
+
+                            for (DataSnapshot activitySnapshot2 : activitiesSnapshottemp.getChildren()) { //ids
+
+                                System.out.println("posible contributionsprinIDDS " + activitySnapshot2.getKey());
+
+                                String[] tempArray = new String[(int) activitySnapshot2.getChildrenCount()];
+                                int k = 0;
+                                for (DataSnapshot activitySnapshot3 : activitySnapshot2.getChildren()) { //branch
+
+
+                                    tempArray[k] = activitySnapshot3.getValue().toString();
+
+                                    System.out.println("heyy temparray[] " + k + " === " + tempArray[k]);
+                                    k++;
+
+                                }
+
+                                System.out.println("activitySnapshot2.getKey() " + activitySnapshot2.getKey());
+                                System.out.println("temparray[10] " + tempArray[10]);
+
+                                String contributionSprintid = activitySnapshot2.getKey();
+
+                                //currentJoycategories will have (endingDate, goal1, goal2, goal3, goal4, NumOfWeeks, sprintActid1, sprintactid2, overallscore, startingDate) for that logged-in user
+                                currentContributionCategories.add(new Category(tempArray[0], tempArray[1], tempArray[2], tempArray[3], tempArray[4], tempArray[5], tempArray[6],
+                                        tempArray[7], tempArray[8], tempArray[9], tempArray[10], currentContributionCategoryId,contributionSprintid));
+                                //System.out.println("hey3 " + activitySnapshot3.getKey()+": "+ activitySnapshot3.getValue(String.class));
+                                //returning = tempArray[5];
+
+                            }
+
+                        }
+                        break;
+
+                    }
+                } //end of for
 
             } //end of datachangeMethod
 
@@ -342,7 +448,7 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.println("useractivities 8 " + userActivitiesAll.get(i).activityid);
             }
 
-
+            //JOY
             for (int i = 0; i < currentJoyCategories.size(); i++) {
 
 
@@ -354,65 +460,113 @@ public class LoginActivity extends AppCompatActivity {
                             currentJoyCategories.get(i).goal1, currentJoyCategories.get(i).goal2, currentJoyCategories.get(i).goal3,
                             currentJoyCategories.get(i).goal4, currentJoyCategories.get(i).numberOfWeeks, currentJoyCategories.get(i).sprintActivityid1,
                             currentJoyCategories.get(i).sprintActivityid2, currentJoyCategories.get(i).sprintOverallScore,
-                            currentJoyCategories.get(i).startingDate, currentJoyCategories.get(i).userId));
+                            currentJoyCategories.get(i).startingDate, currentJoyCategories.get(i).userId,currentJoyCategories.get(i).sprintid));
                 }
-
             }
 
+            //PASSION
+            for (int i = 0; i < currentPassionCategories.size(); i++) {
 
-            int[] firstDateidentifier = new int[userJoysprintsHelper.size()];
+
+                if (userId.contains(currentPassionCategories.get(i).userId)) {
+
+                    System.out.println("categoryid PASSION:  " + currentPassionCategories.get(i).categoryid + " -- " + currentPassionCategories.size());
+
+                    userPassionSprintHelper.add(new Category(currentPassionCategories.get(i).categoryid, currentPassionCategories.get(i).endingDate,
+                            currentPassionCategories.get(i).goal1, currentPassionCategories.get(i).goal2, currentPassionCategories.get(i).goal3,
+                            currentPassionCategories.get(i).goal4, currentPassionCategories.get(i).numberOfWeeks, currentPassionCategories.get(i).sprintActivityid1,
+                            currentPassionCategories.get(i).sprintActivityid2, currentPassionCategories.get(i).sprintOverallScore,
+                            currentPassionCategories.get(i).startingDate, currentPassionCategories.get(i).userId,currentPassionCategories.get(i).sprintid));
+                }
+            }
+
+            //GIVING BACK
+            for (int i = 0; i < currentContributionCategories.size(); i++) {
+
+
+                if (userId.contains(currentContributionCategories.get(i).userId)) {
+
+                    System.out.println("categoryid CONTRIBUTION:  " + currentContributionCategories.get(i).categoryid + " -- " + currentContributionCategories.size());
+
+                    userContributionSprintHelper.add(new Category(currentContributionCategories.get(i).categoryid, currentContributionCategories.get(i).endingDate,
+                            currentContributionCategories.get(i).goal1, currentContributionCategories.get(i).goal2, currentContributionCategories.get(i).goal3,
+                            currentContributionCategories.get(i).goal4, currentContributionCategories.get(i).numberOfWeeks, currentContributionCategories.get(i).sprintActivityid1,
+                            currentContributionCategories.get(i).sprintActivityid2, currentContributionCategories.get(i).sprintOverallScore,
+                            currentContributionCategories.get(i).startingDate, currentContributionCategories.get(i).userId,currentContributionCategories.get(i).sprintid));
+                }
+            }
+
+            //JOY
+
+            TreeMap<String,String> joydateIdentifier = new TreeMap<String,String>();
+
             for (int i = 0; i < userJoysprintsHelper.size(); i++) {
 
-                firstDateidentifier[i] = Integer.parseInt(userJoysprintsHelper.get(i).startingDate);
-
-                System.out.println("firstdateidentifier[i]  " + firstDateidentifier[i]);
-
-                System.out.println("ss3 categ " + userJoysprintsHelper.get(i).categoryid);
-                System.out.println("ss3 ending " + userJoysprintsHelper.get(i).endingDate);
-                System.out.println("ss3 gol1 " + userJoysprintsHelper.get(i).goal1);
-                System.out.println("ss3 gol2 " + userJoysprintsHelper.get(i).goal2);
-                System.out.println("ss3 gol3 " + userJoysprintsHelper.get(i).goal3);
-                System.out.println("ss3 gol4 " + userJoysprintsHelper.get(i).goal4);
-                System.out.println("ss3 numwee " + userJoysprintsHelper.get(i).numberOfWeeks);
-                System.out.println("ss3 sprintid1 " + userJoysprintsHelper.get(i).sprintActivityid1);
-                System.out.println("ss3 sprintid2 " + userJoysprintsHelper.get(i).sprintActivityid2);
-                System.out.println("ss3 overallscoe " + userJoysprintsHelper.get(i).sprintOverallScore);
-                System.out.println("ss3 starting " + userJoysprintsHelper.get(i).startingDate);
-                System.out.println("ss3 starting " + userJoysprintsHelper.get(i).userId);
+                joydateIdentifier.put(userJoysprintsHelper.get(i).startingDate,userJoysprintsHelper.get(i).sprintid);
 
             }
 
-            //sort it by starting date
-            Arrays.sort(firstDateidentifier);
 
+            String joyleastDate = "";
+            for(Map.Entry<String,String> entr: joydateIdentifier.entrySet()){
+                System.out.println("Keyw JOY : " + entr.getKey() + " ValueJOYW : " + entr.getValue());
+                joyleastDate = entr.getKey();
+                sprintjoyid = entr.getValue();
+                break;
 
-            String startingdateid1 = "";
-
-            String temp = firstDateidentifier[0] + "";
-
-            System.out.println("temp fella " + temp);
-
-
-            if (temp.length() != 8) {
-                startingdateid1 = "0" + firstDateidentifier[0];
-            } else {
-                startingdateid1 = "" + firstDateidentifier[0];
             }
 
 
-            System.out.println("startingdate fella " + startingdateid1);
 
+            //PASSION
+
+            TreeMap<String,String> passiondateIdentifier = new TreeMap<String,String>();
+
+            for (int i = 0; i < userPassionSprintHelper.size(); i++) {
+
+                passiondateIdentifier.put(userPassionSprintHelper.get(i).startingDate,userPassionSprintHelper.get(i).sprintid);
+
+            }
+
+            String passionleastDate = "";
+            for(Map.Entry<String,String> entr: passiondateIdentifier.entrySet()){
+                System.out.println("Keyw PASSION : " + entr.getKey() + " ValuePASSIONW : " + entr.getValue());
+                passionleastDate = entr.getKey();
+                sprintpassionid = entr.getValue();
+                break;
+            }
+
+            //GIVING BACK
+
+            TreeMap<String,String> contributiondateIdentifier = new TreeMap<String,String>();
+
+            for (int i = 0; i < userContributionSprintHelper.size(); i++) {
+
+                contributiondateIdentifier.put(userContributionSprintHelper.get(i).startingDate,userContributionSprintHelper.get(i).sprintid);
+            }
+
+            String contributionleastDate = "";
+            for(Map.Entry<String,String> entr: contributiondateIdentifier.entrySet()){
+                System.out.println("Keyw CONTRIBUTION : " + entr.getKey() + " ValueCONTRIBUTION : " + entr.getValue());
+                contributionleastDate = entr.getKey();
+                sprintcontributionid = entr.getValue();
+                break;
+            }
+
+
+
+            //JOY
             Category userJoySprint = new Category();
             for (int i = 0; i < userJoysprintsHelper.size(); i++) {
 
-                if (userJoysprintsHelper.get(i).startingDate.contains(startingdateid1)) {
+                if (userJoysprintsHelper.get(i).startingDate.contains(joyleastDate)) {
 
 
                     userJoySprint = new Category(userJoysprintsHelper.get(i).categoryid, userJoysprintsHelper.get(i).endingDate,
                             userJoysprintsHelper.get(i).goal1, userJoysprintsHelper.get(i).goal2, userJoysprintsHelper.get(i).goal3,
                             userJoysprintsHelper.get(i).goal4, userJoysprintsHelper.get(i).numberOfWeeks, userJoysprintsHelper.get(i).sprintActivityid1,
                             userJoysprintsHelper.get(i).sprintActivityid2, userJoysprintsHelper.get(i).sprintOverallScore,
-                            userJoysprintsHelper.get(i).startingDate, userJoysprintsHelper.get(i).userId);
+                            userJoysprintsHelper.get(i).startingDate, userJoysprintsHelper.get(i).userId,userJoysprintsHelper.get(i).sprintid);
                 }
             }
 
@@ -428,7 +582,56 @@ public class LoginActivity extends AppCompatActivity {
             System.out.println("ss5 overallscoe " + userJoySprint.sprintOverallScore);
             System.out.println("ss5 starting " + userJoySprint.startingDate);
             System.out.println("ss5 userid " + userJoySprint.userId);
+            System.out.println("ss5 sprintid " + userJoySprint.sprintid);
 
+
+            //PASSION
+            Category userPassionSprint = new Category();
+            for (int i = 0; i < userPassionSprintHelper.size(); i++) {
+
+                if (userPassionSprintHelper.get(i).startingDate.contains(passionleastDate)) {
+
+
+                    userPassionSprint = new Category(userPassionSprintHelper.get(i).categoryid, userPassionSprintHelper.get(i).endingDate,
+                            userPassionSprintHelper.get(i).goal1, userPassionSprintHelper.get(i).goal2, userPassionSprintHelper.get(i).goal3,
+                            userPassionSprintHelper.get(i).goal4, userPassionSprintHelper.get(i).numberOfWeeks, userPassionSprintHelper.get(i).sprintActivityid1,
+                            userPassionSprintHelper.get(i).sprintActivityid2, userPassionSprintHelper.get(i).sprintOverallScore,
+                            userPassionSprintHelper.get(i).startingDate, userPassionSprintHelper.get(i).userId,userPassionSprintHelper.get(i).sprintid);
+                }
+            }
+
+            System.out.println("ss5 PASSION " + userPassionSprint.categoryid);
+            System.out.println("ss5 PASSION " + userPassionSprint.endingDate);
+            System.out.println("ss5 PASSION goal1 " + userPassionSprint.goal1);
+            System.out.println("ss5 PASSION goal2 " + userPassionSprint.goal2);
+            System.out.println("ss5 PASSION goal3 " + userPassionSprint.goal3);
+            System.out.println("ss5 PASSION goal4 " + userPassionSprint.goal4);
+            System.out.println("ss5 PASSION" + userPassionSprint.numberOfWeeks);
+            System.out.println("ss5 PASSION sprintid1 " + userPassionSprint.sprintActivityid1);
+            System.out.println("ss5 PASSION sprintid2 " + userPassionSprint.sprintActivityid2);
+            System.out.println("ss5 PASSION overallscoe " + userPassionSprint.sprintOverallScore);
+            System.out.println("ss5 PASSION starting " + userPassionSprint.startingDate);
+            System.out.println("ss5 PASSION userid " + userPassionSprint.userId);
+            System.out.println("ss5 PASSION sprintid " + userPassionSprint.sprintid);
+
+
+            //GIVING BACK
+            Category userContributionSprint = new Category();
+            for (int i = 0; i < userContributionSprintHelper.size(); i++) {
+
+                if (userContributionSprintHelper.get(i).startingDate.contains(contributionleastDate)) {
+
+                    userContributionSprint = new Category(userContributionSprintHelper.get(i).categoryid, userContributionSprintHelper.get(i).endingDate,
+                            userContributionSprintHelper.get(i).goal1, userContributionSprintHelper.get(i).goal2, userContributionSprintHelper.get(i).goal3,
+                            userContributionSprintHelper.get(i).goal4, userContributionSprintHelper.get(i).numberOfWeeks, userContributionSprintHelper.get(i).sprintActivityid1,
+                            userContributionSprintHelper.get(i).sprintActivityid2, userContributionSprintHelper.get(i).sprintOverallScore,
+                            userContributionSprintHelper.get(i).startingDate, userContributionSprintHelper.get(i).userId,userContributionSprintHelper.get(i).sprintid);
+                }
+            }
+
+
+
+            //JOY
             ActivitiesSprint userActivityJoyid1 = new ActivitiesSprint();
             ActivitiesSprint userActivityJoyid2 = new ActivitiesSprint();
 
@@ -473,19 +676,77 @@ public class LoginActivity extends AppCompatActivity {
             System.out.println("ss9 actid " + userActivityJoyid2.activityid);
 
 
+            //PASSION
+            ActivitiesSprint userActivityPassionid1 = new ActivitiesSprint();
+            ActivitiesSprint userActivityPassionid2 = new ActivitiesSprint();
 
-            for(Map.Entry<String,String> entr: joyIdStartingDateMap.entrySet()){
-                System.out.println("Keyw : " + entr.getKey() + " Valuew : " + entr.getValue());
+            for (int i = 0; i < userActivitiesAll.size(); i++) {
 
-                if(userJoySprint.startingDate.contains(entr.getValue())){
-                    sprintjoyid = entr.getKey();
-                    break;
+
+                if (userActivitiesAll.get(i).activityid.contains(userPassionSprint.sprintActivityid1)) {
+                    userActivityPassionid1 = new ActivitiesSprint(userActivitiesAll.get(i).activityScore,
+                            userActivitiesAll.get(i).actualPoints, userActivitiesAll.get(i).categoryId,
+                            userActivitiesAll.get(i).activityName, userActivitiesAll.get(i).sprintDailyPoints,
+                            userActivitiesAll.get(i).targetPoints, userActivitiesAll.get(i).userId, userActivitiesAll.get(i).activityid);
+                }
+
+                if (userActivitiesAll.get(i).activityid.contains(userPassionSprint.sprintActivityid2)) {
+
+                    userActivityPassionid2 = new ActivitiesSprint(userActivitiesAll.get(i).activityScore,
+                            userActivitiesAll.get(i).actualPoints, userActivitiesAll.get(i).categoryId,
+                            userActivitiesAll.get(i).activityName, userActivitiesAll.get(i).sprintDailyPoints,
+                            userActivitiesAll.get(i).targetPoints, userActivitiesAll.get(i).userId, userActivitiesAll.get(i).activityid);
+
                 }
             }
 
-            System.out.println("sprintjoyid fella " + sprintjoyid);
+
+            System.out.println("ss8 PASSION score " + userActivityPassionid1.activityScore);
+            System.out.println("ss8 PASSION points " + userActivityPassionid1.actualPoints);
+            System.out.println("ss8 PASSION catid " + userActivityPassionid1.categoryId);
+            System.out.println("ss8 PASSION actname" + userActivityPassionid1.activityName);
+            System.out.println("ss8 PASSION dailypoints " + userActivityPassionid1.sprintDailyPoints);
+            System.out.println("ss8 PASSION target" + userActivityPassionid1.targetPoints);
+            System.out.println("ss8 PASSION userid " + userActivityPassionid1.userId);
+            System.out.println("ss8 PASSION actid " + userActivityPassionid1.activityid);
 
 
+            System.out.println("ss9 PASSION score " + userActivityPassionid2.activityScore);
+            System.out.println("ss9 PASSION points " + userActivityPassionid2.actualPoints);
+            System.out.println("ss9 PASSION catid " + userActivityPassionid2.categoryId);
+            System.out.println("ss9 PASSION actname" + userActivityPassionid2.activityName);
+            System.out.println("ss9 PASSION dailypoints " + userActivityPassionid2.sprintDailyPoints);
+            System.out.println("ss9 PASSION target" + userActivityPassionid2.targetPoints);
+            System.out.println("ss9 PASSION userid " + userActivityPassionid2.userId);
+            System.out.println("ss9 PASSION actid " + userActivityPassionid2.activityid);
+
+
+            //GIVING BACK
+            ActivitiesSprint userActivityContributionid1 = new ActivitiesSprint();
+            ActivitiesSprint userActivityContributionid2 = new ActivitiesSprint();
+
+            for (int i = 0; i < userActivitiesAll.size(); i++) {
+
+
+                if (userActivitiesAll.get(i).activityid.contains(userContributionSprint.sprintActivityid1)) {
+                    userActivityContributionid1 = new ActivitiesSprint(userActivitiesAll.get(i).activityScore,
+                            userActivitiesAll.get(i).actualPoints, userActivitiesAll.get(i).categoryId,
+                            userActivitiesAll.get(i).activityName, userActivitiesAll.get(i).sprintDailyPoints,
+                            userActivitiesAll.get(i).targetPoints, userActivitiesAll.get(i).userId, userActivitiesAll.get(i).activityid);
+                }
+
+                if (userActivitiesAll.get(i).activityid.contains(userContributionSprint.sprintActivityid2)) {
+
+                    userActivityContributionid2 = new ActivitiesSprint(userActivitiesAll.get(i).activityScore,
+                            userActivitiesAll.get(i).actualPoints, userActivitiesAll.get(i).categoryId,
+                            userActivitiesAll.get(i).activityName, userActivitiesAll.get(i).sprintDailyPoints,
+                            userActivitiesAll.get(i).targetPoints, userActivitiesAll.get(i).userId, userActivitiesAll.get(i).activityid);
+
+                }
+            }
+
+
+            //SAVE EVERYTHING IS NEEDED
             Intent i = new Intent(LoginActivity.this,Dashboard.class);
 
 
@@ -494,12 +755,18 @@ public class LoginActivity extends AppCompatActivity {
             bundle.putParcelableArrayList("mylist", listUsers);
             bundle.putParcelableArrayList("allActivities", allActivities);
             bundle.putParcelableArrayList("userActivitiesAllList",userActivitiesAll);
+
+            //JOY
             bundle.putParcelableArrayList("categoriesJoyCategories",currentJoyCategories);
             bundle.putParcelableArrayList("userJoysprintHelperList",userJoysprintsHelper);
 
+            //PASSION
+            bundle.putParcelableArrayList("categoriesPassionCategories",currentPassionCategories);
+            bundle.putParcelableArrayList("userPassionsprintHelperList",userPassionSprintHelper);
 
-            //missing joyIdStartingDateMap for now
-
+            //GIVING BACK
+            bundle.putParcelableArrayList("categoriesContributionCategories",currentContributionCategories);
+            bundle.putParcelableArrayList("userContributionsprintHelperList",userContributionSprintHelper);
 
             i.putExtras(bundle);
             i.putExtra("userNameY",name);
@@ -508,6 +775,14 @@ public class LoginActivity extends AppCompatActivity {
             //JOY
             i.putExtra("joySprintId",sprintjoyid);
 
+            //PASSION
+            i.putExtra("passionSprintId",sprintpassionid);
+
+            //GIVIGNG BACK
+            i.putExtra("contributionSprintId",sprintcontributionid);
+
+
+            //JOY
 
             i.putExtra("joy_userJoySprint_categoryid",userJoySprint.categoryid);
             i.putExtra("joy_userJoySprint_endingdate",userJoySprint.endingDate);
@@ -521,8 +796,6 @@ public class LoginActivity extends AppCompatActivity {
             i.putExtra("joy_UserJoySprint_sprintoverallscore",userJoySprint.sprintOverallScore);
             i.putExtra("joy_UserJoySprint_startingdate",userJoySprint.startingDate);
             i.putExtra("joy_UserJoySprint_userid",userJoySprint.userId);
-
-
 
             //JOY
             i.putExtra("joy_activityid1_activityscore",userActivityJoyid1.activityScore);
@@ -545,69 +818,79 @@ public class LoginActivity extends AppCompatActivity {
             i.putExtra("joy_activityid2_activityid",userActivityJoyid2.activityid);
 
 
-
-
-
-
-
-
-
-
-            /*
-            //JOY
-            i.putExtra("categoryJoy_categoryid",currentcategoryForuser.categoryid);
-            i.putExtra("categoryJoy_endingDate",currentcategoryForuser.endingDate);
-            i.putExtra("categoryJoy_goal1",currentcategoryForuser.goal1);
-            i.putExtra("categoryJoy_goal2",currentcategoryForuser.goal2);
-            i.putExtra("categoryJoy_goal3",currentcategoryForuser.goal3);
-            i.putExtra("categoryJoy_goal4",currentcategoryForuser.goal4);
-            i.putExtra("categoryJoy_numberofweeks",currentcategoryForuser.numberOfWeeks);
-            i.putExtra("categoryJoy_sprintact1",currentcategoryForuser.sprintActivityid1);
-            i.putExtra("categoryJoy_sprintact2",currentcategoryForuser.sprintActivityid2);
-            i.putExtra("categoryJoy_overallscore",currentcategoryForuser.sprintOverallScore);
-            i.putExtra("categoryJoy_startingDate",currentcategoryForuser.startingDate);
-            i.putExtra("categoryJoy_userId",currentcategoryForuser.userId);
-
-
             //PASSION
-            i.putExtra("passionSprintId",sprintpassionid);
+            i.putExtra("passion_userPassionSprint_categoryid",userPassionSprint.categoryid);
+            i.putExtra("passion_userPassionSprint_endingdate",userPassionSprint.endingDate);
+            i.putExtra("passion_userPassionSprint_goal1",userPassionSprint.goal1);
+            i.putExtra("passion_userPassionSprint_goal2",userPassionSprint.goal2);
+            i.putExtra("passion_userPassionSprint_goal3",userPassionSprint.goal3);
+            i.putExtra("passion_userPassionSprint_goal4",userPassionSprint.goal4);
+            i.putExtra("passion_userPassionSprint_numberofweeks",userPassionSprint.numberOfWeeks);
+            i.putExtra("passion_userPassionSprint_sprintactivityid1",userPassionSprint.sprintActivityid1);
+            i.putExtra("passion_userPassionSprint_sprintactivityid2",userPassionSprint.sprintActivityid2);
+            i.putExtra("passion_userPassionSprint_sprintoverallscore",userPassionSprint.sprintOverallScore);
+            i.putExtra("passion_userPassionSprint_startingdate",userPassionSprint.startingDate);
+            i.putExtra("passion_userPassionSprint_userid",userPassionSprint.userId);
 
-            //PASSION -- The 2 most RECENT activities that the user has agreed to work on
-            i.putExtra("activity1_score_passion",passionActivity1ForUser.activityScore);
-            i.putExtra("activity1_actualpoints_passion",passionActivity1ForUser.actualPoints);
-            i.putExtra("activity1_categoryid_passion",passionActivity1ForUser.categoryId);
-            i.putExtra("activity1_name_passion",passionActivity1ForUser.activityName);
-            i.putExtra("activity1_sprintdailypoints_passion",passionActivity1ForUser.sprintDailyPoints);
-            i.putExtra("activity1_targetpoints_passion",passionActivity1ForUser.targetPoints);
-            i.putExtra("activity1_userid_passion",passionActivity1ForUser.userId);
-            i.putExtra("activity1_activityid_passion",passionActivity1ForUser.activityid);
 
-            //PASSION
-            i.putExtra("activity2_score_passion",passionActivity2ForUser.activityScore);
-            i.putExtra("activity2_actualpoints_passion",passionActivity2ForUser.actualPoints);
-            i.putExtra("activity2_categoryid_passion",passionActivity2ForUser.categoryId);
-            i.putExtra("activity2_name_passion",passionActivity2ForUser.activityName);
-            i.putExtra("activity2_sprintdailypoints_passion",passionActivity2ForUser.sprintDailyPoints);
-            i.putExtra("activity2_targetpoints_passion",passionActivity2ForUser.targetPoints);
-            i.putExtra("activity2_userid_passion",passionActivity2ForUser.userId);
-            i.putExtra("activity2_activityid_passion",passionActivity2ForUser.activityid);
+            i.putExtra("passion_activityid1_activityscore",userActivityPassionid1.activityScore);
+            i.putExtra("passion_activityid1_actualpoints",userActivityPassionid1.actualPoints);
+            i.putExtra("passion_activityid1_categoryid",userActivityPassionid1.categoryId);
+            i.putExtra("passion_activityid1_activityname",userActivityPassionid1.activityName);
+            i.putExtra("passion_activityid1_sprintdailypoints",userActivityPassionid1.sprintDailyPoints);
+            i.putExtra("passion_activityid1_targetpoints",userActivityPassionid1.targetPoints);
+            i.putExtra("passion_activityid1_userid",userActivityPassionid1.userId);
+            i.putExtra("passion_activityid1_activityid",userActivityPassionid1.activityid);
 
-            //PASSION
-            i.putExtra("categoryPassion_categoryid",currentcategoryForuser2.categoryid);
-            i.putExtra("categoryPassion_endingDate",currentcategoryForuser2.endingDate);
-            i.putExtra("categoryPassion_goal1",currentcategoryForuser2.goal1);
-            i.putExtra("categoryPassion_goal2",currentcategoryForuser2.goal2);
-            i.putExtra("categoryPassion_goal3",currentcategoryForuser2.goal3);
-            i.putExtra("categoryPassion_goal4",currentcategoryForuser2.goal4);
-            i.putExtra("categoryPassion_numberofweeks",currentcategoryForuser2.numberOfWeeks);
-            i.putExtra("categoryPassion_sprintact1",currentcategoryForuser2.sprintActivityid1);
-            i.putExtra("categoryPassion_sprintact2",currentcategoryForuser2.sprintActivityid2);
-            i.putExtra("categoryPassion_overallscore",currentcategoryForuser2.sprintOverallScore);
-            i.putExtra("categoryPassion_startingDate",currentcategoryForuser2.startingDate);
-            i.putExtra("categoryPassion_userId",currentcategoryForuser2.userId);
 
-            */
+            i.putExtra("passion_activityid2_activityscore",userActivityPassionid2.activityScore);
+            i.putExtra("passion_activityid2_actualpoints",userActivityPassionid2.actualPoints);
+            i.putExtra("passion_activityid2_categoryid",userActivityPassionid2.categoryId);
+            i.putExtra("passion_activityid2_activityname",userActivityPassionid2.activityName);
+            i.putExtra("passion_activityid2_sprintdailypoints",userActivityPassionid2.sprintDailyPoints);
+            i.putExtra("passion_activityid2_targetpoints",userActivityPassionid2.targetPoints);
+            i.putExtra("passion_activityid2_userid",userActivityPassionid2.userId);
+            i.putExtra("passion_activityid2_activityid",userActivityPassionid2.activityid);
+
+
+
+            //GIVING BACK
+            i.putExtra("contribution_userContributionSprint_categoryid",userContributionSprint.categoryid);
+            i.putExtra("contribution_userContributionSprint_endingdate",userContributionSprint.endingDate);
+            i.putExtra("contribution_userContributionSprint_goal1",userContributionSprint.goal1);
+            i.putExtra("contribution_userContributionSprint_goal2",userContributionSprint.goal2);
+            i.putExtra("contribution_userContributionSprint_goal3",userContributionSprint.goal3);
+            i.putExtra("contribution_userContributionSprint_goal4",userContributionSprint.goal4);
+            i.putExtra("contribution_userContributionSprint_numberofweeks",userContributionSprint.numberOfWeeks);
+            i.putExtra("contribution_userContributionSprint_sprintactivityid1",userContributionSprint.sprintActivityid1);
+            i.putExtra("contribution_userContributionSprint_sprintactivityid2",userContributionSprint.sprintActivityid2);
+            i.putExtra("contribution_userContributionSprint_sprintoverallscore",userContributionSprint.sprintOverallScore);
+            i.putExtra("contribution_userContributionSprint_startingdate",userContributionSprint.startingDate);
+            i.putExtra("contribution_userContributionSprint_userid",userContributionSprint.userId);
+
+
+            i.putExtra("contribution_activityid1_activityscore",userActivityContributionid1.activityScore);
+            i.putExtra("contribution_activityid1_actualpoints",userActivityContributionid1.actualPoints);
+            i.putExtra("contribution_activityid1_categoryid",userActivityContributionid1.categoryId);
+            i.putExtra("contribution_activityid1_activityname",userActivityContributionid1.activityName);
+            i.putExtra("contribution_activityid1_sprintdailypoints",userActivityContributionid1.sprintDailyPoints);
+            i.putExtra("contribution_activityid1_targetpoints",userActivityContributionid1.targetPoints);
+            i.putExtra("contribution_activityid1_userid",userActivityContributionid1.userId);
+            i.putExtra("contribution_activityid1_activityid",userActivityContributionid1.activityid);
+
+
+            i.putExtra("contribution_activityid2_activityscore",userActivityContributionid2.activityScore);
+            i.putExtra("contribution_activityid2_actualpoints",userActivityContributionid2.actualPoints);
+            i.putExtra("contribution_activityid2_categoryid",userActivityContributionid2.categoryId);
+            i.putExtra("contribution_activityid2_activityname",userActivityContributionid2.activityName);
+            i.putExtra("contribution_activityid2_sprintdailypoints",userActivityContributionid2.sprintDailyPoints);
+            i.putExtra("contribution_activityid2_targetpoints",userActivityContributionid2.targetPoints);
+            i.putExtra("contribution_activityid2_userid",userActivityContributionid2.userId);
+            i.putExtra("contribution_activityid2_activityid",userActivityContributionid2.activityid);
+
+
             this.startActivity(i);
+
 
         }else{
             Toast.makeText(this, "Username/Password does not match, Please try again ", Toast.LENGTH_LONG).show();

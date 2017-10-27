@@ -26,7 +26,6 @@ public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-
     //JOY variables
     static ArrayList<ActivitiesSprint> allActivities;
     static ArrayList<ActivitiesSprint> userActivitiesAll;
@@ -38,21 +37,32 @@ public class Dashboard extends AppCompatActivity
     static String endingDateFixed;
     static String startingDateFixed;
     static String sprintJoyid;
-    //static TreeMap<Integer,ActivitiesSprint> activitiesJoyMap; //for later
 
 
     User currentUser; //holds the information of the current logged-in user
 
 
     //PASSION variables
-    ActivitiesSprint currentPassionActivity;
-    static String passion_endingDateFixed;
-    static String passion_startingDateFixed;
+
+    static ArrayList<Category> currentPassionCategories;
+    static ArrayList<Category> userPassionsprintsHelper;
+    static Category userPassionSprint;
+    static ActivitiesSprint userActivityPassionid1;
+    static ActivitiesSprint userActivityPassionid2;
+    static String endingDateFixed_passion;
+    static String startingDateFixed_passion;
     static String sprintPassionid;
-    static TreeMap<Integer,ActivitiesSprint> activitiesPassionMap;
-    static ActivitiesSprint activity1_static_passion;
-    static ActivitiesSprint activity2_static_passion;
-    static Category passion_currentUserCategory;
+
+    //GIVING BACK variables
+
+    static ArrayList<Category> currentContributionCategories;
+    static ArrayList<Category> userContributionsprintsHelper;
+    static Category userContributionSprint;
+    static ActivitiesSprint userActivityContributionid1;
+    static ActivitiesSprint userActivityContributionid2;
+    static String endingDateFixed_contribution;
+    static String startingDateFixed_contribution;
+    static String sprintContributionid;
 
 
     @Override
@@ -70,6 +80,20 @@ public class Dashboard extends AppCompatActivity
         userJoySprint = new Category();
         userActivityJoyid1 = new ActivitiesSprint();
         userActivityJoyid2 = new ActivitiesSprint();
+
+        //PASSION
+        currentPassionCategories = new ArrayList<>();
+        userPassionsprintsHelper = new ArrayList<>();
+        userPassionSprint = new Category();
+        userActivityPassionid1 = new ActivitiesSprint();
+        userActivityPassionid2 = new ActivitiesSprint();
+
+        //GIVING BACK
+        currentContributionCategories = new ArrayList<>();
+        userContributionsprintsHelper = new ArrayList<>();
+        userContributionSprint = new Category();
+        userActivityContributionid1 = new ActivitiesSprint();
+        userActivityContributionid2 = new ActivitiesSprint();
 
 
         ViewPager vp_pages= (ViewPager)findViewById(R.id.vp_pages);
@@ -113,8 +137,9 @@ public class Dashboard extends AppCompatActivity
         String usernameRef = in.getExtras().getString("userNameY");  //has username that the user entered
         String passRef = in.getExtras().getString("passwordY");  //the password that user entered
 
-        sprintJoyid = in.getExtras().getString("joySprintId");
+        //JOY
 
+        sprintJoyid = in.getExtras().getString("joySprintId");
 
         userJoySprint.categoryid = in.getExtras().getString("joy_userJoySprint_categoryid");
         userJoySprint.endingDate = in.getExtras().getString("joy_userJoySprint_endingdate");
@@ -149,6 +174,78 @@ public class Dashboard extends AppCompatActivity
         userActivityJoyid2.activityid = in.getExtras().getString("joy_activityid2_activityid");
 
 
+        //PASSION
+
+        sprintPassionid = in.getExtras().getString("passionSprintId");
+
+        userPassionSprint.categoryid = in.getExtras().getString("passion_userPassionSprint_categoryid");
+        userPassionSprint.endingDate = in.getExtras().getString("passion_userPassionSprint_endingdate");
+        userPassionSprint.goal1 = in.getExtras().getString("passion_userPassionSprint_goal1");
+        userPassionSprint.goal2 = in.getExtras().getString("passion_userPassionSprint_goal2");
+        userPassionSprint.goal3 = in.getExtras().getString("passion_userPassionSprint_goal3");
+        userPassionSprint.goal4 = in.getExtras().getString("passion_userPassionSprint_goal4");
+        userPassionSprint.numberOfWeeks = in.getExtras().getString("passion_userPassionSprint_numberofweeks");
+        userPassionSprint.sprintActivityid1 = in.getExtras().getString("passion_userPassionSprint_sprintactivityid1");
+        userPassionSprint.sprintActivityid2 = in.getExtras().getString("passion_userPassionSprint_sprintactivityid2");
+        userPassionSprint.sprintOverallScore = in.getExtras().getString("passion_userPassionSprint_sprintoverallscore");
+        userPassionSprint.startingDate = in.getExtras().getString("passion_userPassionSprint_startingdate");
+        userPassionSprint.userId = in.getExtras().getString("passion_userPassionSprint_userid");
+
+
+        userActivityPassionid1.activityScore = in.getExtras().getString("passion_activityid1_activityscore");
+        userActivityPassionid1.actualPoints = in.getExtras().getString("passion_activityid1_actualpoints");
+        userActivityPassionid1.categoryId = in.getExtras().getString("passion_activityid1_categoryid");
+        userActivityPassionid1.activityName = in.getExtras().getString("passion_activityid1_activityname");
+        userActivityPassionid1.sprintDailyPoints = in.getExtras().getString("passion_activityid1_sprintdailypoints");
+        userActivityPassionid1.targetPoints = in.getExtras().getString("passion_activityid1_targetpoints");
+        userActivityPassionid1.userId = in.getExtras().getString("passion_activityid1_userid");
+        userActivityPassionid1.activityid = in.getExtras().getString("passion_activityid1_activityid");
+
+        userActivityPassionid2.activityScore = in.getExtras().getString("passion_activityid2_activityscore");
+        userActivityPassionid2.actualPoints = in.getExtras().getString("passion_activityid2_actualpoints");
+        userActivityPassionid2.categoryId = in.getExtras().getString("passion_activityid2_categoryid");
+        userActivityPassionid2.activityName = in.getExtras().getString("passion_activityid2_activityname");
+        userActivityPassionid2.sprintDailyPoints = in.getExtras().getString("passion_activityid2_sprintdailypoints");
+        userActivityPassionid2.targetPoints = in.getExtras().getString("passion_activityid2_targetpoints");
+        userActivityPassionid2.userId = in.getExtras().getString("passion_activityid2_userid");
+        userActivityPassionid2.activityid = in.getExtras().getString("passion_activityid2_activityid");
+
+
+        //GIVING BACK
+
+        sprintContributionid = in.getExtras().getString("contributionSprintId");
+
+        userContributionSprint.categoryid = in.getExtras().getString("contribution_userContributionSprint_categoryid");
+        userContributionSprint.endingDate = in.getExtras().getString("contribution_userContributionSprint_endingdate");
+        userContributionSprint.goal1 = in.getExtras().getString("contribution_userContributionSprint_goal1");
+        userContributionSprint.goal2 = in.getExtras().getString("contribution_userContributionSprint_goal2");
+        userContributionSprint.goal3 = in.getExtras().getString("contribution_userContributionSprint_goal3");
+        userContributionSprint.goal4 = in.getExtras().getString("contribution_userContributionSprint_goal4");
+        userContributionSprint.numberOfWeeks = in.getExtras().getString("contribution_userContributionSprint_numberofweeks");
+        userContributionSprint.sprintActivityid1 = in.getExtras().getString("contribution_userContributionSprint_sprintactivityid1");
+        userContributionSprint.sprintActivityid2 = in.getExtras().getString("contribution_userContributionSprint_sprintactivityid2");
+        userContributionSprint.sprintOverallScore = in.getExtras().getString("contribution_userContributionSprint_sprintoverallscore");
+        userContributionSprint.startingDate = in.getExtras().getString("contribution_userContributionSprint_startingdate");
+        userContributionSprint.userId = in.getExtras().getString("contribution_userContributionSprint_userid");
+
+
+        userActivityContributionid1.activityScore = in.getExtras().getString("contribution_activityid1_activityscore");
+        userActivityContributionid1.actualPoints = in.getExtras().getString("contribution_activityid1_actualpoints");
+        userActivityContributionid1.categoryId = in.getExtras().getString("contribution_activityid1_categoryid");
+        userActivityContributionid1.activityName = in.getExtras().getString("contribution_activityid1_activityname");
+        userActivityContributionid1.sprintDailyPoints = in.getExtras().getString("contribution_activityid1_sprintdailypoints");
+        userActivityContributionid1.targetPoints = in.getExtras().getString("contribution_activityid1_targetpoints");
+        userActivityContributionid1.userId = in.getExtras().getString("contribution_activityid1_userid");
+        userActivityContributionid1.activityid = in.getExtras().getString("contribution_activityid1_activityid");
+
+        userActivityContributionid2.activityScore = in.getExtras().getString("contribution_activityid2_activityscore");
+        userActivityContributionid2.actualPoints = in.getExtras().getString("contribution_activityid2_actualpoints");
+        userActivityContributionid2.categoryId = in.getExtras().getString("contribution_activityid2_categoryid");
+        userActivityContributionid2.activityName = in.getExtras().getString("contribution_activityid2_activityname");
+        userActivityContributionid2.sprintDailyPoints = in.getExtras().getString("contribution_activityid2_sprintdailypoints");
+        userActivityContributionid2.targetPoints = in.getExtras().getString("contribution_activityid2_targetpoints");
+        userActivityContributionid2.userId = in.getExtras().getString("contribution_activityid2_userid");
+        userActivityContributionid2.activityid = in.getExtras().getString("contribution_activityid2_activityid");
 
         //temp
         Bundle bundle = getIntent().getExtras();
@@ -170,30 +267,18 @@ public class Dashboard extends AppCompatActivity
 
         allActivities = bundle.getParcelableArrayList("allActivities");
         userActivitiesAll = bundle.getParcelableArrayList("userActivitiesAllList");
+
+        //JOY
         currentJoyCategories = bundle.getParcelableArrayList("categoriesJoyCategories");
         userJoysprintsHelper = bundle.getParcelableArrayList("userJoysprintHelperList");
 
+        //PASSION
+        currentPassionCategories = bundle.getParcelableArrayList("categoriesPassionCategories");
+        userPassionsprintsHelper = bundle.getParcelableArrayList("userPassionsprintHelperList");
 
-        //ArrayList<ActivitiesSprint> activitiesJoyList = new ArrayList<>();
-
-
-
-
-
-
-
-
-/*
-        System.out.println(" 1qact " + activity1_static_passion.activityScore);
-        System.out.println(" 1qactpoints " + activity1_static_passion.actualPoints);
-        System.out.println(" 1qcatg id " + activity1_static_passion.categoryId);
-        System.out.println(" 1qname " + activity1_static_passion.activityName);
-        System.out.println(" 1qsprintpoints " + activity1_static_passion.sprintDailyPoints);
-        System.out.println(" 1qtarget " + activity1_static_passion.targetPoints);
-        System.out.println(" 1quserid " + activity1_static_passion.userId);
-        System.out.println(" 1qactid " + activity1_static_passion.activityid);
-*/
-
+        //GIVING BACK
+        currentContributionCategories = bundle.getParcelableArrayList("categoriesContributionCategories");
+        userContributionsprintsHelper = bundle.getParcelableArrayList("userContributionsprintHelperList");
 
 
         int j = 0;
@@ -201,8 +286,6 @@ public class Dashboard extends AppCompatActivity
 
 
         //JOY
-
-
 
         //convert to format mm/dd/yyyy
         endingDateFixed = userJoySprint.endingDate.substring(0,2) + "/" +
@@ -217,39 +300,33 @@ public class Dashboard extends AppCompatActivity
         System.out.println("sprintjoyid " + sprintJoyid);
 
 
-
-
-
-
-
-        /*
-        passion_currentUserCategory.categoryid = in.getExtras().getString("categoryPassion_categoryid");
-        passion_currentUserCategory.endingDate = in.getExtras().getString("categoryPassion_endingDate");
-        passion_currentUserCategory.goal1 = in.getExtras().getString("categoryPassion_goal1");
-        passion_currentUserCategory.goal2 = in.getExtras().getString("categoryPassion_goal2");
-        passion_currentUserCategory.goal3 = in.getExtras().getString("categoryPassion_goal3");
-        passion_currentUserCategory.goal4 = in.getExtras().getString("categoryPassion_goal4");
-        passion_currentUserCategory.numberOfWeeks = in.getExtras().getString("categoryPassion_numberofweeks");
-        passion_currentUserCategory.sprintActivityid1 = in.getExtras().getString("categoryPassion_sprintact1");
-        passion_currentUserCategory.sprintActivityid2 = in.getExtras().getString("categoryPassion_sprintact2");
-        passion_currentUserCategory.sprintOverallScore = in.getExtras().getString("categoryPassion_overallscore");
-        passion_currentUserCategory.startingDate = in.getExtras().getString("categoryPassion_startingDate");
-        passion_currentUserCategory.userId = in.getExtras().getString("categoryPassion_userId");
-
-
+        //PASSION
 
         //convert to format mm/dd/yyyy
-        passion_endingDateFixed = passion_currentUserCategory.endingDate.substring(0,2) + "/" +
-                passion_currentUserCategory.endingDate.substring(2,4) + "/" + passion_currentUserCategory.endingDate.substring(4);
+        endingDateFixed_passion = userPassionSprint.endingDate.substring(0,2) + "/" +
+                userPassionSprint.endingDate.substring(2,4) + "/" + userPassionSprint.endingDate.substring(4);
 
         //convert to format mm/dd/yyyy
         //System.out.println("heystart " + startRef);
-        passion_startingDateFixed = passion_currentUserCategory.startingDate.substring(0,2) + "/" +
-                passion_currentUserCategory.startingDate.substring(2,4) + "/" + passion_currentUserCategory.startingDate.substring(4);
+        startingDateFixed_passion = userPassionSprint.startingDate.substring(0,2) + "/" +
+                userPassionSprint.startingDate.substring(2,4) + "/" + userPassionSprint.startingDate.substring(4);
 
 
-        System.out.println("sprintjoyid " + sprintPassionid);
-        */
+        System.out.println("sprintPassionid " + sprintPassionid);
+
+        //GIVING BACK
+
+        //convert to format mm/dd/yyyy
+        endingDateFixed_contribution = userContributionSprint.endingDate.substring(0,2) + "/" +
+                userContributionSprint.endingDate.substring(2,4) + "/" + userContributionSprint.endingDate.substring(4);
+
+        //convert to format mm/dd/yyyy
+        //System.out.println("heystart " + startRef);
+        startingDateFixed_contribution = userContributionSprint.startingDate.substring(0,2) + "/" +
+                userContributionSprint.startingDate.substring(2,4) + "/" + userContributionSprint.startingDate.substring(4);
+
+
+        System.out.println("sprintContributionid " + sprintContributionid);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

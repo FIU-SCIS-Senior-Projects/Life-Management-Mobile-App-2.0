@@ -19,6 +19,7 @@ public class Category implements Parcelable{
     String sprintOverallScore;
     String startingDate;
     String userId;
+    String sprintid;
 
 
 
@@ -36,11 +37,12 @@ public class Category implements Parcelable{
         sprintOverallScore= "";
         startingDate= "";
         userId = "";
+        sprintid = "";
 
     }
 
     public Category(String categoryid, String endingDate, String goal1, String goal2, String goal3, String goal4, String numberOfWeeks, String sprintActivityid1,
-                    String sprintActivityid2, String sprintOverallScore, String startingDate, String userId) {
+                    String sprintActivityid2, String sprintOverallScore, String startingDate, String userId, String sprintid) {
         this.categoryid = categoryid;
         this.endingDate = endingDate;
         this.goal1 = goal1;
@@ -53,6 +55,7 @@ public class Category implements Parcelable{
         this.sprintOverallScore = sprintOverallScore;
         this.startingDate = startingDate;
         this.userId = userId;
+        this.sprintid = sprintid;
 
     }
 
@@ -70,6 +73,7 @@ public class Category implements Parcelable{
         this.sprintOverallScore = in.readString();
         this.startingDate = in.readString();
         this.userId = in.readString();
+        this.sprintid = in.readString();
     }
 
     public String getCategoryid() {
@@ -188,6 +192,7 @@ public class Category implements Parcelable{
         parcel.writeString(sprintOverallScore);
         parcel.writeString(startingDate);
         parcel.writeString(userId);
+        parcel.writeString(sprintid);
     }
 
     public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
