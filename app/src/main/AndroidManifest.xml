@@ -31,11 +31,16 @@
         <activity android:name=".ThirdScreenActivity" />
         <activity android:name=".CarouselScreen" />
         <activity android:name=".MainPassionActivity" />
+        <activity android:name=".MainGivingBackActivity" />
+        <activity android:name=".SprintSettingActivity" />
+
         <activity
             android:name=".Dashboard"
             android:label="@string/title_activity_dashboard"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".CycleActivity" />
+        <activity android:name=".previousCycle"></activity>
     </application>
 
 </manifest>

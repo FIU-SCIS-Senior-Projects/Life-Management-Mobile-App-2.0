@@ -25,9 +25,10 @@ import java.util.ArrayList;
 
     public class CoverFlowAdapter extends BaseAdapter{
 
+
         private ArrayList<Joy> data;  //contains all the activities
         private AppCompatActivity activity;
-        private ArrayList<String> n = new ArrayList<>(); //contains the activities the user will selects
+        static ArrayList<String> n = new ArrayList<>(); //contains the activities the user will selects
         int positionSaver = 0;
         static int counter = 0;
 
@@ -107,7 +108,7 @@ import java.util.ArrayList;
 
                         dialog.show();
 
-                        Button continueBtn = dialog.findViewById(R.id.continueButtonjoyDialog);
+                        Button continueBtn = (Button)dialog.findViewById(R.id.continueButtonjoyDialog);
 
                         continueBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -137,5 +138,4 @@ import java.util.ArrayList;
             }
         }
 
-}
-
+    }

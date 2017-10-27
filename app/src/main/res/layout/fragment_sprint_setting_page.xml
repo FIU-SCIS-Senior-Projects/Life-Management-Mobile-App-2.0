@@ -19,7 +19,6 @@
         android:gravity="center"/>
 
 
-
     <TextView
         android:id="@+id/sprintGoalQ"
         android:layout_width="match_parent"
@@ -55,22 +54,51 @@
         android:textColor="#000000"
         android:padding="10dp"
         android:lineSpacingMultiplier="1.2"
-        android:text="Would you like this sprint to be 1, 2 or 3 weeks long?"/>
+        android:text="How many weeks would you like this sprint to be?"/>
 
-    <EditText
-        android:id="@+id/sprintPeriodA"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:backgroundTint="#066408"
-        android:textCursorDrawable="@color/colorGreen"
-        android:textSize="19sp"
-        android:inputType="number"
-        android:hint="Enter 1, 2 or 3"
-        android:layout_marginTop="-10dp"
-        android:allowUndo="false"
-        />
+    <RadioGroup
+        android:id="@+id/sprintPeriodButtonsGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="left"
+        android:layout_margin="15dp"
+        android:paddingRight="50dp">
+
+        <RadioButton
+            android:id="@+id/sprintPeriod1"
+            style="@android:style/Widget.Holo.Light.CompoundButton.RadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:buttonTint="@color/colorGreen"
+            android:textSize="19sp"
+            />
+
+        <RadioButton
+            android:id="@+id/sprintPeriod2"
+            style="@android:style/Widget.Holo.Light.CompoundButton.RadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:buttonTint="@color/colorGreen"
+            android:textSize="19sp"
+            />
+
+        <RadioButton
+            android:id="@+id/sprintPeriod3"
+            style="@android:style/Widget.Holo.Light.CompoundButton.RadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:buttonTint="@color/colorGreen"
+            android:textSize="19sp"
+            />
+
+
+    </RadioGroup>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -131,12 +159,12 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
         <TextView
+            android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -151,13 +179,5 @@
             />
 
     </LinearLayout>
-
-
-
-
-
-
-
-
 
 </LinearLayout>

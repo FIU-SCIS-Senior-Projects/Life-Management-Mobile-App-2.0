@@ -9,7 +9,7 @@
     android:layout_marginTop="48dp"
     android:id="@+id/scrollViewId"
     android:orientation="vertical">
-    tools:showIn="@layout/app_bar_test"
+    tools:showIn="@layout/app_bar_dashboard"
 
 
     <LinearLayout

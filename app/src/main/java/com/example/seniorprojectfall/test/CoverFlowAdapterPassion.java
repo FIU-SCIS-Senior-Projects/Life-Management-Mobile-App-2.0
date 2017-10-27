@@ -21,119 +21,119 @@ import java.util.ArrayList;
 
 public class CoverFlowAdapterPassion extends BaseAdapter{
 
-    private ArrayList<Passion> activitiesTotalPassion;  //contains all the activities (passion)
-    private AppCompatActivity activity;
-    private ArrayList<String> n = new ArrayList<>(); //contains the activities the user will selects
-    int positionSaver = 0;
-    static int counter = 0;
+
+        private ArrayList<Passion> activitiesTotalPassion;  //contains all the activities (passion)
+        private AppCompatActivity activity;
+        static ArrayList<String> n = new ArrayList<>(); //contains the activities the user will selects
+        int positionSaver = 0;
+        static int counter = 0;
 
 
+        public CoverFlowAdapterPassion(AppCompatActivity context, ArrayList<Passion> objects) {
+            this.activity = context;
+            this.activitiesTotalPassion = objects;
 
-    public CoverFlowAdapterPassion(AppCompatActivity context, ArrayList<Passion> objects) {
-        this.activity = context;
-        this.activitiesTotalPassion = objects;
-
-    }
-
-    @Override
-    public int getCount() {
-
-        return activitiesTotalPassion.size();
-    }
-
-
-    @Override
-    public Passion getItem(int position) {
-        return activitiesTotalPassion.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        CoverFlowAdapterPassion.ViewHolder2 viewHolder;
-
-        if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.item_flow_view, null, false);
-
-            viewHolder = new CoverFlowAdapterPassion.ViewHolder2(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (CoverFlowAdapterPassion.ViewHolder2) convertView.getTag();
         }
 
-        viewHolder.gameImage.setImageResource(activitiesTotalPassion.get(position).getImageSource());
-        viewHolder.gameName.setText(activitiesTotalPassion.get(position).getName());
+        @Override
+        public int getCount() {
 
-        convertView.setOnClickListener(onClickListener(position));
+            return activitiesTotalPassion.size();
+        }
 
-        return convertView;
-    }
 
-    private View.OnClickListener onClickListener(final int position) {
-        return new View.OnClickListener() {
+        @Override
+        public Passion getItem(int position) {
+            return activitiesTotalPassion.get(position);
+        }
 
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog = new Dialog(activity);
-                dialog.setContentView(R.layout.dialog_joy_info);
-                dialog.setCancelable(true); // dismiss when touching outside
-                dialog.setTitle("Details");
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
 
-                ++counter;
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
 
-                n.add(activitiesTotalPassion.get(position).getName().toString());
-                //System.out.println("TESTING2 " + n.size() + " ---- " + n.get(0).toString());
+            CoverFlowAdapterPassion.ViewHolder2 viewHolder;
 
-                if(counter == 2){
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.item_flow_view, null, false);
 
-                    counter = 0;
-                    TextView text2 = (TextView) dialog.findViewById(R.id.name2);
-                    text2.setText(getItem(position).getName());
-                    ImageView image2 = (ImageView) dialog.findViewById(R.id.image2);
-                    image2.setImageResource(getItem(position).getImageSource());
+                viewHolder = new CoverFlowAdapterPassion.ViewHolder2(convertView);
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (CoverFlowAdapterPassion.ViewHolder2) convertView.getTag();
+            }
 
-                    TextView text1 = (TextView) dialog.findViewById(R.id.name);
-                    text1.setText(getItem(positionSaver).getName());
-                    ImageView image1 = (ImageView) dialog.findViewById(R.id.image);
-                    image1.setImageResource(getItem(positionSaver).getImageSource());
+            viewHolder.gameImage.setImageResource(activitiesTotalPassion.get(position).getImageSource());
+            viewHolder.gameName.setText(activitiesTotalPassion.get(position).getName());
 
-                    dialog.show();
+            convertView.setOnClickListener(onClickListener(position));
 
-                    Button continueBtn = dialog.findViewById(R.id.continueButtonjoyDialog);
+            return convertView;
+        }
 
-                    continueBtn.setOnClickListener(new View.OnClickListener() {
+        private View.OnClickListener onClickListener(final int position) {
+            return new View.OnClickListener() {
 
-                        public void onClick(View v) {
-                            //Toast.makeText(MainActivity.this, "It works",Toast.LENGTH_LONG).show();
-                            dialog.dismiss();
-                        }
-                    });
+                @Override
+                public void onClick(View v) {
+                    final Dialog dialog = new Dialog(activity);
+                    dialog.setContentView(R.layout.dialog_joy_info);
+                    dialog.setCancelable(true); // dismiss when touching outside
+                    dialog.setTitle("Details");
+
+                    ++counter;
+
+                    n.add(activitiesTotalPassion.get(position).getName().toString());
+                    //System.out.println("TESTING2 " + n.size() + " ---- " + n.get(0).toString());
+
+                    if(counter == 2){
+
+                        counter = 0;
+                        TextView text2 = (TextView) dialog.findViewById(R.id.name2);
+                        text2.setText(getItem(position).getName());
+                        ImageView image2 = (ImageView) dialog.findViewById(R.id.image2);
+                        image2.setImageResource(getItem(position).getImageSource());
+
+                        TextView text1 = (TextView) dialog.findViewById(R.id.name);
+                        text1.setText(getItem(positionSaver).getName());
+                        ImageView image1 = (ImageView) dialog.findViewById(R.id.image);
+                        image1.setImageResource(getItem(positionSaver).getImageSource());
+
+                        dialog.show();
+
+                        Button continueBtn = (Button)dialog.findViewById(R.id.continueButtonjoyDialog);
+
+                        continueBtn.setOnClickListener(new View.OnClickListener() {
+
+                            public void onClick(View v) {
+                                //Toast.makeText(MainActivity.this, "It works",Toast.LENGTH_LONG).show();
+                                dialog.dismiss();
+                            }
+                        });
+
+                    }
+
+
+                    positionSaver = position;
 
                 }
-
-
-                positionSaver = position;
-
-            }
-        };
-    }
-
-
-    private static class ViewHolder2 {
-        private TextView gameName;
-        private ImageView gameImage;
-
-        public ViewHolder2(View v) {
-            gameImage = (ImageView) v.findViewById(R.id.image);
-            gameName = (TextView) v.findViewById(R.id.name);
+            };
         }
+
+
+        private static class ViewHolder2 {
+            private TextView gameName;
+            private ImageView gameImage;
+
+            public ViewHolder2(View v) {
+                gameImage = (ImageView) v.findViewById(R.id.image);
+                gameName = (TextView) v.findViewById(R.id.name);
+            }
+        }
+
+
     }
-
-
-}

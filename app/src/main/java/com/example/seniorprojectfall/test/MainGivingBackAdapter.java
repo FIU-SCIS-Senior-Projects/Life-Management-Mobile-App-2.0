@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
+import java.util.ArrayList;
+
 
 
 public class MainGivingBackAdapter extends BaseAdapter {
@@ -21,23 +23,15 @@ public class MainGivingBackAdapter extends BaseAdapter {
         private AppCompatActivity activity;
         static int numOfActSelected = 0;
         int act1position = 0;
-
+        static ArrayList<String> givBackActSelected = new ArrayList<>(); //to save 2 giving back activities selected by user for current sprint (make it static?)
 
 
 
         public MainGivingBackAdapter(AppCompatActivity context, List<GivingBack> actGivingbackList) {
             this.actGivingbackList = actGivingbackList;
             this.activity = context;
-
         }
 
-
-
-        /**
-         * How many items are in the data set represented by this Adapter.
-         *
-         * @return Count of items.
-         */
         @Override
         public int getCount() {
             return actGivingbackList.size();
@@ -128,11 +122,14 @@ public class MainGivingBackAdapter extends BaseAdapter {
 
                     if (numOfActSelected == 1){
                         MainGivingBackActivity.nextButton.setVisibility(View.GONE);
+
                     }
 
                     else if (numOfActSelected == 2) {
 
                         numOfActSelected = 0;
+                        // clear givBackActSelected
+                        givBackActSelected.clear();
 
                         TextView text1 = (TextView) dialog.findViewById(R.id.label1Givingback);
                         text1.setText(getItem(act1position).getName());
@@ -154,6 +151,14 @@ public class MainGivingBackAdapter extends BaseAdapter {
                         }
                         else
                         {
+                            // at any moment this list needs to contain only 2 activities
+                            givBackActSelected.add(text1.getText().toString());
+                            givBackActSelected.add(text2.getText().toString());
+                            System.out.println("" + givBackActSelected.size());
+                            for (String e: givBackActSelected)
+                            {
+                                System.out.println(e);
+                            }
                             dialog.show();
                             Button dialogbt = (Button)dialog.findViewById(R.id.continueButtonGiveDialog);
                             dialogbt.setOnClickListener(new View.OnClickListener() {
@@ -163,7 +168,6 @@ public class MainGivingBackAdapter extends BaseAdapter {
                                     MainGivingBackActivity.nextButton.setVisibility(View.VISIBLE);
                                 }
                             });
-                            //GivingBackActivity.nextButton.setVisibility(View.VISIBLE);
 
                         }
 
@@ -172,12 +176,79 @@ public class MainGivingBackAdapter extends BaseAdapter {
                     //GivingBackActivity.nextButton.setVisibility(View.GONE);
                     act1position = position;
 
+                /*
+                if (numOfActSelected == 1) {
+                    dialog = new Dialog(activity);
+                    dialog.setContentView(R.layout.dialog_actgivingback_info);
+                    //dialog.setCancelable(true); //dismiss when touching outside
+                    dialog.setTitle("Activities Selected");
+                    //dialogbt = (Button)dialog.findViewById(R.id.continueButtonGiveDialog);
+                    text1 = (TextView) dialog.findViewById(R.id.label1Givingback);
+                    image1 = (ImageView) dialog.findViewById(R.id.image1Givingback);
+                    //text2 = (TextView) dialog.findViewById(R.id.label2Givingback);
+                    //image2 = (ImageView) dialog.findViewById(R.id.image2Givingback);
+                    //text1 = (TextView) dialog.findViewById(R.id.label1Givingback);
+                    text1.setText(getItem(position).getName());
+                    //image1 = (ImageView) dialog.findViewById(R.id.image1Givingback);
+                    image1.setImageResource(getItem(position).getImageSource());
+                }
+                else if (numOfActSelected == 2)
+                {
+                    // Check if the second selected activity is not the same as first selected one
+                    text2 = (TextView) dialog.findViewById(R.id.label2Givingback);
+                    text2.setText(getItem(position).getName());
+                    //TextView text1 = (TextView) dialog.findViewById(R.id.label1Givingback);
+                    if (text1.getText().equals(text2.getText()))
+                    {
+                        Toast.makeText(activity,"Choose activity #2 that is different from activity #1",Toast.LENGTH_LONG).show();
+                        numOfActSelected=1;
+                    }
+                    else {
+
+                        image2 = (ImageView) dialog.findViewById(R.id.image2Givingback);
+                        image2.setImageResource(getItem(position).getImageSource());
+
+                        numOfActSelected = 0; // do not use it if do not want allow user reselect activities
+                        dialog.show();
+
+                        dialogbt = (Button)dialog.findViewById(R.id.continueButtonGiveDialog);
+                        dialogbt.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view){
+                                dialog.dismiss();
+                                //onButtonClick((Button) view);
+                            }
+                        });
+
+
+
+
+
+
+                        //numOfActSelected = 0; // do not use it if do not want allow user reselect activities
+                        //text1 = null;
+                        //text2 = null;
+                        //image1 = null;
+                        //image2 = null;
+
+                       // dialog.show();
+
+                    }
+                }
+
+        */
+                    //GivingBackActivity.nextButton.setVisibility(View.GONE);
                 }
 
 
             };
 
+
         }
+
+        //public void onButtonClick(Button view){
+        //   dialog.dismiss();
+        // }
 
         private static class ViewHolder {
             private TextView actGivingbackName;

@@ -15,6 +15,11 @@ import com.sccomponents.gauges.ScGauge;
 
 
 public class FragmentGivingBack extends Fragment {
+
+    /**
+     * Created by Natalia on 9/20/2017.
+     */
+
         /**
          * Called to have the fragment instantiate its user interface view.
          * This is optional, and non-graphical fragments can return null (which
