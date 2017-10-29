@@ -33,6 +33,9 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
     DatabaseReference databaseUpdateCategories;
     DatabaseReference databaseUpdateActivities;
 
+    TextView textActual1;
+    TextView textActual2;
+
 
 
         /**
@@ -53,6 +56,8 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
          *                           from a previous saved state as given here.
          * @return Return the View for the fragment's UI, or null.
          */
+
+
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -62,21 +67,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
             System.out.println("YEYH " + Dashboard.userActivityJoyid1.activityid);
 
-            /*
-            for(int i=0;i<d;i++){
-
-
-                System.out.println("ss4 gol2 " + Dashboard.activitiesJoyMap.get(i).activityScore);
-                System.out.println("ss4 gol3 " + Dashboard.activitiesJoyMap.get(i).actualPoints);
-                System.out.println("ss4 gol4 " + Dashboard.activitiesJoyMap.get(i).categoryId);
-                System.out.println("ss4 sprintid1 " + Dashboard.activitiesJoyMap.get(i).activityName);
-                System.out.println("ss4 sprintid2 " + Dashboard.activitiesJoyMap.get(i).sprintDailyPoints);
-                System.out.println("ss4 overallscoe " + Dashboard.activitiesJoyMap.get(i).targetPoints);
-                System.out.println("ss4 starting" + Dashboard.activitiesJoyMap.get(i).userId);
-
-
-            }
-              */
 
             final ScrollView scroll = (ScrollView)view.findViewById(R.id.scrollViewId);
             scroll.post(new Runnable() {
@@ -104,10 +94,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             TextView textCategScore = (TextView)view.findViewById(R.id.textViewCategScore);
             textCategScore.setText("Joy Score");
 
-            TextView textActual1 = (TextView)view.findViewById(R.id.textViewActual1);
+            textActual1 = (TextView)view.findViewById(R.id.textViewActual1);
             textActual1.setText(Dashboard.userActivityJoyid1.actualPoints);
 
-            TextView textActual2 = (TextView)view.findViewById(R.id.textViewActual2);
+            textActual2 = (TextView)view.findViewById(R.id.textViewActual2);
             textActual2.setText(Dashboard.userActivityJoyid2.actualPoints);
 
             TextView textTarget1 = (TextView)view.findViewById(R.id.textViewTarget1);
@@ -144,6 +134,15 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
 
                     }else{
 
@@ -155,6 +154,17 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay1.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+
+                        String Modifystr = modify+"";
+
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }
 
                     //11001001100100
@@ -185,6 +195,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay2.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
 
                     }else{
 
@@ -195,6 +213,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay2.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
                 }
@@ -223,6 +249,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay3.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
 
                     }else{
 
@@ -233,6 +267,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay3.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
 
@@ -263,6 +305,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay4.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
 
                     }else{
 
@@ -273,6 +323,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay4.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
 
@@ -303,6 +361,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay5.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
 
                     }else{
 
@@ -313,6 +379,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay5.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+                        String Modifystr = modify+"";
+
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
 
@@ -343,6 +417,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay6.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
 
                     }else{
 
@@ -353,6 +435,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay6.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
 
@@ -382,6 +472,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay7.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -391,6 +489,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay7.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -418,6 +524,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay8.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -427,6 +541,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay8.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
                 }
@@ -455,6 +577,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay9.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -464,6 +594,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay9.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -491,6 +629,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay10.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -500,6 +646,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay10.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -527,6 +681,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay11.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -536,6 +698,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay11.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -563,6 +733,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay12.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -572,6 +750,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay12.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -599,6 +785,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay13.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -608,6 +802,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay13.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -636,6 +838,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay14.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -645,6 +855,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay14.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
                 }
@@ -676,6 +894,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay15.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -685,6 +911,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay15.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -714,6 +948,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay16.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -723,6 +965,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay16.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -752,6 +1002,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay17.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -761,6 +1019,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay17.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -791,6 +1057,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay18.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -800,6 +1074,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay18.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -829,6 +1111,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay19.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -838,6 +1128,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay19.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
                 }
@@ -868,6 +1166,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay20.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -877,6 +1183,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay20.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
                 }
@@ -907,6 +1221,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay21.setBackgroundColor(Color.LTGRAY);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify1;
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -916,6 +1238,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("sprintDailyPoints").setValue(modify);
                         btCalendarDay21.setBackgroundColor(Color.GREEN);
                         Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
+                        setTextView(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -945,6 +1275,13 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
 
                     }else{
 
@@ -956,6 +1293,16 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay22.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
+
                     }
                 }
             });
@@ -983,6 +1330,13 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
 
                     }else{
 
@@ -994,6 +1348,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay23.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1021,6 +1383,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
 
                     }else{
 
@@ -1032,6 +1402,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay24.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1059,6 +1437,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1069,6 +1455,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay25.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
                 }
@@ -1097,6 +1491,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1107,6 +1509,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay26.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1134,6 +1544,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1144,6 +1562,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay27.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1172,6 +1598,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1182,6 +1616,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay28.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1209,6 +1651,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1219,6 +1669,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay29.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1246,6 +1704,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1256,6 +1722,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay30.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1284,6 +1758,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1294,6 +1776,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay31.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1321,6 +1811,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1331,6 +1829,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay32.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1359,6 +1865,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1369,6 +1883,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay33.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1397,6 +1919,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1407,6 +1937,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay34.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1436,6 +1974,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1446,6 +1992,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay35.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
                 }
@@ -1476,6 +2030,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1486,6 +2048,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay36.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1516,6 +2086,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1526,6 +2104,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay37.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1555,6 +2141,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1565,6 +2159,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay38.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
                 }
@@ -1595,6 +2197,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1605,6 +2215,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay39.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
                 }
@@ -1635,6 +2253,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1645,6 +2271,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay40.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
 
                 }
@@ -1676,6 +2310,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1686,6 +2328,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay41.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -1715,6 +2365,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
 
+                        String Modifystr = modify1+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
+
                     }else{
 
                         //means the user click this button for first time
@@ -1725,6 +2383,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                         btCalendarDay42.setBackgroundColor(Color.GREEN);
 
                         Dashboard.userActivityJoyid2.sprintDailyPoints = modify;
+
+                        String Modifystr = modify+"";
+                        int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
+                        Dashboard.userActivityJoyid2.actualPoints = countOnes+"";
+                        setTextView2(countOnes+"");
+
+                        databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
+                        databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
                     }
                 }
             });
@@ -2834,6 +3500,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
+        }
+
+        public void setTextView(String value){
+            textActual1.setText(value);
+        }
+
+        public void setTextView2(String value){
+            textActual2.setText(value);
         }
 
 
