@@ -25,53 +25,8 @@
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="cdf48fb344174b41c3ded1c7dc93231a77bbcd97">
+        sha1="1ac45c661f83831ddd42b44604371f35befea59a">
         <dex dex="/Users/lazaro/AndroidStudioProjects/Test/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_d9e0c13221aee9de2ce87cbf12343953ab9d75d9/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/lazaro/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="/Users/lazaro/AndroidStudioProjects/Test/app/build/intermediates/transforms/dex/debug/folders/1000/10/picasso-2.5.2_7fce654550b01b6f97e0b498f6393a38b5c1fac7/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/lazaro/.android/build-cache/c938c4e2f6ef956baa5551dc24d433657a1d18f8/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
-        <dex dex="/Users/lazaro/AndroidStudioProjects/Test/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_fb3216c38b2f60f470a47b365f7d0969178d85bb/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/lazaro/.android/build-cache/90e34cd417cb26f35f093aab45d0ca5a2c40c528/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
-        <dex dex="/Users/lazaro/AndroidStudioProjects/Test/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_30aafb640f4f51d17373db577ad7810f5ac815f3/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/lazaro/.android/build-cache/a5ca4908d7eac2b578d85aac934d8d4c46757485/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
-        <dex dex="/Users/lazaro/AndroidStudioProjects/Test/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_00fc82891bfd9b559243338c5591390d45debd0f/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/lazaro/.android/build-cache/9097a0e4fb36ed3fd14887fc7eabe477f5dc8f96/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="95519720620b553f63afc789beba9ad582807f7c">
-        <dex dex="/Users/lazaro/AndroidStudioProjects/Test/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_822e073b8e3462b78d07ed9fa2514482380d16c2/classes.dex" />
     </item>
 
 </items>

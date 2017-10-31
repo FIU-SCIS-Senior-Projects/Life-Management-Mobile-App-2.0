@@ -1,55 +1,79 @@
 package com.example.seniorprojectfall.test;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.content.Intent;
+import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Button;
 
-public class CycleActivity extends AppCompatActivity {
+public class cycleActivity extends AppCompatActivity {
 
-    ListView list;
-    ArrayAdapter<String> adapter;
-    String[] elements = {"hello1","heyy","fsdfds","gggg"};
+    static String element_static;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cycle);
 
-        list = (ListView) findViewById(R.id.listview);
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,elements);
-        list.setAdapter(adapter);
+        Intent in = getIntent();
+        element_static = in.getExtras().getString("theelement");
+        String[] s = element_static.split(" ");
 
-       list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-               Toast.makeText(getBaseContext(),adapterView.getItemAtPosition(i) + " is selected",Toast.LENGTH_LONG).show();
-               System.out.println("this is i fella " + i + " and longl " + l);
+        System.out.println("queahira element " + element_static);
 
-               goToPreviousCycle(i);
-           }
-       });
+       String s6detail = "";
+        String s7detail = "";
+
+        if(s[6].length()==7){
+            s6detail = "0" + s[6].substring(1,2) + "/" + s[6].substring(2,4) + "/" + s[6].substring(6);
+        }else{
+                    s6detail = s[6].substring(0,2) + "/" + s[6].substring(2,4) + "/" + s[6].substring(6);
+        }
+
+
+        if(s[2].length()==7){
+            s7detail = "0" + s[2].substring(1,2) + "/" + s[2].substring(2,4) + "/" + s[2].substring(6);
+        }else{
+            s7detail = s[2].substring(0,2) + "/" + s[2].substring(2,4) + "/" + s[2].substring(6);
+        }
+
+
+        TextView g = (TextView) findViewById(R.id.textView3);
+
+        g.setText("\n\n"
+                + " Activity Score: " + "\t " + s[0] + "\n"
+                + " Actual Points:  " + "\t " + s[1] + "\n"
+                + " Activity Name: " + "\t"+ s[3] + "\n"
+                + " Target Points:  " + "\t "+ s[5] + "\n"
+                + " Starting Date:  " + "\t "+ s7detail + "\n"
+                + " Ending Date:   " + "\t  "+ s6detail);
+
+                Button btn = (Button) findViewById(R.id.buttonleave);
+        btn.setText("Return");
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+
+
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
 
     }
 
-    public void goToPreviousCycle(int i){
-
-        String element = elements[i];
-        System.out.println("this is the element fella " + element);
-
-        Intent k = new Intent(CycleActivity.this,previousCycle.class);
-
-
-        //saving all data do we can use it in the next screen
-        Bundle bundle = new Bundle();
-
-        k.putExtras(bundle);
-        k.putExtra("theelement",element);
-
-        this.startActivity(k);
-    }
 }

@@ -31,6 +31,7 @@ public class Dashboard extends AppCompatActivity
     static ArrayList<ActivitiesSprint> userActivitiesAll;
     static ArrayList<Category> currentJoyCategories;
     static ArrayList<Category> userJoysprintsHelper;
+    static ArrayList<ActivitiesSprint> userJoyactivitiesPrevious;
     static Category userJoySprint;
     static ActivitiesSprint userActivityJoyid1;
     static ActivitiesSprint userActivityJoyid2;
@@ -46,6 +47,7 @@ public class Dashboard extends AppCompatActivity
 
     static ArrayList<Category> currentPassionCategories;
     static ArrayList<Category> userPassionsprintsHelper;
+    static ArrayList<ActivitiesSprint> userPassionactivitiesPrevious;
     static Category userPassionSprint;
     static ActivitiesSprint userActivityPassionid1;
     static ActivitiesSprint userActivityPassionid2;
@@ -80,6 +82,7 @@ public class Dashboard extends AppCompatActivity
         userJoySprint = new Category();
         userActivityJoyid1 = new ActivitiesSprint();
         userActivityJoyid2 = new ActivitiesSprint();
+        userJoyactivitiesPrevious = new ArrayList<>();
 
         //PASSION
         currentPassionCategories = new ArrayList<>();
@@ -87,6 +90,7 @@ public class Dashboard extends AppCompatActivity
         userPassionSprint = new Category();
         userActivityPassionid1 = new ActivitiesSprint();
         userActivityPassionid2 = new ActivitiesSprint();
+        userPassionactivitiesPrevious = new ArrayList<>();
 
         //GIVING BACK
         currentContributionCategories = new ArrayList<>();
@@ -271,10 +275,12 @@ public class Dashboard extends AppCompatActivity
         //JOY
         currentJoyCategories = bundle.getParcelableArrayList("categoriesJoyCategories");
         userJoysprintsHelper = bundle.getParcelableArrayList("userJoysprintHelperList");
+        userJoyactivitiesPrevious = bundle.getParcelableArrayList("activitiesJOYPrevious");
 
         //PASSION
         currentPassionCategories = bundle.getParcelableArrayList("categoriesPassionCategories");
         userPassionsprintsHelper = bundle.getParcelableArrayList("userPassionsprintHelperList");
+        userPassionactivitiesPrevious = bundle.getParcelableArrayList("activitiesPassionPrevious");
 
         //GIVING BACK
         currentContributionCategories = bundle.getParcelableArrayList("categoriesContributionCategories");
@@ -353,16 +359,12 @@ public class Dashboard extends AppCompatActivity
         public android.support.v4.app.Fragment getItem(int position){
             switch (position){
                 case 0:
-
                     return new FragmentJoy();
 
                 case 1:
-
                     return new FragmentPassion();
 
-
                 case 2:
-
                     return new FragmentGivingBack();
 
             }
@@ -437,7 +439,7 @@ public class Dashboard extends AppCompatActivity
 
         } else if (id == R.id.nav_prev_cycle) {
 
-            Intent i = new Intent(Dashboard.this,CycleActivity.class);
+            Intent i = new Intent(Dashboard.this,previous_cycle.class);
             this.startActivity(i);
 
         } else if (id == R.id.nav_settings) {

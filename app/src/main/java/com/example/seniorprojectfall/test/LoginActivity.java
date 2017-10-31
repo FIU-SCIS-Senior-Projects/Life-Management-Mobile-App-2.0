@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     ArrayList<Category> userJoysprintsHelper;
     ArrayList<User> listUsers;
     ArrayList<Category> currentJoyCategories;
+    ArrayList<ActivitiesSprint> activitiesjoyPrevious;
     String userId;
     //Map<String,String> joyIdStartingDateMap;
     String sprintjoyid;
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     ArrayList<Category> userPassionSprintHelper;
     ArrayList<Category> currentPassionCategories;
+    ArrayList<ActivitiesSprint> activitiesPassionPrevious;
     Map<String,String> passionIdStartingDateMap;
     String sprintpassionid;
     String currentPassionCategoryId; //temporary variable holding the current category user id
@@ -65,11 +67,13 @@ public class LoginActivity extends AppCompatActivity {
         allActivities = new ArrayList<>();
         listUsers = new ArrayList<>();
         currentJoyCategories = new ArrayList<>();
+        activitiesjoyPrevious = new ArrayList<>();
 
         //PASSION INITIALIZATIONS
         userPassionSprintHelper = new ArrayList<>();
         passionIdStartingDateMap = new TreeMap<>();
         currentPassionCategories = new ArrayList<>();
+        activitiesPassionPrevious = new ArrayList<>();
 
         //GIVING BACK INITIALIZATIONS
         userContributionSprintHelper = new ArrayList<>();
@@ -437,16 +441,11 @@ public class LoginActivity extends AppCompatActivity {
             }
 
 
-            for (int i = 0; i < userActivitiesAll.size(); i++) {
-                System.out.println("useractivities " + userActivitiesAll.get(i).activityScore);
-                System.out.println("useractivities 2 " + userActivitiesAll.get(i).actualPoints);
-                System.out.println("useractivities 3 " + userActivitiesAll.get(i).categoryId);
-                System.out.println("useractivities 4 " + userActivitiesAll.get(i).activityName);
-                System.out.println("useractivities 5 " + userActivitiesAll.get(i).sprintDailyPoints);
-                System.out.println("useractivities 6 " + userActivitiesAll.get(i).targetPoints);
-                System.out.println("useractivities 7 " + userActivitiesAll.get(i).userId);
-                System.out.println("useractivities 8 " + userActivitiesAll.get(i).activityid);
-            }
+
+
+
+
+            List<String> tempList = new ArrayList<>(); //list containing all the sprintActivities of the user
 
             //JOY
             for (int i = 0; i < currentJoyCategories.size(); i++) {
@@ -454,7 +453,11 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (userId.contains(currentJoyCategories.get(i).userId)) {
 
-                    System.out.println("categoryid:  " + currentJoyCategories.get(i).categoryid + " -- " + currentJoyCategories.size());
+                    System.out.println("categoryid:  " + currentJoyCategories.get(i).categoryid + " -- " + currentJoyCategories.get(i).sprintid);
+
+                    tempList.add(currentJoyCategories.get(i).sprintActivityid1 + " " + currentJoyCategories.get(i).startingDate + " " + currentJoyCategories.get(i).endingDate);
+                    tempList.add(currentJoyCategories.get(i).sprintActivityid2 + " " + currentJoyCategories.get(i).startingDate + " " + currentJoyCategories.get(i).endingDate);
+
 
                     userJoysprintsHelper.add(new Category(currentJoyCategories.get(i).categoryid, currentJoyCategories.get(i).endingDate,
                             currentJoyCategories.get(i).goal1, currentJoyCategories.get(i).goal2, currentJoyCategories.get(i).goal3,
@@ -464,13 +467,41 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
 
+            //JOY
+
+            for (int i = 0; i < tempList.size(); i++) {
+
+                System.out.println("funtioning templist " + tempList.get(i));
+
+                for (int k = 0; k < userActivitiesAll.size(); k++) {
+
+                    String [] splitter = tempList.get(i).split(" ");
+
+                    if (userActivitiesAll.get(k).activityid.contains(splitter[0])){
+
+                        //fake the data for later use (categoryid and userid)
+                        activitiesjoyPrevious.add(new ActivitiesSprint(userActivitiesAll.get(k).activityScore,userActivitiesAll.get(k).actualPoints,
+                                splitter[1], userActivitiesAll.get(k).activityName, userActivitiesAll.get(k).sprintDailyPoints,
+                                userActivitiesAll.get(k).targetPoints, splitter[2], userActivitiesAll.get(k).activityid));
+                        break;
+                    }
+                }
+            } //end of for
+
+
             //PASSION
+            List<String> tempListPassion = new ArrayList<>(); //list containing all the sprintActivities of the user
+
+
             for (int i = 0; i < currentPassionCategories.size(); i++) {
 
 
                 if (userId.contains(currentPassionCategories.get(i).userId)) {
 
                     System.out.println("categoryid PASSION:  " + currentPassionCategories.get(i).categoryid + " -- " + currentPassionCategories.size());
+
+                    tempListPassion.add(currentPassionCategories.get(i).sprintActivityid1 + " " + currentPassionCategories.get(i).startingDate + " " + currentPassionCategories.get(i).endingDate);
+                    tempListPassion.add(currentPassionCategories.get(i).sprintActivityid2 + " " + currentPassionCategories.get(i).startingDate + " " + currentPassionCategories.get(i).endingDate);
 
                     userPassionSprintHelper.add(new Category(currentPassionCategories.get(i).categoryid, currentPassionCategories.get(i).endingDate,
                             currentPassionCategories.get(i).goal1, currentPassionCategories.get(i).goal2, currentPassionCategories.get(i).goal3,
@@ -479,6 +510,29 @@ public class LoginActivity extends AppCompatActivity {
                             currentPassionCategories.get(i).startingDate, currentPassionCategories.get(i).userId,currentPassionCategories.get(i).sprintid));
                 }
             }
+
+
+            for (int i = 0; i < tempListPassion.size(); i++) {
+
+                System.out.println("funtioning templist passion " + tempListPassion.get(i));
+
+                for (int k = 0; k < userActivitiesAll.size(); k++) {
+
+                    String [] splitter = tempListPassion.get(i).split(" ");
+
+                    if (userActivitiesAll.get(k).activityid.contains(splitter[0])){
+
+                        //fake the data for later use (categoryid and userid)
+                        activitiesPassionPrevious.add(new ActivitiesSprint(userActivitiesAll.get(k).activityScore,userActivitiesAll.get(k).actualPoints,
+                                splitter[1], userActivitiesAll.get(k).activityName, userActivitiesAll.get(k).sprintDailyPoints,
+                                userActivitiesAll.get(k).targetPoints, splitter[2], userActivitiesAll.get(k).activityid));
+                        break;
+                    }
+                }
+            } //end of for
+
+
+
 
             //GIVING BACK
             for (int i = 0; i < currentContributionCategories.size(); i++) {
@@ -516,6 +570,10 @@ public class LoginActivity extends AppCompatActivity {
 
             }
 
+            for(Map.Entry<String,String> entr: joydateIdentifier.entrySet()){
+                System.out.println("Keyw JOY2 : " + entr.getKey() + " ValueJOYW2 : " + entr.getValue());
+
+            }
 
 
             //PASSION
@@ -759,10 +817,13 @@ public class LoginActivity extends AppCompatActivity {
             //JOY
             bundle.putParcelableArrayList("categoriesJoyCategories",currentJoyCategories);
             bundle.putParcelableArrayList("userJoysprintHelperList",userJoysprintsHelper);
+            bundle.putParcelableArrayList("activitiesJOYPrevious",activitiesjoyPrevious);
+
 
             //PASSION
             bundle.putParcelableArrayList("categoriesPassionCategories",currentPassionCategories);
             bundle.putParcelableArrayList("userPassionsprintHelperList",userPassionSprintHelper);
+            bundle.putParcelableArrayList("activitiesPassionPrevious",activitiesPassionPrevious);
 
             //GIVING BACK
             bundle.putParcelableArrayList("categoriesContributionCategories",currentContributionCategories);

@@ -33,14 +33,17 @@
         <activity android:name=".MainPassionActivity" />
         <activity android:name=".MainGivingBackActivity" />
         <activity android:name=".SprintSettingActivity" />
-
         <activity
             android:name=".Dashboard"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".CycleActivity" />
-        <activity android:name=".previousCycle"></activity>
+        <activity
+            android:name=".previous_cycle"
+            android:label="@string/title_activity_previous_cycle" />
+        <activity android:name=".cycleActivity" />
+        <activity android:name=".cycleActivityPassion" />
+        <activity android:name=".cycleActivityContribution"></activity>
     </application>
 
 </manifest>
