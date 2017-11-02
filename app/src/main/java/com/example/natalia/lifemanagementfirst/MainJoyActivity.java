@@ -45,7 +45,14 @@ public class MainJoyActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this, "It works",Toast.LENGTH_LONG).show();
+                Intent in = getIntent();
+                String userid = in.getStringExtra("userid");
+                String username = in.getStringExtra("username");
+                String password = in.getStringExtra("password");
                 Intent i = new Intent(MainJoyActivity.this, MainPassionActivity.class);
+                i.putExtra("userid",userid);
+                i.putExtra("username",username);
+                i.putExtra("password",password);
                 startActivity(i);
             }
         });

@@ -26,7 +26,7 @@ public class ActGivingbackAdapter extends BaseAdapter {
     private AppCompatActivity activity;
     static int numOfActSelected = 0;
     int act1position = 0;
-    static ArrayList<String> givBackActSelected = new ArrayList<>(); //to save 2 giving back activities selected by user for current sprint (make it static?)
+    static ArrayList<String> givBackActSelected = new ArrayList<>(); //to save 2 giving back activities selected by user for current sprint
     //private Dialog dialog;   //make it final if do not want to permit user to reselect activities
     //private TextView text1;
     //private TextView text2;

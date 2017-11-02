@@ -1,7 +1,8 @@
 package com.example.natalia.lifemanagementfirst;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+
+        import android.os.Parcel;
+        import android.os.Parcelable;
 
 /**
  * Created by lazaro on 9/17/17.
@@ -172,3 +173,4 @@ public class User implements Parcelable{
 
 
 }
+

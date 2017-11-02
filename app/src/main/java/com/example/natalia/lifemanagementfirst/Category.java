@@ -1,87 +1,87 @@
 package com.example.natalia.lifemanagementfirst;
 
-/**
- * Created by Lazaro
- */
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.*;
 
-
 public class Category implements Parcelable{
-    String categoryId;
+
+    String categoryid;
     String endingDate;
     String goal1;
     String goal2;
     String goal3;
     String goal4;
     String numberOfWeeks;
-    String sprintActivityId1;
-    String sprintActivityId2;
+    String sprintActivityid1;
+    String sprintActivityid2;
     String sprintOverallScore;
     String startingDate;
     String userId;
+    String sprintid;
 
 
 
     public Category(){
 
-        categoryId = "";
+        categoryid = "";
         endingDate = "";
         goal1= "";
         goal2= "";
         goal3= "";
         goal4= "";
         numberOfWeeks= "";
-        sprintActivityId1= "";
-        sprintActivityId2= "";
+        sprintActivityid1= "";
+        sprintActivityid2= "";
         sprintOverallScore= "";
         startingDate= "";
         userId = "";
+        sprintid = "";
 
     }
 
     public Category(String categoryid, String endingDate, String goal1, String goal2, String goal3, String goal4, String numberOfWeeks, String sprintActivityid1,
-                    String sprintActivityid2, String sprintOverallScore, String startingDate, String userId) {
-        this.categoryId = categoryid;
+                    String sprintActivityid2, String sprintOverallScore, String startingDate, String userId, String sprintid) {
+        this.categoryid = categoryid;
         this.endingDate = endingDate;
         this.goal1 = goal1;
         this.goal2 = goal2;
         this.goal3 = goal3;
         this.goal4 = goal4;
         this.numberOfWeeks = numberOfWeeks;
-        this.sprintActivityId1 = sprintActivityid1;
-        this.sprintActivityId2 = sprintActivityid2;
+        this.sprintActivityid1 = sprintActivityid1;
+        this.sprintActivityid2 = sprintActivityid2;
         this.sprintOverallScore = sprintOverallScore;
         this.startingDate = startingDate;
         this.userId = userId;
+        this.sprintid = sprintid;
 
     }
 
     public Category(Parcel in){
 
-        this.categoryId = in.readString();
+        this.categoryid = in.readString();
         this.endingDate = in.readString();
         this.goal1 = in.readString();
         this.goal2 = in.readString();
         this.goal3 = in.readString();
         this.goal4 = in.readString();
         this.numberOfWeeks = in.readString();
-        this.sprintActivityId1 = in.readString();
-        this.sprintActivityId2 = in.readString();
+        this.sprintActivityid1 = in.readString();
+        this.sprintActivityid2 = in.readString();
         this.sprintOverallScore = in.readString();
         this.startingDate = in.readString();
         this.userId = in.readString();
+        this.sprintid = in.readString();
     }
 
     public String getCategoryid() {
-        return categoryId;
+        return categoryid;
     }
 
     public void setCategoryid(String categoryid) {
-        this.categoryId = categoryid;
+        this.categoryid = categoryid;
     }
 
     public String getUserId() {
@@ -141,19 +141,19 @@ public class Category implements Parcelable{
     }
 
     public String getSprintActivityid1() {
-        return sprintActivityId1;
+        return sprintActivityid1;
     }
 
     public void setSprintActivityid1(String sprintActivityid1) {
-        this.sprintActivityId1 = sprintActivityid1;
+        this.sprintActivityid1 = sprintActivityid1;
     }
 
     public String getSprintActivityid2() {
-        return sprintActivityId2;
+        return sprintActivityid2;
     }
 
     public void setSprintActivityid2(String sprintActivityid2) {
-        this.sprintActivityId2 = sprintActivityid2;
+        this.sprintActivityid2 = sprintActivityid2;
     }
 
     public String getSprintOverallScore() {
@@ -180,18 +180,19 @@ public class Category implements Parcelable{
     @Override
     public void writeToParcel(Parcel parcel, int i) {
 
-        parcel.writeString(categoryId);
+        parcel.writeString(categoryid);
         parcel.writeString(endingDate);
         parcel.writeString(goal1);
         parcel.writeString(goal2);
         parcel.writeString(goal3);
         parcel.writeString(goal4);
         parcel.writeString(numberOfWeeks);
-        parcel.writeString(sprintActivityId1);
-        parcel.writeString(sprintActivityId2);
+        parcel.writeString(sprintActivityid1);
+        parcel.writeString(sprintActivityid2);
         parcel.writeString(sprintOverallScore);
         parcel.writeString(startingDate);
         parcel.writeString(userId);
+        parcel.writeString(sprintid);
     }
 
     public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
@@ -205,3 +206,4 @@ public class Category implements Parcelable{
         }
     };
 }
+

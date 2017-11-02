@@ -40,8 +40,15 @@ public class GivingBackActivity extends AppCompatActivity {
         //Go to sprint setting activity when click on button
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(GivingBackActivity.this, SprintSettingActivity.class);
-                startActivity(intent);
+                Intent in = getIntent();
+                String userid = in.getStringExtra("userid");
+                String username = in.getStringExtra("username");
+                String password = in.getStringExtra("password");
+                Intent i = new Intent(GivingBackActivity.this, SprintSettingActivity.class);
+                i.putExtra("userid",userid);
+                i.putExtra("username",username);
+                i.putExtra("password",password);
+                startActivity(i);
             }
         });
         nextButton.setVisibility(View.GONE);

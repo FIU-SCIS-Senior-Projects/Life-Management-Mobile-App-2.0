@@ -48,7 +48,7 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
     private final static long MILLISEC_PER_DAY = 24*60*60*1000;
 
     private EditText sprintGoal;
-    //static EditText sprintPeriod;
+
     static long sprintPeriodInDays;
     private TextView swipeText;
     //KeyListener mKeyListenerSprintPeriod;  // used to disable sprintPeriod EditText to take user input after user successfully selected sprint end date
@@ -61,7 +61,6 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_sprint_setting_page,container,false);
 
-        // User input validations
         sprintGoal = (EditText)rootView.findViewById(R.id.sprintGoalA);
         sprintGoal.addTextChangedListener(this);
 
@@ -102,18 +101,6 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
         });
 
 
-
-        /*
-        if(incorrectInput())
-        {
-            Toast.makeText(getActivity(),"Sprint goal MUST be at least 4 characters long",Toast.LENGTH_SHORT).show();
-        }
-        */
-
-        // End user input validations
-
-
-
         sprintStartDate = (TextView)rootView.findViewById(R.id.sprintStartDate);
         sprintStartDate.setVisibility(View.INVISIBLE);
         sprintStartDate.addTextChangedListener(this);
@@ -150,9 +137,24 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
                 sdate.set(Calendar.YEAR,year);
 
                 month = month + 1;
-                String date = month + "/" + day + "/" + year;
+                String date = "";
+                if (month >= 10 && day >= 10){
+                    date = month + "/" + day + "/" + year;
+                }
+                else{
+                    if(month < 10 && day < 10){
+                        date = "0" + month + "/" + "0" + day + "/" + year;
+                    }
+                    else{
+                        if(month < 10){
+                            date = "0" + month + "/" + day + "/" + year;
+                        }
+                        else if(day < 10){
+                            date = month + "/" + "0" + day + "/" + year;
+                        }
+                    }
+                }
                 sprintStartDate.setText(date);
-                // calculate date for end date and set text to sprintEndDate textview
 
             }
         };
@@ -191,7 +193,24 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
                 edate.set(Calendar.YEAR,year);
 
                 month = month + 1;
-                String date = month + "/" + day + "/" + year;
+                String date = "";
+                if (month >= 10 && day >= 10){
+                    date = month + "/" + day + "/" + year;
+                }
+                else{
+                    if(month < 10 && day < 10){
+                        date = "0" + month + "/" + "0" + day + "/" + year;
+                    }
+                    else{
+                        if(month < 10){
+                            date = "0" + month + "/" + day + "/" + year;
+                        }
+                        else if(day < 10){
+                            date = month + "/" + "0" + day + "/" + year;
+                        }
+                    }
+                }
+
                 sprintEndDate.setText(date);
 
             }
@@ -200,8 +219,6 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
 
         swipeText = (TextView)rootView.findViewById(R.id.swipe);
         swipeText.setVisibility(View.INVISIBLE);
-
-
 
         return rootView;
 
@@ -217,65 +234,28 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
 
     }
 
+    //user input validations
     @Override
     public void afterTextChanged(Editable s) {
         if (s == sprintGoal.getEditableText()) {
-            //KeyListener mKeyListener = sprintPeriod.getKeyListener();
+
             if (TextUtils.isEmpty(s)) {
                 Toast.makeText(getActivity(), "Please enter sprint goal", Toast.LENGTH_LONG).show();
-                // Block other textviews
-                //sprintPeriod.setVisibility(View.INVISIBLE);
-                radioGroup.setVisibility(View.INVISIBLE);
-                //sprintStartDate.setVisibility(View.INVISIBLE);
+                // Block other views
 
-                //sprintPeriod.setKeyListener(null); // disable sprintPeriod EditText to take user input
-                //sprintStartDate.setVisibility(View.INVISIBLE);
-                //sprintStartDate.setKeyListener(null); // disable sprintStartDate TextView to take user input
+                radioGroup.setVisibility(View.INVISIBLE);
+
             } else if (s.length() > 5) {
                 Toast.makeText(getActivity(), "Sprint goal cannot be more than 160 characters long", Toast.LENGTH_LONG).show();
                 s.replace(0, s.length(), s.subSequence(0, 5));
                 radioGroup.setVisibility(View.VISIBLE);
-                //sprintStartDate.setVisibility(View.VISIBLE);
 
-                //KeyListener mKeyListener = sprintPeriod.getKeyListener();
-                //sprintPeriod.setKeyListener(mKeyListenerSprintPeriod); // enable sprintPeriod EditText to take user input
-                //sprintPeriod.setVisibility(View.VISIBLE);
-                //sprintStartDate.setVisibility(View.VISIBLE);
-                //sprintStartDate.setKeyListener(mKeyListenerStartDate); // enable sprintStartDate TextView to take user input
             } else {
                 radioGroup.setVisibility(View.VISIBLE);
-                //sprintStartDate.setVisibility(View.VISIBLE);
 
-                //KeyListener mKeyListener = sprintPeriod.getKeyListener();
-                //sprintPeriod.setKeyListener(mKeyListenerSprintPeriod); // enable sprintPeriod EditText to take user input
-                //sprintPeriod.setVisibility(View.VISIBLE);
-                //sprintStartDate.setVisibility(View.VISIBLE);
-                //sprintStartDate.setKeyListener(mKeyListenerStartDate); // enable sprintStartDate TextView to take user input
             }
         }
-        /*
-        else if (s == sprintPeriod.getEditableText()) {
-            if (TextUtils.isEmpty(s)) {
-                Toast.makeText(getActivity(), "Please enter 1, 2, or 3 for sprint period", Toast.LENGTH_LONG).show();
-                // Block other textviews for calendars
-                sprintStartDate.setVisibility(View.INVISIBLE);
-            } else {
-                int num = Integer.parseInt(s.toString());
-                if (num != 1 && num != 2 && num != 3){
-                    //Toast.makeText(getActivity(), "Please enter 1, 2, or 3", Toast.LENGTH_SHORT).show();
-                    //s.replace(0,s.length(),"0");
-                    s.clear();
-                    // Block other textviews for calendars
-                }
-                else{
-                    // Unblock other textviews for calendars
-                    sprintStartDate.setVisibility(View.VISIBLE);
-                    sprintPeriodInDays = num * 7;
-                }
-            }
 
-
-        } */
         else if (s == sprintStartDate.getEditableText()){
             if(TextUtils.isEmpty(s)){
                 Toast.makeText(getActivity(), "Please select sprint start date that is Monday", Toast.LENGTH_LONG).show();
@@ -326,8 +306,6 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
                         sprintStartDate.setKeyListener(null);
 
                         swipeText.setVisibility(View.VISIBLE);
-                        //String d = "" + daysDif;
-                        //swipeText.setText(d);
                     }
                 }
 
@@ -377,10 +355,6 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
 
             case R.id.sprintPeriod2:
                 if(checked) {
-                    //if rb2 is selected, set rb2's text to bold, and set sprintPeriod to 2 (weeks)
-                    //rb2.setTypeface(null, Typeface.BOLD);
-                    //rb1.setTypeface(null, Typeface.NORMAL);
-                    //rb3.setTypeface(null, Typeface.NORMAL);
                     sprintPeriod = "2";
                     int period = Integer.parseInt(sprintPeriod);
                     sprintPeriodInDays = period * 7;
@@ -389,10 +363,6 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
 
             case R.id.sprintPeriod3:
                 if(checked) {
-                    //if rb3 is selected, set rb3's text to bold, and set sprintPeriod to 3 (weeks)
-                    //rb3.setTypeface(null, Typeface.BOLD);
-                    //rb1.setTypeface(null, Typeface.NORMAL);
-                    //rb2.setTypeface(null, Typeface.NORMAL);
                     sprintPeriod = "3";
                     int period = Integer.parseInt(sprintPeriod);
                     sprintPeriodInDays = period * 7;
@@ -404,17 +374,6 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
         }
     }
 
-
-
-
-    public boolean incorrectInput(){
-        String sprGoal = sprintGoal.getText().toString();
-        if (sprGoal.length() < 4 )
-        {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * Called immediately after {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}

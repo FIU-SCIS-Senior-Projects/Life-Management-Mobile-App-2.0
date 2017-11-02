@@ -40,15 +40,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "868568540473-ph0ahqpf9jdaeussvpil6il47entblqv.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
               "client_id": "868568540473-tn32bvqc0nffmkp2qbehuv0cpk3869hd.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.sp.LifeManagementApp"
               }
+            },
+            {
+              "client_id": "868568540473-ph0ahqpf9jdaeussvpil6il47entblqv.apps.googleusercontent.com",
+              "client_type": 3
             }
           ]
         },
@@ -91,15 +91,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "868568540473-ph0ahqpf9jdaeussvpil6il47entblqv.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
               "client_id": "868568540473-tn32bvqc0nffmkp2qbehuv0cpk3869hd.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.sp.LifeManagementApp"
               }
+            },
+            {
+              "client_id": "868568540473-ph0ahqpf9jdaeussvpil6il47entblqv.apps.googleusercontent.com",
+              "client_type": 3
             }
           ]
         },

@@ -414,11 +414,17 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         User currentUser = new User(email,currentusername,firstN,lastN,Dob,password,false,false,id);
 
         //push()
+        //databaseReference.push().setValue(currentUser);
         databaseReference.child(id).setValue(currentUser);
         progressDialog.dismiss();
         Toast.makeText(getApplication(),"Saved Successfully",Toast.LENGTH_LONG).show();
 
         Intent i = new Intent(CreateUserActivity.this,MainJoyActivity.class);
+        //Save user id, currentusername, password so that we can use it in the following Activity:
+        i.putExtra("userid",id);
+        i.putExtra("username",currentusername);
+        i.putExtra("password",password);
+
         startActivity(i);
 
     } //end of method addData

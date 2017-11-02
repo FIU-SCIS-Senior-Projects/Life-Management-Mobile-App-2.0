@@ -3,70 +3,58 @@ package com.example.natalia.lifemanagementfirst;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by lazaro on 10/5/17.
- */
 
 
-public class ActivitiesSprint implements Parcelable{
+public class Activity implements Parcelable{
 
 
 
     String activityScore;
     String actualPoints;
     String categoryId;
-    String activityName;
+    String name;
     String sprintDailyPoints;
     String targetPoints;
     String userId;
-    String activityid;
 
-    public ActivitiesSprint() {
+    public Activity() {
 
 
         activityScore = "";
         actualPoints = "";
         categoryId = "";
-        activityName = "";
+        name = "";
         sprintDailyPoints = "";
         targetPoints = "";
         userId = "";
-        activityid = "";
     }
 
-    public ActivitiesSprint(String activityScore, String actualPoints, String categoryId, String activityName, String sprintDailyPoints, String targetPoints, String userId, String activityid) {
+    public Activity(String activityScore, String actualPoints, String categoryId, String name, String sprintDailyPoints, String targetPoints, String userId) {
 
         this.activityScore = activityScore;
         this.actualPoints = actualPoints;
         this.categoryId = categoryId;
-        this.activityName = activityName;
+        this.name = name;
         this.sprintDailyPoints = sprintDailyPoints;
         this.targetPoints = targetPoints;
         this.userId = userId;
-        this.activityid = activityid;
+
     }
 
-    public ActivitiesSprint(Parcel in){
+    public Activity(Parcel in){
 
 
         this.activityScore = in.readString();
         this.actualPoints = in.readString();
         this.categoryId = in.readString();
-        this.activityName = in.readString();
+        this.name = in.readString();
         this.sprintDailyPoints = in.readString();
         this.targetPoints = in.readString();
         this.userId = in.readString();
-        this.activityid = in.readString();
+
 
     }
 
-    public String getActivityid() {
-        return activityid;
-    }
-
-    public void setActivityid(String activityid) {
-        this.activityid = activityid;
-    }
 
     public String getActivityScore() {
         return activityScore;
@@ -93,12 +81,12 @@ public class ActivitiesSprint implements Parcelable{
     }
 
 
-    public String getActivityName() {
-        return activityName;
+    public String getName() {
+        return name;
     }
 
-    public void setActivityName(String activityName) {
-        this.activityName = activityName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSprintDailyPoints() {
@@ -137,23 +125,23 @@ public class ActivitiesSprint implements Parcelable{
         parcel.writeString(activityScore);
         parcel.writeString(actualPoints);
         parcel.writeString(categoryId);
-        parcel.writeString(activityName);
+        parcel.writeString(name);
         parcel.writeString(sprintDailyPoints);
         parcel.writeString(targetPoints);
         parcel.writeString(userId);
-        parcel.writeString(activityid);
+
 
 
     }
 
-    public static final Parcelable.Creator<ActivitiesSprint> CREATOR = new Parcelable.Creator<ActivitiesSprint>() {
-        public ActivitiesSprint createFromParcel(Parcel in) {
-            return new ActivitiesSprint(in);
+    public static final Parcelable.Creator<Activity> CREATOR = new Parcelable.Creator<Activity>() {
+        public Activity createFromParcel(Parcel in) {
+            return new Activity(in);
         }
 
         @Override
-        public ActivitiesSprint[] newArray(int i) {
-            return new ActivitiesSprint[i];
+        public Activity[] newArray(int i) {
+            return new Activity[i];
         }
     };
 

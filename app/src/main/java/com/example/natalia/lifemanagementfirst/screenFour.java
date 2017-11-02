@@ -14,7 +14,7 @@ public class screenFour extends AppCompatActivity {
     }
 
     public void onArrowClick(View view) {
-        Intent intent = new Intent(this, TestActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 

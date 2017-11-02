@@ -25,16 +25,18 @@
             </intent-filter>
         </activity>
         <activity android:name=".screenFour" />
-        <activity
-            android:name=".TestActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CreateUserActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".CarouselScreen" />
         <activity android:name=".MainJoyActivity" />
         <activity android:name=".MainPassionActivity" />
         <activity android:name=".SprintSettingActivity" />
-        <activity android:name=".GivingBackActivity"></activity>
+        <activity android:name=".GivingBackActivity" />
+        <activity
+            android:name=".Dashboard"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
