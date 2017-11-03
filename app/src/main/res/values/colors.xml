@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="alert_dialog_button_1">#58b5fd</color>
+    <color name="alert_dialog_button_1">#fd5b58</color>
     <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#f8fbfa</color>
     <color name="colorAccent">#ff4081</color>

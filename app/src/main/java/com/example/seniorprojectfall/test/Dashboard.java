@@ -60,6 +60,7 @@ public class Dashboard extends AppCompatActivity
     static ArrayList<Category> currentContributionCategories;
     static ArrayList<Category> userContributionsprintsHelper;
     static Category userContributionSprint;
+    static ArrayList<ActivitiesSprint> userContributionactivitiesPrevious;
     static ActivitiesSprint userActivityContributionid1;
     static ActivitiesSprint userActivityContributionid2;
     static String endingDateFixed_contribution;
@@ -98,6 +99,7 @@ public class Dashboard extends AppCompatActivity
         userContributionSprint = new Category();
         userActivityContributionid1 = new ActivitiesSprint();
         userActivityContributionid2 = new ActivitiesSprint();
+        userContributionactivitiesPrevious = new ArrayList<>();
 
 
         ViewPager vp_pages= (ViewPager)findViewById(R.id.vp_pages);
@@ -285,6 +287,7 @@ public class Dashboard extends AppCompatActivity
         //GIVING BACK
         currentContributionCategories = bundle.getParcelableArrayList("categoriesContributionCategories");
         userContributionsprintsHelper = bundle.getParcelableArrayList("userContributionsprintHelperList");
+        userContributionactivitiesPrevious = bundle.getParcelableArrayList("activitiesContributionPrevious");
 
 
         int j = 0;
@@ -436,6 +439,9 @@ public class Dashboard extends AppCompatActivity
         if (id == R.id.nav_new_cycle) {
             // Handle new cycle action
         } else if (id == R.id.nav_current_cycle) {
+
+            Intent i = new Intent(Dashboard.this,currentCycleActivity.class);
+            this.startActivity(i);
 
         } else if (id == R.id.nav_prev_cycle) {
 

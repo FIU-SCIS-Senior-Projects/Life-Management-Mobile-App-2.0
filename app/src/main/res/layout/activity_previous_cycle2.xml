@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/previouscycle_background"
+    android:background="@drawable/previouscyclebackground1"
     android:orientation="vertical"
     tools:context="com.example.seniorprojectfall.test.previous_cycle">
 
@@ -30,8 +30,6 @@
             tools:layout_editor_absoluteY="142dp" />
 
         <ListView
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:id="@+id/listview"
             android:layout_width="wrap_content"
             android:layout_height="294dp"
@@ -40,6 +38,8 @@
             android:layout_below="@+id/textView"
             android:layout_marginTop="125dp"
             android:layout_weight="1"
+            android:textSize="20sp"
+            android:textStyle="bold"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="268dp" />
 
@@ -54,6 +54,7 @@
             android:layout_marginEnd="14dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/leftarrowicon_cycle"
+            android:elevation="20dp"
             android:scaleType="fitXY" />
 
     </FrameLayout>

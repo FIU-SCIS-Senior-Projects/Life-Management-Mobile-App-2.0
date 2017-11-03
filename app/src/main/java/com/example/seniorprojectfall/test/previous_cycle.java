@@ -42,7 +42,7 @@ public class previous_cycle extends AppCompatActivity {
                     populatePassion();
                     return true;
                 case R.id.navigation_contribution:
-
+                    populateContribution();
                     return true;
             }
             return false;
@@ -54,16 +54,31 @@ public class previous_cycle extends AppCompatActivity {
     public void populateJoy(){
 
 
-        String [] ele = new String[Dashboard.userJoysprintsHelper.size()];
+        elements = new String[Dashboard.userJoyactivitiesPrevious.size()];
+        elementsHelper = new String[Dashboard.userJoyactivitiesPrevious.size()];
 
-        for(int i=0;i<ele.length;i++){
+        for(int i=0;i<elements.length;i++){
+            elements[i] = Dashboard.userJoyactivitiesPrevious.get(i).activityName + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
+                    + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId;
 
-            //ele[i] = Dashboard.userJoysprintsHelper.get(i).
+            elementsHelper[i] = Dashboard.userJoyactivitiesPrevious.get(i).activityName + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0,2)
+                    + "/" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(2,4) + "/"
+                    + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(6) + "-"
+                    + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(0,2) + "/"
+                    + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(2,4) + "/" + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(6) + ")";
         }
+
         list = (ListView) findViewById(R.id.listview);
-        elements[3] = "newwww";
-        ArrayAdapter<String>  adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,elements);
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,elementsHelper);
         list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                //Toast.makeText(getBaseContext(),parent.getItemAtPosition(i) + " is selected",Toast.LENGTH_LONG).show();
+                showContentJoy(i);
+            }
+        });
 
     }
 
@@ -94,6 +109,41 @@ public class previous_cycle extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 //Toast.makeText(getBaseContext(),parent.getItemAtPosition(i) + " is selected",Toast.LENGTH_LONG).show();
                 showContentPassion(i);
+            }
+        });
+
+
+    }
+
+    public void populateContribution(){
+
+        mTextMessage = (TextView) findViewById(R.id.textViewcycle_title);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        elements = new String[Dashboard.userContributionactivitiesPrevious.size()];
+        elementsHelper = new String[Dashboard.userContributionactivitiesPrevious.size()];
+
+        for(int i=0;i<elements.length;i++){
+            elements[i] = Dashboard.userContributionactivitiesPrevious.get(i).activityName + " " + Dashboard.userContributionactivitiesPrevious.get(i).categoryId
+                    + " " + Dashboard.userContributionactivitiesPrevious.get(i).userId;
+
+            elementsHelper[i] = Dashboard.userContributionactivitiesPrevious.get(i).activityName + " (" + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(0,2)
+                    + "/" + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(2,4) + "/"
+                    + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(6) + "-"
+                    + " " + Dashboard.userContributionactivitiesPrevious.get(i).userId.substring(0,2) + "/"
+                    + Dashboard.userContributionactivitiesPrevious.get(i).userId.substring(2,4) + "/" + Dashboard.userContributionactivitiesPrevious.get(i).userId.substring(6) + ")";
+        }
+
+        list = (ListView) findViewById(R.id.listview);
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,elementsHelper);
+        list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                //Toast.makeText(getBaseContext(),parent.getItemAtPosition(i) + " is selected",Toast.LENGTH_LONG).show();
+                showContentContribution(i);
             }
         });
 
@@ -131,7 +181,7 @@ public class previous_cycle extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 //Toast.makeText(getBaseContext(),parent.getItemAtPosition(i) + " is selected",Toast.LENGTH_LONG).show();
-                showContent(i);
+                showContentJoy(i);
             }
         });
 
@@ -153,7 +203,9 @@ public class previous_cycle extends AppCompatActivity {
 
     }
 
-    public void showContent(int i){
+
+    //JOY
+    public void showContentJoy(int i){
 
         String element = "";
         String[] elementsplitter = elements[i].split(" ");
@@ -196,6 +248,7 @@ public class previous_cycle extends AppCompatActivity {
         this.startActivity(k);
     }
 
+    //PASSION
     public void showContentPassion(int i){
 
         String element = "";
@@ -239,6 +292,52 @@ public class previous_cycle extends AppCompatActivity {
         this.startActivity(k);
     }
 
+    //CONTRIBUTION
+
+    public void showContentContribution(int i){
+
+        String element = "";
+        String[] elementsplitter = elements[i].split(" ");
+        System.out.println("this is the elementsplitter contribution " + elementsplitter[0]);
+        System.out.println("this is the element fella contribution " + elements[i]);
+
+        int size = Dashboard.userContributionactivitiesPrevious.size();
+        for(int k=0;k<size;k++){
+
+            System.out.println("whatnow1 " + Dashboard.userContributionactivitiesPrevious.get(k).activityName);
+            System.out.println("whatnow2 " + Dashboard.userContributionactivitiesPrevious.get(k).categoryId);
+            System.out.println("whatnow3 " + Dashboard.userContributionactivitiesPrevious.get(k).userId);
+
+            if(Dashboard.userContributionactivitiesPrevious.get(k).activityName.contains(elementsplitter[0]) &&
+                    Dashboard.userContributionactivitiesPrevious.get(k).categoryId.contains(elementsplitter[1]) &&
+                    Dashboard.userContributionactivitiesPrevious.get(k).userId.contains(elementsplitter[2])){
+
+                element = Dashboard.userContributionactivitiesPrevious.get(k).activityScore + " "
+                        + Dashboard.userContributionactivitiesPrevious.get(k).actualPoints + " "
+                        + Dashboard.userContributionactivitiesPrevious.get(k).categoryId + " "
+                        + Dashboard.userContributionactivitiesPrevious.get(k).activityName + " "
+                        + Dashboard.userContributionactivitiesPrevious.get(k).sprintDailyPoints + " "
+                        + Dashboard.userContributionactivitiesPrevious.get(k).targetPoints + " "
+                        + Dashboard.userContributionactivitiesPrevious.get(k).userId;
+                break;
+            }
+        }
+
+        System.out.println("elementafter contribution " + element);
+
+        Intent k = new Intent(previous_cycle.this,cycleActivityContribution.class);
+
+
+        //saving all data do we can use it in the next screen
+        Bundle bundle = new Bundle();
+
+        k.putExtras(bundle);
+        k.putExtra("theelementcontribution",element);
+
+        this.startActivity(k);
+    }
+
 
 
 }
+

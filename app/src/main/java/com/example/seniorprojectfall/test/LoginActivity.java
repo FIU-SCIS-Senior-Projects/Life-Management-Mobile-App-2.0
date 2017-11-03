@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     ArrayList<Category> userContributionSprintHelper;
     ArrayList<Category> currentContributionCategories;
     Map<String,String> contributionIdStartingDateMap;
+    ArrayList<ActivitiesSprint> activitiesContributionPrevious;
     String sprintcontributionid;
     String currentContributionCategoryId; //temporary variable holding the current category user id
 
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         userContributionSprintHelper = new ArrayList<>();
         contributionIdStartingDateMap = new TreeMap<>();
         currentContributionCategories = new ArrayList<>();
+        activitiesContributionPrevious = new ArrayList<>();
 
 
         //getting the reference of artists node
@@ -441,10 +443,6 @@ public class LoginActivity extends AppCompatActivity {
             }
 
 
-
-
-
-
             List<String> tempList = new ArrayList<>(); //list containing all the sprintActivities of the user
 
             //JOY
@@ -533,7 +531,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-
+            List<String> tempListContribution = new ArrayList<>(); //list containing all the sprintActivities of the user
             //GIVING BACK
             for (int i = 0; i < currentContributionCategories.size(); i++) {
 
@@ -542,6 +540,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     System.out.println("categoryid CONTRIBUTION:  " + currentContributionCategories.get(i).categoryid + " -- " + currentContributionCategories.size());
 
+                    tempListContribution.add(currentContributionCategories.get(i).sprintActivityid1 + " " + currentContributionCategories.get(i).startingDate + " " + currentContributionCategories.get(i).endingDate);
+                    tempListContribution.add(currentContributionCategories.get(i).sprintActivityid2 + " " + currentContributionCategories.get(i).startingDate + " " + currentContributionCategories.get(i).endingDate);
+
                     userContributionSprintHelper.add(new Category(currentContributionCategories.get(i).categoryid, currentContributionCategories.get(i).endingDate,
                             currentContributionCategories.get(i).goal1, currentContributionCategories.get(i).goal2, currentContributionCategories.get(i).goal3,
                             currentContributionCategories.get(i).goal4, currentContributionCategories.get(i).numberOfWeeks, currentContributionCategories.get(i).sprintActivityid1,
@@ -549,6 +550,26 @@ public class LoginActivity extends AppCompatActivity {
                             currentContributionCategories.get(i).startingDate, currentContributionCategories.get(i).userId,currentContributionCategories.get(i).sprintid));
                 }
             }
+
+
+            for (int i = 0; i < tempListContribution.size(); i++) {
+
+                System.out.println("funtioning templist contribution " + tempListContribution.get(i));
+
+                for (int k = 0; k < userActivitiesAll.size(); k++) {
+
+                    String [] splitter = tempListContribution.get(i).split(" ");
+
+                    if (userActivitiesAll.get(k).activityid.contains(splitter[0])){
+
+                        //fake the data for later use (categoryid and userid)
+                        activitiesContributionPrevious.add(new ActivitiesSprint(userActivitiesAll.get(k).activityScore,userActivitiesAll.get(k).actualPoints,
+                                splitter[1], userActivitiesAll.get(k).activityName, userActivitiesAll.get(k).sprintDailyPoints,
+                                userActivitiesAll.get(k).targetPoints, splitter[2], userActivitiesAll.get(k).activityid));
+                        break;
+                    }
+                }
+            } //end of for
 
             //JOY
 
@@ -561,18 +582,12 @@ public class LoginActivity extends AppCompatActivity {
             }
 
 
-            String joyleastDate = "";
+            String joycurrentDate = "";
             for(Map.Entry<String,String> entr: joydateIdentifier.entrySet()){
                 System.out.println("Keyw JOY : " + entr.getKey() + " ValueJOYW : " + entr.getValue());
-                joyleastDate = entr.getKey();
+                //get the most current startind date
+                joycurrentDate = entr.getKey();
                 sprintjoyid = entr.getValue();
-                break;
-
-            }
-
-            for(Map.Entry<String,String> entr: joydateIdentifier.entrySet()){
-                System.out.println("Keyw JOY2 : " + entr.getKey() + " ValueJOYW2 : " + entr.getValue());
-
             }
 
 
@@ -591,7 +606,7 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.println("Keyw PASSION : " + entr.getKey() + " ValuePASSIONW : " + entr.getValue());
                 passionleastDate = entr.getKey();
                 sprintpassionid = entr.getValue();
-                break;
+                //break
             }
 
             //GIVING BACK
@@ -608,7 +623,7 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.println("Keyw CONTRIBUTION : " + entr.getKey() + " ValueCONTRIBUTION : " + entr.getValue());
                 contributionleastDate = entr.getKey();
                 sprintcontributionid = entr.getValue();
-                break;
+                //break;
             }
 
 
@@ -617,7 +632,7 @@ public class LoginActivity extends AppCompatActivity {
             Category userJoySprint = new Category();
             for (int i = 0; i < userJoysprintsHelper.size(); i++) {
 
-                if (userJoysprintsHelper.get(i).startingDate.contains(joyleastDate)) {
+                if (userJoysprintsHelper.get(i).startingDate.contains(joycurrentDate)) {
 
 
                     userJoySprint = new Category(userJoysprintsHelper.get(i).categoryid, userJoysprintsHelper.get(i).endingDate,
@@ -828,6 +843,7 @@ public class LoginActivity extends AppCompatActivity {
             //GIVING BACK
             bundle.putParcelableArrayList("categoriesContributionCategories",currentContributionCategories);
             bundle.putParcelableArrayList("userContributionsprintHelperList",userContributionSprintHelper);
+            bundle.putParcelableArrayList("activitiesContributionPrevious",activitiesContributionPrevious);
 
             i.putExtras(bundle);
             i.putExtra("userNameY",name);

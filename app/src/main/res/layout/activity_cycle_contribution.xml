@@ -6,7 +6,7 @@
     android:background="@drawable/contributionbackground">
 
     <TextView
-        android:id="@+id/textView3passion"
+        android:id="@+id/textView3contribution"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
@@ -17,12 +17,12 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/buttonleavepassion"
+        android:id="@+id/buttonleavecontribution"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/alert_dialog_button_1"
-        android:text="Button" />
+         />
 
 </RelativeLayout>
