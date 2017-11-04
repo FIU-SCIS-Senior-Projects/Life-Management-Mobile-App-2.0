@@ -55,20 +55,43 @@ public class previous_cycle extends AppCompatActivity {
 
 
         elements = new String[Dashboard.userJoyactivitiesPrevious.size()];
+        ArrayList<String> tempelementList = new ArrayList<>();
+        ArrayList<String> tempList = new ArrayList<>();
+        boolean is = false;
+
         elementsHelper = new String[Dashboard.userJoyactivitiesPrevious.size()];
+        int pointer = 0;
 
-        for(int i=0;i<elements.length;i++){
-            elements[i] = Dashboard.userJoyactivitiesPrevious.get(i).activityName + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
-                    + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId;
+        for(int i=0;i<elements.length;i++) {
 
-            elementsHelper[i] = Dashboard.userJoyactivitiesPrevious.get(i).activityName + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0,2)
-                    + "/" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(2,4) + "/"
-                    + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(6) + "-"
-                    + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(0,2) + "/"
-                    + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(2,4) + "/" + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(6) + ")";
+
+            if (!(Dashboard.userActivityJoyid1.activityid.contains(Dashboard.userJoyactivitiesPrevious.get(i).activityid))
+                    && (!(Dashboard.userActivityJoyid2.activityid.contains(Dashboard.userJoyactivitiesPrevious.get(i).activityid)))) {
+
+                tempelementList.add(Dashboard.userJoyactivitiesPrevious.get(i).activityName + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
+                        + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId);
+
+                is = true;
+
+                tempList.add(Dashboard.userJoyactivitiesPrevious.get(i).activityName + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0, 2)
+                        + "/" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(2, 4) + "/"
+                        + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(6) + "-"
+                        + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(0, 2) + "/"
+                        + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(2, 4) + "/" + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(6) + ")");
+
+                ++pointer;
+            }
         }
 
+        elements = tempelementList.toArray(new String[tempelementList.size()]);
+        elementsHelper = tempList.toArray(new String[tempList.size()]);
+
         list = (ListView) findViewById(R.id.listview);
+
+        if(!is){
+            Toast.makeText(this, "No Previous Activities Found",Toast.LENGTH_LONG).show();
+        }
+
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,elementsHelper);
         list.setAdapter(adapter);
 
@@ -87,18 +110,41 @@ public class previous_cycle extends AppCompatActivity {
 
 
         elements = new String[Dashboard.userPassionactivitiesPrevious.size()];
+        ArrayList<String> tempelementList = new ArrayList<>();
+        ArrayList<String> tempList = new ArrayList<>();
+        boolean is = false;
+
         elementsHelper = new String[Dashboard.userPassionactivitiesPrevious.size()];
+        int pointer = 0;
 
-        for(int i=0;i<elements.length;i++){
-            elements[i] = Dashboard.userPassionactivitiesPrevious.get(i).activityName + " " + Dashboard.userPassionactivitiesPrevious.get(i).categoryId
-                    + " " + Dashboard.userPassionactivitiesPrevious.get(i).userId;
+        for(int i=0;i<elements.length;i++) {
 
-            elementsHelper[i] = Dashboard.userPassionactivitiesPrevious.get(i).activityName + " (" + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(0,2)
-                    + "/" + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(2,4) + "/"
-                    + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(6) + "-"
-                    + " " + Dashboard.userPassionactivitiesPrevious.get(i).userId.substring(0,2) + "/"
-                    + Dashboard.userPassionactivitiesPrevious.get(i).userId.substring(2,4) + "/" + Dashboard.userPassionactivitiesPrevious.get(i).userId.substring(6) + ")";
+
+            if (!(Dashboard.userActivityPassionid1.activityid.contains(Dashboard.userPassionactivitiesPrevious.get(i).activityid))
+                    && (!(Dashboard.userActivityPassionid2.activityid.contains(Dashboard.userPassionactivitiesPrevious.get(i).activityid)))) {
+
+                tempelementList.add(Dashboard.userPassionactivitiesPrevious.get(i).activityName + " " + Dashboard.userPassionactivitiesPrevious.get(i).categoryId
+                        + " " + Dashboard.userPassionactivitiesPrevious.get(i).userId);
+
+                is = true;
+
+                tempList.add(Dashboard.userPassionactivitiesPrevious.get(i).activityName + " (" + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(0, 2)
+                        + "/" + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(2, 4) + "/"
+                        + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(6) + "-"
+                        + " " + Dashboard.userPassionactivitiesPrevious.get(i).userId.substring(0, 2) + "/"
+                        + Dashboard.userPassionactivitiesPrevious.get(i).userId.substring(2, 4) + "/" + Dashboard.userPassionactivitiesPrevious.get(i).userId.substring(6) + ")");
+
+                ++pointer;
+            }
         }
+
+        elements = tempelementList.toArray(new String[tempelementList.size()]);
+        elementsHelper = tempList.toArray(new String[tempList.size()]);
+
+        if(!is){
+            Toast.makeText(this, "No Previous Activities Found",Toast.LENGTH_LONG).show();
+        }
+
 
         list = (ListView) findViewById(R.id.listview);
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,elementsHelper);
@@ -117,38 +163,60 @@ public class previous_cycle extends AppCompatActivity {
 
     public void populateContribution(){
 
-        mTextMessage = (TextView) findViewById(R.id.textViewcycle_title);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         elements = new String[Dashboard.userContributionactivitiesPrevious.size()];
+        ArrayList<String> tempelementList = new ArrayList<>();
+        ArrayList<String> tempList = new ArrayList<>();
+        boolean res = false;
         elementsHelper = new String[Dashboard.userContributionactivitiesPrevious.size()];
+        int pointer = 0;
 
-        for(int i=0;i<elements.length;i++){
-            elements[i] = Dashboard.userContributionactivitiesPrevious.get(i).activityName + " " + Dashboard.userContributionactivitiesPrevious.get(i).categoryId
-                    + " " + Dashboard.userContributionactivitiesPrevious.get(i).userId;
+        for(int i=0;i<elements.length;i++) {
 
-            elementsHelper[i] = Dashboard.userContributionactivitiesPrevious.get(i).activityName + " (" + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(0,2)
-                    + "/" + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(2,4) + "/"
-                    + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(6) + "-"
-                    + " " + Dashboard.userContributionactivitiesPrevious.get(i).userId.substring(0,2) + "/"
-                    + Dashboard.userContributionactivitiesPrevious.get(i).userId.substring(2,4) + "/" + Dashboard.userContributionactivitiesPrevious.get(i).userId.substring(6) + ")";
+
+            if (!(Dashboard.userActivityContributionid1.activityid.contains(Dashboard.userContributionactivitiesPrevious.get(i).activityid))
+                    && (!(Dashboard.userActivityContributionid2.activityid.contains(Dashboard.userContributionactivitiesPrevious.get(i).activityid)))) {
+
+
+
+                tempelementList.add(Dashboard.userContributionactivitiesPrevious.get(i).activityName + " " + Dashboard.userContributionactivitiesPrevious.get(i).categoryId
+                        + " " + Dashboard.userContributionactivitiesPrevious.get(i).userId);
+
+                res = true;
+
+                tempList.add(Dashboard.userContributionactivitiesPrevious.get(i).activityName + " (" + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(0, 2)
+                        + "/" + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(2, 4) + "/"
+                        + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(6) + "-"
+                        + " " + Dashboard.userContributionactivitiesPrevious.get(i).userId.substring(0, 2) + "/"
+                        + Dashboard.userContributionactivitiesPrevious.get(i).userId.substring(2, 4) + "/" + Dashboard.userContributionactivitiesPrevious.get(i).userId.substring(6) + ")");
+
+                ++pointer;
+            }
         }
 
+        elements = tempelementList.toArray(new String[tempelementList.size()]);
+        elementsHelper = tempList.toArray(new String[tempList.size()]);
+
         list = (ListView) findViewById(R.id.listview);
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,elementsHelper);
-        list.setAdapter(adapter);
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                //Toast.makeText(getBaseContext(),parent.getItemAtPosition(i) + " is selected",Toast.LENGTH_LONG).show();
-                showContentContribution(i);
-            }
-        });
 
 
-    }
+        if(!res){
+            Toast.makeText(this, "No Previous Activities Found",Toast.LENGTH_LONG).show();
+        }
+
+            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, elementsHelper);
+            list.setAdapter(adapter);
+
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                    //Toast.makeText(getBaseContext(),parent.getItemAtPosition(i) + " is selected",Toast.LENGTH_LONG).show();
+                    showContentContribution(i);
+                }
+            });
+        }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,39 +228,69 @@ public class previous_cycle extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         elements = new String[Dashboard.userJoyactivitiesPrevious.size()];
+        ArrayList<String> tempelementList = new ArrayList<>();
+        ArrayList<String> tempList = new ArrayList<>();
+
         elementsHelper = new String[Dashboard.userJoyactivitiesPrevious.size()];
+        boolean res = false;
+        int pointer = 0;
 
-        for(int i=0;i<elements.length;i++){
-            elements[i] = Dashboard.userJoyactivitiesPrevious.get(i).activityName + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
-                    + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId;
+        for(int i=0;i<elements.length;i++) {
 
-            elementsHelper[i] = Dashboard.userJoyactivitiesPrevious.get(i).activityName + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0,2)
-                    + "/" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(2,4) + "/"
-                    + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(6) + "-"
-                    + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(0,2) + "/"
-                    + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(2,4) + "/" + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(6) + ")";
+
+            if (!(Dashboard.userActivityJoyid1.activityid.contains(Dashboard.userJoyactivitiesPrevious.get(i).activityid))
+                    && (!(Dashboard.userActivityJoyid2.activityid.contains(Dashboard.userJoyactivitiesPrevious.get(i).activityid)))) {
+
+                res = true;
+
+                tempelementList.add(Dashboard.userJoyactivitiesPrevious.get(i).activityName + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
+                        + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId);
+
+
+                tempList.add(Dashboard.userJoyactivitiesPrevious.get(i).activityName + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0, 2)
+                        + "/" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(2, 4) + "/"
+                        + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(6) + "-"
+                        + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(0, 2) + "/"
+                        + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(2, 4) + "/" + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(6) + ")");
+
+                ++pointer;
+            }
         }
 
+        elements = tempelementList.toArray(new String[tempelementList.size()]);
+        elementsHelper = tempList.toArray(new String[tempList.size()]);
+
+
         list = (ListView) findViewById(R.id.listview);
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,elementsHelper);
-        list.setAdapter(adapter);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                //Toast.makeText(getBaseContext(),parent.getItemAtPosition(i) + " is selected",Toast.LENGTH_LONG).show();
-                showContentJoy(i);
-            }
-        });
+        if(!res){
 
-        ImageButton goBack = (ImageButton) findViewById(R.id.imageButton_Cycle);
+            Toast.makeText(this, "No activities found",Toast.LENGTH_LONG).show();
+        }else {
 
-        goBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, elementsHelper);
+
+            list.setAdapter(adapter);
+
+
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                    //Toast.makeText(getBaseContext(),parent.getItemAtPosition(i) + " is selected",Toast.LENGTH_LONG).show();
+                    showContentJoy(i);
+                }
+            });
+
+            ImageButton goBack = (ImageButton) findViewById(R.id.imageButton_Cycle);
+
+            goBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+
+        }
 
     }
 
@@ -215,9 +313,6 @@ public class previous_cycle extends AppCompatActivity {
         int size = Dashboard.userJoyactivitiesPrevious.size();
         for(int k=0;k<size;k++){
 
-            System.out.println("whatnow1 " + Dashboard.userJoyactivitiesPrevious.get(k).activityName);
-            System.out.println("whatnow2 " + Dashboard.userJoyactivitiesPrevious.get(k).categoryId);
-            System.out.println("whatnow3 " + Dashboard.userJoyactivitiesPrevious.get(k).userId);
 
             if(Dashboard.userJoyactivitiesPrevious.get(k).activityName.contains(elementsplitter[0]) &&
                     Dashboard.userJoyactivitiesPrevious.get(k).categoryId.contains(elementsplitter[1]) &&

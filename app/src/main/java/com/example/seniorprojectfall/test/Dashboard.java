@@ -347,6 +347,21 @@ public class Dashboard extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        System.out.println("whatnott " + Dashboard.userActivityJoyid1.categoryId);
+        System.out.println("whatnott " + Dashboard.userActivityJoyid1.activityid);
+
+        System.out.println("whatnottt " + Dashboard.userActivityJoyid2.categoryId);
+        System.out.println("whatnottt " + Dashboard.userActivityJoyid2.activityid);
+
+
+        System.out.println("whatnott " + Dashboard.userActivityJoyid1);
+
+        for(int i=0;i<Dashboard.userJoyactivitiesPrevious.size();i++){
+            System.out.println("whatnott2 " + Dashboard.userJoyactivitiesPrevious.get(i).activityid
+                    + " - " + Dashboard.userJoyactivitiesPrevious.get(i).actualPoints
+                    + " & " + Dashboard.userJoyactivitiesPrevious.get(i).userId);
+        }
         
     } //end of onCreate
 

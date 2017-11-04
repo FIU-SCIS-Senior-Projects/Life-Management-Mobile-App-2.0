@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.CheckedTextView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import android.content.Intent;
@@ -27,12 +28,22 @@ public class MainActivity extends AppCompatActivity {
 
             androidRightArrowButton = (ImageButton) findViewById(R.id.imageButton);
 
+            CheckedTextView skip = (CheckedTextView) findViewById(R.id.checkedTextView);
+
 
             androidRightArrowButton.setOnClickListener(new View.OnClickListener() {
 
                 public void onClick(View v){
                     //Toast.makeText(MainActivity.this, "It works",Toast.LENGTH_LONG).show();
                     Intent i = new Intent(MainActivity.this,SecondScreenActivity.class);
+                    startActivity(i);
+                }
+            });
+
+            skip.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(MainActivity.this,LoginActivity.class);
                     startActivity(i);
                 }
             });
