@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.KeyListener;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
@@ -245,9 +246,9 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
 
                 radioGroup.setVisibility(View.INVISIBLE);
 
-            } else if (s.length() > 5) {
+            } else if (s.length() > 160) {
                 Toast.makeText(getActivity(), "Sprint goal cannot be more than 160 characters long", Toast.LENGTH_LONG).show();
-                s.replace(0, s.length(), s.subSequence(0, 5));
+                s.replace(0, s.length(), s.subSequence(0, 160));
                 radioGroup.setVisibility(View.VISIBLE);
 
             } else {
@@ -258,7 +259,7 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
 
         else if (s == sprintStartDate.getEditableText()){
             if(TextUtils.isEmpty(s)){
-                Toast.makeText(getActivity(), "Please select sprint start date that is Monday", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Please select sprint start date", Toast.LENGTH_LONG).show();
                 sprintEndDate.setVisibility(View.INVISIBLE);
             }
             else{
@@ -268,14 +269,7 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
                     s.clear();
                 }
                 else {
-                    // check if start date is Monday (Sprint must start on Monday)
-                    if(sdate.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY){
-                        sprintEndDate.setVisibility(View.VISIBLE);
-                    }
-                    else {
-                        Toast.makeText(getActivity(), "Sprint must start on Monday", Toast.LENGTH_LONG).show();
-                        s.clear();
-                    }
+                    sprintEndDate.setVisibility(View.VISIBLE);
                 }
             }
         }
@@ -306,6 +300,13 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
                         sprintStartDate.setKeyListener(null);
 
                         swipeText.setVisibility(View.VISIBLE);
+                        // enable swiping b/c all the fields have been filled by user
+                        SprintSettingActivity.mPager.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View v, MotionEvent event) {
+                                return false;
+                            }
+                        });
                     }
                 }
 

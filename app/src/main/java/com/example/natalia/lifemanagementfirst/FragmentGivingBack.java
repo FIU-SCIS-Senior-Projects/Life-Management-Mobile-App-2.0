@@ -15,11 +15,15 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sccomponents.gauges.ScArcGauge;
 import com.sccomponents.gauges.ScGauge;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.lang.Math;
 
 
 public class FragmentGivingBack extends Fragment implements View.OnClickListener{
@@ -119,6 +123,14 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         textTarget2 = (TextView)view.findViewById(R.id.textViewTarget2);  // nat change
         textTarget2.setText(Dashboard.userActivityContributionid2.targetPoints);
 
+        TextView mondayDate = (TextView)view.findViewById(R.id.TextViewMonday);
+        TextView tuesdayDate = (TextView)view.findViewById(R.id.TextViewTuesday);
+        TextView  wednesdayDate= (TextView)view.findViewById(R.id.TextViewWednesday);
+        TextView thursdayDate = (TextView)view.findViewById(R.id.TextViewThursday);
+        TextView fridayDate = (TextView)view.findViewById(R.id.TextViewFriday);
+        TextView saturdayDate = (TextView)view.findViewById(R.id.TextViewSaturday);
+        TextView sundayDate = (TextView)view.findViewById(R.id.TextViewSunday);
+
         // nat change
         // Find the components for gaugeContributionActivity1
         counterContributionActivity1 = (TextView) view.findViewById(R.id.counter_joy_activity1);
@@ -198,9 +210,9 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         // Find the components for gaugeLifeScore
         counterContributionLifeScore = (TextView) view.findViewById(R.id.counter_life_score);
         gaugeContributionLifeScore = (ScArcGauge) view.findViewById(R.id.gauge_life_score);
-        lifeScoreContributionInt = ((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
+        lifeScoreContributionInt = (int)Math.round((((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
                 (Integer.parseInt(Dashboard.userPassionSprint.sprintOverallScore)) +
-                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3;
+                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3.0));
 
         // Set the features stroke cap style to rounded
         gaugeContributionLifeScore.findFeature(ScArcGauge.BASE_IDENTIFIER)
@@ -2929,9 +2941,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         });
 
 
-        //int d = Dashboard.activitiesJoyMap.size();  //d must be 2
-
-
+        String datearranger = "";
         int numberOfweeks = Integer.parseInt(Dashboard.userContributionSprint.numberOfWeeks);
 
         if(numberOfweeks == 1){
@@ -2951,56 +2961,96 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             btCalendarDay20.setVisibility(View.GONE);
             btCalendarDay21.setVisibility(View.GONE);
 
+
             //update the current value from start of the week
-            String temp = textStartingDate.getText().toString();
-            int counter = Integer.parseInt(temp.substring(3,5));
+            String tempStartingDate = textStartingDate.getText().toString();
+            String tempEndingDate = textEndingDate.getText().toString();
+            System.out.println("thisistemp " + tempStartingDate);
+            System.out.println("thisistemp2 " + tempEndingDate);
 
-            if(counter>9) {
-                btCalendarDay1.setText(counter + "");
-            }else{
-                btCalendarDay1.setText("0" + counter);
-            }
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay2.setText(counter + "");
-            }else{
-                btCalendarDay2.setText("0" + counter);
-            }
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay3.setText(counter + "");
-            }else{
-                btCalendarDay3.setText("0" + counter);
-            }
+            try {
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay4.setText(counter + "");
-            }else{
-                btCalendarDay4.setText("0" + counter);
-            }
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                Date startDate = formatter.parse(tempStartingDate);
+                Date endDate = formatter.parse(tempEndingDate);
+                Calendar start = Calendar.getInstance();
+                start.setTime(startDate);
+                Calendar end = Calendar.getInstance();
+                end.setTime(endDate);
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay5.setText(counter + "");
-            }else{
-                btCalendarDay5.setText("0" + counter);
-            }
+                int counter = 0;
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay6.setText(counter + "");
-            }else{
-                btCalendarDay6.setText("0" + counter);
-            }
+                for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+                    // Do your job here with `date`.
+                    String[] str = date.toString().split(" ");
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay7.setText(counter + "");
-            }else{
-                btCalendarDay7.setText("0" + counter);
+                    System.out.println("DATEIS2 completedate " + date.toString());
+
+                    if(counter==7){
+                        break;
+                    }
+
+                    for(int i=0;i<str.length;i++) {
+                        System.out.println("DATEIS2 " + str[2]);
+
+
+                        if(counter==0){
+                            ++counter;
+                            btCalendarDay1.setText(str[2]);
+                            btCalendarDay22.setText(str[2]);
+                            datearranger = str[0];
+                            break;
+
+                        }else if(counter==1){
+                            ++counter;
+                            btCalendarDay2.setText(str[2]);
+                            btCalendarDay23.setText(str[2]);
+                            break;
+
+                        }else if(counter==2){
+                            ++counter;
+                            btCalendarDay3.setText(str[2]);
+                            btCalendarDay24.setText(str[2]);
+                            break;
+
+                        }else if(counter==3){
+
+                            ++counter;
+                            btCalendarDay4.setText(str[2]);
+                            btCalendarDay25.setText(str[2]);
+                            break;
+
+                        }else if(counter==4){
+
+                            ++counter;
+                            btCalendarDay5.setText(str[2]);
+                            btCalendarDay26.setText(str[2]);
+                            break;
+
+                        }else if(counter==5){
+
+                            ++counter;
+                            btCalendarDay6.setText(str[2]);
+                            btCalendarDay27.setText(str[2]);
+                            break;
+
+                        }else{
+
+                            ++counter;
+                            btCalendarDay7.setText(str[2]);
+                            btCalendarDay28.setText(str[2]);
+                            break;
+                        }
+
+
+                    }
+                }
+
+
+            }catch(ParseException e){
+                e.printStackTrace();
             }
 
             //put the selected days in dashboard
@@ -3042,57 +3092,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             btCalendarDay41.setVisibility(View.GONE);
             btCalendarDay42.setVisibility(View.GONE);
 
-            //update the current value from start of the week
-
-            counter = Integer.parseInt(temp.substring(3,5));
-
-            if(counter>9) {
-                btCalendarDay22.setText(counter + "");
-            }else{
-                btCalendarDay22.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay23.setText(counter + "");
-            }else{
-                btCalendarDay23.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay24.setText(counter + "");
-            }else{
-                btCalendarDay24.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay25.setText(counter + "");
-            }else{
-                btCalendarDay25.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay26.setText(counter + "");
-            }else{
-                btCalendarDay26.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay27.setText(counter + "");
-            }else{
-                btCalendarDay27.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay28.setText(counter + "");
-            }else{
-                btCalendarDay28.setText("0" + counter);
-            }
 
             String sprintJoyDailypoints2 = Dashboard.userActivityContributionid2.sprintDailyPoints;
 
@@ -3129,104 +3128,137 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             btCalendarDay21.setVisibility(View.GONE);
 
             //update the current value from start of the week
-            String temp = textStartingDate.getText().toString();
-            int counter = Integer.parseInt(temp.substring(3,5));
+            String tempStartingDate = textStartingDate.getText().toString();
+            String tempEndingDate = textEndingDate.getText().toString();
 
-            if(counter>9) {
-                btCalendarDay1.setText(counter + "");
-            }else{
-                btCalendarDay1.setText("0" + counter);
-            }
+            try {
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay2.setText(counter + "");
-            }else{
-                btCalendarDay2.setText("0" + counter);
-            }
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                Date startDate = formatter.parse(tempStartingDate);
+                Date endDate = formatter.parse(tempEndingDate);
+                Calendar start = Calendar.getInstance();
+                start.setTime(startDate);
+                Calendar end = Calendar.getInstance();
+                end.setTime(endDate);
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay3.setText(counter + "");
-            }else{
-                btCalendarDay3.setText("0" + counter);
-            }
+                int counter = 0;
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay4.setText(counter + "");
-            }else{
-                btCalendarDay4.setText("0" + counter);
-            }
+                for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+                    // Do your job here with `date`.
+                    String[] str = date.toString().split(" ");
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay5.setText(counter + "");
-            }else{
-                btCalendarDay5.setText("0" + counter);
-            }
+                    if(counter==14){
+                        break;
+                    }
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay6.setText(counter + "");
-            }else{
-                btCalendarDay6.setText("0" + counter);
-            }
+                    for(int i=0;i<str.length;i++) {
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay7.setText(counter + "");
-            }else{
-                btCalendarDay7.setText("0" + counter);
-            }
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay8.setText(counter + "");
-            }else{
-                btCalendarDay8.setText("0" + counter);
-            }
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay9.setText(counter + "");
-            }else{
-                btCalendarDay9.setText("0" + counter);
-            }
+                        if(counter==0){
+                            ++counter;
+                            btCalendarDay1.setText(str[2]);
+                            btCalendarDay22.setText(str[2]);
+                            datearranger = str[0];
+                            break;
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay10.setText(counter + "");
-            }else{
-                btCalendarDay10.setText("0" + counter);
-            }
+                        }else if(counter==1){
+                            ++counter;
+                            btCalendarDay2.setText(str[2]);
+                            btCalendarDay23.setText(str[2]);
+                            break;
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay11.setText(counter + "");
-            }else{
-                btCalendarDay11.setText("0" + counter);
-            }
+                        }else if(counter==2){
+                            ++counter;
+                            btCalendarDay3.setText(str[2]);
+                            btCalendarDay24.setText(str[2]);
+                            break;
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay12.setText(counter + "");
-            }else{
-                btCalendarDay12.setText("0" + counter);
-            }
+                        }else if(counter==3){
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay13.setText(counter + "");
-            }else{
-                btCalendarDay13.setText("0" + counter);
-            }
+                            ++counter;
+                            btCalendarDay4.setText(str[2]);
+                            btCalendarDay25.setText(str[2]);
+                            break;
 
-            ++counter;
-            if(counter>9) {
-                btCalendarDay14.setText(counter + "");
-            }else{
-                btCalendarDay14.setText("0" + counter);
+                        }else if(counter==4){
+
+                            ++counter;
+                            btCalendarDay5.setText(str[2]);
+                            btCalendarDay26.setText(str[2]);
+                            break;
+
+                        }else if(counter==5){
+
+                            ++counter;
+                            btCalendarDay6.setText(str[2]);
+                            btCalendarDay27.setText(str[2]);
+                            break;
+
+                        }else if(counter==6){
+
+                            ++counter;
+                            btCalendarDay7.setText(str[2]);
+                            btCalendarDay28.setText(str[2]);
+                            break;
+
+                        }else if(counter==7){
+
+                            ++counter;
+                            btCalendarDay8.setText(str[2]);
+                            btCalendarDay29.setText(str[2]);
+                            break;
+
+                        }else if(counter==8){
+
+                            ++counter;
+                            btCalendarDay9.setText(str[2]);
+                            btCalendarDay30.setText(str[2]);
+                            break;
+
+                        }else if(counter==9){
+
+                            ++counter;
+                            btCalendarDay10.setText(str[2]);
+                            btCalendarDay31.setText(str[2]);
+                            break;
+
+                        }else if(counter==10){
+
+                            ++counter;
+                            btCalendarDay11.setText(str[2]);
+                            btCalendarDay32.setText(str[2]);
+                            break;
+
+                        }else if(counter==11){
+
+                            ++counter;
+                            btCalendarDay12.setText(str[2]);
+                            btCalendarDay33.setText(str[2]);
+                            break;
+
+                        }else if(counter==12){
+
+                            ++counter;
+                            btCalendarDay13.setText(str[2]);
+                            btCalendarDay34.setText(str[2]);
+                            break;
+
+                        }else{
+
+                            ++counter;
+                            btCalendarDay14.setText(str[2]);
+                            btCalendarDay35.setText(str[2]);
+                            break;
+                        }
+
+
+                    }
+                }
+
+
+            }catch(ParseException e){
+                e.printStackTrace();
             }
 
 
@@ -3275,106 +3307,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             btCalendarDay41.setVisibility(View.GONE);
             btCalendarDay42.setVisibility(View.GONE);
 
-            counter = Integer.parseInt(temp.substring(3,5));
-
-            if(counter>9) {
-                btCalendarDay22.setText(counter + "");
-            }else{
-                btCalendarDay22.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay23.setText(counter + "");
-            }else{
-                btCalendarDay23.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay24.setText(counter + "");
-            }else{
-                btCalendarDay24.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay25.setText(counter + "");
-            }else{
-                btCalendarDay25.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay26.setText(counter + "");
-            }else{
-                btCalendarDay26.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay27.setText(counter + "");
-            }else{
-                btCalendarDay27.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay28.setText(counter + "");
-            }else{
-                btCalendarDay28.setText("0" + counter);
-            }
-
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay29.setText(counter + "");
-            }else{
-                btCalendarDay29.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay30.setText(counter + "");
-            }else{
-                btCalendarDay30.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay31.setText(counter + "");
-            }else{
-                btCalendarDay31.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay32.setText(counter + "");
-            }else{
-                btCalendarDay32.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay33.setText(counter + "");
-            }else{
-                btCalendarDay33.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay34.setText(counter + "");
-            }else{
-                btCalendarDay34.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay35.setText(counter + "");
-            }else{
-                btCalendarDay35.setText("0" + counter);
-            }
-
             //put the selected days in dashboard
             String sprintJoyDailypoints2 = Dashboard.userActivityContributionid2.sprintDailyPoints;
 
@@ -3418,157 +3350,185 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             //display all of them
 
             //update the current value from start of the week
-            String temp = textStartingDate.getText().toString();
-            int counter = Integer.parseInt(temp.substring(3,5));
+            //update the current value from start of the week
+            String tempStartingDate = textStartingDate.getText().toString();
+            String tempEndingDate = textEndingDate.getText().toString();
 
-            if(counter>9) {
-                btCalendarDay1.setText(counter + "");
-            }else{
-                btCalendarDay1.setText("0" + counter);
+            try {
+
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                Date startDate = formatter.parse(tempStartingDate);
+                Date endDate = formatter.parse(tempEndingDate);
+                Calendar start = Calendar.getInstance();
+                start.setTime(startDate);
+                Calendar end = Calendar.getInstance();
+                end.setTime(endDate);
+
+                int counter = 0;
+
+                for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+                    // Do your job here with `date`.
+                    String[] str = date.toString().split(" ");
+
+                    if(counter==21){
+                        break;
+                    }
+
+                    for(int i=0;i<str.length;i++) {
+
+
+                        if(counter==0){
+                            ++counter;
+                            btCalendarDay1.setText(str[2]);
+                            btCalendarDay22.setText(str[2]);
+                            datearranger = str[0];
+                            break;
+
+                        }else if(counter==1){
+                            ++counter;
+                            btCalendarDay2.setText(str[2]);
+                            btCalendarDay23.setText(str[2]);
+                            break;
+
+                        }else if(counter==2){
+                            ++counter;
+                            btCalendarDay3.setText(str[2]);
+                            btCalendarDay24.setText(str[2]);
+                            break;
+
+                        }else if(counter==3){
+
+                            ++counter;
+                            btCalendarDay4.setText(str[2]);
+                            btCalendarDay25.setText(str[2]);
+                            break;
+
+                        }else if(counter==4){
+
+                            ++counter;
+                            btCalendarDay5.setText(str[2]);
+                            btCalendarDay26.setText(str[2]);
+                            break;
+
+                        }else if(counter==5){
+
+                            ++counter;
+                            btCalendarDay6.setText(str[2]);
+                            btCalendarDay27.setText(str[2]);
+                            break;
+
+                        }else if(counter==6){
+
+                            ++counter;
+                            btCalendarDay7.setText(str[2]);
+                            btCalendarDay28.setText(str[2]);
+                            break;
+
+                        }else if(counter==7){
+
+                            ++counter;
+                            btCalendarDay8.setText(str[2]);
+                            btCalendarDay29.setText(str[2]);
+                            break;
+
+                        }else if(counter==8){
+
+                            ++counter;
+                            btCalendarDay9.setText(str[2]);
+                            btCalendarDay30.setText(str[2]);
+                            break;
+
+                        }else if(counter==9){
+
+                            ++counter;
+                            btCalendarDay10.setText(str[2]);
+                            btCalendarDay31.setText(str[2]);
+                            break;
+
+                        }else if(counter==10){
+
+                            ++counter;
+                            btCalendarDay11.setText(str[2]);
+                            btCalendarDay32.setText(str[2]);
+                            break;
+
+                        }else if(counter==11){
+
+                            ++counter;
+                            btCalendarDay12.setText(str[2]);
+                            btCalendarDay33.setText(str[2]);
+                            break;
+
+                        }else if(counter==12){
+
+                            ++counter;
+                            btCalendarDay13.setText(str[2]);
+                            btCalendarDay34.setText(str[2]);
+                            break;
+
+                        }else if(counter==13){
+
+                            ++counter;
+                            btCalendarDay14.setText(str[2]);
+                            btCalendarDay35.setText(str[2]);
+                            break;
+
+                        }else if(counter==14){
+
+                            ++counter;
+                            btCalendarDay15.setText(str[2]);
+                            btCalendarDay36.setText(str[2]);
+                            break;
+
+                        }else if(counter==15){
+
+                            ++counter;
+                            btCalendarDay16.setText(str[2]);
+                            btCalendarDay37.setText(str[2]);
+                            break;
+
+                        }else if(counter==16){
+
+                            ++counter;
+                            btCalendarDay17.setText(str[2]);
+                            btCalendarDay38.setText(str[2]);
+                            break;
+
+                        }else if(counter==17){
+
+                            ++counter;
+                            btCalendarDay18.setText(str[2]);
+                            btCalendarDay39.setText(str[2]);
+                            break;
+
+                        }else if(counter==18){
+
+                            ++counter;
+                            btCalendarDay19.setText(str[2]);
+                            btCalendarDay40.setText(str[2]);
+                            break;
+
+                        }else if(counter==19){
+
+                            ++counter;
+                            btCalendarDay20.setText(str[2]);
+                            btCalendarDay41.setText(str[2]);
+                            break;
+
+                        }else{
+
+                            ++counter;
+                            btCalendarDay21.setText(str[2]);
+                            btCalendarDay42.setText(str[2]);
+                            break;
+                        }
+                    }
+                }
+
+
+            }catch(ParseException e){
+                e.printStackTrace();
             }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay2.setText(counter + "");
-            }else{
-                btCalendarDay2.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay3.setText(counter + "");
-            }else{
-                btCalendarDay3.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay4.setText(counter + "");
-            }else{
-                btCalendarDay4.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay5.setText(counter + "");
-            }else{
-                btCalendarDay5.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay6.setText(counter + "");
-            }else{
-                btCalendarDay6.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay7.setText(counter + "");
-            }else{
-                btCalendarDay7.setText("0" + counter);
-            }
-
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay8.setText(counter + "");
-            }else{
-                btCalendarDay8.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay9.setText(counter + "");
-            }else{
-                btCalendarDay9.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay10.setText(counter + "");
-            }else{
-                btCalendarDay10.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay11.setText(counter + "");
-            }else{
-                btCalendarDay11.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay12.setText(counter + "");
-            }else{
-                btCalendarDay12.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay13.setText(counter + "");
-            }else{
-                btCalendarDay13.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay14.setText(counter + "");
-            }else{
-                btCalendarDay14.setText("0" + counter);
-            }
-
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay15.setText(counter + "");
-            }else{
-                btCalendarDay15.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay16.setText(counter + "");
-            }else{
-                btCalendarDay16.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay17.setText(counter + "");
-            }else{
-                btCalendarDay17.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay18.setText(counter + "");
-            }else{
-                btCalendarDay18.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay19.setText(counter + "");
-            }else{
-                btCalendarDay19.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay20.setText(counter + "");
-            }else{
-                btCalendarDay20.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay21.setText(counter + "");
-            }else{
-                btCalendarDay21.setText("0" + counter);
-            }
-
 
             //put the selected days in dashboard
             String sprintContributionDailypoints = Dashboard.userActivityContributionid1.sprintDailyPoints;
@@ -3620,163 +3580,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                 }
 
             } //end of for
-
-
-
-
-            //second activity (3 rows)
-
-
-            counter = Integer.parseInt(temp.substring(3,5));
-
-            if(counter>9) {
-                btCalendarDay22.setText(counter + "");
-            }else{
-                btCalendarDay22.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay23.setText(counter + "");
-            }else{
-                btCalendarDay23.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay24.setText(counter + "");
-            }else{
-                btCalendarDay24.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay25.setText(counter + "");
-            }else{
-                btCalendarDay25.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay26.setText(counter + "");
-            }else{
-                btCalendarDay26.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay27.setText(counter + "");
-            }else{
-                btCalendarDay27.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay28.setText(counter + "");
-            }else{
-                btCalendarDay28.setText("0" + counter);
-            }
-
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay29.setText(counter + "");
-            }else{
-                btCalendarDay29.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay30.setText(counter + "");
-            }else{
-                btCalendarDay30.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay31.setText(counter + "");
-            }else{
-                btCalendarDay31.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay32.setText(counter + "");
-            }else{
-                btCalendarDay32.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay33.setText(counter + "");
-            }else{
-                btCalendarDay33.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay34.setText(counter + "");
-            }else{
-                btCalendarDay34.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay35.setText(counter + "");
-            }else{
-                btCalendarDay35.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay36.setText(counter + "");
-            }else{
-                btCalendarDay36.setText("0" + counter);
-            }
-
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay37.setText(counter + "");
-            }else{
-                btCalendarDay37.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay38.setText(counter + "");
-            }else{
-                btCalendarDay38.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay39.setText(counter + "");
-            }else{
-                btCalendarDay39.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay40.setText(counter + "");
-            }else{
-                btCalendarDay40.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay41.setText(counter + "");
-            }else{
-                btCalendarDay41.setText("0" + counter);
-            }
-
-            ++counter;
-            if(counter>9) {
-                btCalendarDay42.setText(counter + "");
-            }else{
-                btCalendarDay42.setText("0" + counter);
-            }
-
 
             //put the selected days in dashboard
             String sprintJoyDailypoints2 = Dashboard.userActivityContributionid2.sprintDailyPoints;
@@ -3831,7 +3634,75 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
 
         }
 
+        //traverse circularly to rearrange the names of the buttons
+        int position = -1;
 
+        if(datearranger.contains("Mon")){
+
+            position = 0;
+
+        }else if(datearranger.contains("Tue")){
+
+            position = 1;
+
+        }else if(datearranger.contains("Wed")){
+
+            position = 2;
+
+        }else if(datearranger.contains("Thu")){
+
+            position = 3;
+
+        }else if(datearranger.contains("Fri")){
+
+            position = 4;
+
+        }else if(datearranger.contains("Sat")){
+
+            position = 5;
+
+        }else {
+
+            position = 6;
+        }
+
+        String[] a = {"M","T","W","Th","F","Sa","S"};
+
+
+        for (int i = 0; i < a.length; i++) {
+
+
+            if(i==0){
+
+                mondayDate.setText(a[(i + position) % a.length]);
+
+            }else if(i==1){
+
+                tuesdayDate.setText(a[(i + position) % a.length]);
+
+            }else if(i==2){
+
+                wednesdayDate.setText(a[(i + position) % a.length]);
+
+            }else if(i==3){
+
+                thursdayDate.setText(a[(i + position) % a.length]);
+
+            }else if(i==4){
+
+                fridayDate.setText(a[(i + position) % a.length]);
+
+            }else if(i==5){
+
+                saturdayDate.setText(a[(i + position) % a.length]);
+
+            }else {
+
+                sundayDate.setText(a[(i + position) % a.length]);
+
+            }
+            //System.out.println(a[(i + position) % a.length]);
+        }
 
 
         //GOALS (questionaire)
@@ -3930,7 +3801,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             activity1ScoreInt = 100;
         }
         else {
-            activity1ScoreInt = (Integer.parseInt(textActual1.getText().toString()) * 100) / (Integer.parseInt(textTarget1.getText().toString()));
+            activity1ScoreInt = (int)Math.round(((Integer.parseInt(textActual1.getText().toString()) * 100.0) / (Integer.parseInt(textTarget1.getText().toString()))));
         }
         activity1ScoreStr = activity1ScoreInt + "";
         gaugeContributionActivity1.setHighValue(activity1ScoreInt);
@@ -3938,16 +3809,16 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
         databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("activityScore").setValue(activity1ScoreStr);
 
-        contributionScoreInt = (activity1ScoreInt + activity2ScoreInt)/ 2;
+        contributionScoreInt = (int)Math.round(((activity1ScoreInt + activity2ScoreInt)/ 2.0));
         contributionScoreStr = contributionScoreInt + "";
         gaugeContributionScore.setHighValue(contributionScoreInt);
         Dashboard.userContributionSprint.sprintOverallScore = contributionScoreStr;
         databaseUpdateCategories = FirebaseDatabase.getInstance().getReference("Categories");
         databaseUpdateCategories.child(Dashboard.userContributionSprint.categoryid).child("ContributionSprints").child(Dashboard.sprintContributionid).child("sprintOverallScore").setValue(contributionScoreStr);
 
-        lifeScoreContributionInt = ((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
+        lifeScoreContributionInt = (int)Math.round((((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
                 (Integer.parseInt(Dashboard.userPassionSprint.sprintOverallScore)) +
-                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3;
+                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3.0));
         gaugeContributionLifeScore.setHighValue(lifeScoreContributionInt);
 
         FragmentJoy.lifeScoreJoyInt = lifeScoreContributionInt;
@@ -3963,7 +3834,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             activity2ScoreInt = 100;
         }
         else {
-            activity2ScoreInt = (Integer.parseInt(textActual2.getText().toString()) * 100) / (Integer.parseInt(textTarget2.getText().toString()));
+            activity2ScoreInt = (int)Math.round(((Integer.parseInt(textActual2.getText().toString()) * 100.0) / (Integer.parseInt(textTarget2.getText().toString()))));
         }
         activity2ScoreStr = activity2ScoreInt + "";
         gaugeContributionActivity2.setHighValue(activity2ScoreInt);
@@ -3971,16 +3842,16 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
         databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("activityScore").setValue(activity2ScoreStr);
 
-        contributionScoreInt = (activity1ScoreInt + activity2ScoreInt)/ 2;
+        contributionScoreInt = (int)Math.round(((activity1ScoreInt + activity2ScoreInt)/ 2.0));
         contributionScoreStr = contributionScoreInt + "";
         gaugeContributionScore.setHighValue(contributionScoreInt);
         Dashboard.userContributionSprint.sprintOverallScore = contributionScoreStr;
         databaseUpdateCategories = FirebaseDatabase.getInstance().getReference("Categories");
         databaseUpdateCategories.child(Dashboard.userContributionSprint.categoryid).child("ContributionSprints").child(Dashboard.sprintContributionid).child("sprintOverallScore").setValue(contributionScoreStr);
 
-        lifeScoreContributionInt = ((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
+        lifeScoreContributionInt = (int)Math.round((((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
                 (Integer.parseInt(Dashboard.userPassionSprint.sprintOverallScore)) +
-                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3;
+                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3.0));
         gaugeContributionLifeScore.setHighValue(lifeScoreContributionInt);
 
         FragmentJoy.lifeScoreJoyInt = lifeScoreContributionInt;

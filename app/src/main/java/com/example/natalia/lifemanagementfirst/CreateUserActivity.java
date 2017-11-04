@@ -424,7 +424,6 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         i.putExtra("userid",id);
         i.putExtra("username",currentusername);
         i.putExtra("password",password);
-
         startActivity(i);
 
     } //end of method addData

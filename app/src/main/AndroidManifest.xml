@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".screenFour" />
+        <activity android:name=".ThirdScreenActivity" />
         <activity android:name=".CreateUserActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".CarouselScreen" />
@@ -35,7 +36,14 @@
         <activity
             android:name=".Dashboard"
             android:windowSoftInputMode="adjustPan"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".previous_cycle"
+            android:label="@string/title_activity_previous_cycle" />
+        <activity android:name=".cycleActivity" />
+        <activity android:name=".cycleActivityPassion" />
+        <activity android:name=".cycleActivityContribution" />
+        <activity android:name=".currentCycleActivity">
         </activity>
     </application>
 

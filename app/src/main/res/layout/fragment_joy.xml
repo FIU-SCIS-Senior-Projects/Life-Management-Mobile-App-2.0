@@ -105,73 +105,73 @@
                     android:layout_gravity="center">
 
                     <TextView
+                        android:id="@+id/TextViewMonday"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:background="#b9b9b9"
                         android:gravity="center"
                         android:layout_margin="1dp"
                         android:padding="1dp"
-                        android:text="M"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
                     <TextView
+                        android:id="@+id/TextViewTuesday"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:background="#b9b9b9"
                         android:gravity="center"
                         android:layout_margin="1dp"
                         android:padding="1dp"
-                        android:text="T"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
                     <TextView
+                        android:id="@+id/TextViewWednesday"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:background="#b9b9b9"
                         android:gravity="center"
                         android:layout_margin="1dp"
                         android:padding="1dp"
-                        android:text="W"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
                     <TextView
+                        android:id="@+id/TextViewThursday"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:background="#b9b9b9"
                         android:gravity="center"
                         android:layout_margin="1dp"
                         android:padding="1dp"
-                        android:text="Th"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
                     <TextView
+                        android:id="@+id/TextViewFriday"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:background="#b9b9b9"
                         android:gravity="center"
                         android:layout_margin="1dp"
                         android:padding="1dp"
-                        android:text="F"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
                     <TextView
+                        android:id="@+id/TextViewSaturday"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:background="#b9b9b9"
                         android:gravity="center"
                         android:layout_margin="1dp"
                         android:padding="1dp"
-                        android:text="Sa"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
                     <TextView
+                        android:id="@+id/TextViewSunday"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:background="#b9b9b9"
                         android:gravity="center"
                         android:layout_margin="1dp"
                         android:padding="1dp"
-                        android:text="S"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
                 </LinearLayout>
@@ -221,7 +221,6 @@
                     android:background="#FFF5F515"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="16"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:textColor="#000000"
                     android:textSize="18sp" />
@@ -509,7 +508,6 @@
                     android:background="#FFF5F515"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="9"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:textColor="#000000"
                     android:textSize="18sp" />
@@ -567,7 +565,6 @@
                     android:layout_marginRight="1dp"
                     android:layout_marginTop="10dp"
                     android:inputType="textMultiLine"
-                    android:text="Programming"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textColor="#000000"
                     android:textSize="15sp" />
@@ -581,7 +578,6 @@
                     android:background="#FFF5F515"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="16"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:textColor="#000000"
                     android:textSize="18sp" />
@@ -869,7 +865,6 @@
                     android:background="#FFF5F515"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="9"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:textColor="#000000"
                     android:textSize="18sp" />

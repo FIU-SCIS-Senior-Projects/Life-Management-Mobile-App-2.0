@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,7 +33,7 @@ public class SprintSettingActivity extends FragmentActivity {
 
     private static final int NUM_PAGES = 2; //number of pages to show in Sprint Settings
 
-    private ViewPager mPager;
+    static ViewPager mPager;
 
     private PagerAdapter mPagerAdapter;
 
@@ -82,6 +84,9 @@ public class SprintSettingActivity extends FragmentActivity {
     static ArrayList<Category> userPassionSprintHelper;
     static ArrayList<Category> currentContributionCategories;
     static ArrayList<Category> userContributionSprintHelper;
+    static ArrayList<ActivitiesSprint> activitiesjoyPrevious;
+    static ArrayList<ActivitiesSprint> activitiesPassionPrevious;
+    static ArrayList<ActivitiesSprint> activitiesContributionPrevious;
 
     static ArrayList<ActivitiesSprint> currentJoyActivities; //no need?????
 
@@ -99,6 +104,14 @@ public class SprintSettingActivity extends FragmentActivity {
         mPager = (ViewPager) findViewById(R.id.sprintSettingPager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
+        // disable swiping untill all the fields have been filled by user
+        mPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                return true;
+            }
+        });
 
         databaseUsers = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -121,6 +134,10 @@ public class SprintSettingActivity extends FragmentActivity {
 
         currentContributionCategories = new ArrayList<>();
         userContributionSprintHelper = new ArrayList<>();
+
+        activitiesjoyPrevious = new ArrayList<>();
+        activitiesPassionPrevious = new ArrayList<>();
+        activitiesContributionPrevious = new ArrayList<>();
 
         currentJoyActivities = new ArrayList<>();   // no need????????
 
@@ -680,6 +697,7 @@ public class SprintSettingActivity extends FragmentActivity {
 
         }
 
+        List<String> tempList = new ArrayList<>(); //list containing all the sprintActivities of the user
         //JOY
         for (int i = 0; i < currentJoyCategories.size(); i++) {
 
@@ -687,6 +705,10 @@ public class SprintSettingActivity extends FragmentActivity {
             if (userId.contains(currentJoyCategories.get(i).userId)) {
 
                 System.out.println("categoryid:  " + currentJoyCategories.get(i).categoryid + " -- " + currentJoyCategories.size());
+
+                tempList.add(currentJoyCategories.get(i).sprintActivityid1 + " " + currentJoyCategories.get(i).startingDate + " " + currentJoyCategories.get(i).endingDate);
+                tempList.add(currentJoyCategories.get(i).sprintActivityid2 + " " + currentJoyCategories.get(i).startingDate + " " + currentJoyCategories.get(i).endingDate);
+
 
                 userJoysprintsHelper.add(new Category(currentJoyCategories.get(i).categoryid, currentJoyCategories.get(i).endingDate,
                         currentJoyCategories.get(i).goal1, currentJoyCategories.get(i).goal2, currentJoyCategories.get(i).goal3,
@@ -696,13 +718,39 @@ public class SprintSettingActivity extends FragmentActivity {
             }
         }
 
+        //JOY
+
+        for (int i = 0; i < tempList.size(); i++) {
+
+            System.out.println("funtioning templist " + tempList.get(i));
+
+            for (int k = 0; k < userActivitiesAll.size(); k++) {
+
+                String [] splitter = tempList.get(i).split(" ");
+
+                if (userActivitiesAll.get(k).activityid.contains(splitter[0])){
+
+                    //fake the data for later use (categoryid and userid)
+                    activitiesjoyPrevious.add(new ActivitiesSprint(userActivitiesAll.get(k).activityScore,userActivitiesAll.get(k).actualPoints,
+                            splitter[1], userActivitiesAll.get(k).activityName, userActivitiesAll.get(k).sprintDailyPoints,
+                            userActivitiesAll.get(k).targetPoints, splitter[2], userActivitiesAll.get(k).activityid));
+                    break;
+                }
+            }
+        } //end of for
+
         //PASSION
+
+        List<String> tempListPassion = new ArrayList<>(); //list containing all the sprintActivities of the user
         for (int i = 0; i < currentPassionCategories.size(); i++) {
 
 
             if (userId.contains(currentPassionCategories.get(i).userId)) {
 
                 System.out.println("categoryid PASSION:  " + currentPassionCategories.get(i).categoryid + " -- " + currentPassionCategories.size());
+
+                tempListPassion.add(currentPassionCategories.get(i).sprintActivityid1 + " " + currentPassionCategories.get(i).startingDate + " " + currentPassionCategories.get(i).endingDate);
+                tempListPassion.add(currentPassionCategories.get(i).sprintActivityid2 + " " + currentPassionCategories.get(i).startingDate + " " + currentPassionCategories.get(i).endingDate);
 
                 userPassionSprintHelper.add(new Category(currentPassionCategories.get(i).categoryid, currentPassionCategories.get(i).endingDate,
                         currentPassionCategories.get(i).goal1, currentPassionCategories.get(i).goal2, currentPassionCategories.get(i).goal3,
@@ -712,13 +760,37 @@ public class SprintSettingActivity extends FragmentActivity {
             }
         }
 
+        for (int i = 0; i < tempListPassion.size(); i++) {
+
+            System.out.println("funtioning templist passion " + tempListPassion.get(i));
+
+            for (int k = 0; k < userActivitiesAll.size(); k++) {
+
+                String [] splitter = tempListPassion.get(i).split(" ");
+
+                if (userActivitiesAll.get(k).activityid.contains(splitter[0])){
+
+                    //fake the data for later use (categoryid and userid)
+                    activitiesPassionPrevious.add(new ActivitiesSprint(userActivitiesAll.get(k).activityScore,userActivitiesAll.get(k).actualPoints,
+                            splitter[1], userActivitiesAll.get(k).activityName, userActivitiesAll.get(k).sprintDailyPoints,
+                            userActivitiesAll.get(k).targetPoints, splitter[2], userActivitiesAll.get(k).activityid));
+                    break;
+                }
+            }
+        } //end of for
+
         //GIVING BACK
+
+        List<String> tempListContribution = new ArrayList<>(); //list containing all the sprintActivities of the user
         for (int i = 0; i < currentContributionCategories.size(); i++) {
 
 
             if (userId.contains(currentContributionCategories.get(i).userId)) {
 
                 System.out.println("categoryid CONTRIBUTION:  " + currentContributionCategories.get(i).categoryid + " -- " + currentContributionCategories.size());
+
+                tempListContribution.add(currentContributionCategories.get(i).sprintActivityid1 + " " + currentContributionCategories.get(i).startingDate + " " + currentContributionCategories.get(i).endingDate);
+                tempListContribution.add(currentContributionCategories.get(i).sprintActivityid2 + " " + currentContributionCategories.get(i).startingDate + " " + currentContributionCategories.get(i).endingDate);
 
                 userContributionSprintHelper.add(new Category(currentContributionCategories.get(i).categoryid, currentContributionCategories.get(i).endingDate,
                         currentContributionCategories.get(i).goal1, currentContributionCategories.get(i).goal2, currentContributionCategories.get(i).goal3,
@@ -727,6 +799,25 @@ public class SprintSettingActivity extends FragmentActivity {
                         currentContributionCategories.get(i).startingDate, currentContributionCategories.get(i).userId,currentContributionCategories.get(i).sprintid));
             }
         }
+
+        for (int i = 0; i < tempListContribution.size(); i++) {
+
+            System.out.println("funtioning templist contribution " + tempListContribution.get(i));
+
+            for (int k = 0; k < userActivitiesAll.size(); k++) {
+
+                String [] splitter = tempListContribution.get(i).split(" ");
+
+                if (userActivitiesAll.get(k).activityid.contains(splitter[0])){
+
+                    //fake the data for later use (categoryid and userid)
+                    activitiesContributionPrevious.add(new ActivitiesSprint(userActivitiesAll.get(k).activityScore,userActivitiesAll.get(k).actualPoints,
+                            splitter[1], userActivitiesAll.get(k).activityName, userActivitiesAll.get(k).sprintDailyPoints,
+                            userActivitiesAll.get(k).targetPoints, splitter[2], userActivitiesAll.get(k).activityid));
+                    break;
+                }
+            }
+        } //end of for
 
         //User currentUser = new User("n@gmail.com","nat1111n","Nat","Natnat","09/09/1990","Natnat1111",false,false,id);
 

@@ -218,14 +218,18 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                 //JOY
                 bundle.putParcelableArrayList("categoriesJoyCategories",SprintSettingActivity.currentJoyCategories);
                 bundle.putParcelableArrayList("userJoysprintHelperList",SprintSettingActivity.userJoysprintsHelper);
+                bundle.putParcelableArrayList("activitiesJOYPrevious",SprintSettingActivity.activitiesjoyPrevious);
 
                 //PASSION
                 bundle.putParcelableArrayList("categoriesPassionCategories",SprintSettingActivity.currentPassionCategories);
                 bundle.putParcelableArrayList("userPassionsprintHelperList",SprintSettingActivity.userPassionSprintHelper);
+                bundle.putParcelableArrayList("activitiesPassionPrevious",SprintSettingActivity.activitiesPassionPrevious);
+
 
                 //GIVING BACK
                 bundle.putParcelableArrayList("categoriesContributionCategories",SprintSettingActivity.currentContributionCategories);
                 bundle.putParcelableArrayList("userContributionsprintHelperList",SprintSettingActivity.userContributionSprintHelper);
+                bundle.putParcelableArrayList("activitiesContributionPrevious",SprintSettingActivity.activitiesContributionPrevious);
 
                 //bundle.putParcelableArrayList("currentjoyactivitylist", SprintSettingActivity.currentJoyActivities); //total activities (needed for previous cycle)
                 i.putExtras(bundle);

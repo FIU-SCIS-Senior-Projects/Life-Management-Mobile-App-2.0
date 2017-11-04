@@ -21,7 +21,6 @@ import android.view.MenuItem;
 
 import java.util.*;
 import android.content.Intent;
-import android.widget.Toast;
 
 
 //This is dashboard activity
@@ -34,6 +33,7 @@ public class Dashboard extends AppCompatActivity
     static ArrayList<ActivitiesSprint> userActivitiesAll;
     static ArrayList<Category> currentJoyCategories;
     static ArrayList<Category> userJoysprintsHelper;
+    static ArrayList<ActivitiesSprint> userJoyactivitiesPrevious;
     static Category userJoySprint;
     static ActivitiesSprint userActivityJoyid1;
     static ActivitiesSprint userActivityJoyid2;
@@ -49,6 +49,7 @@ public class Dashboard extends AppCompatActivity
 
     static ArrayList<Category> currentPassionCategories;
     static ArrayList<Category> userPassionsprintsHelper;
+    static ArrayList<ActivitiesSprint> userPassionactivitiesPrevious;
     static Category userPassionSprint;
     static ActivitiesSprint userActivityPassionid1;
     static ActivitiesSprint userActivityPassionid2;
@@ -61,6 +62,7 @@ public class Dashboard extends AppCompatActivity
     static ArrayList<Category> currentContributionCategories;
     static ArrayList<Category> userContributionsprintsHelper;
     static Category userContributionSprint;
+    static ArrayList<ActivitiesSprint> userContributionactivitiesPrevious;
     static ActivitiesSprint userActivityContributionid1;
     static ActivitiesSprint userActivityContributionid2;
     static String endingDateFixed_contribution;
@@ -83,6 +85,7 @@ public class Dashboard extends AppCompatActivity
         userJoySprint = new Category();
         userActivityJoyid1 = new ActivitiesSprint();
         userActivityJoyid2 = new ActivitiesSprint();
+        userJoyactivitiesPrevious = new ArrayList<>();
 
         //PASSION
         currentPassionCategories = new ArrayList<>();
@@ -90,6 +93,7 @@ public class Dashboard extends AppCompatActivity
         userPassionSprint = new Category();
         userActivityPassionid1 = new ActivitiesSprint();
         userActivityPassionid2 = new ActivitiesSprint();
+        userPassionactivitiesPrevious = new ArrayList<>();
 
         //GIVING BACK
         currentContributionCategories = new ArrayList<>();
@@ -97,6 +101,7 @@ public class Dashboard extends AppCompatActivity
         userContributionSprint = new Category();
         userActivityContributionid1 = new ActivitiesSprint();
         userActivityContributionid2 = new ActivitiesSprint();
+        userContributionactivitiesPrevious = new ArrayList<>();
 
 
         ViewPager vp_pages= (ViewPager)findViewById(R.id.vp_pages);
@@ -274,14 +279,17 @@ public class Dashboard extends AppCompatActivity
         //JOY
         currentJoyCategories = bundle.getParcelableArrayList("categoriesJoyCategories");
         userJoysprintsHelper = bundle.getParcelableArrayList("userJoysprintHelperList");
+        userJoyactivitiesPrevious = bundle.getParcelableArrayList("activitiesJOYPrevious");
 
         //PASSION
         currentPassionCategories = bundle.getParcelableArrayList("categoriesPassionCategories");
         userPassionsprintsHelper = bundle.getParcelableArrayList("userPassionsprintHelperList");
+        userPassionactivitiesPrevious = bundle.getParcelableArrayList("activitiesPassionPrevious");
 
         //GIVING BACK
         currentContributionCategories = bundle.getParcelableArrayList("categoriesContributionCategories");
         userContributionsprintsHelper = bundle.getParcelableArrayList("userContributionsprintHelperList");
+        userContributionactivitiesPrevious = bundle.getParcelableArrayList("activitiesContributionPrevious");
 
 
         int j = 0;
@@ -356,16 +364,12 @@ public class Dashboard extends AppCompatActivity
         public android.support.v4.app.Fragment getItem(int position){
             switch (position){
                 case 0:
-
                     return new FragmentJoy();
 
                 case 1:
-
                     return new FragmentPassion();
 
-
                 case 2:
-
                     return new FragmentGivingBack();
 
             }
@@ -422,6 +426,8 @@ public class Dashboard extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_signout) {
+            Intent i = new Intent(Dashboard.this, LoginActivity.class);
+            startActivity(i);
             return true;
         }
 
@@ -436,10 +442,10 @@ public class Dashboard extends AppCompatActivity
 
         if (id == R.id.nav_new_cycle) {
             // Handle new cycle action
-
             String endDate = userJoySprint.endingDate;
             int monthEnd = Integer.parseInt(endDate.substring(0,2)) - 1;
             int dayEnd = Integer.parseInt(endDate.substring(2,4));
+            //System.out.println("NAT TEST END DATE" + dayEnd);
             int yearEnd = Integer.parseInt(endDate.substring(4));
             Calendar edate = Calendar.getInstance();
             edate.set(Calendar.DAY_OF_MONTH,dayEnd);
@@ -458,8 +464,22 @@ public class Dashboard extends AppCompatActivity
             if(calToday.compareTo(edate) < 0){
 
                 AlertDialog.Builder a_builder = new AlertDialog.Builder(Dashboard.this);
-                a_builder.setMessage("Please finish current sprint before starting new sprint").setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                a_builder.setMessage("You have not finished the current sprint. Do you want to start a new sprint?").setCancelable(false)
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent i = new Intent(Dashboard.this, MainJoyActivity.class);
+                                //Save user id, currentusername, password so that we can use it in the following Activity:
+                                i.putExtra("userid", currentUser.id);
+                                i.putExtra("username", currentUser.username);
+                                i.putExtra("password", currentUser.password);
+
+                                startActivity(i);
+                            }
+                        })
+
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -469,7 +489,8 @@ public class Dashboard extends AppCompatActivity
                 AlertDialog alert = a_builder.create();
                 alert.show();
                 alert.getButton(alert.BUTTON_POSITIVE).setTextColor(Color.parseColor("#11b213"));
-                //Toast.makeText(Dashboard.this, "Please finish current sprint before starting new sprint", Toast.LENGTH_LONG).show();
+                alert.getButton(alert.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#11b213"));
+
 
             }
             else {
@@ -483,10 +504,13 @@ public class Dashboard extends AppCompatActivity
             }
         } else if (id == R.id.nav_current_cycle) {
 
+            Intent i = new Intent(Dashboard.this,currentCycleActivity.class);
+            this.startActivity(i);
+
         } else if (id == R.id.nav_prev_cycle) {
 
-            //Intent i = new Intent(Dashboard.this,CycleActivity.class);
-            //this.startActivity(i);
+            Intent i = new Intent(Dashboard.this,previous_cycle.class);
+            this.startActivity(i);
 
         } else if (id == R.id.nav_settings) {
 
