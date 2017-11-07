@@ -110,6 +110,7 @@
     <orderEntry type="library" exported="" name="firebase-database-9.2.0" level="project" />
     <orderEntry type="library" exported="" name="firebase-client-jvm-2.5.2" level="project" />
     <orderEntry type="library" exported="" name="transition-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="firebase-storage-9.2.0" level="project" />
     <orderEntry type="library" exported="" name="jackson-annotations-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="firebase-common-9.2.0" level="project" />
     <orderEntry type="library" exported="" name="firebase-iid-9.2.0" level="project" />
@@ -134,6 +135,7 @@
     <orderEntry type="library" exported="" name="firebase-client-android-2.5.2" level="project" />
     <orderEntry type="library" exported="" name="design-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="support-core-ui-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="firebase-storage-common-9.2.0" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="firebase-auth-common-9.2.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="jsr305-2.0.1" level="project" />

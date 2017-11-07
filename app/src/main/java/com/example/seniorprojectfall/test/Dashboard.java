@@ -1,5 +1,6 @@
 package com.example.seniorprojectfall.test;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -16,9 +17,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import java.util.*;
 import android.content.Intent;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.view.View;
+import android.graphics.Bitmap;
+import java.io.File;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 
 //This is dashboard activity
@@ -39,9 +54,10 @@ public class Dashboard extends AppCompatActivity
     static String startingDateFixed;
     static String sprintJoyid;
 
-
+    static String profileName;
     User currentUser; //holds the information of the current logged-in user
-
+    DatabaseReference profilePic;
+    static String helper;
 
     //PASSION variables
 
@@ -289,53 +305,34 @@ public class Dashboard extends AppCompatActivity
         userContributionsprintsHelper = bundle.getParcelableArrayList("userContributionsprintHelperList");
         userContributionactivitiesPrevious = bundle.getParcelableArrayList("activitiesContributionPrevious");
 
-
-        int j = 0;
-        int k = 0;
-
-
         //JOY
-
         //convert to format mm/dd/yyyy
         endingDateFixed = userJoySprint.endingDate.substring(0,2) + "/" +
                 userJoySprint.endingDate.substring(2,4) + "/" + userJoySprint.endingDate.substring(4);
 
         //convert to format mm/dd/yyyy
-        //System.out.println("heystart " + startRef);
         startingDateFixed = userJoySprint.startingDate.substring(0,2) + "/" +
                 userJoySprint.startingDate.substring(2,4) + "/" + userJoySprint.startingDate.substring(4);
 
 
-        System.out.println("sprintjoyid " + sprintJoyid);
-
-
         //PASSION
-
         //convert to format mm/dd/yyyy
         endingDateFixed_passion = userPassionSprint.endingDate.substring(0,2) + "/" +
                 userPassionSprint.endingDate.substring(2,4) + "/" + userPassionSprint.endingDate.substring(4);
 
         //convert to format mm/dd/yyyy
-        //System.out.println("heystart " + startRef);
         startingDateFixed_passion = userPassionSprint.startingDate.substring(0,2) + "/" +
                 userPassionSprint.startingDate.substring(2,4) + "/" + userPassionSprint.startingDate.substring(4);
 
 
-        System.out.println("sprintPassionid " + sprintPassionid);
-
         //GIVING BACK
-
         //convert to format mm/dd/yyyy
         endingDateFixed_contribution = userContributionSprint.endingDate.substring(0,2) + "/" +
                 userContributionSprint.endingDate.substring(2,4) + "/" + userContributionSprint.endingDate.substring(4);
 
         //convert to format mm/dd/yyyy
-        //System.out.println("heystart " + startRef);
         startingDateFixed_contribution = userContributionSprint.startingDate.substring(0,2) + "/" +
                 userContributionSprint.startingDate.substring(2,4) + "/" + userContributionSprint.startingDate.substring(4);
-
-
-        System.out.println("sprintContributionid " + sprintContributionid);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -347,25 +344,35 @@ public class Dashboard extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View headerlayout = navigationView.getHeaderView(0);
 
-        System.out.println("whatnott " + Dashboard.userActivityJoyid1.categoryId);
-        System.out.println("whatnott " + Dashboard.userActivityJoyid1.activityid);
+        //testing lazaro
+        TextView message  = (TextView) headerlayout.findViewById(R.id.welcomeTextview);
+        message.setText("Hello " + currentUser.firstName.toString());
 
-        System.out.println("whatnottt " + Dashboard.userActivityJoyid2.categoryId);
-        System.out.println("whatnottt " + Dashboard.userActivityJoyid2.activityid);
+        profileName = in.getExtras().getString("profileImageName");
+        final ImageView profilePicbtn = (ImageView)headerlayout.findViewById(R.id.imageViewProfile);
 
 
-        System.out.println("whatnott " + Dashboard.userActivityJoyid1);
+        try {
+            final File tmpFile = File.createTempFile("img", "png");
+            StorageReference reference = FirebaseStorage.getInstance().getReference("userProfileImgs");
 
-        for(int i=0;i<Dashboard.userJoyactivitiesPrevious.size();i++){
-            System.out.println("whatnott2 " + Dashboard.userJoyactivitiesPrevious.get(i).activityid
-                    + " - " + Dashboard.userJoyactivitiesPrevious.get(i).actualPoints
-                    + " & " + Dashboard.userJoyactivitiesPrevious.get(i).userId);
+            reference.child(profileName).getFile(tmpFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                    Bitmap image = BitmapFactory.decodeFile(tmpFile.getAbsolutePath());
+                    profilePicbtn.setImageBitmap(image);
+                }
+            });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        
+
     } //end of onCreate
-
-
 
 
     class FragmentAdapter extends FragmentPagerAdapter {
@@ -407,8 +414,6 @@ public class Dashboard extends AppCompatActivity
 
             }
         }
-
-
     }
 
     @Override
@@ -434,8 +439,6 @@ public class Dashboard extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        System.out.println("id in optionSelected method " + id);
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_signout) {
@@ -484,6 +487,4 @@ public class Dashboard extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-}
+} //end of class

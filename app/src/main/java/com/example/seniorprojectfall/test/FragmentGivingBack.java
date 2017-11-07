@@ -23,7 +23,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
+import java.lang.Math;
 
 public class FragmentGivingBack extends Fragment implements View.OnClickListener{
 
@@ -209,9 +209,9 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         // Find the components for gaugeLifeScore
         counterContributionLifeScore = (TextView) view.findViewById(R.id.counter_life_score);
         gaugeContributionLifeScore = (ScArcGauge) view.findViewById(R.id.gauge_life_score);
-        lifeScoreContributionInt = ((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
+        lifeScoreContributionInt = (int)Math.round((((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
                 (Integer.parseInt(Dashboard.userPassionSprint.sprintOverallScore)) +
-                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3;
+                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3.0));
 
         // Set the features stroke cap style to rounded
         gaugeContributionLifeScore.findFeature(ScArcGauge.BASE_IDENTIFIER)
@@ -3790,6 +3790,11 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             databaseUpdateCategories.child(Dashboard.userActivityContributionid1.categoryId).child("ContributionSprints").child(Dashboard.sprintContributionid).child("goal3").setValue(q3_contribution.getText().toString());
             databaseUpdateCategories.child(Dashboard.userActivityContributionid1.categoryId).child("ContributionSprints").child(Dashboard.sprintContributionid).child("goal4").setValue(q4_contribution.getText().toString());
 
+
+            q1_contribution.setText("");
+            q2_contribution.setText("");
+            q3_contribution.setText("");
+            q4_contribution.setText("");
         }
     }
 
@@ -3800,7 +3805,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             activity1ScoreInt = 100;
         }
         else {
-            activity1ScoreInt = (Integer.parseInt(textActual1.getText().toString()) * 100) / (Integer.parseInt(textTarget1.getText().toString()));
+            activity1ScoreInt = (int)Math.round(((Integer.parseInt(textActual1.getText().toString()) * 100.0) / (Integer.parseInt(textTarget1.getText().toString()))));
         }
         activity1ScoreStr = activity1ScoreInt + "";
         gaugeContributionActivity1.setHighValue(activity1ScoreInt);
@@ -3808,16 +3813,16 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
         databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("activityScore").setValue(activity1ScoreStr);
 
-        contributionScoreInt = (activity1ScoreInt + activity2ScoreInt)/ 2;
+        contributionScoreInt = (int)Math.round(((activity1ScoreInt + activity2ScoreInt)/ 2.0));
         contributionScoreStr = contributionScoreInt + "";
         gaugeContributionScore.setHighValue(contributionScoreInt);
         Dashboard.userContributionSprint.sprintOverallScore = contributionScoreStr;
         databaseUpdateCategories = FirebaseDatabase.getInstance().getReference("Categories");
         databaseUpdateCategories.child(Dashboard.userContributionSprint.categoryid).child("ContributionSprints").child(Dashboard.sprintContributionid).child("sprintOverallScore").setValue(contributionScoreStr);
 
-        lifeScoreContributionInt = ((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
+        lifeScoreContributionInt = (int)Math.round((((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
                 (Integer.parseInt(Dashboard.userPassionSprint.sprintOverallScore)) +
-                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3;
+                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3.0));
         gaugeContributionLifeScore.setHighValue(lifeScoreContributionInt);
 
         FragmentJoy.lifeScoreJoyInt = lifeScoreContributionInt;
@@ -3833,7 +3838,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             activity2ScoreInt = 100;
         }
         else {
-            activity2ScoreInt = (Integer.parseInt(textActual2.getText().toString()) * 100) / (Integer.parseInt(textTarget2.getText().toString()));
+            activity2ScoreInt = (int)Math.round(((Integer.parseInt(textActual2.getText().toString()) * 100.0) / (Integer.parseInt(textTarget2.getText().toString()))));
         }
         activity2ScoreStr = activity2ScoreInt + "";
         gaugeContributionActivity2.setHighValue(activity2ScoreInt);
@@ -3841,16 +3846,16 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
         databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("activityScore").setValue(activity2ScoreStr);
 
-        contributionScoreInt = (activity1ScoreInt + activity2ScoreInt)/ 2;
+        contributionScoreInt = (int)Math.round(((activity1ScoreInt + activity2ScoreInt)/ 2.0));
         contributionScoreStr = contributionScoreInt + "";
         gaugeContributionScore.setHighValue(contributionScoreInt);
         Dashboard.userContributionSprint.sprintOverallScore = contributionScoreStr;
         databaseUpdateCategories = FirebaseDatabase.getInstance().getReference("Categories");
         databaseUpdateCategories.child(Dashboard.userContributionSprint.categoryid).child("ContributionSprints").child(Dashboard.sprintContributionid).child("sprintOverallScore").setValue(contributionScoreStr);
 
-        lifeScoreContributionInt = ((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
+        lifeScoreContributionInt = (int)Math.round((((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
                 (Integer.parseInt(Dashboard.userPassionSprint.sprintOverallScore)) +
-                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3;
+                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3.0));
         gaugeContributionLifeScore.setHighValue(lifeScoreContributionInt);
 
         FragmentJoy.lifeScoreJoyInt = lifeScoreContributionInt;

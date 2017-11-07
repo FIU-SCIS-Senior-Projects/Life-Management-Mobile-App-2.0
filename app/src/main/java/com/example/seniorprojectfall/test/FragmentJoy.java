@@ -20,7 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
+import java.lang.Math;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sccomponents.gauges.ScArcGauge;
@@ -217,9 +217,9 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
         // Find the components for gaugeLifeScore
         counterJoyLifeScore = (TextView) view.findViewById(R.id.counter_life_score);
         gaugeJoyLifeScore = (ScArcGauge) view.findViewById(R.id.gauge_life_score);
-        lifeScoreJoyInt = ((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
+        lifeScoreJoyInt = (int)Math.round((((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
                 (Integer.parseInt(Dashboard.userPassionSprint.sprintOverallScore)) +
-                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3;
+                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3.0));
 
         // Set the features stroke cap style to rounded
         gaugeJoyLifeScore.findFeature(ScArcGauge.BASE_IDENTIFIER)
@@ -3773,6 +3773,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             databaseUpdateCategories.child(Dashboard.userActivityJoyid1.categoryId).child("JoySprints").child(Dashboard.sprintJoyid).child("goal3").setValue(q3.getText().toString());
             databaseUpdateCategories.child(Dashboard.userActivityJoyid1.categoryId).child("JoySprints").child(Dashboard.sprintJoyid).child("goal4").setValue(q4.getText().toString());
 
+
+            q1.setText("");
+            q2.setText("");
+            q3.setText("");
+            q4.setText("");
         }
 
     }
@@ -3784,7 +3789,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             activity1ScoreInt = 100;
         }
         else {
-            activity1ScoreInt = (Integer.parseInt(textActual1.getText().toString()) * 100) / (Integer.parseInt(textTarget1.getText().toString()));
+            activity1ScoreInt = (int)Math.round((Integer.parseInt(textActual1.getText().toString()) * 100.0) / (Integer.parseInt(textTarget1.getText().toString())));
         }
         activity1ScoreStr = activity1ScoreInt + "";
         gaugeJoyActivity1.setHighValue(activity1ScoreInt);
@@ -3792,16 +3797,16 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
         databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
         databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("activityScore").setValue(activity1ScoreStr);
 
-        joyScoreInt = (activity1ScoreInt + activity2ScoreInt)/ 2;
+        joyScoreInt = (int)Math.round(((activity1ScoreInt + activity2ScoreInt)/ 2.0));
         joyScoreStr = joyScoreInt + "";
         gaugeJoyScore.setHighValue(joyScoreInt);
         Dashboard.userJoySprint.sprintOverallScore = joyScoreStr;
         databaseUpdateCategories = FirebaseDatabase.getInstance().getReference("Categories");
         databaseUpdateCategories.child(Dashboard.userJoySprint.categoryid).child("JoySprints").child(Dashboard.sprintJoyid).child("sprintOverallScore").setValue(joyScoreStr);
 
-        lifeScoreJoyInt = ((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
+        lifeScoreJoyInt = (int)Math.round((((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
                 (Integer.parseInt(Dashboard.userPassionSprint.sprintOverallScore)) +
-                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3;
+                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3.0));
         gaugeJoyLifeScore.setHighValue(lifeScoreJoyInt);
 
         FragmentPassion.lifeScorePassionInt = lifeScoreJoyInt;
@@ -3818,7 +3823,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             activity2ScoreInt = 100;
         }
         else {
-            activity2ScoreInt = (Integer.parseInt(textActual2.getText().toString()) * 100) / (Integer.parseInt(textTarget2.getText().toString()));
+            activity2ScoreInt = (int)Math.round(((Integer.parseInt(textActual2.getText().toString()) * 100.0) / (Integer.parseInt(textTarget2.getText().toString()))));
         }
         activity2ScoreStr = activity2ScoreInt + "";
         gaugeJoyActivity2.setHighValue(activity2ScoreInt);
@@ -3826,16 +3831,16 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
         databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
         databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("activityScore").setValue(activity2ScoreStr);
 
-        joyScoreInt = (activity1ScoreInt + activity2ScoreInt)/ 2;
+        joyScoreInt = (int)Math.round(((activity1ScoreInt + activity2ScoreInt)/ 2.0));
         joyScoreStr = joyScoreInt + "";
         gaugeJoyScore.setHighValue(joyScoreInt);
         Dashboard.userJoySprint.sprintOverallScore = joyScoreStr;
         databaseUpdateCategories = FirebaseDatabase.getInstance().getReference("Categories");
         databaseUpdateCategories.child(Dashboard.userJoySprint.categoryid).child("JoySprints").child(Dashboard.sprintJoyid).child("sprintOverallScore").setValue(joyScoreStr);
 
-        lifeScoreJoyInt = ((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
+        lifeScoreJoyInt = (int)Math.round((((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
                 (Integer.parseInt(Dashboard.userPassionSprint.sprintOverallScore)) +
-                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3;
+                (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3.0));
         gaugeJoyLifeScore.setHighValue(lifeScoreJoyInt);
 
         FragmentPassion.lifeScorePassionInt = lifeScoreJoyInt;
