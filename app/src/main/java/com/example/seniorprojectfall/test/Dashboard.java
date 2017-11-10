@@ -18,6 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import java.util.*;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -346,7 +348,7 @@ public class Dashboard extends AppCompatActivity
 
         View headerlayout = navigationView.getHeaderView(0);
 
-        //testing lazaro
+
         TextView message  = (TextView) headerlayout.findViewById(R.id.welcomeTextview);
         message.setText("Hello " + currentUser.firstName.toString());
 
@@ -442,6 +444,8 @@ public class Dashboard extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_signout) {
+            Intent i = new Intent(Dashboard.this,LoginActivity.class);
+            startActivity(i);
             return true;
         }
 
@@ -456,6 +460,70 @@ public class Dashboard extends AppCompatActivity
 
         if (id == R.id.nav_new_cycle) {
             // Handle new cycle action
+            String endDate = userJoySprint.endingDate;
+            int monthEnd = Integer.parseInt(endDate.substring(0,2)) - 1;
+            int dayEnd = Integer.parseInt(endDate.substring(2,4));
+            //System.out.println("NAT TEST END DATE" + dayEnd);
+            int yearEnd = Integer.parseInt(endDate.substring(4));
+            Calendar edate = Calendar.getInstance();
+            edate.set(Calendar.DAY_OF_MONTH,dayEnd);
+            edate.set(Calendar.MONTH,monthEnd);
+            edate.set(Calendar.YEAR,yearEnd);
+
+            Calendar calToday = Calendar.getInstance();
+            //int yearToday = calToday.get(Calendar.YEAR);
+            //int monthToday = calToday.get(Calendar.MONTH) + 1;
+            //int dayToday = calToday.get(Calendar.DAY_OF_MONTH);
+            //calToday.set(Calendar.DAY_OF_MONTH,dayToday);
+            //calToday.set(Calendar.MONTH,monthEnd);
+            //calToday.set(Calendar.YEAR,yearEnd);
+
+
+            if(calToday.compareTo(edate) < 0){
+
+                AlertDialog.Builder a_builder = new AlertDialog.Builder(Dashboard.this);
+                a_builder.setMessage("You have not finished the current sprint. Do you want to start a new sprint?").setCancelable(false)
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent i = new Intent(Dashboard.this, MainJoyActivity.class);
+                                //Save user id, currentusername, password so that we can use it in the following Activity:
+                                i.putExtra("userid", currentUser.id);
+                                i.putExtra("username", currentUser.username);
+                                i.putExtra("password", currentUser.password);
+
+                                startActivity(i);
+                            }
+                        })
+
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = a_builder.create();
+                alert.show();
+                alert.getButton(alert.BUTTON_POSITIVE).setTextColor(Color.parseColor("#11b213"));
+                alert.getButton(alert.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#11b213"));
+
+
+            }
+            else {
+                Intent i = new Intent(Dashboard.this, MainJoyActivity.class);
+                //Save user id, currentusername, password so that we can use it in the following Activity:
+                i.putExtra("userid", currentUser.id);
+                i.putExtra("username", currentUser.username);
+                i.putExtra("password", currentUser.password);
+
+                startActivity(i);
+            }
+
+
+
+
         } else if (id == R.id.nav_current_cycle) {
 
             Intent i = new Intent(Dashboard.this,currentCycleActivity.class);

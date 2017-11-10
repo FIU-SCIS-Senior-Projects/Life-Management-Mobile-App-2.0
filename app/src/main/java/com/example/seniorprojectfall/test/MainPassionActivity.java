@@ -39,7 +39,14 @@ public class MainPassionActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this, "It works",Toast.LENGTH_LONG).show();
-                Intent i = new Intent(MainPassionActivity.this, MainActivity.class);
+                Intent in = getIntent();
+                String userid = in.getStringExtra("userid");
+                String username = in.getStringExtra("username");
+                String password = in.getStringExtra("password");
+                Intent i = new Intent(MainPassionActivity.this, MainGivingBackActivity.class);
+                i.putExtra("userid",userid);
+                i.putExtra("username",username);
+                i.putExtra("password",password);
                 startActivity(i);
             }
         });
@@ -68,7 +75,5 @@ public class MainPassionActivity extends AppCompatActivity {
         activitiesPassion.add(new Passion(R.drawable.passion_nature, "Nature"));
         activitiesPassion.add(new Passion(R.drawable.passion_realestate, "Real Estate"));
         activitiesPassion.add(new Passion(R.drawable.passion_learning, "Learning"));
-
-
     }
 }

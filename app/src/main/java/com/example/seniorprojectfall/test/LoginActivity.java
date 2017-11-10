@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(LoginActivity.this,CreateUserActivity.class);
+                finish();
                 startActivity(i);
             }
         });
@@ -152,6 +153,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 for (DataSnapshot categorySnapshot : dataSnapshot.getChildren()) { //id
 
+                    if(categorySnapshot.getValue() == null){
+                        break;
+                    }
+
                     String[] separator = categorySnapshot.getValue().toString().split(" ");
 
                     for (int i = separator.length - 1; i >= 0; i--) {
@@ -166,6 +171,10 @@ public class LoginActivity extends AppCompatActivity {
 
                             DataSnapshot activitiesSnapshottemp = categorySnapshot.child("JoySprints");
 
+                            if(activitiesSnapshottemp.getValue() == null){
+                                break;
+                            }
+
                             String[] f = activitiesSnapshottemp.getValue().toString().split("=");
 
                             String temporary = f[0];
@@ -173,9 +182,17 @@ public class LoginActivity extends AppCompatActivity {
 
                             for (DataSnapshot activitySnapshot2 : activitiesSnapshottemp.getChildren()) { //ids
 
+                                if(activitySnapshot2.getValue() == null){
+                                    break;
+                                }
+
                                 String[] tempArray = new String[(int) activitySnapshot2.getChildrenCount()];
                                 int k = 0;
                                 for (DataSnapshot activitySnapshot3 : activitySnapshot2.getChildren()) { //branch
+
+                                    if(activitySnapshot3.getValue() == null){
+                                        break;
+                                    }
 
                                     tempArray[k] = activitySnapshot3.getValue().toString();
                                     k++;
@@ -207,6 +224,11 @@ public class LoginActivity extends AppCompatActivity {
 
                             currentPassionCategoryId = temp.substring(g, temp.length() - 1);
                             DataSnapshot activitiesSnapshottemp = categorySnapshot.child("PassionSprints");
+
+                            if(activitiesSnapshottemp.getValue() == null){
+                                break;
+                            }
+
                             String[] f = activitiesSnapshottemp.getValue().toString().split("=");
 
                             String temporary = f[0];
@@ -215,9 +237,17 @@ public class LoginActivity extends AppCompatActivity {
 
                             for (DataSnapshot activitySnapshot2 : activitiesSnapshottemp.getChildren()) { //ids
 
+                                if(activitySnapshot2.getValue() == null){
+                                    break;
+                                }
+
                                 String[] tempArray = new String[(int) activitySnapshot2.getChildrenCount()];
                                 int k = 0;
                                 for (DataSnapshot activitySnapshot3 : activitySnapshot2.getChildren()) { //branch
+
+                                    if(activitySnapshot3.getValue() == null){
+                                        break;
+                                    }
 
                                     tempArray[k] = activitySnapshot3.getValue().toString();
                                     k++;
@@ -249,6 +279,11 @@ public class LoginActivity extends AppCompatActivity {
                             currentContributionCategoryId = temp.substring(g, temp.length() - 1);
 
                             DataSnapshot activitiesSnapshottemp = categorySnapshot.child("ContributionSprints");
+
+                            if(activitiesSnapshottemp.getValue()== null){
+                                break;
+                            }
+
                             String[] f = activitiesSnapshottemp.getValue().toString().split("=");
                             String temporary = f[0];
                             String tempId = temporary.substring(1);  //joysprint unique id
@@ -256,9 +291,17 @@ public class LoginActivity extends AppCompatActivity {
 
                             for (DataSnapshot activitySnapshot2 : activitiesSnapshottemp.getChildren()) { //ids
 
+                                if(activitySnapshot2.getValue() == null){
+                                    break;
+                                }
+
                                 String[] tempArray = new String[(int) activitySnapshot2.getChildrenCount()];
                                 int k = 0;
                                 for (DataSnapshot activitySnapshot3 : activitySnapshot2.getChildren()) { //branch
+
+                                    if(activitySnapshot3.getValue() == null){
+                                        break;
+                                    }
 
                                     tempArray[k] = activitySnapshot3.getValue().toString();
                                     k++;

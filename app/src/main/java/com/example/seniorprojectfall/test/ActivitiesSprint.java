@@ -46,6 +46,17 @@ public class ActivitiesSprint implements Parcelable{
         this.activityid = activityid;
     }
 
+    public ActivitiesSprint(String activityScore, String actualPoints, String categoryId, String activityName, String sprintDailyPoints, String targetPoints, String userId) {
+
+        this.activityScore = activityScore;
+        this.actualPoints = actualPoints;
+        this.categoryId = categoryId;
+        this.activityName = activityName;
+        this.sprintDailyPoints = sprintDailyPoints;
+        this.targetPoints = targetPoints;
+        this.userId = userId;
+    }
+
     public ActivitiesSprint(Parcel in){
 
 

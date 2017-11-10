@@ -19,7 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -60,8 +59,6 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         lastName = (EditText) findViewById(R.id.editLastName);
         DOB = (EditText) findViewById(R.id.editDOB);
         buttonRegister = (Button) findViewById(R.id.buttonSignup);
-
-
         buttonRegister.setOnClickListener(this);
 
     }
@@ -160,10 +157,10 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                 }
             }
 
-                //make all first character uppercase for better look in database
-                String temp = firstN.substring(0, 1).toUpperCase();
-                firstN = temp + firstN.substring(1);
-                //Toast.makeText(this,"First Name UPPER " + firstN,Toast.LENGTH_SHORT).show();
+            //make all first character uppercase for better look in database
+            String temp = firstN.substring(0, 1).toUpperCase();
+            firstN = temp + firstN.substring(1);
+            //Toast.makeText(this,"First Name UPPER " + firstN,Toast.LENGTH_SHORT).show();
 
         }
 
@@ -193,10 +190,10 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                 }
             }
 
-                //make all first character uppercase for better look in database
-                String temp = lastN.substring(0, 1).toUpperCase();
-                lastN = temp + lastN.substring(1);
-                //Toast.makeText(this,"Last Name UPPER " + lastN,Toast.LENGTH_SHORT).show();
+            //make all first character uppercase for better look in database
+            String temp = lastN.substring(0, 1).toUpperCase();
+            lastN = temp + lastN.substring(1);
+            //Toast.makeText(this,"Last Name UPPER " + lastN,Toast.LENGTH_SHORT).show();
         }
 
         //Email
@@ -273,7 +270,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
             }
         }
 
-       //username
+        //username
         if((TextUtils.isEmpty(currentusername)) || (currentusername.length()<=1)){
             Toast.makeText(this,"Username MUST contain more characters",Toast.LENGTH_SHORT).show();
             return;
@@ -414,16 +411,17 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         User currentUser = new User(email,currentusername,firstN,lastN,Dob,password,false,false,id);
 
         //push()
-        databaseReference.push().setValue(currentUser);
+        //databaseReference.push().setValue(currentUser);
+        databaseReference.child(id).setValue(currentUser);
         progressDialog.dismiss();
         Toast.makeText(getApplication(),"Saved Successfully",Toast.LENGTH_LONG).show();
 
         Intent i = new Intent(CreateUserActivity.this,MainJoyActivity.class);
+        //Save user id, currentusername, password so that we can use it in the following Activity:
+        i.putExtra("userid",id);
+        i.putExtra("username",currentusername);
+        i.putExtra("password",password);
         startActivity(i);
 
     } //end of method addData
-
-
-
-
 }

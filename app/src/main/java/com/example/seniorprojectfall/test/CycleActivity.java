@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Button;
 
+import com.sccomponents.gauges.ScArcGauge;
+
 public class cycleActivity extends AppCompatActivity {
 
     static String element_static;
@@ -27,8 +29,6 @@ public class cycleActivity extends AppCompatActivity {
         Intent in = getIntent();
         element_static = in.getExtras().getString("theelement");
         String[] s = element_static.split(" ");
-
-        System.out.println("queahira element " + element_static);
 
        String s6detail = "";
         String s7detail = "";
@@ -46,18 +46,24 @@ public class cycleActivity extends AppCompatActivity {
             s7detail = s[2].substring(0,2) + "/" + s[2].substring(2,4) + "/" + s[2].substring(6);
         }
 
-
+        ScArcGauge first = (ScArcGauge) findViewById(R.id.gauge_previouscycle_joy);
+        TextView actScore = (TextView) findViewById(R.id.counter_previouscycle_joy);
         TextView g = (TextView) findViewById(R.id.textView3);
 
         g.setText("\n\n"
-                + " Activity Score: " + "\t " + s[0] + "\n"
-                + " Actual Points:  " + "\t " + s[1] + "\n"
                 + " Activity Name: " + "\t"+ s[3] + "\n"
+                + " Actual Points:  " + "\t " + s[1] + "\n"
                 + " Target Points:  " + "\t "+ s[5] + "\n"
                 + " Starting Date:  " + "\t "+ s7detail + "\n"
                 + " Ending Date:   " + "\t  "+ s6detail);
 
-                Button btn = (Button) findViewById(R.id.buttonleave);
+        int temp = Integer.parseInt(s[0]);
+
+        actScore.setText(temp+"");
+        first.setHighValue(temp);
+
+
+        Button btn = (Button) findViewById(R.id.buttonleave);
         btn.setText("Return");
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

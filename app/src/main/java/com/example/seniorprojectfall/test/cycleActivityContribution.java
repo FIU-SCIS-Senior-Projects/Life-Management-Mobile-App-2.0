@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.sccomponents.gauges.ScArcGauge;
+
 public class cycleActivityContribution extends AppCompatActivity {
 
     static String element_static_contribution;
@@ -22,8 +24,6 @@ public class cycleActivityContribution extends AppCompatActivity {
 
                 element_static_contribution = in.getExtras().getString("theelementcontribution");
                 String[] s = element_static_contribution.split(" ");
-
-                System.out.println("queahira element contribution " + element_static_contribution);
 
                 String s6detail = "";
                 String s7detail = "";
@@ -43,14 +43,21 @@ public class cycleActivityContribution extends AppCompatActivity {
 
 
                 TextView g = (TextView) findViewById(R.id.textView3contribution);
+                ScArcGauge first = (ScArcGauge) findViewById(R.id.gauge_previouscycle_contribution);
+                TextView actScore = (TextView) findViewById(R.id.counter_previouscycle_contribution);
 
                 g.setText("\n\n"
-                        + " Activity Score: " + "\t " + s[0] + "\n"
-                        + " Actual Points:  " + "\t " + s[1] + "\n"
                         + " Activity Name: " + "\t" + s[3] + "\n"
+                        + " Actual Points:  " + "\t " + s[1] + "\n"
                         + " Target Points:  " + "\t " + s[5] + "\n"
                         + " Starting Date:  " + "\t " + s7detail + "\n"
                         + " Ending Date:   " + "\t  " + s6detail);
+
+                int t = Integer.parseInt(s[0]);
+
+                actScore.setText(t+"");
+                first.setHighValue(t);
+
 
                 Button btn = (Button) findViewById(R.id.buttonleavecontribution);
                 btn.setText("Return");

@@ -19,10 +19,10 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
 
         static EditText joyAct1goal;
         static EditText joyAct2goal;
-        private EditText passionAct1goal;
-        private EditText passionAct2goal;
-        private EditText contribAct1goal;
-        private EditText contribAct2goal;
+        static EditText passionAct1goal;
+        static EditText passionAct2goal;
+        static EditText contribAct1goal;
+        static EditText contribAct2goal;
         static Button submitSettings;
         private TextView joyAct1;
         private TextView joyAct2;
@@ -81,15 +81,155 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                 @Override
                 public void onClick(View v) {
                     SprintSettingActivity.saveSettings();
-                    Intent i = new Intent(getActivity(),LoginActivity.class);
+
+                    Intent i = new Intent(getActivity(),Dashboard.class);
+                    i.putExtra("userid",SprintSettingActivity.userId);
+                    i.putExtra("userNameY",SprintSettingActivity.username);
+                    i.putExtra("passwordY",SprintSettingActivity.password);
+
+                    //Transfer info for JOY
+                    i.putExtra("joySprintId",SprintSettingActivity.sprintJoyid);
+
+                    //Transfer info for act1Joy (newly created)
+                    i.putExtra("joy_activityid1_activityscore",SprintSettingActivity.act1Joy.getActivityScore());
+                    i.putExtra("joy_activityid1_actualpoints",SprintSettingActivity.act1Joy.getActualPoints());
+                    i.putExtra("joy_activityid1_categoryid",SprintSettingActivity.act1Joy.getCategoryId());
+                    i.putExtra("joy_activityid1_activityname",SprintSettingActivity.act1Joy.getActivityName());
+                    i.putExtra("joy_activityid1_sprintdailypoints",SprintSettingActivity.act1Joy.getSprintDailyPoints());
+                    i.putExtra("joy_activityid1_targetpoints",SprintSettingActivity.act1Joy.getTargetPoints());
+                    i.putExtra("joy_activityid1_userid",SprintSettingActivity.act1Joy.getUserId());
+                    i.putExtra("joy_activityid1_activityid",SprintSettingActivity.activities1joyId);
+
+                    //Transfer info for act2Joy
+                    i.putExtra("joy_activityid2_activityscore",SprintSettingActivity.act2Joy.getActivityScore());
+                    i.putExtra("joy_activityid2_actualpoints",SprintSettingActivity.act2Joy.getActualPoints());
+                    i.putExtra("joy_activityid2_categoryid",SprintSettingActivity.act2Joy.getCategoryId());
+                    i.putExtra("joy_activityid2_activityname",SprintSettingActivity.act2Joy.getActivityName());
+                    i.putExtra("joy_activityid2_sprintdailypoints",SprintSettingActivity.act2Joy.getSprintDailyPoints());
+                    i.putExtra("joy_activityid2_targetpoints",SprintSettingActivity.act2Joy.getTargetPoints());
+                    i.putExtra("joy_activityid2_userid",SprintSettingActivity.act2Joy.getUserId());
+                    i.putExtra("joy_activityid2_activityid",SprintSettingActivity.activities2joyId);
+
+                    //Transfer info for joyCategory (newly created category/sprint in JoySprints of Categories)
+                    i.putExtra("joy_userJoySprint_categoryid",SprintSettingActivity.arJoySprint.get("categoryId"));
+                    i.putExtra("joy_userJoySprint_endingdate",SprintSettingActivity.arJoySprint.get("endingDate"));
+                    i.putExtra("joy_userJoySprint_goal1",SprintSettingActivity.arJoySprint.get("goal1"));
+                    i.putExtra("joy_userJoySprint_goal2",SprintSettingActivity.arJoySprint.get("goal2"));
+                    i.putExtra("joy_userJoySprint_goal3",SprintSettingActivity.arJoySprint.get("goal3"));
+                    i.putExtra("joy_userJoySprint_goal4",SprintSettingActivity.arJoySprint.get("goal4"));
+                    i.putExtra("joy_userJoySprint_numberofweeks",SprintSettingActivity.arJoySprint.get("numberOfWeeks"));
+                    i.putExtra("joy_userJoySprint_sprintactivityid1",SprintSettingActivity.arJoySprint.get("sprintActivityId1"));
+                    i.putExtra("joy_UserJoySprint_sprintactivityid2",SprintSettingActivity.arJoySprint.get("sprintActivityId2"));
+                    i.putExtra("joy_UserJoySprint_sprintoverallscore",SprintSettingActivity.arJoySprint.get("sprintOverallScore"));
+                    i.putExtra("joy_UserJoySprint_startingdate",SprintSettingActivity.arJoySprint.get("startingDate"));
+                    i.putExtra("joy_UserJoySprint_userid",SprintSettingActivity.arJoySprint.get("userId"));
+
+
+                    //Transfer info for PASSION
+                    i.putExtra("passionSprintId",SprintSettingActivity.sprintPassionid);
+
+                    //Transfer info for passionCategory (newly created category/sprint in PassionSprints of Categories)
+                    i.putExtra("passion_userPassionSprint_categoryid",SprintSettingActivity.arPassionSprint.get("categoryId"));
+                    i.putExtra("passion_userPassionSprint_endingdate",SprintSettingActivity.arPassionSprint.get("endingDate"));
+                    i.putExtra("passion_userPassionSprint_goal1",SprintSettingActivity.arPassionSprint.get("goal1"));
+                    i.putExtra("passion_userPassionSprint_goal2",SprintSettingActivity.arPassionSprint.get("goal2"));
+                    i.putExtra("passion_userPassionSprint_goal3",SprintSettingActivity.arPassionSprint.get("goal3"));
+                    i.putExtra("passion_userPassionSprint_goal4",SprintSettingActivity.arPassionSprint.get("goal4"));
+                    i.putExtra("passion_userPassionSprint_numberofweeks",SprintSettingActivity.arPassionSprint.get("numberOfWeeks"));
+                    i.putExtra("passion_userPassionSprint_sprintactivityid1",SprintSettingActivity.arPassionSprint.get("sprintActivityId1"));
+                    i.putExtra("passion_userPassionSprint_sprintactivityid2",SprintSettingActivity.arPassionSprint.get("sprintActivityId2"));
+                    i.putExtra("passion_userPassionSprint_sprintoverallscore",SprintSettingActivity.arPassionSprint.get("sprintOverallScore"));
+                    i.putExtra("passion_userPassionSprint_startingdate",SprintSettingActivity.arPassionSprint.get("startingDate"));
+                    i.putExtra("passion_userPassionSprint_userid",SprintSettingActivity.arPassionSprint.get("userId"));
+
+                    //Transfer info for act1Passion (newly created)
+                    i.putExtra("passion_activityid1_activityscore",SprintSettingActivity.act1Passion.getActivityScore());
+                    i.putExtra("passion_activityid1_actualpoints",SprintSettingActivity.act1Passion.getActualPoints());
+                    i.putExtra("passion_activityid1_categoryid",SprintSettingActivity.act1Passion.getCategoryId());
+                    i.putExtra("passion_activityid1_activityname",SprintSettingActivity.act1Passion.getActivityName());
+                    i.putExtra("passion_activityid1_sprintdailypoints",SprintSettingActivity.act1Passion.getSprintDailyPoints());
+                    i.putExtra("passion_activityid1_targetpoints",SprintSettingActivity.act1Passion.getTargetPoints());
+                    i.putExtra("passion_activityid1_userid",SprintSettingActivity.act1Passion.getUserId());
+                    i.putExtra("passion_activityid1_activityid",SprintSettingActivity.activities1passionId);
+
+                    //Transfer info for act2Passion (newly created)
+                    i.putExtra("passion_activityid2_activityscore",SprintSettingActivity.act2Passion.getActivityScore());
+                    i.putExtra("passion_activityid2_actualpoints",SprintSettingActivity.act2Passion.getActualPoints());
+                    i.putExtra("passion_activityid2_categoryid",SprintSettingActivity.act2Passion.getCategoryId());
+                    i.putExtra("passion_activityid2_activityname",SprintSettingActivity.act2Passion.getActivityName());
+                    i.putExtra("passion_activityid2_sprintdailypoints",SprintSettingActivity.act2Passion.getSprintDailyPoints());
+                    i.putExtra("passion_activityid2_targetpoints",SprintSettingActivity.act2Passion.getTargetPoints());
+                    i.putExtra("passion_activityid2_userid",SprintSettingActivity.act2Passion.getUserId());
+                    i.putExtra("passion_activityid2_activityid",SprintSettingActivity.activities2passionId);
+
+
+                    //Transfer info for CONTRIBUTION
+                    i.putExtra("contributionSprintId",SprintSettingActivity.sprintContribid);
+
+                    //Transfer info for contributionCategory (newly created category/sprint in ContributionSprints of Categories)
+                    i.putExtra("contribution_userContributionSprint_categoryid",SprintSettingActivity.arContrSprint.get("categoryId"));
+                    i.putExtra("contribution_userContributionSprint_endingdate",SprintSettingActivity.arContrSprint.get("endingDate"));
+                    i.putExtra("contribution_userContributionSprint_goal1",SprintSettingActivity.arContrSprint.get("goal1"));
+                    i.putExtra("contribution_userContributionSprint_goal2",SprintSettingActivity.arContrSprint.get("goal2"));
+                    i.putExtra("contribution_userContributionSprint_goal3",SprintSettingActivity.arContrSprint.get("goal3"));
+                    i.putExtra("contribution_userContributionSprint_goal4",SprintSettingActivity.arContrSprint.get("goal4"));
+                    i.putExtra("contribution_userContributionSprint_numberofweeks",SprintSettingActivity.arContrSprint.get("numberOfWeeks"));
+                    i.putExtra("contribution_userContributionSprint_sprintactivityid1",SprintSettingActivity.arContrSprint.get("sprintActivityId1"));
+                    i.putExtra("contribution_userContributionSprint_sprintactivityid2",SprintSettingActivity.arContrSprint.get("sprintActivityId2"));
+                    i.putExtra("contribution_userContributionSprint_sprintoverallscore",SprintSettingActivity.arContrSprint.get("sprintOverallScore"));
+                    i.putExtra("contribution_userContributionSprint_startingdate",SprintSettingActivity.arContrSprint.get("startingDate"));
+                    i.putExtra("contribution_userContributionSprint_userid",SprintSettingActivity.arContrSprint.get("userId"));
+
+                    //Transfer info for act1Contrib (newly created)
+                    i.putExtra("contribution_activityid1_activityscore",SprintSettingActivity.act1Contrib.getActivityScore());
+                    i.putExtra("contribution_activityid1_actualpoints",SprintSettingActivity.act1Contrib.getActualPoints());
+                    i.putExtra("contribution_activityid1_categoryid",SprintSettingActivity.act1Contrib.getCategoryId());
+                    i.putExtra("contribution_activityid1_activityname",SprintSettingActivity.act1Contrib.getActivityName());
+                    i.putExtra("contribution_activityid1_sprintdailypoints",SprintSettingActivity.act1Contrib.getSprintDailyPoints());
+                    i.putExtra("contribution_activityid1_targetpoints",SprintSettingActivity.act1Contrib.getTargetPoints());
+                    i.putExtra("contribution_activityid1_userid",SprintSettingActivity.act1Contrib.getUserId());
+                    i.putExtra("contribution_activityid1_activityid",SprintSettingActivity.activities1contribId);
+
+                    //Transfer info for act2Contrib (newly created)
+                    i.putExtra("contribution_activityid2_activityscore",SprintSettingActivity.act2Contrib.getActivityScore());
+                    i.putExtra("contribution_activityid2_actualpoints",SprintSettingActivity.act2Contrib.getActualPoints());
+                    i.putExtra("contribution_activityid2_categoryid",SprintSettingActivity.act2Contrib.getCategoryId());
+                    i.putExtra("contribution_activityid2_activityname",SprintSettingActivity.act2Contrib.getActivityName());
+                    i.putExtra("contribution_activityid2_sprintdailypoints",SprintSettingActivity.act2Contrib.getSprintDailyPoints());
+                    i.putExtra("contribution_activityid2_targetpoints",SprintSettingActivity.act2Contrib.getTargetPoints());
+                    i.putExtra("contribution_activityid2_userid",SprintSettingActivity.act2Contrib.getUserId());
+                    i.putExtra("contribution_activityid2_activityid",SprintSettingActivity.activities2contribId);
+
+
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList("mylist", SprintSettingActivity.listUsers);
+
+                    bundle.putParcelableArrayList("allActivities", SprintSettingActivity.allActivities);
+                    bundle.putParcelableArrayList("userActivitiesAllList",SprintSettingActivity.userActivitiesAll);
+
+                    //JOY
+                    bundle.putParcelableArrayList("categoriesJoyCategories",SprintSettingActivity.currentJoyCategories);
+                    bundle.putParcelableArrayList("userJoysprintHelperList",SprintSettingActivity.userJoysprintsHelper);
+                    bundle.putParcelableArrayList("activitiesJOYPrevious",SprintSettingActivity.activitiesjoyPrevious);
+
+                    //PASSION
+                    bundle.putParcelableArrayList("categoriesPassionCategories",SprintSettingActivity.currentPassionCategories);
+                    bundle.putParcelableArrayList("userPassionsprintHelperList",SprintSettingActivity.userPassionSprintHelper);
+                    bundle.putParcelableArrayList("activitiesPassionPrevious",SprintSettingActivity.activitiesPassionPrevious);
+
+
+                    //GIVING BACK
+                    bundle.putParcelableArrayList("categoriesContributionCategories",SprintSettingActivity.currentContributionCategories);
+                    bundle.putParcelableArrayList("userContributionsprintHelperList",SprintSettingActivity.userContributionSprintHelper);
+                    bundle.putParcelableArrayList("activitiesContributionPrevious",SprintSettingActivity.activitiesContributionPrevious);
+
+                    //bundle.putParcelableArrayList("currentjoyactivitylist", SprintSettingActivity.currentJoyActivities); //total activities (needed for previous cycle)
+                    i.putExtras(bundle);
+
                     startActivity(i);
 
                 }
             });
-
-
-
-
 
             return rootView;
 
