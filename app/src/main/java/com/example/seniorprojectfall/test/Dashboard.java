@@ -46,6 +46,7 @@ public class Dashboard extends AppCompatActivity
     //JOY variables
     static ArrayList<ActivitiesSprint> allActivities;
     static ArrayList<ActivitiesSprint> userActivitiesAll;
+    static ArrayList<Coach> coachesList;
     static ArrayList<Category> currentJoyCategories;
     static ArrayList<Category> userJoysprintsHelper;
     static ArrayList<ActivitiesSprint> userJoyactivitiesPrevious;
@@ -92,6 +93,8 @@ public class Dashboard extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        coachesList = new ArrayList<>();
 
         //JOY
         allActivities = new ArrayList<>();
@@ -291,6 +294,7 @@ public class Dashboard extends AppCompatActivity
 
         allActivities = bundle.getParcelableArrayList("allActivities");
         userActivitiesAll = bundle.getParcelableArrayList("userActivitiesAllList");
+        coachesList = bundle.getParcelableArrayList("coachesList");
 
         //JOY
         currentJoyCategories = bundle.getParcelableArrayList("categoriesJoyCategories");
@@ -337,6 +341,7 @@ public class Dashboard extends AppCompatActivity
                 userContributionSprint.startingDate.substring(2,4) + "/" + userContributionSprint.startingDate.substring(4);
 
 
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -354,7 +359,6 @@ public class Dashboard extends AppCompatActivity
 
         profileName = in.getExtras().getString("profileImageName");
         final ImageView profilePicbtn = (ImageView)headerlayout.findViewById(R.id.imageViewProfile);
-
 
         try {
             final File tmpFile = File.createTempFile("img", "png");
@@ -537,6 +541,8 @@ public class Dashboard extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_view_coaches) {
+            Intent i = new Intent(Dashboard.this,viewCoachesActivity.class);
+            this.startActivity(i);
 
         } else if (id == R.id.nav_share_progress) {
 

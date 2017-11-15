@@ -11,6 +11,7 @@
     <RelativeLayout
         android:layout_width="413dp"
         android:layout_height="0dp"
+        android:layout_weight="0.7"
         android:background="@drawable/upimagesecondscreen"
         android:layout_marginStart="1dp"
         tools:layout_constraintTop_creator="1"
@@ -28,6 +29,7 @@
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="0dp"
+        android:layout_weight="0.45"
         android:layout_height="126dp"
         android:layout_marginEnd="1dp"
         android:layout_marginLeft="1dp"
@@ -86,6 +88,7 @@
 
     <RelativeLayout
         android:layout_width="405dp"
+        android:layout_weight="0.45"
         android:layout_height="107dp"
         android:layout_marginBottom="141dp"
         android:layout_marginEnd="8dp"
@@ -142,6 +145,8 @@
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="240dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="false"
         android:background="@drawable/roadscreen2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"

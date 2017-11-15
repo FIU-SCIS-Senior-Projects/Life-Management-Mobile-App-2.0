@@ -44,7 +44,8 @@
         <activity android:name=".cycleActivity" />
         <activity android:name=".cycleActivityPassion" />
         <activity android:name=".cycleActivityContribution" />
-        <activity android:name=".currentCycleActivity"></activity>
+        <activity android:name=".currentCycleActivity" />
+        <activity android:name=".viewCoachesActivity"></activity>
     </application>
 
 </manifest>

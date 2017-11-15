@@ -35,6 +35,9 @@ public class LoginActivity extends AppCompatActivity {
     String sprintjoyid;
     String currentCategoryuserId; //temporary variable holding the current category user id
 
+    //COACHES
+    ArrayList<Coach> coachList;
+
     //PASSION variables
     ArrayList<Category> userPassionSprintHelper;
     ArrayList<Category> currentPassionCategories;
@@ -56,11 +59,15 @@ public class LoginActivity extends AppCompatActivity {
     DatabaseReference databaseUsers; //our database reference object
     DatabaseReference databaseActivities;
     DatabaseReference databaseProfileImages;
+    DatabaseReference databaseCoaches;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //COACH
+        coachList = new ArrayList<>();
 
         //JOY INITIALIZATIONs
         userJoysprintsHelper = new ArrayList<>();
@@ -83,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //getting the reference of artists node
         databaseUsers = FirebaseDatabase.getInstance().getReference("Users");
+        databaseCoaches = FirebaseDatabase.getInstance().getReference("Coaches");
         databaseActivities = FirebaseDatabase.getInstance().getReference("Activities");
         databaseCategories = FirebaseDatabase.getInstance().getReference("Categories");
         databaseProfileImages = FirebaseDatabase.getInstance().getReference("ProfileImgs");
@@ -131,6 +139,8 @@ public class LoginActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //getting artist
 
+                    System.out.println("coachh_test " + postSnapshot.getValue());
+
                     User users = postSnapshot.getValue(User.class);
                     //adding artist to the list
                     listUsers.add(users);
@@ -143,6 +153,71 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+
+        //coach
+
+        databaseCoaches.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                //iterating through all the nodes
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    //getting artist
+
+                    System.out.println("coachh_test " + postSnapshot.getValue());
+                    String str = postSnapshot.getValue().toString();
+
+
+                    int skills_pos = str.indexOf("skills=");
+                    int firstname_pos = str.indexOf("firstName=");
+                    int lastname_pos = str.indexOf("lastName=");
+                    int rating_pos = str.indexOf("rating=");
+                    int id_pos = str.indexOf("id=");
+                    int email_pos = str.indexOf("email=");
+
+
+                    System.out.println("skills pos " + str.substring((skills_pos+7),(firstname_pos-2)));
+                    System.out.println("firstName pos " + str.substring((firstname_pos+10),(lastname_pos-2)));
+                    System.out.println("lastName pos " + str.substring((lastname_pos+9),(rating_pos-2)));
+                    System.out.println("rating pos " + str.substring((rating_pos+7),(id_pos-2)));
+                    System.out.println("id pos " + str.substring((id_pos+3),(email_pos-2)));
+                    System.out.println("email pos " + str.substring((email_pos+6),(str.length()-1)));
+
+
+                    String temp1 = str.substring((skills_pos+7),(firstname_pos-2));
+                    String temp2 = str.substring((firstname_pos+10),(lastname_pos-2));
+                    String temp3 = str.substring((lastname_pos+9),(rating_pos-2));
+                    String temp4 = str.substring((rating_pos+7),(id_pos-2));
+                    String temp5 = str.substring((id_pos+3),(email_pos-2));
+                    String temp6 =  str.substring((email_pos+6),(str.length()-1));
+
+                    coachList.add(new Coach(temp1,temp2,temp3,temp4,temp5,temp6));
+
+                    /*
+                    Coach coach = postSnapshot.getValue(Coach.class);
+
+                    System.out.println("coachh_email " + coach.email);
+                    System.out.println("coachh_id" + coach.coachId);
+                    System.out.println("coachh_first " + coach.firstName);
+                    System.out.println("coachh_last " + coach.lastName);
+                    System.out.println("coachh_rating " + coach.rating);
+                    System.out.println("coachh_skills " + coach.skills);
+                    */
+
+                    //adding artist to the list
+                    //coachList.add(coach);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
 
         databaseCategories.addValueEventListener(new ValueEventListener() {
@@ -698,6 +773,7 @@ public class LoginActivity extends AppCompatActivity {
             bundle.putParcelableArrayList("mylist", listUsers);
             bundle.putParcelableArrayList("allActivities", allActivities);
             bundle.putParcelableArrayList("userActivitiesAllList",userActivitiesAll);
+            bundle.putParcelableArrayList("coachesList",coachList);
 
             //JOY
             bundle.putParcelableArrayList("categoriesJoyCategories",currentJoyCategories);
@@ -714,6 +790,7 @@ public class LoginActivity extends AppCompatActivity {
             bundle.putParcelableArrayList("categoriesContributionCategories",currentContributionCategories);
             bundle.putParcelableArrayList("userContributionsprintHelperList",userContributionSprintHelper);
             bundle.putParcelableArrayList("activitiesContributionPrevious",activitiesContributionPrevious);
+
 
             i.putExtras(bundle);
             i.putExtra("userNameY",name);
