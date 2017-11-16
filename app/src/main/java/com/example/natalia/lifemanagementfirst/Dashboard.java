@@ -527,7 +527,10 @@ public class Dashboard extends AppCompatActivity
         }
         else if (id == R.id.nav_chat) {
             Intent i = new Intent(Dashboard.this, ChatActivity.class);
-
+            //Save user id, currentusername so that we can use it in the following Activity:
+            i.putExtra("userid", currentUser.id);
+            i.putExtra("username", currentUser.username);
+            i.putExtra("firstname", currentUser.firstName);
             startActivity(i);
 
         }
