@@ -12,20 +12,23 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
         android:scaleType="fitXY"
         android:src="@drawable/screen3top" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.9"
         android:scaleType="fitXY"
         android:src="@drawable/screen3middle" />
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -33,13 +36,13 @@
             android:scaleType="fitXY"
             android:src="@drawable/screen3bottom" />
 
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionButton"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="bottom|end"
             android:layout_margin="1dp"
-            android:onClick="onArrowClick"
             app:backgroundTint="@android:color/transparent"
             app:elevation="0dp"
             app:fabSize="mini"
@@ -49,3 +52,4 @@
     </FrameLayout>
 
 </LinearLayout>
+

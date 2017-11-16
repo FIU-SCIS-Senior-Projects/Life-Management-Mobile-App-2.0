@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/previouscyclebackground1"
     android:orientation="vertical"
-    tools:context="com.example.seniorprojectfall.test.previous_cycle">
+    tools:context="com.example.natalia.lifemanagementfirst.previous_cycle">
 
     <FrameLayout
         android:id="@+id/content"
@@ -23,7 +23,7 @@
 
             android:foregroundGravity="center"
             android:text="         Select any of your activities below:"
-            android:textColor="@color/common_plus_signin_btn_text_light_pressed"
+            android:textColor="@color/common_google_signin_btn_text_light_pressed"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="8dp"

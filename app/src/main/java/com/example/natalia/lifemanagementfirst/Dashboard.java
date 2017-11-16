@@ -16,11 +16,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.*;
 import android.content.Intent;
+import android.widget.TextView;
 
 
 //This is dashboard activity
@@ -111,9 +113,12 @@ public class Dashboard extends AppCompatActivity
         int[] tabIcons = {R.drawable.joy,R.drawable.passion,R.drawable.giving_back};
         TabLayout tbl_pages= (TabLayout)findViewById(R.id.tbl_pages);
         tbl_pages.setupWithViewPager(vp_pages);
+
         tbl_pages.getTabAt(0).setIcon(tabIcons[0]);
         tbl_pages.getTabAt(1).setIcon(tabIcons[1]);
         tbl_pages.getTabAt(2).setIcon(tabIcons[2]);
+
+        //tbl_pages.getTabAt(0).getIcon().setBounds(10,10,10,10);
 
         tbl_pages.getTabAt(0).getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
         tbl_pages.getTabAt(1).getIcon().setColorFilter(Color.parseColor("#a8a8a8"), PorterDuff.Mode.SRC_IN);
@@ -504,6 +509,7 @@ public class Dashboard extends AppCompatActivity
             }
         } else if (id == R.id.nav_current_cycle) {
 
+
             Intent i = new Intent(Dashboard.this,currentCycleActivity.class);
             this.startActivity(i);
 
@@ -520,6 +526,9 @@ public class Dashboard extends AppCompatActivity
 
         }
         else if (id == R.id.nav_chat) {
+            Intent i = new Intent(Dashboard.this, ChatActivity.class);
+
+            startActivity(i);
 
         }
         else if (id == R.id.nav_update_calendar) {

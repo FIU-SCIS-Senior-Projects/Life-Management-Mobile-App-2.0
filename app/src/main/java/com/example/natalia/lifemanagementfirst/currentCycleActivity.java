@@ -1,6 +1,8 @@
 package com.example.natalia.lifemanagementfirst;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -26,17 +28,21 @@ public class currentCycleActivity extends AppCompatActivity {
                 case R.id.navigation_joy:
 
                     populatecurrentJoy();
+                    item.getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
                     return true;
                 case R.id.navigation_passion:
-
+                    item.getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
                     populatecurrentPassion();
                     return true;
                 case R.id.navigation_contribution:
+                    item.getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
                     populatecurrentContribution();
                     return true;
             }
             return false;
         }
+
+
 
     };
 

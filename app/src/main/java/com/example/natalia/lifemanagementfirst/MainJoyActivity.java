@@ -22,7 +22,7 @@ public class MainJoyActivity extends AppCompatActivity {
     private FeatureCoverFlow coverFlow;
     private CoverFlowAdapter adapter;
     private ArrayList<Joy> activitiesJoy;
-    ImageButton androidRightArrowButton;
+    static ImageButton androidRightArrowButton;
 
 
     @Override
@@ -57,6 +57,7 @@ public class MainJoyActivity extends AppCompatActivity {
             }
         });
 
+        androidRightArrowButton.setVisibility(View.GONE);
         //zoom animation
         Animation zoomAnimation = AnimationUtils.loadAnimation(this,R.anim.zoom);
         androidRightArrowButton.startAnimation(zoomAnimation);

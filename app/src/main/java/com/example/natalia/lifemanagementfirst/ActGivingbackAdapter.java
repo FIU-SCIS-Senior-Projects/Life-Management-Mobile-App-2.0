@@ -33,12 +33,13 @@ public class ActGivingbackAdapter extends BaseAdapter {
     //private ImageView image1;
     //private ImageView image2;
     //private Button dialogbt;
-
+    private List<View> clickedActivities;  // holds last 2 activities the user clicked on
 
 
     public ActGivingbackAdapter(AppCompatActivity context, List<ActGivingback> actGivingbackList) {
         this.actGivingbackList = actGivingbackList;
         this.activity = context;
+        clickedActivities = new ArrayList<>();
         //this.numOfActSelected = 0;
         //dialog = new Dialog(activity);
         //dialog.setContentView(R.layout.dialog_actgivingback_info);
@@ -138,6 +139,8 @@ public class ActGivingbackAdapter extends BaseAdapter {
             public void onClick(View v){
                 ++numOfActSelected;
 
+                //v.setBackgroundResource(R.drawable.image_border);
+
             //GivingBackActivity.nextButton.setVisibility(View.GONE); //???????HERE???
 
                 final Dialog dialog;
@@ -148,11 +151,18 @@ public class ActGivingbackAdapter extends BaseAdapter {
 
                 if (numOfActSelected == 1){
                     GivingBackActivity.nextButton.setVisibility(View.GONE);
+                    if (clickedActivities.size() == 2){
+                        clickedActivities.get(0).setBackgroundResource(R.color.colorTransparent);
+                        clickedActivities.get(1).setBackgroundResource(R.color.colorTransparent);
+                        clickedActivities.clear();
+                    }
+                    v.setBackgroundResource(R.drawable.image_border);
+                    clickedActivities.add(v);
 
                 }
 
                 else if (numOfActSelected == 2) {
-
+                    //v.setBackgroundResource(R.drawable.image_border);
                     numOfActSelected = 0;
                     // clear givBackActSelected
                     givBackActSelected.clear();
@@ -170,6 +180,10 @@ public class ActGivingbackAdapter extends BaseAdapter {
 
                     if (text1.getText().equals(text2.getText()))
                     {
+
+                        v.setBackgroundResource(R.color.colorTransparent);
+                        clickedActivities.clear();
+                        //v.setBackground("@android:color/transparent");
                         Toast.makeText(activity,"Choose 2 different activities",Toast.LENGTH_LONG).show();
                         dialog.dismiss();
 
@@ -177,6 +191,9 @@ public class ActGivingbackAdapter extends BaseAdapter {
                     }
                     else
                     {
+                        v.setBackgroundResource(R.drawable.image_border);
+                        clickedActivities.add(v);
+                        //v.setBackgroundResource(R.drawable.image_border);
                         // at any moment this list needs to contain only 2 activities
                         givBackActSelected.add(text1.getText().toString());
                         givBackActSelected.add(text2.getText().toString());
@@ -197,8 +214,6 @@ public class ActGivingbackAdapter extends BaseAdapter {
                         //GivingBackActivity.nextButton.setVisibility(View.VISIBLE);
 
                     }
-
-
 
 
                 }

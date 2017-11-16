@@ -1,6 +1,7 @@
 package com.example.natalia.lifemanagementfirst;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -88,6 +89,7 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
         submitSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                submitSettings.setBackgroundResource(R.color.colorGreen);
                 SprintSettingActivity.saveSettings();
 
                 Intent i = new Intent(getActivity(),Dashboard.class);
