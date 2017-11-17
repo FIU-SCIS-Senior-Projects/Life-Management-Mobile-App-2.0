@@ -27,6 +27,8 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:theme="@style/MyTextInputLayout"
         android:layout_toLeftOf="@+id/fab"
         android:layout_toStartOf="@+id/fab"
@@ -39,15 +41,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:allowUndo="true"
             android:hint="Message"
-            android:textColorHint="@color/colorPrimary"
             android:backgroundTint="@color/colorPrimary"
             android:textCursorDrawable="@drawable/color_blue_cursor"/>
 
-        </android.support.design.widget.TextInputLayout>
+    </android.support.design.widget.TextInputLayout>
 
     <ListView
         android:id="@+id/list_of_message"
@@ -63,4 +62,6 @@
 
     </ListView>
 
+
 </RelativeLayout>
+

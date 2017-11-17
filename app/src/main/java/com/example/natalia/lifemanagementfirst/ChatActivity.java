@@ -3,8 +3,12 @@ package com.example.natalia.lifemanagementfirst;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,12 +34,23 @@ public class ChatActivity  extends AppCompatActivity {
     String username;
     String firstname;
     String chatId;
-
+    String activityName = "Chats";
+    //ActionBar actionBar = getSupportActionBar();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_chat);
+
+
+        //actionBar = getSupportActionBar();
+        //if(activityName != null) {
+            //actionBar.setTitle(activityName);
+        //}
+        //actionBar.setSubtitle(activityName);
+        //actionBar.setIcon(R.drawable.ic_chevron_left_black_24dp);
+
 
         databaseReferenceChat = FirebaseDatabase.getInstance().getReference("Chats");
         //chatSnapshot = databaseReferenceChat.();
@@ -144,5 +159,26 @@ public class ChatActivity  extends AppCompatActivity {
             };
             listOfMessage.setAdapter(adapter);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.chat_message, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_back:
+
+                super.onBackPressed();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }
