@@ -2,7 +2,9 @@ package com.example.seniorprojectfall.test;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class viewCoachesActivity extends AppCompatActivity {
@@ -17,6 +19,8 @@ public class viewCoachesActivity extends AppCompatActivity {
 
 
         ListView list = (ListView) findViewById(R.id.listviewViewCoaches);
+        ImageButton backButton = (ImageButton) findViewById(R.id.imageButton_Coaches);
+
         elements = new String[Dashboard.coachesList.size()];
 
         for(int i=0;i<elements.length;i++){
@@ -27,13 +31,22 @@ public class viewCoachesActivity extends AppCompatActivity {
                     + "Rating: " + Dashboard.coachesList.get(i).rating + "\n";
         }
 
-
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, elements);
 
-
-        //temp
-
-
         list.setAdapter(adapter);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
     }
 }

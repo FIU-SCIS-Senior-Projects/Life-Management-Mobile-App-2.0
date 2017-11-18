@@ -23,7 +23,7 @@
 
             android:foregroundGravity="center"
             android:text="         Select any of your activities below:"
-            android:textColor="@color/common_plus_signin_btn_text_light_pressed"
+            android:textColor="@color/common_google_signin_btn_text_light_pressed"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="8dp"

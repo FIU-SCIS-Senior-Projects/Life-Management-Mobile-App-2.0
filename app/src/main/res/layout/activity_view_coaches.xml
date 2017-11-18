@@ -23,9 +23,9 @@
             android:layout_marginTop="70dp"
 
             android:foregroundGravity="center"
-            android:text="Current Coaches:"
+            android:text="  Current Coaches:"
             android:textAlignment="center"
-            android:textColor="@color/common_plus_signin_btn_text_light_pressed"
+            android:textColor="@color/common_google_signin_btn_text_light_pressed"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="8dp"
@@ -40,13 +40,13 @@
             android:layout_below="@+id/textView"
             android:layout_marginTop="125dp"
             android:layout_weight="1"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="268dp" />
 
         <ImageButton
-            android:id="@+id/imageButton_Cycle"
+            android:id="@+id/imageButton_Coaches"
             android:layout_width="51dp"
             android:layout_height="51dp"
             android:layout_alignParentBottom="true"

@@ -2,6 +2,7 @@ package com.example.seniorprojectfall.test;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,7 +40,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
     DatabaseReference databaseReference;
     List<User> listUsers2;
 
-
+//#ff6b6b
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

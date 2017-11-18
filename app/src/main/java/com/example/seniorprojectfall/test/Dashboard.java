@@ -42,7 +42,6 @@ import com.squareup.picasso.Picasso;
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
     //JOY variables
     static ArrayList<ActivitiesSprint> allActivities;
     static ArrayList<ActivitiesSprint> userActivitiesAll;

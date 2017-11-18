@@ -92,11 +92,10 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="5dp"
-
             android:foregroundGravity="center"
             android:text="Current Cycle"
             android:textAlignment="center"
-            android:textColor="@color/common_plus_signin_btn_text_light_pressed"
+            android:textColor="@color/common_google_signin_btn_text_light_pressed"
             android:textSize="30sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="8dp"

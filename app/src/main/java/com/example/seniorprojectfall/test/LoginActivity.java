@@ -1,6 +1,7 @@
 package com.example.seniorprojectfall.test;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -116,6 +117,8 @@ public class LoginActivity extends AppCompatActivity {
         registerUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                registerUser.setTextColor(Color.WHITE);
                 Intent i = new Intent(LoginActivity.this,CreateUserActivity.class);
                 finish();
                 startActivity(i);
@@ -138,8 +141,6 @@ public class LoginActivity extends AppCompatActivity {
                 //iterating through all the nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //getting artist
-
-                    System.out.println("coachh_test " + postSnapshot.getValue());
 
                     User users = postSnapshot.getValue(User.class);
                     //adding artist to the list
@@ -165,9 +166,7 @@ public class LoginActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //getting artist
 
-                    System.out.println("coachh_test " + postSnapshot.getValue());
                     String str = postSnapshot.getValue().toString();
-
 
                     int skills_pos = str.indexOf("skills=");
                     int firstname_pos = str.indexOf("firstName=");
@@ -175,15 +174,6 @@ public class LoginActivity extends AppCompatActivity {
                     int rating_pos = str.indexOf("rating=");
                     int id_pos = str.indexOf("id=");
                     int email_pos = str.indexOf("email=");
-
-
-                    System.out.println("skills pos " + str.substring((skills_pos+7),(firstname_pos-2)));
-                    System.out.println("firstName pos " + str.substring((firstname_pos+10),(lastname_pos-2)));
-                    System.out.println("lastName pos " + str.substring((lastname_pos+9),(rating_pos-2)));
-                    System.out.println("rating pos " + str.substring((rating_pos+7),(id_pos-2)));
-                    System.out.println("id pos " + str.substring((id_pos+3),(email_pos-2)));
-                    System.out.println("email pos " + str.substring((email_pos+6),(str.length()-1)));
-
 
                     String temp1 = str.substring((skills_pos+7),(firstname_pos-2));
                     String temp2 = str.substring((firstname_pos+10),(lastname_pos-2));
@@ -193,17 +183,6 @@ public class LoginActivity extends AppCompatActivity {
                     String temp6 =  str.substring((email_pos+6),(str.length()-1));
 
                     coachList.add(new Coach(temp1,temp2,temp3,temp4,temp5,temp6));
-
-                    /*
-                    Coach coach = postSnapshot.getValue(Coach.class);
-
-                    System.out.println("coachh_email " + coach.email);
-                    System.out.println("coachh_id" + coach.coachId);
-                    System.out.println("coachh_first " + coach.firstName);
-                    System.out.println("coachh_last " + coach.lastName);
-                    System.out.println("coachh_rating " + coach.rating);
-                    System.out.println("coachh_skills " + coach.skills);
-                    */
 
                     //adding artist to the list
                     //coachList.add(coach);
@@ -417,7 +396,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         //retrieve activities for JOY (for that user)
         databaseActivities.addValueEventListener(new ValueEventListener() {
             @Override
@@ -465,6 +443,9 @@ public class LoginActivity extends AppCompatActivity {
         } //end of for
 
         if(isValid) {
+
+
+            signIn.setTextColor(Color.WHITE);
 
             for(Map.Entry g: profileImagesTotal.entrySet()){
 
