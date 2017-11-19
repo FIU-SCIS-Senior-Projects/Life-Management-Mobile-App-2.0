@@ -118,7 +118,6 @@ public class previous_cycle extends AppCompatActivity {
                 showContentJoy(i);
             }
         });
-
     }
 
 
@@ -294,7 +293,7 @@ public class previous_cycle extends AppCompatActivity {
                 }
             });
 
-            ImageButton goBack = (ImageButton) findViewById(R.id.imageButton_Cycle);
+            final ImageButton goBack = (ImageButton) findViewById(R.id.imageButton_Cycle);
 
             goBack.setOnClickListener(new View.OnClickListener() {
                 @Override

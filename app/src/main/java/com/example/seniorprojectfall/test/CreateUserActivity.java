@@ -308,7 +308,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
             }
 
             if(!a){
-                Toast.makeText(this,"Username MUST contain characters and numbers",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Username MUST contain characters and at least a number",Toast.LENGTH_SHORT).show();
                 return;
             }
 

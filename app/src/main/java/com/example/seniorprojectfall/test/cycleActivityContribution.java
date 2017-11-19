@@ -1,6 +1,7 @@
 package com.example.seniorprojectfall.test;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -59,11 +60,12 @@ public class cycleActivityContribution extends AppCompatActivity {
                 first.setHighValue(t);
 
 
-                Button btn = (Button) findViewById(R.id.buttonleavecontribution);
+                final Button btn = (Button) findViewById(R.id.buttonleavecontribution);
                 btn.setText("Return");
                 btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        btn.setTextColor(Color.WHITE);
                         onBackPressed();
 
                     }

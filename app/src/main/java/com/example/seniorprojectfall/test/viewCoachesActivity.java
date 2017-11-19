@@ -30,8 +30,8 @@ public class viewCoachesActivity extends AppCompatActivity {
                     "Skills: " + Dashboard.coachesList.get(i).skills + "\n"
                     + "Rating: " + Dashboard.coachesList.get(i).rating + "\n";
         }
-
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, elements);
+//simple_list_item1
+        adapter = new ArrayAdapter<String>(this, R.layout.sizeadjuster_coaches, elements);
 
         list.setAdapter(adapter);
 

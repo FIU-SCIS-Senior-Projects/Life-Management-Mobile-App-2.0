@@ -72,8 +72,15 @@ public class MainPassionActivity extends AppCompatActivity {
 
     private void settingDummyData() {
         activitiesPassion = new ArrayList<>();
-        activitiesPassion.add(new Passion(R.drawable.passion_nature, "Nature"));
-        activitiesPassion.add(new Passion(R.drawable.passion_realestate, "Real Estate"));
+        activitiesPassion.add(new Passion(R.drawable.passion_nature2, "Nature"));
+        activitiesPassion.add(new Passion(R.drawable.passion_realestate2, "Real Estate"));
         activitiesPassion.add(new Passion(R.drawable.passion_learning, "Learning"));
+        activitiesPassion.add(new Passion(R.drawable.passion_parenting2, "Parenting"));
+        activitiesPassion.add(new Passion(R.drawable.passion_socialmedia3, "Social Media"));
+        activitiesPassion.add(new Passion(R.drawable.passion_health2, "Health"));
+        activitiesPassion.add(new Passion(R.drawable.passion_hair2, "Hair"));
+        activitiesPassion.add(new Passion(R.drawable.passion_networking, "Networking"));
+
+
     }
 }

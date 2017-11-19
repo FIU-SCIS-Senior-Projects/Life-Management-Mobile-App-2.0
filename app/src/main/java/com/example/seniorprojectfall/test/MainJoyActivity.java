@@ -78,15 +78,15 @@ public class MainJoyActivity extends AppCompatActivity {
 
     private void settingDummyData() {
         activitiesJoy = new ArrayList<>();
-        activitiesJoy.add(new Joy(R.drawable.joy_beachh, "Beach"));
-        activitiesJoy.add(new Joy(R.drawable.joy_cooking, "Cooking"));
-        activitiesJoy.add(new Joy(R.drawable.joy_cycling, "Cycling"));
+        activitiesJoy.add(new Joy(R.drawable.joy_beach2, "Beach"));
+        activitiesJoy.add(new Joy(R.drawable.joy_cooking2, "Cooking"));
+        activitiesJoy.add(new Joy(R.drawable.joy_cycling3, "Cycling"));
         activitiesJoy.add(new Joy(R.drawable.joy_exercising, "Exercising"));
         activitiesJoy.add(new Joy(R.drawable.joy_movies, "Movies"));
         activitiesJoy.add(new Joy(R.drawable.joy_music, "Music"));
         activitiesJoy.add(new Joy(R.drawable.joy_photography, "Photography"));
         activitiesJoy.add(new Joy(R.drawable.joy_programming, "Programming"));
-        activitiesJoy.add(new Joy(R.drawable.joy_reading, "Reading"));
+        activitiesJoy.add(new Joy(R.drawable.joy_reading2, "Reading"));
 
     }
 }
