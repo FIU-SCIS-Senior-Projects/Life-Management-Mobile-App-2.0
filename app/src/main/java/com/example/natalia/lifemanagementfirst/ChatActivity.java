@@ -1,6 +1,7 @@
 package com.example.natalia.lifemanagementfirst;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -34,6 +35,8 @@ public class ChatActivity  extends AppCompatActivity {
     String username;
     String firstname;
     String chatId;
+    String coachId;
+    String coachFirstName;
     String activityName = "Chats";
     //ActionBar actionBar = getSupportActionBar();
 
@@ -62,6 +65,9 @@ public class ChatActivity  extends AppCompatActivity {
         System.out.println("NAT TEST username" + username);
         firstname = in.getStringExtra("firstname");
         System.out.println("NAT TEST firstname" + firstname);
+        coachId = in.getStringExtra("coachid");
+        coachFirstName = in.getStringExtra("coachfirstname");
+        System.out.println("NAT TEST coachfirstname" + coachFirstName);
 
         onStart();
 
@@ -74,10 +80,20 @@ public class ChatActivity  extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                EditText input = (EditText)findViewById(R.id.input);
-                databaseReferenceChat.child(chatId).child("ChatMessage").push().setValue(new ChatMessage(input.getText().toString(),firstname));
-                input.setText("");
-                //displayChatMessage();
+                    EditText input = (EditText) findViewById(R.id.input);
+
+                    if (chatId == null){
+                        //create new db object to hold this user coach chats
+                        chatId = databaseReferenceChat.push().getKey();
+                        databaseReferenceChat.child(chatId).child("userId").setValue(userId);
+                        databaseReferenceChat.child(chatId).child("coachId").setValue(coachId);
+                    }
+
+                    databaseReferenceChat.child(chatId).child("ChatMessage").push().setValue(new ChatMessage(input.getText().toString(), firstname));
+                    input.setText("");
+                    //displayChatMessage();
+
+
             }
         });
 
@@ -86,7 +102,7 @@ public class ChatActivity  extends AppCompatActivity {
 
     }
 
-    //private void findUserChats(DatabaseReference databaseReferenceChat) {
+    //find User Coach Chats
     @Override
     protected void onStart() {
         super.onStart();
@@ -97,19 +113,23 @@ public class ChatActivity  extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot chatSnapshot : dataSnapshot.getChildren()) { //id)
-                    if (chatSnapshot.getValue() == null) {
+                    if ((chatSnapshot.getValue() == null) || (chatSnapshot.child("userId").getValue() == null) || (chatSnapshot.child("coachId").getValue() == null) ) {
                         break;
                     }
                     else{
-                        // assign userId here?????????
                         String userIdTmp = chatSnapshot.child("userId").getValue().toString();
+                        String coachIdTmp = chatSnapshot.child("coachId").getValue().toString();
                         System.out.println("NAT TEST userIdTmp" + userIdTmp);
-                        if (userIdTmp.equals(userId)) {
+                        if ((userIdTmp.equals(userId)) && (coachIdTmp.equals(coachId))) {
                             //get that chatSnapshot id, so that we can add new chats there
                             chatId = chatSnapshot.getKey();
                             System.out.println("NAT TEST chatId" + chatId);
-                            displayChatMessage();
-
+                            //if(chatId != null) {
+                                displayChatMessage();
+                            //}
+                           // else{
+                                // create new one
+                            //}
                             /* to check if there exists sprint with same starting date
                             // Before adding new categories for new sprint, check if there already exists categories with the starting date that user entered
                             // it's sufficient to check only ContributionSprints
@@ -144,17 +164,42 @@ public class ChatActivity  extends AppCompatActivity {
 
     private void displayChatMessage() {
         ListView listOfMessage = (ListView)findViewById(R.id.list_of_message);
-        // do the following if chatId != null
-        if (chatId != null) {
+        // do the following if chatId != null && databaseReferenceChat.child(chatId).child("ChatMessage") != null ?????????
+        if ((chatId != null) && (databaseReferenceChat.child(chatId).child("ChatMessage") != null)) {
             adapter = new FirebaseListAdapter<ChatMessage>(this, ChatMessage.class, R.layout.list_item_chat, databaseReferenceChat.child(chatId).child("ChatMessage")) {
                 @Override
                 protected void populateView(View v, ChatMessage model, int position) {
                     // Get references to the views of list_item_chat.xml
                     TextView messageText = (TextView) v.findViewById(R.id.message_text);
                     TextView messageUser = (TextView) v.findViewById(R.id.message_user);
+                    TextView messageTextRight = (TextView) v.findViewById(R.id.message_text_right);
+                    TextView messageUserRight = (TextView) v.findViewById(R.id.message_user_right);
 
-                    messageText.setText(model.getMessageText());
-                    messageUser.setText(model.getMessageUser());
+                    if(model.getMessageUser().equals(coachFirstName)) {
+
+
+                        messageText.setText(model.getMessageText());
+                        //messageText.setBackgroundResource(R.drawable.text_message_background);
+                        messageUser.setText(model.getMessageUser());
+
+                        //TextView messageUserRight = (TextView) v.findViewById(R.id.message_user_right);
+                        messageTextRight.setText("");
+                        //messageTextRight.setBackgroundColor(Color.TRANSPARENT);
+                        //messageUserRight.setVisibility(View.INVISIBLE);
+                        messageUserRight.setText("");
+
+                    }
+                    else if(model.getMessageUser().equals(firstname)){
+
+                        messageTextRight.setText(model.getMessageText());
+                        messageUserRight.setText(model.getMessageUser());
+
+                        messageText.setText("");
+                        //TextView messageUser = (TextView) v.findViewById(R.id.message_user);
+                        //messageText.setBackgroundColor(Color.TRANSPARENT);
+                        //messageUser.setVisibility(View.INVISIBLE);
+                        messageUser.setText("");
+                    }
                 }
             };
             listOfMessage.setAdapter(adapter);

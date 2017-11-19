@@ -46,6 +46,7 @@
         <activity android:name=".cycleActivityPassion" />
         <activity android:name=".cycleActivityContribution" />
         <activity android:name=".ChatActivity" />
+        <activity android:name=".ChatCoachSelectionActivity" />
         <activity android:name=".currentCycleActivity">
         </activity>
     </application>

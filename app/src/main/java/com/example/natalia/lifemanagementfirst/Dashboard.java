@@ -30,6 +30,7 @@ public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
+
     //JOY variables
     static ArrayList<ActivitiesSprint> allActivities;
     static ArrayList<ActivitiesSprint> userActivitiesAll;
@@ -78,6 +79,7 @@ public class Dashboard extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         //JOY
         allActivities = new ArrayList<>();
@@ -432,6 +434,7 @@ public class Dashboard extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_signout) {
             Intent i = new Intent(Dashboard.this, LoginActivity.class);
+            finish();
             startActivity(i);
             return true;
         }
@@ -526,7 +529,7 @@ public class Dashboard extends AppCompatActivity
 
         }
         else if (id == R.id.nav_chat) {
-            Intent i = new Intent(Dashboard.this, ChatActivity.class);
+            Intent i = new Intent(Dashboard.this, ChatCoachSelectionActivity.class);
             //Save user id, currentusername so that we can use it in the following Activity:
             i.putExtra("userid", currentUser.id);
             i.putExtra("username", currentUser.username);
