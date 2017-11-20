@@ -17,7 +17,7 @@ public class MainPassionActivity extends AppCompatActivity {
     private FeatureCoverFlow coverFlow;
     private CoverFlowAdapterPassion adapter;
     private ArrayList<Passion> activitiesPassion;
-    ImageButton androidRightArrowButton;
+    static ImageButton androidRightArrowButton;
 
 
     @Override
@@ -51,6 +51,7 @@ public class MainPassionActivity extends AppCompatActivity {
             }
         });
 
+        androidRightArrowButton.setVisibility(View.GONE);
         //zoom animation
         Animation zoomAnimation = AnimationUtils.loadAnimation(this,R.anim.zoom);
         androidRightArrowButton.startAnimation(zoomAnimation);
@@ -80,6 +81,8 @@ public class MainPassionActivity extends AppCompatActivity {
         activitiesPassion.add(new Passion(R.drawable.passion_health2, "Health"));
         activitiesPassion.add(new Passion(R.drawable.passion_hair2, "Hair"));
         activitiesPassion.add(new Passion(R.drawable.passion_networking, "Networking"));
+        activitiesPassion.add(new Passion(R.drawable.passion_camping, "Camping"));
+        activitiesPassion.add(new Passion(R.drawable.passion_traveling, "Traveling"));
 
 
     }

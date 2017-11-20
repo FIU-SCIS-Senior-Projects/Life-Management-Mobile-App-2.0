@@ -1,6 +1,5 @@
 package com.example.seniorprojectfall.test;
 
-
 import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +15,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-
 public class MainGivingBackAdapter extends BaseAdapter {
 
         private List<GivingBack> actGivingbackList;
@@ -24,12 +22,13 @@ public class MainGivingBackAdapter extends BaseAdapter {
         static int numOfActSelected = 0;
         int act1position = 0;
         static ArrayList<String> givBackActSelected = new ArrayList<>(); //to save 2 giving back activities selected by user for current sprint (make it static?)
-
+        private List<View> clickedActivities; //holds last 2 activities the user clicked on
 
 
         public MainGivingBackAdapter(AppCompatActivity context, List<GivingBack> actGivingbackList) {
             this.actGivingbackList = actGivingbackList;
             this.activity = context;
+            clickedActivities = new ArrayList<>();
         }
 
         @Override
@@ -97,22 +96,18 @@ public class MainGivingBackAdapter extends BaseAdapter {
             viewHolder.actGivingbackImage.setImageResource(actGivingbackList.get(position).getImageSource());
             viewHolder.actGivingbackName.setText(actGivingbackList.get(position).getName());
 
-            //GivingBackActivity.nextButton.setVisibility(View.GONE);
             convertView.setOnClickListener(onClickListener(position));
 
             return convertView;
         }
 
         private View.OnClickListener onClickListener(final int position){
-            //GivingBackActivity.nextButton.setVisibility(View.GONE);
+
             return new View.OnClickListener() {
-                //GivingBackActivity.nextButton.setVisibility(View.GONE);  //??????
 
                 @Override
                 public void onClick(View v){
                     ++numOfActSelected;
-
-                    //GivingBackActivity.nextButton.setVisibility(View.GONE); //???????HERE???
 
                     final Dialog dialog;
                     dialog = new Dialog(activity);
@@ -122,6 +117,13 @@ public class MainGivingBackAdapter extends BaseAdapter {
 
                     if (numOfActSelected == 1){
                         MainGivingBackActivity.nextButton.setVisibility(View.GONE);
+                        if (clickedActivities.size() == 2){
+                            clickedActivities.get(0).setBackgroundResource(R.color.colorTransparent);
+                            clickedActivities.get(1).setBackgroundResource(R.color.colorTransparent);
+                            clickedActivities.clear();
+                        }
+                        v.setBackgroundResource(R.drawable.image_border);
+                        clickedActivities.add(v);
 
                     }
 
@@ -142,15 +144,16 @@ public class MainGivingBackAdapter extends BaseAdapter {
                         image2.setImageResource(getItem(position).getImageSource());
 
 
-                        if (text1.getText().equals(text2.getText()))
-                        {
+                        if (text1.getText().equals(text2.getText())) {
+                            v.setBackgroundResource(R.color.colorTransparent);
+                            clickedActivities.clear();
                             Toast.makeText(activity,"Choose 2 different activities",Toast.LENGTH_LONG).show();
                             dialog.dismiss();
 
-
                         }
-                        else
-                        {
+                        else {
+                            v.setBackgroundResource(R.drawable.image_border);
+                            clickedActivities.add(v);
                             // at any moment this list needs to contain only 2 activities
                             givBackActSelected.add(text1.getText().toString());
                             givBackActSelected.add(text2.getText().toString());
@@ -168,87 +171,14 @@ public class MainGivingBackAdapter extends BaseAdapter {
                                     MainGivingBackActivity.nextButton.setVisibility(View.VISIBLE);
                                 }
                             });
-
+                                MainGivingBackActivity.nextButton.setVisibility(View.VISIBLE);
                         }
 
                     }
-
-                    //GivingBackActivity.nextButton.setVisibility(View.GONE);
                     act1position = position;
-
-                /*
-                if (numOfActSelected == 1) {
-                    dialog = new Dialog(activity);
-                    dialog.setContentView(R.layout.dialog_actgivingback_info);
-                    //dialog.setCancelable(true); //dismiss when touching outside
-                    dialog.setTitle("Activities Selected");
-                    //dialogbt = (Button)dialog.findViewById(R.id.continueButtonGiveDialog);
-                    text1 = (TextView) dialog.findViewById(R.id.label1Givingback);
-                    image1 = (ImageView) dialog.findViewById(R.id.image1Givingback);
-                    //text2 = (TextView) dialog.findViewById(R.id.label2Givingback);
-                    //image2 = (ImageView) dialog.findViewById(R.id.image2Givingback);
-                    //text1 = (TextView) dialog.findViewById(R.id.label1Givingback);
-                    text1.setText(getItem(position).getName());
-                    //image1 = (ImageView) dialog.findViewById(R.id.image1Givingback);
-                    image1.setImageResource(getItem(position).getImageSource());
                 }
-                else if (numOfActSelected == 2)
-                {
-                    // Check if the second selected activity is not the same as first selected one
-                    text2 = (TextView) dialog.findViewById(R.id.label2Givingback);
-                    text2.setText(getItem(position).getName());
-                    //TextView text1 = (TextView) dialog.findViewById(R.id.label1Givingback);
-                    if (text1.getText().equals(text2.getText()))
-                    {
-                        Toast.makeText(activity,"Choose activity #2 that is different from activity #1",Toast.LENGTH_LONG).show();
-                        numOfActSelected=1;
-                    }
-                    else {
-
-                        image2 = (ImageView) dialog.findViewById(R.id.image2Givingback);
-                        image2.setImageResource(getItem(position).getImageSource());
-
-                        numOfActSelected = 0; // do not use it if do not want allow user reselect activities
-                        dialog.show();
-
-                        dialogbt = (Button)dialog.findViewById(R.id.continueButtonGiveDialog);
-                        dialogbt.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view){
-                                dialog.dismiss();
-                                //onButtonClick((Button) view);
-                            }
-                        });
-
-
-
-
-
-
-                        //numOfActSelected = 0; // do not use it if do not want allow user reselect activities
-                        //text1 = null;
-                        //text2 = null;
-                        //image1 = null;
-                        //image2 = null;
-
-                       // dialog.show();
-
-                    }
-                }
-
-        */
-                    //GivingBackActivity.nextButton.setVisibility(View.GONE);
-                }
-
-
             };
-
-
         }
-
-        //public void onButtonClick(Button view){
-        //   dialog.dismiss();
-        // }
 
         private static class ViewHolder {
             private TextView actGivingbackName;

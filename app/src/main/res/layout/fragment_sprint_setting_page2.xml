@@ -260,7 +260,7 @@
             android:textColor="#fdfcfc"
             android:textStyle="bold"
             android:textSize="18sp"
-            style="?android:textAppearanceMedium"/>
+            style="?android:attr/buttonStyleSmall"/>
 
     </LinearLayout>
 
