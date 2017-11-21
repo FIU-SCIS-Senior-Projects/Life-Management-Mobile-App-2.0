@@ -464,7 +464,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     userActivitiesAll.add(new ActivitiesSprint(allActivities.get(i).activityScore,
                             allActivities.get(i).actualPoints, allActivities.get(i).categoryId,
-                            allActivities.get(i).activityName, allActivities.get(i).sprintDailyPoints,
+                            allActivities.get(i).name, allActivities.get(i).sprintDailyPoints,
                             allActivities.get(i).targetPoints, allActivities.get(i).userId, allActivities.get(i).activityid));
                 }
             }
@@ -501,7 +501,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         //fake the data for later use (categoryid and userid)
                         activitiesjoyPrevious.add(new ActivitiesSprint(userActivitiesAll.get(k).activityScore,userActivitiesAll.get(k).actualPoints,
-                                splitter[1], userActivitiesAll.get(k).activityName, userActivitiesAll.get(k).sprintDailyPoints,
+                                splitter[1], userActivitiesAll.get(k).name, userActivitiesAll.get(k).sprintDailyPoints,
                                 userActivitiesAll.get(k).targetPoints, splitter[2], userActivitiesAll.get(k).activityid));
                         break;
                     }
@@ -540,7 +540,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         //fake the data for later use (categoryid and userid)
                         activitiesPassionPrevious.add(new ActivitiesSprint(userActivitiesAll.get(k).activityScore,userActivitiesAll.get(k).actualPoints,
-                                splitter[1], userActivitiesAll.get(k).activityName, userActivitiesAll.get(k).sprintDailyPoints,
+                                splitter[1], userActivitiesAll.get(k).name, userActivitiesAll.get(k).sprintDailyPoints,
                                 userActivitiesAll.get(k).targetPoints, splitter[2], userActivitiesAll.get(k).activityid));
                         break;
                     }
@@ -578,7 +578,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         //fake the data for later use (categoryid and userid)
                         activitiesContributionPrevious.add(new ActivitiesSprint(userActivitiesAll.get(k).activityScore,userActivitiesAll.get(k).actualPoints,
-                                splitter[1], userActivitiesAll.get(k).activityName, userActivitiesAll.get(k).sprintDailyPoints,
+                                splitter[1], userActivitiesAll.get(k).name, userActivitiesAll.get(k).sprintDailyPoints,
                                 userActivitiesAll.get(k).targetPoints, splitter[2], userActivitiesAll.get(k).activityid));
                         break;
                     }
@@ -686,7 +686,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (userActivitiesAll.get(i).activityid.contains(userJoySprint.sprintActivityid1)) {
                     userActivityJoyid1 = new ActivitiesSprint(userActivitiesAll.get(i).activityScore,
                             userActivitiesAll.get(i).actualPoints, userActivitiesAll.get(i).categoryId,
-                            userActivitiesAll.get(i).activityName, userActivitiesAll.get(i).sprintDailyPoints,
+                            userActivitiesAll.get(i).name, userActivitiesAll.get(i).sprintDailyPoints,
                             userActivitiesAll.get(i).targetPoints, userActivitiesAll.get(i).userId, userActivitiesAll.get(i).activityid);
                 }
 
@@ -694,7 +694,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     userActivityJoyid2 = new ActivitiesSprint(userActivitiesAll.get(i).activityScore,
                             userActivitiesAll.get(i).actualPoints, userActivitiesAll.get(i).categoryId,
-                            userActivitiesAll.get(i).activityName, userActivitiesAll.get(i).sprintDailyPoints,
+                            userActivitiesAll.get(i).name, userActivitiesAll.get(i).sprintDailyPoints,
                             userActivitiesAll.get(i).targetPoints, userActivitiesAll.get(i).userId, userActivitiesAll.get(i).activityid);
                 }
             }
@@ -709,7 +709,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (userActivitiesAll.get(i).activityid.contains(userPassionSprint.sprintActivityid1)) {
                     userActivityPassionid1 = new ActivitiesSprint(userActivitiesAll.get(i).activityScore,
                             userActivitiesAll.get(i).actualPoints, userActivitiesAll.get(i).categoryId,
-                            userActivitiesAll.get(i).activityName, userActivitiesAll.get(i).sprintDailyPoints,
+                            userActivitiesAll.get(i).name, userActivitiesAll.get(i).sprintDailyPoints,
                             userActivitiesAll.get(i).targetPoints, userActivitiesAll.get(i).userId, userActivitiesAll.get(i).activityid);
                 }
 
@@ -717,7 +717,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     userActivityPassionid2 = new ActivitiesSprint(userActivitiesAll.get(i).activityScore,
                             userActivitiesAll.get(i).actualPoints, userActivitiesAll.get(i).categoryId,
-                            userActivitiesAll.get(i).activityName, userActivitiesAll.get(i).sprintDailyPoints,
+                            userActivitiesAll.get(i).name, userActivitiesAll.get(i).sprintDailyPoints,
                             userActivitiesAll.get(i).targetPoints, userActivitiesAll.get(i).userId, userActivitiesAll.get(i).activityid);
                 }
             }
@@ -732,7 +732,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (userActivitiesAll.get(i).activityid.contains(userContributionSprint.sprintActivityid1)) {
                     userActivityContributionid1 = new ActivitiesSprint(userActivitiesAll.get(i).activityScore,
                             userActivitiesAll.get(i).actualPoints, userActivitiesAll.get(i).categoryId,
-                            userActivitiesAll.get(i).activityName, userActivitiesAll.get(i).sprintDailyPoints,
+                            userActivitiesAll.get(i).name, userActivitiesAll.get(i).sprintDailyPoints,
                             userActivitiesAll.get(i).targetPoints, userActivitiesAll.get(i).userId, userActivitiesAll.get(i).activityid);
                 }
 
@@ -740,7 +740,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     userActivityContributionid2 = new ActivitiesSprint(userActivitiesAll.get(i).activityScore,
                             userActivitiesAll.get(i).actualPoints, userActivitiesAll.get(i).categoryId,
-                            userActivitiesAll.get(i).activityName, userActivitiesAll.get(i).sprintDailyPoints,
+                            userActivitiesAll.get(i).name, userActivitiesAll.get(i).sprintDailyPoints,
                             userActivitiesAll.get(i).targetPoints, userActivitiesAll.get(i).userId, userActivitiesAll.get(i).activityid);
 
                 }
@@ -804,7 +804,7 @@ public class LoginActivity extends AppCompatActivity {
             i.putExtra("joy_activityid1_activityscore",userActivityJoyid1.activityScore);
             i.putExtra("joy_activityid1_actualpoints",userActivityJoyid1.actualPoints);
             i.putExtra("joy_activityid1_categoryid",userActivityJoyid1.categoryId);
-            i.putExtra("joy_activityid1_activityname",userActivityJoyid1.activityName);
+            i.putExtra("joy_activityid1_activityname",userActivityJoyid1.name);
             i.putExtra("joy_activityid1_sprintdailypoints",userActivityJoyid1.sprintDailyPoints);
             i.putExtra("joy_activityid1_targetpoints",userActivityJoyid1.targetPoints);
             i.putExtra("joy_activityid1_userid",userActivityJoyid1.userId);
@@ -814,7 +814,7 @@ public class LoginActivity extends AppCompatActivity {
             i.putExtra("joy_activityid2_activityscore",userActivityJoyid2.activityScore);
             i.putExtra("joy_activityid2_actualpoints",userActivityJoyid2.actualPoints);
             i.putExtra("joy_activityid2_categoryid",userActivityJoyid2.categoryId);
-            i.putExtra("joy_activityid2_activityname",userActivityJoyid2.activityName);
+            i.putExtra("joy_activityid2_activityname",userActivityJoyid2.name);
             i.putExtra("joy_activityid2_sprintdailypoints",userActivityJoyid2.sprintDailyPoints);
             i.putExtra("joy_activityid2_targetpoints",userActivityJoyid2.targetPoints);
             i.putExtra("joy_activityid2_userid",userActivityJoyid2.userId);
@@ -839,7 +839,7 @@ public class LoginActivity extends AppCompatActivity {
             i.putExtra("passion_activityid1_activityscore",userActivityPassionid1.activityScore);
             i.putExtra("passion_activityid1_actualpoints",userActivityPassionid1.actualPoints);
             i.putExtra("passion_activityid1_categoryid",userActivityPassionid1.categoryId);
-            i.putExtra("passion_activityid1_activityname",userActivityPassionid1.activityName);
+            i.putExtra("passion_activityid1_activityname",userActivityPassionid1.name);
             i.putExtra("passion_activityid1_sprintdailypoints",userActivityPassionid1.sprintDailyPoints);
             i.putExtra("passion_activityid1_targetpoints",userActivityPassionid1.targetPoints);
             i.putExtra("passion_activityid1_userid",userActivityPassionid1.userId);
@@ -849,7 +849,7 @@ public class LoginActivity extends AppCompatActivity {
             i.putExtra("passion_activityid2_activityscore",userActivityPassionid2.activityScore);
             i.putExtra("passion_activityid2_actualpoints",userActivityPassionid2.actualPoints);
             i.putExtra("passion_activityid2_categoryid",userActivityPassionid2.categoryId);
-            i.putExtra("passion_activityid2_activityname",userActivityPassionid2.activityName);
+            i.putExtra("passion_activityid2_activityname",userActivityPassionid2.name);
             i.putExtra("passion_activityid2_sprintdailypoints",userActivityPassionid2.sprintDailyPoints);
             i.putExtra("passion_activityid2_targetpoints",userActivityPassionid2.targetPoints);
             i.putExtra("passion_activityid2_userid",userActivityPassionid2.userId);
@@ -873,7 +873,7 @@ public class LoginActivity extends AppCompatActivity {
             i.putExtra("contribution_activityid1_activityscore",userActivityContributionid1.activityScore);
             i.putExtra("contribution_activityid1_actualpoints",userActivityContributionid1.actualPoints);
             i.putExtra("contribution_activityid1_categoryid",userActivityContributionid1.categoryId);
-            i.putExtra("contribution_activityid1_activityname",userActivityContributionid1.activityName);
+            i.putExtra("contribution_activityid1_activityname",userActivityContributionid1.name);
             i.putExtra("contribution_activityid1_sprintdailypoints",userActivityContributionid1.sprintDailyPoints);
             i.putExtra("contribution_activityid1_targetpoints",userActivityContributionid1.targetPoints);
             i.putExtra("contribution_activityid1_userid",userActivityContributionid1.userId);
@@ -883,7 +883,7 @@ public class LoginActivity extends AppCompatActivity {
             i.putExtra("contribution_activityid2_activityscore",userActivityContributionid2.activityScore);
             i.putExtra("contribution_activityid2_actualpoints",userActivityContributionid2.actualPoints);
             i.putExtra("contribution_activityid2_categoryid",userActivityContributionid2.categoryId);
-            i.putExtra("contribution_activityid2_activityname",userActivityContributionid2.activityName);
+            i.putExtra("contribution_activityid2_activityname",userActivityContributionid2.name);
             i.putExtra("contribution_activityid2_sprintdailypoints",userActivityContributionid2.sprintDailyPoints);
             i.putExtra("contribution_activityid2_targetpoints",userActivityContributionid2.targetPoints);
             i.putExtra("contribution_activityid2_userid",userActivityContributionid2.userId);

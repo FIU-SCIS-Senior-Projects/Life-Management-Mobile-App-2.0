@@ -84,12 +84,12 @@ public class previous_cycle extends AppCompatActivity {
             if (!(Dashboard.userActivityJoyid1.activityid.contains(Dashboard.userJoyactivitiesPrevious.get(i).activityid))
                     && (!(Dashboard.userActivityJoyid2.activityid.contains(Dashboard.userJoyactivitiesPrevious.get(i).activityid)))) {
 
-                tempelementList.add(Dashboard.userJoyactivitiesPrevious.get(i).activityName + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
+                tempelementList.add(Dashboard.userJoyactivitiesPrevious.get(i).name + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
                         + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId);
 
                 is = true;
 
-                tempList.add(Dashboard.userJoyactivitiesPrevious.get(i).activityName + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0, 2)
+                tempList.add(Dashboard.userJoyactivitiesPrevious.get(i).name + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0, 2)
                         + "/" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(2, 4) + "/"
                         + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(6) + "-"
                         + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(0, 2) + "/"
@@ -137,12 +137,12 @@ public class previous_cycle extends AppCompatActivity {
             if (!(Dashboard.userActivityPassionid1.activityid.contains(Dashboard.userPassionactivitiesPrevious.get(i).activityid))
                     && (!(Dashboard.userActivityPassionid2.activityid.contains(Dashboard.userPassionactivitiesPrevious.get(i).activityid)))) {
 
-                tempelementList.add(Dashboard.userPassionactivitiesPrevious.get(i).activityName + " " + Dashboard.userPassionactivitiesPrevious.get(i).categoryId
+                tempelementList.add(Dashboard.userPassionactivitiesPrevious.get(i).name + " " + Dashboard.userPassionactivitiesPrevious.get(i).categoryId
                         + " " + Dashboard.userPassionactivitiesPrevious.get(i).userId);
 
                 is = true;
 
-                tempList.add(Dashboard.userPassionactivitiesPrevious.get(i).activityName + " (" + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(0, 2)
+                tempList.add(Dashboard.userPassionactivitiesPrevious.get(i).name + " (" + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(0, 2)
                         + "/" + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(2, 4) + "/"
                         + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(6) + "-"
                         + " " + Dashboard.userPassionactivitiesPrevious.get(i).userId.substring(0, 2) + "/"
@@ -192,12 +192,12 @@ public class previous_cycle extends AppCompatActivity {
 
 
 
-                tempelementList.add(Dashboard.userContributionactivitiesPrevious.get(i).activityName + " " + Dashboard.userContributionactivitiesPrevious.get(i).categoryId
+                tempelementList.add(Dashboard.userContributionactivitiesPrevious.get(i).name + " " + Dashboard.userContributionactivitiesPrevious.get(i).categoryId
                         + " " + Dashboard.userContributionactivitiesPrevious.get(i).userId);
 
                 res = true;
 
-                tempList.add(Dashboard.userContributionactivitiesPrevious.get(i).activityName + " (" + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(0, 2)
+                tempList.add(Dashboard.userContributionactivitiesPrevious.get(i).name + " (" + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(0, 2)
                         + "/" + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(2, 4) + "/"
                         + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(6) + "-"
                         + " " + Dashboard.userContributionactivitiesPrevious.get(i).userId.substring(0, 2) + "/"
@@ -255,11 +255,11 @@ public class previous_cycle extends AppCompatActivity {
 
                 res = true;
 
-                tempelementList.add(Dashboard.userJoyactivitiesPrevious.get(i).activityName + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
+                tempelementList.add(Dashboard.userJoyactivitiesPrevious.get(i).name + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
                         + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId);
 
 
-                tempList.add(Dashboard.userJoyactivitiesPrevious.get(i).activityName + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0, 2)
+                tempList.add(Dashboard.userJoyactivitiesPrevious.get(i).name + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0, 2)
                         + "/" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(2, 4) + "/"
                         + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(6) + "-"
                         + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(0, 2) + "/"
@@ -323,14 +323,14 @@ public class previous_cycle extends AppCompatActivity {
         for(int k=0;k<size;k++){
 
 
-            if(Dashboard.userJoyactivitiesPrevious.get(k).activityName.contains(elementsplitter[0]) &&
+            if(Dashboard.userJoyactivitiesPrevious.get(k).name.contains(elementsplitter[0]) &&
                     Dashboard.userJoyactivitiesPrevious.get(k).categoryId.contains(elementsplitter[1]) &&
                     Dashboard.userJoyactivitiesPrevious.get(k).userId.contains(elementsplitter[2])){
 
                 element = Dashboard.userJoyactivitiesPrevious.get(k).activityScore + " "
                         + Dashboard.userJoyactivitiesPrevious.get(k).actualPoints + " "
                         + Dashboard.userJoyactivitiesPrevious.get(k).categoryId + " "
-                        + Dashboard.userJoyactivitiesPrevious.get(k).activityName + " "
+                        + Dashboard.userJoyactivitiesPrevious.get(k).name + " "
                         + Dashboard.userJoyactivitiesPrevious.get(k).sprintDailyPoints + " "
                         + Dashboard.userJoyactivitiesPrevious.get(k).targetPoints + " "
                         + Dashboard.userJoyactivitiesPrevious.get(k).userId;
@@ -362,14 +362,14 @@ public class previous_cycle extends AppCompatActivity {
         for(int k=0;k<size;k++){
 
 
-            if(Dashboard.userPassionactivitiesPrevious.get(k).activityName.contains(elementsplitter[0]) &&
+            if(Dashboard.userPassionactivitiesPrevious.get(k).name.contains(elementsplitter[0]) &&
                     Dashboard.userPassionactivitiesPrevious.get(k).categoryId.contains(elementsplitter[1]) &&
                     Dashboard.userPassionactivitiesPrevious.get(k).userId.contains(elementsplitter[2])){
 
                 element = Dashboard.userPassionactivitiesPrevious.get(k).activityScore + " "
                         + Dashboard.userPassionactivitiesPrevious.get(k).actualPoints + " "
                         + Dashboard.userPassionactivitiesPrevious.get(k).categoryId + " "
-                        + Dashboard.userPassionactivitiesPrevious.get(k).activityName + " "
+                        + Dashboard.userPassionactivitiesPrevious.get(k).name + " "
                         + Dashboard.userPassionactivitiesPrevious.get(k).sprintDailyPoints + " "
                         + Dashboard.userPassionactivitiesPrevious.get(k).targetPoints + " "
                         + Dashboard.userPassionactivitiesPrevious.get(k).userId;
@@ -398,14 +398,14 @@ public class previous_cycle extends AppCompatActivity {
         int size = Dashboard.userContributionactivitiesPrevious.size();
         for(int k=0;k<size;k++){
 
-            if(Dashboard.userContributionactivitiesPrevious.get(k).activityName.contains(elementsplitter[0]) &&
+            if(Dashboard.userContributionactivitiesPrevious.get(k).name.contains(elementsplitter[0]) &&
                     Dashboard.userContributionactivitiesPrevious.get(k).categoryId.contains(elementsplitter[1]) &&
                     Dashboard.userContributionactivitiesPrevious.get(k).userId.contains(elementsplitter[2])){
 
                 element = Dashboard.userContributionactivitiesPrevious.get(k).activityScore + " "
                         + Dashboard.userContributionactivitiesPrevious.get(k).actualPoints + " "
                         + Dashboard.userContributionactivitiesPrevious.get(k).categoryId + " "
-                        + Dashboard.userContributionactivitiesPrevious.get(k).activityName + " "
+                        + Dashboard.userContributionactivitiesPrevious.get(k).name + " "
                         + Dashboard.userContributionactivitiesPrevious.get(k).sprintDailyPoints + " "
                         + Dashboard.userContributionactivitiesPrevious.get(k).targetPoints + " "
                         + Dashboard.userContributionactivitiesPrevious.get(k).userId;

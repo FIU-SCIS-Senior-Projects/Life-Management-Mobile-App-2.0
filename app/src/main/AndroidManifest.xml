@@ -31,7 +31,6 @@
         <activity android:name=".ThirdScreenActivity" />
         <activity android:name=".CarouselScreen" />
         <activity android:name=".MainPassionActivity" />
-        <activity android:name=".MainGivingBackActivity" />
         <activity android:name=".SprintSettingActivity" />
         <activity
             android:name=".Dashboard"
@@ -45,7 +44,9 @@
         <activity android:name=".cycleActivityPassion" />
         <activity android:name=".cycleActivityContribution" />
         <activity android:name=".currentCycleActivity" />
-        <activity android:name=".viewCoachesActivity"></activity>
+        <activity android:name=".viewCoachesActivity" />
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".ChatCoachSelectionActivity"></activity>
     </application>
 
 </manifest>

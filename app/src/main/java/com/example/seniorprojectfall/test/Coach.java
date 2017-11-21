@@ -10,16 +10,16 @@ import android.os.Parcelable;
 public class Coach implements Parcelable{
 
     public String email;
-    public String firstname;
+    public String firstName;
     public String id;
-    public String lastname;
+    public String lastName;
     public String rating;
     public String skills;
 
-    public Coach(String skills, String firstname, String lastname, String rating, String id, String email) {
+    public Coach(String skills, String firstName, String lastName, String rating, String id, String email) {
         this.skills = skills;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.rating = rating;
         this.id = id;
         this.email = email;
@@ -27,8 +27,8 @@ public class Coach implements Parcelable{
 
     public Coach(){
         skills = "";
-        firstname = "";
-        lastname = "";
+        firstName = "";
+        lastName = "";
         rating = "";
         id = "";
         email = "";
@@ -37,8 +37,8 @@ public class Coach implements Parcelable{
     public Coach(Parcel in){
 
         this.skills = in.readString();
-        this.firstname = in.readString();
-        this.lastname = in.readString();
+        this.firstName = in.readString();
+        this.lastName = in.readString();
         this.rating = in.readString();
         this.id = in.readString();
         this.email = in.readString();
@@ -67,8 +67,8 @@ public class Coach implements Parcelable{
     public void writeToParcel(Parcel parcel, int flags) {
 
         parcel.writeString(skills);
-        parcel.writeString(firstname);
-        parcel.writeString(lastname);
+        parcel.writeString(firstName);
+        parcel.writeString(lastName);
         parcel.writeString(rating);
         parcel.writeString(id);
         parcel.writeString(email);
@@ -83,12 +83,12 @@ public class Coach implements Parcelable{
         this.email = email;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getId() {
@@ -99,12 +99,12 @@ public class Coach implements Parcelable{
         this.id = id;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getRating() {

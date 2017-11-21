@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     skip.setTextColor(Color.BLUE);
-                    Intent i = new Intent(MainActivity.this,MainPassionActivity.class);
+                    Intent i = new Intent(MainActivity.this,LoginActivity.class);
                     startActivity(i);
                 }
             });

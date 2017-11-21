@@ -16,11 +16,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.lang.String;
+import java.lang.Math;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.lang.Math;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sccomponents.gauges.ScArcGauge;
@@ -107,11 +108,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
         TextView textAct1 = (TextView)view.findViewById(R.id.textViewAct1);
         // Assign variable textAct1 the value of static variable activity1Joy (from TestActivity.java)
-        textAct1.setText(Dashboard.userActivityJoyid1.activityName);
+        textAct1.setText(Dashboard.userActivityJoyid1.name);
         //textAct1.setText("Inner Peace");
 
         TextView textAct2 = (TextView)view.findViewById(R.id.textViewAct2);
-        textAct2.setText(Dashboard.userActivityJoyid2.activityName);
+        textAct2.setText(Dashboard.userActivityJoyid2.name);
 
         TextView textCategScore = (TextView)view.findViewById(R.id.textViewCategScore);
         textCategScore.setText("Joy Score");
@@ -3789,7 +3790,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             activity1ScoreInt = 100;
         }
         else {
-            activity1ScoreInt = (int)Math.round((Integer.parseInt(textActual1.getText().toString()) * 100.0) / (Integer.parseInt(textTarget1.getText().toString())));
+            activity1ScoreInt = (int)Math.round(((Integer.parseInt(textActual1.getText().toString()) * 100.0) / (Integer.parseInt(textTarget1.getText().toString()))));
         }
         activity1ScoreStr = activity1ScoreInt + "";
         gaugeJoyActivity1.setHighValue(activity1ScoreInt);

@@ -1,5 +1,6 @@
 package com.example.seniorprojectfall.test;
 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,7 +26,7 @@ public class viewCoachesActivity extends AppCompatActivity {
 
         for(int i=0;i<elements.length;i++){
 
-            elements[i] = "Full Name: " + Dashboard.coachesList.get(i).firstname + ", " + Dashboard.coachesList.get(i).lastname + "\n"
+            elements[i] = "Full Name: " + Dashboard.coachesList.get(i).firstName + ", " + Dashboard.coachesList.get(i).lastName + "\n"
                     + "Email: " + Dashboard.coachesList.get(i).email + "\n" +
                     "Skills: " + Dashboard.coachesList.get(i).skills + "\n"
                     + "Rating: " + Dashboard.coachesList.get(i).rating + "\n";

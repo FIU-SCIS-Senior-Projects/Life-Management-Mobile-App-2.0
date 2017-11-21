@@ -10,12 +10,10 @@ import android.os.Parcelable;
 
 public class ActivitiesSprint implements Parcelable{
 
-
-
     String activityScore;
     String actualPoints;
     String categoryId;
-    String activityName;
+    String name;
     String sprintDailyPoints;
     String targetPoints;
     String userId;
@@ -27,31 +25,31 @@ public class ActivitiesSprint implements Parcelable{
         activityScore = "";
         actualPoints = "";
         categoryId = "";
-        activityName = "";
+        name = "";
         sprintDailyPoints = "";
         targetPoints = "";
         userId = "";
         activityid = "";
     }
 
-    public ActivitiesSprint(String activityScore, String actualPoints, String categoryId, String activityName, String sprintDailyPoints, String targetPoints, String userId, String activityid) {
+    public ActivitiesSprint(String activityScore, String actualPoints, String categoryId, String name, String sprintDailyPoints, String targetPoints, String userId, String activityid) {
 
         this.activityScore = activityScore;
         this.actualPoints = actualPoints;
         this.categoryId = categoryId;
-        this.activityName = activityName;
+        this.name = name;
         this.sprintDailyPoints = sprintDailyPoints;
         this.targetPoints = targetPoints;
         this.userId = userId;
         this.activityid = activityid;
     }
 
-    public ActivitiesSprint(String activityScore, String actualPoints, String categoryId, String activityName, String sprintDailyPoints, String targetPoints, String userId) {
+    public ActivitiesSprint(String activityScore, String actualPoints, String categoryId, String name, String sprintDailyPoints, String targetPoints, String userId) {
 
         this.activityScore = activityScore;
         this.actualPoints = actualPoints;
         this.categoryId = categoryId;
-        this.activityName = activityName;
+        this.name = name;
         this.sprintDailyPoints = sprintDailyPoints;
         this.targetPoints = targetPoints;
         this.userId = userId;
@@ -63,7 +61,7 @@ public class ActivitiesSprint implements Parcelable{
         this.activityScore = in.readString();
         this.actualPoints = in.readString();
         this.categoryId = in.readString();
-        this.activityName = in.readString();
+        this.name = in.readString();
         this.sprintDailyPoints = in.readString();
         this.targetPoints = in.readString();
         this.userId = in.readString();
@@ -104,12 +102,12 @@ public class ActivitiesSprint implements Parcelable{
     }
 
 
-    public String getActivityName() {
-        return activityName;
+    public String getName() {
+        return name;
     }
 
-    public void setActivityName(String activityName) {
-        this.activityName = activityName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSprintDailyPoints() {
@@ -144,16 +142,14 @@ public class ActivitiesSprint implements Parcelable{
     @Override
     public void writeToParcel(Parcel parcel, int i) {
 
-
         parcel.writeString(activityScore);
         parcel.writeString(actualPoints);
         parcel.writeString(categoryId);
-        parcel.writeString(activityName);
+        parcel.writeString(name);
         parcel.writeString(sprintDailyPoints);
         parcel.writeString(targetPoints);
         parcel.writeString(userId);
         parcel.writeString(activityid);
-
 
     }
 

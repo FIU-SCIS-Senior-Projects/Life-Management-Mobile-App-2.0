@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +13,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.KeyListener;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
@@ -22,43 +22,48 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.Calendar;
+
+/**
+ * Created by Natalia on 10/5/2017.
+ */
 
 public class SprintSettingPageFragment extends Fragment implements TextWatcher{
 
-        static TextView sprintStartDate;
-        static TextView sprintEndDate;
-        private DatePickerDialog.OnDateSetListener mStartDateSetListener;
-        private DatePickerDialog.OnDateSetListener mEndDateSetListener;
-        private RadioGroup radioGroup;
-        private RadioButton rb1;
-        private RadioButton rb2;
-        private RadioButton rb3;
-        static String sprintPeriod;
+    static TextView sprintStartDate;
+    static TextView sprintEndDate;
+    private DatePickerDialog.OnDateSetListener mStartDateSetListener;
+    private DatePickerDialog.OnDateSetListener mEndDateSetListener;
 
-        //Calendar type variables to use later to calculate difference between dates for sprint selected by user
-        Calendar sdate;
-        Calendar edate;
-        Calendar calToday;
-        private final static long MILLISEC_PER_DAY = 24*60*60*1000;
+    private RadioGroup radioGroup;
+    private RadioButton rb1;
+    private RadioButton rb2;
+    private RadioButton rb3;
+    static String sprintPeriod;
 
-        private EditText sprintGoal;
-        //static EditText sprintPeriod;
-        static long sprintPeriodInDays;
-        private TextView swipeText;
-        //KeyListener mKeyListenerSprintPeriod;  // used to disable sprintPeriod EditText to take user input after user successfully selected sprint end date
-        //KeyListener mKeyListenerStartDate;
+    //Calendar type variables to use later to calculate difference between dates for sprint selected by user
+    Calendar sdate;
+    Calendar edate;
+    Calendar calToday;
+    private final static long MILLISEC_PER_DAY = 24*60*60*1000;
+
+    private EditText sprintGoal;
+
+    static long sprintPeriodInDays;
+    private TextView swipeText;
+    //KeyListener mKeyListenerSprintPeriod;  // used to disable sprintPeriod EditText to take user input after user successfully selected sprint end date
+    //KeyListener mKeyListenerStartDate;
 
 
 
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-            ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_sprint_setting_page,container,false);
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_sprint_setting_page,container,false);
 
-            // User input validations
-            sprintGoal = (EditText)rootView.findViewById(R.id.sprintGoalA);
-            sprintGoal.addTextChangedListener(this);
+        sprintGoal = (EditText)rootView.findViewById(R.id.sprintGoalA);
+        sprintGoal.addTextChangedListener(this);
 
         /*
         sprintPeriod = (EditText)rootView.findViewById(R.id.sprintPeriodA);
@@ -67,172 +72,168 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
         sprintPeriod.addTextChangedListener(this);
         */
 
-            radioGroup = (RadioGroup)rootView.findViewById(R.id.sprintPeriodButtonsGroup);
-            radioGroup.setVisibility(View.INVISIBLE);
-            rb1 = (RadioButton)rootView.findViewById(R.id.sprintPeriod1);
-            rb2 = (RadioButton)rootView.findViewById(R.id.sprintPeriod2);
-            rb3 = (RadioButton)rootView.findViewById(R.id.sprintPeriod3);
+        radioGroup = (RadioGroup)rootView.findViewById(R.id.sprintPeriodButtonsGroup);
+        radioGroup.setVisibility(View.INVISIBLE);
+        rb1 = (RadioButton)rootView.findViewById(R.id.sprintPeriod1);
+        rb2 = (RadioButton)rootView.findViewById(R.id.sprintPeriod2);
+        rb3 = (RadioButton)rootView.findViewById(R.id.sprintPeriod3);
 
-            rb1.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view){
-                    onRadioBtnClicked(rb1);
+
+
+        rb1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                onRadioBtnClicked(rb1);
+            }
+        });
+
+        rb2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                onRadioBtnClicked(rb2);
+            }
+        });
+
+        rb3.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                onRadioBtnClicked(rb3);
+            }
+        });
+
+
+        sprintStartDate = (TextView)rootView.findViewById(R.id.sprintStartDate);
+        sprintStartDate.setVisibility(View.INVISIBLE);
+        sprintStartDate.addTextChangedListener(this);
+        //mKeyListenerStartDate = sprintStartDate.getKeyListener();
+
+
+
+        sprintStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                calToday = Calendar.getInstance();
+                int year = calToday.get(Calendar.YEAR);
+                int month = calToday.get(Calendar.MONTH);
+                int day = calToday.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        getActivity(),
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mStartDateSetListener,
+                        year,month,day);
+
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mStartDateSetListener = new DatePickerDialog.OnDateSetListener(){
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day){
+                // to set Calendar type var sdate to the values selected by user
+                sdate = Calendar.getInstance();
+                sdate.set(Calendar.DAY_OF_MONTH,day);
+                sdate.set(Calendar.MONTH,month);
+                sdate.set(Calendar.YEAR,year);
+
+                month = month + 1;
+                String date = "";
+                if (month >= 10 && day >= 10){
+                    date = month + "/" + day + "/" + year;
                 }
-            });
-
-            rb2.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view){
-                    onRadioBtnClicked(rb2);
-                }
-            });
-
-            rb3.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view){
-                    onRadioBtnClicked(rb3);
-                }
-            });
-
-            // End user input validations
-
-
-
-            sprintStartDate = (TextView)rootView.findViewById(R.id.sprintStartDate);
-            sprintStartDate.setVisibility(View.INVISIBLE);
-            sprintStartDate.addTextChangedListener(this);
-            //mKeyListenerStartDate = sprintStartDate.getKeyListener();
-
-
-
-            sprintStartDate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                    calToday = Calendar.getInstance();
-                    int year = calToday.get(Calendar.YEAR);
-                    int month = calToday.get(Calendar.MONTH);
-                    int day = calToday.get(Calendar.DAY_OF_MONTH);
-
-                    DatePickerDialog dialog = new DatePickerDialog(
-                            getActivity(),
-                            android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                            mStartDateSetListener,
-                            year,month,day);
-
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    dialog.show();
-                }
-            });
-
-            mStartDateSetListener = new DatePickerDialog.OnDateSetListener(){
-                @Override
-                public void onDateSet(DatePicker datePicker, int year, int month, int day){
-                    // to set Calendar type var sdate to the values selected by user
-                    sdate = Calendar.getInstance();
-                    sdate.set(Calendar.DAY_OF_MONTH,day);
-                    sdate.set(Calendar.MONTH,month);
-                    sdate.set(Calendar.YEAR,year);
-
-                    month = month + 1;
-                    String date = "";
-                    if (month >= 10 && day >= 10){
-                        date = month + "/" + day + "/" + year;
+                else{
+                    if(month < 10 && day < 10){
+                        date = "0" + month + "/" + "0" + day + "/" + year;
                     }
                     else{
-                        if(month < 10 && day < 10){
-                            date = "0" + month + "/" + "0" + day + "/" + year;
+                        if(month < 10){
+                            date = "0" + month + "/" + day + "/" + year;
                         }
-                        else{
-                            if(month < 10){
-                                date = "0" + month + "/" + day + "/" + year;
-                            }
-                            else if(day < 10){
-                                date = month + "/" + "0" + day + "/" + year;
-                            }
+                        else if(day < 10){
+                            date = month + "/" + "0" + day + "/" + year;
                         }
                     }
-
-                    sprintStartDate.setText(date);
-                    // calculate date for end date and set text to sprintEndDate textview
-
                 }
-            };
+                sprintStartDate.setText(date);
+
+            }
+        };
 
 
-            sprintEndDate = (TextView)rootView.findViewById(R.id.sprintEndDate);
-            sprintEndDate.setVisibility(View.INVISIBLE);
-            sprintEndDate.addTextChangedListener(this);
+        sprintEndDate = (TextView)rootView.findViewById(R.id.sprintEndDate);
+        sprintEndDate.setVisibility(View.INVISIBLE);
+        sprintEndDate.addTextChangedListener(this);
 
-            sprintEndDate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                    Calendar cal = Calendar.getInstance();
-                    int year = cal.get(Calendar.YEAR);
-                    int month = cal.get(Calendar.MONTH);
-                    int day = cal.get(Calendar.DAY_OF_MONTH);
+        sprintEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
 
-                    DatePickerDialog dialog = new DatePickerDialog(
-                            getActivity(),
-                            android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                            mEndDateSetListener,
-                            year,month,day);
+                DatePickerDialog dialog = new DatePickerDialog(
+                        getActivity(),
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mEndDateSetListener,
+                        year,month,day);
 
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    dialog.show();
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mEndDateSetListener = new DatePickerDialog.OnDateSetListener(){
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day){
+                // to set Calendar type var sdate to the values selected by user
+                edate = Calendar.getInstance();
+                edate.set(Calendar.DAY_OF_MONTH,day);
+                edate.set(Calendar.MONTH,month);
+                edate.set(Calendar.YEAR,year);
+
+                month = month + 1;
+                String date = "";
+                if (month >= 10 && day >= 10){
+                    date = month + "/" + day + "/" + year;
                 }
-            });
-
-            mEndDateSetListener = new DatePickerDialog.OnDateSetListener(){
-                @Override
-                public void onDateSet(DatePicker datePicker, int year, int month, int day){
-                    // to set Calendar type var sdate to the values selected by user
-                    edate = Calendar.getInstance();
-                    edate.set(Calendar.DAY_OF_MONTH,day);
-                    edate.set(Calendar.MONTH,month);
-                    edate.set(Calendar.YEAR,year);
-
-                    month = month + 1;
-                    String date = "";
-                    if (month >= 10 && day >= 10){
-                        date = month + "/" + day + "/" + year;
+                else{
+                    if(month < 10 && day < 10){
+                        date = "0" + month + "/" + "0" + day + "/" + year;
                     }
                     else{
-                        if(month < 10 && day < 10){
-                            date = "0" + month + "/" + "0" + day + "/" + year;
+                        if(month < 10){
+                            date = "0" + month + "/" + day + "/" + year;
                         }
-                        else{
-                            if(month < 10){
-                                date = "0" + month + "/" + day + "/" + year;
-                            }
-                            else if(day < 10){
-                                date = month + "/" + "0" + day + "/" + year;
-                            }
+                        else if(day < 10){
+                            date = month + "/" + "0" + day + "/" + year;
                         }
                     }
-                    sprintEndDate.setText(date);
-
                 }
-            };
+
+                sprintEndDate.setText(date);
+
+            }
+        };
 
 
-            swipeText = (TextView)rootView.findViewById(R.id.swipe);
-            swipeText.setVisibility(View.INVISIBLE);
+        swipeText = (TextView)rootView.findViewById(R.id.swipe);
+        swipeText.setVisibility(View.INVISIBLE);
 
+        return rootView;
 
+    }
 
-            return rootView;
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count){
 
-        }
+    }
 
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count){
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after){
 
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after){
-
-        }
+    }
 
     //user input validations
     @Override
@@ -368,6 +369,9 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
                     sprintPeriodInDays = period * 7;
                 }
                 break;
+
+
+
         }
     }
 

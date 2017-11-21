@@ -43,7 +43,7 @@ public class MainPassionActivity extends AppCompatActivity {
                 String userid = in.getStringExtra("userid");
                 String username = in.getStringExtra("username");
                 String password = in.getStringExtra("password");
-                Intent i = new Intent(MainPassionActivity.this, MainGivingBackActivity.class);
+                Intent i = new Intent(MainPassionActivity.this, GivingBackActivity.class);
                 i.putExtra("userid",userid);
                 i.putExtra("username",username);
                 i.putExtra("password",password);
@@ -84,6 +84,6 @@ public class MainPassionActivity extends AppCompatActivity {
         activitiesPassion.add(new Passion(R.drawable.passion_camping, "Camping"));
         activitiesPassion.add(new Passion(R.drawable.passion_traveling, "Traveling"));
 
-
     }
+
 }

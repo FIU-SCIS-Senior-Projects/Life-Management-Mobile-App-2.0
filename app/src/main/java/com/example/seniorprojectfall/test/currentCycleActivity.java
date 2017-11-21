@@ -88,7 +88,7 @@ public class currentCycleActivity extends AppCompatActivity {
 
 
         g.setText("\n\n\n"
-                + " Activity Name: " +  Dashboard.userActivityJoyid1.activityName + "\n"
+                + " Activity Name: " +  Dashboard.userActivityJoyid1.name + "\n"
                 + " Actual Points:  " + Dashboard.userActivityJoyid1.actualPoints + "\n"
                 + " Target Points:  " + Dashboard.userActivityJoyid1.targetPoints + "\n"
                 + " Starting Date:  " + Dashboard.startingDateFixed + "\n"
@@ -106,7 +106,7 @@ public class currentCycleActivity extends AppCompatActivity {
 
 
         g2.setText("\n\n\n"
-                + " Activity #2 Name: " +  Dashboard.userActivityJoyid2.activityName + "\n"
+                + " Activity #2 Name: " +  Dashboard.userActivityJoyid2.name + "\n"
                 + " Actual Points:  " + Dashboard.userActivityJoyid2.actualPoints + "\n"
                 + " Target Points:  " + Dashboard.userActivityJoyid2.targetPoints + "\n"
                 + " Starting Date:  " + Dashboard.startingDateFixed + "\n"
@@ -140,7 +140,7 @@ public class currentCycleActivity extends AppCompatActivity {
 
 
         g.setText("\n\n\n"
-                + " Activity Name: " +  Dashboard.userActivityJoyid1.activityName + "\n"
+                + " Activity Name: " +  Dashboard.userActivityJoyid1.name + "\n"
                 + " Actual Points:  " + Dashboard.userActivityJoyid1.actualPoints + "\n"
                 + " Target Points:  " + Dashboard.userActivityJoyid1.targetPoints + "\n"
                 + " Starting Date:  " + Dashboard.startingDateFixed + "\n"
@@ -158,7 +158,7 @@ public class currentCycleActivity extends AppCompatActivity {
 
 
         g2.setText("\n\n\n"
-                + " Activity #2 Name: " +  Dashboard.userActivityJoyid2.activityName + "\n"
+                + " Activity #2 Name: " +  Dashboard.userActivityJoyid2.name + "\n"
                 + " Actual Points:  " + Dashboard.userActivityJoyid2.actualPoints + "\n"
                 + " Target Points:  " + Dashboard.userActivityJoyid2.targetPoints + "\n"
                 + " Starting Date:  " + Dashboard.startingDateFixed + "\n"
@@ -183,7 +183,7 @@ public class currentCycleActivity extends AppCompatActivity {
 
 
         g.setText("\n\n\n"
-                + " Activity Name: " +  Dashboard.userActivityPassionid1.activityName + "\n"
+                + " Activity Name: " +  Dashboard.userActivityPassionid1.name + "\n"
                 + " Actual Points:  " + Dashboard.userActivityPassionid1.actualPoints + "\n"
                 + " Target Points:  " + Dashboard.userActivityPassionid1.targetPoints + "\n"
                 + " Starting Date:  " + Dashboard.startingDateFixed_passion + "\n"
@@ -200,7 +200,7 @@ public class currentCycleActivity extends AppCompatActivity {
         first3.setHighValue(h1);
 
         g2.setText("\n\n\n"
-                + " Activity #2 Name: " +  Dashboard.userActivityPassionid2.activityName + "\n"
+                + " Activity #2 Name: " +  Dashboard.userActivityPassionid2.name + "\n"
                 + " Actual Points:  " + Dashboard.userActivityPassionid2.actualPoints + "\n"
                 + " Target Points:  " + Dashboard.userActivityPassionid2.targetPoints + "\n"
                 + " Starting Date:  " + Dashboard.startingDateFixed_passion + "\n"
@@ -222,7 +222,7 @@ public class currentCycleActivity extends AppCompatActivity {
 
 
         g.setText("\n\n\n"
-                + " Activity Name: " +  Dashboard.userActivityContributionid1.activityName + "\n"
+                + " Activity Name: " +  Dashboard.userActivityContributionid1.name + "\n"
                 + " Actual Points:  " + Dashboard.userActivityContributionid1.actualPoints + "\n"
                 + " Target Points:  " + Dashboard.userActivityContributionid1.targetPoints + "\n"
                 + " Starting Date:  " + Dashboard.startingDateFixed_contribution + "\n"
@@ -239,7 +239,7 @@ public class currentCycleActivity extends AppCompatActivity {
         first3.setHighValue(h1);
 
         g2.setText("\n\n\n"
-                + " Activity #2 Name: " +  Dashboard.userActivityContributionid2.activityName + "\n"
+                + " Activity #2 Name: " +  Dashboard.userActivityContributionid2.name + "\n"
                 + " Actual Points:  " + Dashboard.userActivityContributionid2.actualPoints + "\n"
                 + " Target Points:  " + Dashboard.userActivityContributionid2.targetPoints + "\n"
                 + " Starting Date:  " + Dashboard.startingDateFixed_contribution + "\n"

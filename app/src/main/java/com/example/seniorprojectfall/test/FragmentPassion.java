@@ -101,11 +101,11 @@ public class FragmentPassion extends Fragment implements View.OnClickListener{
 
         TextView textAct1 = (TextView)view.findViewById(R.id.textViewAct1);
         // Assign variable textAct1 the value of static variable activity1Joy (from TestActivity.java)
-        textAct1.setText(Dashboard.userActivityPassionid1.activityName);
+        textAct1.setText(Dashboard.userActivityPassionid1.name);
         //textAct1.setText("Inner Peace");
 
         TextView textAct2 = (TextView)view.findViewById(R.id.textViewAct2);
-        textAct2.setText(Dashboard.userActivityPassionid2.activityName);
+        textAct2.setText(Dashboard.userActivityPassionid2.name);
 
         TextView textCategScore = (TextView)view.findViewById(R.id.textViewCategScore);
         textCategScore.setText("Passion Score");
