@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -19,7 +20,6 @@ import android.widget.Toast;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.content.Intent;
-
 import java.util.ArrayList;
 
 public class previous_cycle extends AppCompatActivity {
@@ -44,6 +44,7 @@ public class previous_cycle extends AppCompatActivity {
             for (int i = 0; i < navigation.getMenu().size(); i++) {
                 MenuItem menuItem = navigation.getMenu().getItem(i);
                 boolean isChecked = menuItem.getItemId() == item.getItemId();
+                System.out.println("ischecked " + isChecked + " then i: " + i);
                 menuItem.getIcon().setColorFilter(Color.parseColor("#a8a8a8"), PorterDuff.Mode.SRC_IN);
             }
 
@@ -239,6 +240,7 @@ public class previous_cycle extends AppCompatActivity {
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+
         elements = new String[Dashboard.userJoyactivitiesPrevious.size()];
         ArrayList<String> tempelementList = new ArrayList<>();
         ArrayList<String> tempList = new ArrayList<>();
@@ -306,9 +308,7 @@ public class previous_cycle extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         super.onBackPressed();
-
     }
 
     //JOY
