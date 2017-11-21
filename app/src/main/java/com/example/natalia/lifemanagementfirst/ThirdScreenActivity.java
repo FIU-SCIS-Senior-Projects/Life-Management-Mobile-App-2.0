@@ -26,7 +26,7 @@ public class ThirdScreenActivity extends AppCompatActivity{
         nextButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v){
-                Intent intent = new Intent(ThirdScreenActivity.this, LoginActivity.class);
+                Intent intent = new Intent(ThirdScreenActivity.this, activity_fourth_screen.class);
                 startActivity(intent);
             }
         });

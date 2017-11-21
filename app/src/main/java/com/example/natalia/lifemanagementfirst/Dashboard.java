@@ -1,5 +1,6 @@
 package com.example.natalia.lifemanagementfirst;
 
+import android.graphics.BitmapFactory;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -22,7 +23,22 @@ import android.view.MenuItem;
 
 import java.util.*;
 import android.content.Intent;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import android.view.View;
+import android.graphics.Bitmap;
+import java.io.File;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 
 //This is dashboard activity
@@ -34,6 +50,7 @@ public class Dashboard extends AppCompatActivity
     //JOY variables
     static ArrayList<ActivitiesSprint> allActivities;
     static ArrayList<ActivitiesSprint> userActivitiesAll;
+    static ArrayList<Coach> coachesList;
     static ArrayList<Category> currentJoyCategories;
     static ArrayList<Category> userJoysprintsHelper;
     static ArrayList<ActivitiesSprint> userJoyactivitiesPrevious;
@@ -44,8 +61,10 @@ public class Dashboard extends AppCompatActivity
     static String startingDateFixed;
     static String sprintJoyid;
 
-
+    static String profileName;
     User currentUser; //holds the information of the current logged-in user
+    DatabaseReference profilePic;
+    static String helper;
 
 
     //PASSION variables
@@ -79,6 +98,8 @@ public class Dashboard extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        coachesList = new ArrayList<>();
 
 
         //JOY
@@ -120,7 +141,6 @@ public class Dashboard extends AppCompatActivity
         tbl_pages.getTabAt(1).setIcon(tabIcons[1]);
         tbl_pages.getTabAt(2).setIcon(tabIcons[2]);
 
-        //tbl_pages.getTabAt(0).getIcon().setBounds(10,10,10,10);
 
         tbl_pages.getTabAt(0).getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
         tbl_pages.getTabAt(1).getIcon().setColorFilter(Color.parseColor("#a8a8a8"), PorterDuff.Mode.SRC_IN);
@@ -173,7 +193,7 @@ public class Dashboard extends AppCompatActivity
         userActivityJoyid1.activityScore = in.getExtras().getString("joy_activityid1_activityscore");
         userActivityJoyid1.actualPoints = in.getExtras().getString("joy_activityid1_actualpoints");
         userActivityJoyid1.categoryId = in.getExtras().getString("joy_activityid1_categoryid");
-        userActivityJoyid1.activityName = in.getExtras().getString("joy_activityid1_activityname");
+        userActivityJoyid1.name = in.getExtras().getString("joy_activityid1_activityname");
         userActivityJoyid1.sprintDailyPoints = in.getExtras().getString("joy_activityid1_sprintdailypoints");
         userActivityJoyid1.targetPoints = in.getExtras().getString("joy_activityid1_targetpoints");
         userActivityJoyid1.userId = in.getExtras().getString("joy_activityid1_userid");
@@ -182,7 +202,7 @@ public class Dashboard extends AppCompatActivity
         userActivityJoyid2.activityScore = in.getExtras().getString("joy_activityid2_activityscore");
         userActivityJoyid2.actualPoints = in.getExtras().getString("joy_activityid2_actualpoints");
         userActivityJoyid2.categoryId = in.getExtras().getString("joy_activityid2_categoryid");
-        userActivityJoyid2.activityName = in.getExtras().getString("joy_activityid2_activityname");
+        userActivityJoyid2.name = in.getExtras().getString("joy_activityid2_activityname");
         userActivityJoyid2.sprintDailyPoints = in.getExtras().getString("joy_activityid2_sprintdailypoints");
         userActivityJoyid2.targetPoints = in.getExtras().getString("joy_activityid2_targetpoints");
         userActivityJoyid2.userId = in.getExtras().getString("joy_activityid2_userid");
@@ -210,7 +230,7 @@ public class Dashboard extends AppCompatActivity
         userActivityPassionid1.activityScore = in.getExtras().getString("passion_activityid1_activityscore");
         userActivityPassionid1.actualPoints = in.getExtras().getString("passion_activityid1_actualpoints");
         userActivityPassionid1.categoryId = in.getExtras().getString("passion_activityid1_categoryid");
-        userActivityPassionid1.activityName = in.getExtras().getString("passion_activityid1_activityname");
+        userActivityPassionid1.name = in.getExtras().getString("passion_activityid1_activityname");
         userActivityPassionid1.sprintDailyPoints = in.getExtras().getString("passion_activityid1_sprintdailypoints");
         userActivityPassionid1.targetPoints = in.getExtras().getString("passion_activityid1_targetpoints");
         userActivityPassionid1.userId = in.getExtras().getString("passion_activityid1_userid");
@@ -219,7 +239,7 @@ public class Dashboard extends AppCompatActivity
         userActivityPassionid2.activityScore = in.getExtras().getString("passion_activityid2_activityscore");
         userActivityPassionid2.actualPoints = in.getExtras().getString("passion_activityid2_actualpoints");
         userActivityPassionid2.categoryId = in.getExtras().getString("passion_activityid2_categoryid");
-        userActivityPassionid2.activityName = in.getExtras().getString("passion_activityid2_activityname");
+        userActivityPassionid2.name = in.getExtras().getString("passion_activityid2_activityname");
         userActivityPassionid2.sprintDailyPoints = in.getExtras().getString("passion_activityid2_sprintdailypoints");
         userActivityPassionid2.targetPoints = in.getExtras().getString("passion_activityid2_targetpoints");
         userActivityPassionid2.userId = in.getExtras().getString("passion_activityid2_userid");
@@ -247,7 +267,7 @@ public class Dashboard extends AppCompatActivity
         userActivityContributionid1.activityScore = in.getExtras().getString("contribution_activityid1_activityscore");
         userActivityContributionid1.actualPoints = in.getExtras().getString("contribution_activityid1_actualpoints");
         userActivityContributionid1.categoryId = in.getExtras().getString("contribution_activityid1_categoryid");
-        userActivityContributionid1.activityName = in.getExtras().getString("contribution_activityid1_activityname");
+        userActivityContributionid1.name = in.getExtras().getString("contribution_activityid1_activityname");
         userActivityContributionid1.sprintDailyPoints = in.getExtras().getString("contribution_activityid1_sprintdailypoints");
         userActivityContributionid1.targetPoints = in.getExtras().getString("contribution_activityid1_targetpoints");
         userActivityContributionid1.userId = in.getExtras().getString("contribution_activityid1_userid");
@@ -256,7 +276,7 @@ public class Dashboard extends AppCompatActivity
         userActivityContributionid2.activityScore = in.getExtras().getString("contribution_activityid2_activityscore");
         userActivityContributionid2.actualPoints = in.getExtras().getString("contribution_activityid2_actualpoints");
         userActivityContributionid2.categoryId = in.getExtras().getString("contribution_activityid2_categoryid");
-        userActivityContributionid2.activityName = in.getExtras().getString("contribution_activityid2_activityname");
+        userActivityContributionid2.name = in.getExtras().getString("contribution_activityid2_activityname");
         userActivityContributionid2.sprintDailyPoints = in.getExtras().getString("contribution_activityid2_sprintdailypoints");
         userActivityContributionid2.targetPoints = in.getExtras().getString("contribution_activityid2_targetpoints");
         userActivityContributionid2.userId = in.getExtras().getString("contribution_activityid2_userid");
@@ -282,6 +302,7 @@ public class Dashboard extends AppCompatActivity
 
         allActivities = bundle.getParcelableArrayList("allActivities");
         userActivitiesAll = bundle.getParcelableArrayList("userActivitiesAllList");
+        coachesList = bundle.getParcelableArrayList("coachesList");
 
         //JOY
         currentJoyCategories = bundle.getParcelableArrayList("categoriesJoyCategories");
@@ -299,8 +320,6 @@ public class Dashboard extends AppCompatActivity
         userContributionactivitiesPrevious = bundle.getParcelableArrayList("activitiesContributionPrevious");
 
 
-        int j = 0;
-        int k = 0;
 
 
         //JOY
@@ -310,12 +329,11 @@ public class Dashboard extends AppCompatActivity
                 userJoySprint.endingDate.substring(2,4) + "/" + userJoySprint.endingDate.substring(4);
 
         //convert to format mm/dd/yyyy
-        //System.out.println("heystart " + startRef);
+
         startingDateFixed = userJoySprint.startingDate.substring(0,2) + "/" +
                 userJoySprint.startingDate.substring(2,4) + "/" + userJoySprint.startingDate.substring(4);
 
 
-        System.out.println("sprintjoyid " + sprintJoyid);
 
 
         //PASSION
@@ -325,12 +343,11 @@ public class Dashboard extends AppCompatActivity
                 userPassionSprint.endingDate.substring(2,4) + "/" + userPassionSprint.endingDate.substring(4);
 
         //convert to format mm/dd/yyyy
-        //System.out.println("heystart " + startRef);
+
         startingDateFixed_passion = userPassionSprint.startingDate.substring(0,2) + "/" +
                 userPassionSprint.startingDate.substring(2,4) + "/" + userPassionSprint.startingDate.substring(4);
 
 
-        System.out.println("sprintPassionid " + sprintPassionid);
 
         //GIVING BACK
 
@@ -339,12 +356,12 @@ public class Dashboard extends AppCompatActivity
                 userContributionSprint.endingDate.substring(2,4) + "/" + userContributionSprint.endingDate.substring(4);
 
         //convert to format mm/dd/yyyy
-        //System.out.println("heystart " + startRef);
+
         startingDateFixed_contribution = userContributionSprint.startingDate.substring(0,2) + "/" +
                 userContributionSprint.startingDate.substring(2,4) + "/" + userContributionSprint.startingDate.substring(4);
 
 
-        System.out.println("sprintContributionid " + sprintContributionid);
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -355,6 +372,35 @@ public class Dashboard extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerlayout = navigationView.getHeaderView(0);
+
+
+
+        TextView message  = (TextView) headerlayout.findViewById(R.id.welcomeTextview);
+        message.setText("Hello " + currentUser.firstName.toString());
+
+        profileName = in.getExtras().getString("profileImageName");
+        final ImageView profilePicbtn = (ImageView)headerlayout.findViewById(R.id.imageViewProfile);
+
+        try {
+            final File tmpFile = File.createTempFile("img", "png");
+            StorageReference reference = FirebaseStorage.getInstance().getReference("userProfileImgs");
+
+            reference.child(profileName).getFile(tmpFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                    Bitmap image = BitmapFactory.decodeFile(tmpFile.getAbsolutePath());
+                    profilePicbtn.setImageBitmap(image);
+                }
+            });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
 
     } //end of onCreate
@@ -428,8 +474,6 @@ public class Dashboard extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        System.out.println("id in optionSelected method " + id);
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_signout) {
@@ -524,6 +568,8 @@ public class Dashboard extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_view_coaches) {
+            Intent i = new Intent(Dashboard.this,viewCoachesActivity.class);
+            this.startActivity(i);
 
         } else if (id == R.id.nav_share_progress) {
 

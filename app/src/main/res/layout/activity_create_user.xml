@@ -4,27 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/a8"
     tools:context="com.example.natalia.lifemanagementfirst.CreateUserActivity">
 
 
     <LinearLayout
-        android:layout_centerVertical="true"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:layout_constraintTop_creator="1"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        tools:layout_constraintLeft_creator="1"
+        android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="8dp">
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1">
 
         <EditText
             android:id="@+id/editFirstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:hint="Enter First Name" />
+            android:hint="Enter First Name"
+            />
 
         <EditText
             android:id="@+id/editLastName"
@@ -77,6 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
+            android:background="#F9604B"
             android:text="Signup" />
 
         <EditText

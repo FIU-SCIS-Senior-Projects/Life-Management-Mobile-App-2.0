@@ -108,11 +108,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
         TextView textAct1 = (TextView)view.findViewById(R.id.textViewAct1);
         // Assign variable textAct1 the value of static variable activity1Joy (from TestActivity.java)
-        textAct1.setText(Dashboard.userActivityJoyid1.activityName);
+        textAct1.setText(Dashboard.userActivityJoyid1.name);
         //textAct1.setText("Inner Peace");
 
         TextView textAct2 = (TextView)view.findViewById(R.id.textViewAct2);
-        textAct2.setText(Dashboard.userActivityJoyid2.activityName);
+        textAct2.setText(Dashboard.userActivityJoyid2.name);
 
         TextView textCategScore = (TextView)view.findViewById(R.id.textViewCategScore);
         textCategScore.setText("Joy Score");
@@ -3774,6 +3774,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             databaseUpdateCategories.child(Dashboard.userActivityJoyid1.categoryId).child("JoySprints").child(Dashboard.sprintJoyid).child("goal3").setValue(q3.getText().toString());
             databaseUpdateCategories.child(Dashboard.userActivityJoyid1.categoryId).child("JoySprints").child(Dashboard.sprintJoyid).child("goal4").setValue(q4.getText().toString());
 
+
+            q1.setText("");
+            q2.setText("");
+            q3.setText("");
+            q4.setText("");
         }
 
     }

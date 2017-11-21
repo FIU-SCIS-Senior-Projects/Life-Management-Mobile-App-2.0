@@ -1,5 +1,7 @@
 package com.example.natalia.lifemanagementfirst;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -23,25 +25,39 @@ import java.util.ArrayList;
 public class previous_cycle extends AppCompatActivity {
 
     private TextView mTextMessage;
+    private int mMenuId;
     ListView list;
     ArrayAdapter<String> adapter;
     String[] elements;
     String[] elementsHelper;
+    BottomNavigationView navigation;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
+            mMenuId = item.getItemId();
+            for (int i = 0; i < navigation.getMenu().size(); i++) {
+                MenuItem menuItem = navigation.getMenu().getItem(i);
+                boolean isChecked = menuItem.getItemId() == item.getItemId();
+                menuItem.getIcon().setColorFilter(Color.parseColor("#a8a8a8"), PorterDuff.Mode.SRC_IN);
+            }
+
             switch (item.getItemId()) {
                 case R.id.navigation_joy:
-
+                    item.getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
                     populateJoy();
                     return true;
                 case R.id.navigation_passion:
+                    item.getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
                     populatePassion();
                     return true;
                 case R.id.navigation_contribution:
+                    item.getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
                     populateContribution();
                     return true;
             }
@@ -68,12 +84,12 @@ public class previous_cycle extends AppCompatActivity {
             if (!(Dashboard.userActivityJoyid1.activityid.contains(Dashboard.userJoyactivitiesPrevious.get(i).activityid))
                     && (!(Dashboard.userActivityJoyid2.activityid.contains(Dashboard.userJoyactivitiesPrevious.get(i).activityid)))) {
 
-                tempelementList.add(Dashboard.userJoyactivitiesPrevious.get(i).activityName + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
+                tempelementList.add(Dashboard.userJoyactivitiesPrevious.get(i).name + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
                         + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId);
 
                 is = true;
 
-                tempList.add(Dashboard.userJoyactivitiesPrevious.get(i).activityName + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0, 2)
+                tempList.add(Dashboard.userJoyactivitiesPrevious.get(i).name + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0, 2)
                         + "/" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(2, 4) + "/"
                         + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(6) + "-"
                         + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(0, 2) + "/"
@@ -102,12 +118,10 @@ public class previous_cycle extends AppCompatActivity {
                 showContentJoy(i);
             }
         });
-
     }
 
 
     public void populatePassion(){
-
 
         elements = new String[Dashboard.userPassionactivitiesPrevious.size()];
         ArrayList<String> tempelementList = new ArrayList<>();
@@ -123,12 +137,12 @@ public class previous_cycle extends AppCompatActivity {
             if (!(Dashboard.userActivityPassionid1.activityid.contains(Dashboard.userPassionactivitiesPrevious.get(i).activityid))
                     && (!(Dashboard.userActivityPassionid2.activityid.contains(Dashboard.userPassionactivitiesPrevious.get(i).activityid)))) {
 
-                tempelementList.add(Dashboard.userPassionactivitiesPrevious.get(i).activityName + " " + Dashboard.userPassionactivitiesPrevious.get(i).categoryId
+                tempelementList.add(Dashboard.userPassionactivitiesPrevious.get(i).name + " " + Dashboard.userPassionactivitiesPrevious.get(i).categoryId
                         + " " + Dashboard.userPassionactivitiesPrevious.get(i).userId);
 
                 is = true;
 
-                tempList.add(Dashboard.userPassionactivitiesPrevious.get(i).activityName + " (" + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(0, 2)
+                tempList.add(Dashboard.userPassionactivitiesPrevious.get(i).name + " (" + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(0, 2)
                         + "/" + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(2, 4) + "/"
                         + Dashboard.userPassionactivitiesPrevious.get(i).categoryId.substring(6) + "-"
                         + " " + Dashboard.userPassionactivitiesPrevious.get(i).userId.substring(0, 2) + "/"
@@ -178,12 +192,12 @@ public class previous_cycle extends AppCompatActivity {
 
 
 
-                tempelementList.add(Dashboard.userContributionactivitiesPrevious.get(i).activityName + " " + Dashboard.userContributionactivitiesPrevious.get(i).categoryId
+                tempelementList.add(Dashboard.userContributionactivitiesPrevious.get(i).name + " " + Dashboard.userContributionactivitiesPrevious.get(i).categoryId
                         + " " + Dashboard.userContributionactivitiesPrevious.get(i).userId);
 
                 res = true;
 
-                tempList.add(Dashboard.userContributionactivitiesPrevious.get(i).activityName + " (" + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(0, 2)
+                tempList.add(Dashboard.userContributionactivitiesPrevious.get(i).name + " (" + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(0, 2)
                         + "/" + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(2, 4) + "/"
                         + Dashboard.userContributionactivitiesPrevious.get(i).categoryId.substring(6) + "-"
                         + " " + Dashboard.userContributionactivitiesPrevious.get(i).userId.substring(0, 2) + "/"
@@ -216,15 +230,13 @@ public class previous_cycle extends AppCompatActivity {
     }
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_previous_cycle2);
 
         mTextMessage = (TextView) findViewById(R.id.textViewcycle_title);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         elements = new String[Dashboard.userJoyactivitiesPrevious.size()];
@@ -243,11 +255,11 @@ public class previous_cycle extends AppCompatActivity {
 
                 res = true;
 
-                tempelementList.add(Dashboard.userJoyactivitiesPrevious.get(i).activityName + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
+                tempelementList.add(Dashboard.userJoyactivitiesPrevious.get(i).name + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
                         + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId);
 
 
-                tempList.add(Dashboard.userJoyactivitiesPrevious.get(i).activityName + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0, 2)
+                tempList.add(Dashboard.userJoyactivitiesPrevious.get(i).name + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0, 2)
                         + "/" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(2, 4) + "/"
                         + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(6) + "-"
                         + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId.substring(0, 2) + "/"
@@ -281,7 +293,7 @@ public class previous_cycle extends AppCompatActivity {
                 }
             });
 
-            ImageButton goBack = (ImageButton) findViewById(R.id.imageButton_Cycle);
+            final ImageButton goBack = (ImageButton) findViewById(R.id.imageButton_Cycle);
 
             goBack.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -289,9 +301,7 @@ public class previous_cycle extends AppCompatActivity {
                     onBackPressed();
                 }
             });
-
         }
-
     }
 
     @Override
@@ -300,7 +310,6 @@ public class previous_cycle extends AppCompatActivity {
         super.onBackPressed();
 
     }
-
 
     //JOY
     public void showContentJoy(int i){
@@ -314,14 +323,14 @@ public class previous_cycle extends AppCompatActivity {
         for(int k=0;k<size;k++){
 
 
-            if(Dashboard.userJoyactivitiesPrevious.get(k).activityName.contains(elementsplitter[0]) &&
+            if(Dashboard.userJoyactivitiesPrevious.get(k).name.contains(elementsplitter[0]) &&
                     Dashboard.userJoyactivitiesPrevious.get(k).categoryId.contains(elementsplitter[1]) &&
                     Dashboard.userJoyactivitiesPrevious.get(k).userId.contains(elementsplitter[2])){
 
                 element = Dashboard.userJoyactivitiesPrevious.get(k).activityScore + " "
                         + Dashboard.userJoyactivitiesPrevious.get(k).actualPoints + " "
                         + Dashboard.userJoyactivitiesPrevious.get(k).categoryId + " "
-                        + Dashboard.userJoyactivitiesPrevious.get(k).activityName + " "
+                        + Dashboard.userJoyactivitiesPrevious.get(k).name + " "
                         + Dashboard.userJoyactivitiesPrevious.get(k).sprintDailyPoints + " "
                         + Dashboard.userJoyactivitiesPrevious.get(k).targetPoints + " "
                         + Dashboard.userJoyactivitiesPrevious.get(k).userId;
@@ -348,24 +357,19 @@ public class previous_cycle extends AppCompatActivity {
 
         String element = "";
         String[] elementsplitter = elements[i].split(" ");
-        System.out.println("this is the elementsplitter passion " + elementsplitter[0]);
-        System.out.println("this is the element fella passion " + elements[i]);
 
         int size = Dashboard.userPassionactivitiesPrevious.size();
         for(int k=0;k<size;k++){
 
-            System.out.println("whatnow1 " + Dashboard.userPassionactivitiesPrevious.get(k).activityName);
-            System.out.println("whatnow2 " + Dashboard.userPassionactivitiesPrevious.get(k).categoryId);
-            System.out.println("whatnow3 " + Dashboard.userPassionactivitiesPrevious.get(k).userId);
 
-            if(Dashboard.userPassionactivitiesPrevious.get(k).activityName.contains(elementsplitter[0]) &&
+            if(Dashboard.userPassionactivitiesPrevious.get(k).name.contains(elementsplitter[0]) &&
                     Dashboard.userPassionactivitiesPrevious.get(k).categoryId.contains(elementsplitter[1]) &&
                     Dashboard.userPassionactivitiesPrevious.get(k).userId.contains(elementsplitter[2])){
 
                 element = Dashboard.userPassionactivitiesPrevious.get(k).activityScore + " "
                         + Dashboard.userPassionactivitiesPrevious.get(k).actualPoints + " "
                         + Dashboard.userPassionactivitiesPrevious.get(k).categoryId + " "
-                        + Dashboard.userPassionactivitiesPrevious.get(k).activityName + " "
+                        + Dashboard.userPassionactivitiesPrevious.get(k).name + " "
                         + Dashboard.userPassionactivitiesPrevious.get(k).sprintDailyPoints + " "
                         + Dashboard.userPassionactivitiesPrevious.get(k).targetPoints + " "
                         + Dashboard.userPassionactivitiesPrevious.get(k).userId;
@@ -373,10 +377,7 @@ public class previous_cycle extends AppCompatActivity {
             }
         }
 
-        System.out.println("elementafter passion " + element);
-
         Intent k = new Intent(previous_cycle.this,cycleActivityPassion.class);
-
 
         //saving all data do we can use it in the next screen
         Bundle bundle = new Bundle();
@@ -393,24 +394,18 @@ public class previous_cycle extends AppCompatActivity {
 
         String element = "";
         String[] elementsplitter = elements[i].split(" ");
-        System.out.println("this is the elementsplitter contribution " + elementsplitter[0]);
-        System.out.println("this is the element fella contribution " + elements[i]);
 
         int size = Dashboard.userContributionactivitiesPrevious.size();
         for(int k=0;k<size;k++){
 
-            System.out.println("whatnow1 " + Dashboard.userContributionactivitiesPrevious.get(k).activityName);
-            System.out.println("whatnow2 " + Dashboard.userContributionactivitiesPrevious.get(k).categoryId);
-            System.out.println("whatnow3 " + Dashboard.userContributionactivitiesPrevious.get(k).userId);
-
-            if(Dashboard.userContributionactivitiesPrevious.get(k).activityName.contains(elementsplitter[0]) &&
+            if(Dashboard.userContributionactivitiesPrevious.get(k).name.contains(elementsplitter[0]) &&
                     Dashboard.userContributionactivitiesPrevious.get(k).categoryId.contains(elementsplitter[1]) &&
                     Dashboard.userContributionactivitiesPrevious.get(k).userId.contains(elementsplitter[2])){
 
                 element = Dashboard.userContributionactivitiesPrevious.get(k).activityScore + " "
                         + Dashboard.userContributionactivitiesPrevious.get(k).actualPoints + " "
                         + Dashboard.userContributionactivitiesPrevious.get(k).categoryId + " "
-                        + Dashboard.userContributionactivitiesPrevious.get(k).activityName + " "
+                        + Dashboard.userContributionactivitiesPrevious.get(k).name + " "
                         + Dashboard.userContributionactivitiesPrevious.get(k).sprintDailyPoints + " "
                         + Dashboard.userContributionactivitiesPrevious.get(k).targetPoints + " "
                         + Dashboard.userContributionactivitiesPrevious.get(k).userId;
@@ -418,10 +413,7 @@ public class previous_cycle extends AppCompatActivity {
             }
         }
 
-        System.out.println("elementafter contribution " + element);
-
         Intent k = new Intent(previous_cycle.this,cycleActivityContribution.class);
-
 
         //saving all data do we can use it in the next screen
         Bundle bundle = new Bundle();
@@ -431,8 +423,6 @@ public class previous_cycle extends AppCompatActivity {
 
         this.startActivity(k);
     }
-
-
 
 }
 

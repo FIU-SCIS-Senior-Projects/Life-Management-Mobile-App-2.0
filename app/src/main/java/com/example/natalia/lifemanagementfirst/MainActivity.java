@@ -1,5 +1,6 @@
 package com.example.natalia.lifemanagementfirst;
 
+        import android.graphics.Color;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
         import android.view.ActionMode;
@@ -28,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
         androidRightArrowButton = (ImageButton) findViewById(R.id.imageButton);
 
-        CheckedTextView skip = (CheckedTextView) findViewById(R.id.checkedTextView);
+        final CheckedTextView skip = (CheckedTextView) findViewById(R.id.checkedTextView);
 
 
         androidRightArrowButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v){
                 //Toast.makeText(MainActivity.this, "It works",Toast.LENGTH_LONG).show();
-                Intent i = new Intent(MainActivity.this,ThirdScreenActivity.class);
+                Intent i = new Intent(MainActivity.this,SecondScreenActivity.class);
                 startActivity(i);
             }
         });
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                skip.setTextColor(Color.BLUE);
                 Intent i = new Intent(MainActivity.this,LoginActivity.class);
                 startActivity(i);
             }
@@ -57,4 +59,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
 

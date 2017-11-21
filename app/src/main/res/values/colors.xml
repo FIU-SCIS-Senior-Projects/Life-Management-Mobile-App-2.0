@@ -7,5 +7,5 @@
     <color name="colorGreenLight">#ad4deb6a</color>
     <color name="colorGreenMedium">#11b213</color>
     <color name="colorTransparent">#00000000</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#000000</color>
 </resources>

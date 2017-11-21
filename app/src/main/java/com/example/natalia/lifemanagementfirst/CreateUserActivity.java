@@ -2,6 +2,7 @@ package com.example.natalia.lifemanagementfirst;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -40,7 +40,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
     DatabaseReference databaseReference;
     List<User> listUsers2;
 
-
+    //#ff6b6b
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +60,6 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         lastName = (EditText) findViewById(R.id.editLastName);
         DOB = (EditText) findViewById(R.id.editDOB);
         buttonRegister = (Button) findViewById(R.id.buttonSignup);
-
-
         buttonRegister.setOnClickListener(this);
 
     }
@@ -310,7 +308,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
             }
 
             if(!a){
-                Toast.makeText(this,"Username MUST contain characters and numbers",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Username MUST contain characters and at least a number",Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -427,8 +425,4 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         startActivity(i);
 
     } //end of method addData
-
-
-
-
 }

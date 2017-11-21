@@ -30,7 +30,6 @@ public class ChatActivity  extends AppCompatActivity {
     private FirebaseListAdapter<ChatMessage> adapter;
     FloatingActionButton fab;
     DatabaseReference databaseReferenceChat;
-    //DataSnapshot chatSnapshot;
     String userId;
     String username;
     String firstname;
@@ -38,25 +37,17 @@ public class ChatActivity  extends AppCompatActivity {
     String coachId;
     String coachFirstName;
     String activityName = "Chats";
-    //ActionBar actionBar = getSupportActionBar();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_chat);
 
 
-        //actionBar = getSupportActionBar();
-        //if(activityName != null) {
-            //actionBar.setTitle(activityName);
-        //}
-        //actionBar.setSubtitle(activityName);
-        //actionBar.setIcon(R.drawable.ic_chevron_left_black_24dp);
-
 
         databaseReferenceChat = FirebaseDatabase.getInstance().getReference("Chats");
-        //chatSnapshot = databaseReferenceChat.();
+
 
         Intent in = getIntent();
         userId = in.getStringExtra("userid");
@@ -71,9 +62,8 @@ public class ChatActivity  extends AppCompatActivity {
 
         onStart();
 
-        // If does not work like this, put it (addValueEventListener) in a method and call this method here.
-        //check if this user already has chats in Chats:
-        //findUserChats(databaseReferenceChat);
+
+        //check if this user already has chats in Chats.
 
 
         fab = (FloatingActionButton)findViewById(R.id.fab);
@@ -89,9 +79,10 @@ public class ChatActivity  extends AppCompatActivity {
                         databaseReferenceChat.child(chatId).child("coachId").setValue(coachId);
                     }
 
-                    databaseReferenceChat.child(chatId).child("ChatMessage").push().setValue(new ChatMessage(input.getText().toString(), firstname));
+                    //when coach's username is added to coach model in db, userId can be replaced with user's username
+                    databaseReferenceChat.child(chatId).child("ChatMessage").push().setValue(new ChatMessage(input.getText().toString(), userId));
                     input.setText("");
-                    //displayChatMessage();
+
 
 
             }
@@ -124,31 +115,9 @@ public class ChatActivity  extends AppCompatActivity {
                             //get that chatSnapshot id, so that we can add new chats there
                             chatId = chatSnapshot.getKey();
                             System.out.println("NAT TEST chatId" + chatId);
-                            //if(chatId != null) {
+
                                 displayChatMessage();
-                            //}
-                           // else{
-                                // create new one
-                            //}
-                            /* to check if there exists sprint with same starting date
-                            // Before adding new categories for new sprint, check if there already exists categories with the starting date that user entered
-                            // it's sufficient to check only ContributionSprints
-                            DataSnapshot contrSprints = categorySnapshot.child("ContributionSprints");
-                            for (DataSnapshot contrSprintSnapshot : contrSprints.getChildren()) { //id)
-                                if (contrSprintSnapshot.getValue() == null) {
-                                    break;
-                                }
-                                else{
-                                    String startDateTmp = contrSprintSnapshot.child("startingDate").getValue().toString();
-                                    System.out.println("TEST LOOP START DATE" + startDateTmp);
-                                    if (startDateTmp.equals(startingDate)){
 
-                                    }
-
-                                }
-
-                                }
-                            */
                         }
                     }
                 }
@@ -159,12 +128,12 @@ public class ChatActivity  extends AppCompatActivity {
 
             }
         });
-        //displayChatMessage();
+
     }
 
     private void displayChatMessage() {
         ListView listOfMessage = (ListView)findViewById(R.id.list_of_message);
-        // do the following if chatId != null && databaseReferenceChat.child(chatId).child("ChatMessage") != null ?????????
+
         if ((chatId != null) && (databaseReferenceChat.child(chatId).child("ChatMessage") != null)) {
             adapter = new FirebaseListAdapter<ChatMessage>(this, ChatMessage.class, R.layout.list_item_chat, databaseReferenceChat.child(chatId).child("ChatMessage")) {
                 @Override
@@ -175,29 +144,21 @@ public class ChatActivity  extends AppCompatActivity {
                     TextView messageTextRight = (TextView) v.findViewById(R.id.message_text_right);
                     TextView messageUserRight = (TextView) v.findViewById(R.id.message_user_right);
 
-                    if(model.getMessageUser().equals(coachFirstName)) {
+                    //when coach's username is added to coach model in db, coach (userId) can be replaced with coach's (user's) usernames
+                    if(model.getMessageUser().equals(coachId)) {
 
 
                         messageText.setText(model.getMessageText());
-                        //messageText.setBackgroundResource(R.drawable.text_message_background);
-                        messageUser.setText(model.getMessageUser());
-
-                        //TextView messageUserRight = (TextView) v.findViewById(R.id.message_user_right);
+                        messageUser.setText(coachFirstName);
                         messageTextRight.setText("");
-                        //messageTextRight.setBackgroundColor(Color.TRANSPARENT);
-                        //messageUserRight.setVisibility(View.INVISIBLE);
                         messageUserRight.setText("");
 
                     }
-                    else if(model.getMessageUser().equals(firstname)){
+                    else if(model.getMessageUser().equals(userId)){
 
                         messageTextRight.setText(model.getMessageText());
-                        messageUserRight.setText(model.getMessageUser());
-
+                        messageUserRight.setText(firstname);
                         messageText.setText("");
-                        //TextView messageUser = (TextView) v.findViewById(R.id.message_user);
-                        //messageText.setBackgroundColor(Color.TRANSPARENT);
-                        //messageUser.setVisibility(View.INVISIBLE);
                         messageUser.setText("");
                     }
                 }

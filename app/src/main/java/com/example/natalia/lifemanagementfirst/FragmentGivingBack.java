@@ -102,11 +102,11 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
 
         TextView textAct1 = (TextView)view.findViewById(R.id.textViewAct1);
         // Assign variable textAct1 the value of static variable activity1Joy (from TestActivity.java)
-        textAct1.setText(Dashboard.userActivityContributionid1.activityName);
+        textAct1.setText(Dashboard.userActivityContributionid1.name);
         //textAct1.setText("Inner Peace");
 
         TextView textAct2 = (TextView)view.findViewById(R.id.textViewAct2);
-        textAct2.setText(Dashboard.userActivityContributionid2.activityName);
+        textAct2.setText(Dashboard.userActivityContributionid2.name);
 
         TextView textCategScore = (TextView)view.findViewById(R.id.textViewCategScore);
         textCategScore.setText("Contribution Score");
@@ -3791,6 +3791,11 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             databaseUpdateCategories.child(Dashboard.userActivityContributionid1.categoryId).child("ContributionSprints").child(Dashboard.sprintContributionid).child("goal3").setValue(q3_contribution.getText().toString());
             databaseUpdateCategories.child(Dashboard.userActivityContributionid1.categoryId).child("ContributionSprints").child(Dashboard.sprintContributionid).child("goal4").setValue(q4_contribution.getText().toString());
 
+
+            q1_contribution.setText("");
+            q2_contribution.setText("");
+            q3_contribution.setText("");
+            q4_contribution.setText("");
         }
     }
 

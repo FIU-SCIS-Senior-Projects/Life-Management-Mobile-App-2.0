@@ -210,12 +210,16 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                 i.putExtra("contribution_activityid2_userid",SprintSettingActivity.act2Contrib.getUserId());
                 i.putExtra("contribution_activityid2_activityid",SprintSettingActivity.activities2contribId);
 
+                //profile image
+                i.putExtra("profileImageName",SprintSettingActivity.userProfileImageName);
+
 
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList("mylist", SprintSettingActivity.listUsers);
 
                 bundle.putParcelableArrayList("allActivities", SprintSettingActivity.allActivities);
                 bundle.putParcelableArrayList("userActivitiesAllList",SprintSettingActivity.userActivitiesAll);
+                bundle.putParcelableArrayList("coachesList",SprintSettingActivity.coachList);
 
                 //JOY
                 bundle.putParcelableArrayList("categoriesJoyCategories",SprintSettingActivity.currentJoyCategories);

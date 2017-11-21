@@ -2,7 +2,6 @@ package com.example.natalia.lifemanagementfirst;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ChatCoachSelectionActivity extends AppCompatActivity {
 
-    private FirebaseListAdapter<ChatCoach> adapter;
+    private FirebaseListAdapter<Coach> adapter;
     DatabaseReference databaseReferenceCoaches;
     String userId;
     String username;
@@ -38,20 +37,11 @@ public class ChatCoachSelectionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_chat_coaches_selection);
 
 
-        //actionBar = getSupportActionBar();
-        //if(activityName != null) {
-        //actionBar.setTitle(activityName);
-        //}
-        //actionBar.setSubtitle(activityName);
-        //actionBar.setIcon(R.drawable.ic_chevron_left_black_24dp);
-
 
         databaseReferenceCoaches = FirebaseDatabase.getInstance().getReference("Coaches");
-        //chatSnapshot = databaseReferenceChat.();
 
         Intent in = getIntent();
         userId = in.getStringExtra("userid");
@@ -62,10 +52,6 @@ public class ChatCoachSelectionActivity extends AppCompatActivity {
         System.out.println("NAT TEST firstname" + firstname);
 
         onStart();
-
-        // If does not work like this, put it (addValueEventListener) in a method and call this method here.
-        //check if this user already has chats in Chats:
-        //findUserChats(databaseReferenceChat);
 
 
         //Load chat coaches
@@ -101,16 +87,16 @@ public class ChatCoachSelectionActivity extends AppCompatActivity {
 
             }
         });
-        //displayChatMessage();
+
     }
 
     private void displayCoaches() {
         ListView listOfCoaches = (ListView)findViewById(R.id.list_of_coaches);
-        // do the following if coachId != null
+
         if (coachId != null) {
-            adapter = new FirebaseListAdapter<ChatCoach>(this, ChatCoach.class, R.layout.list_item_chat_coach, databaseReferenceCoaches) {
+            adapter = new FirebaseListAdapter<Coach>(this, Coach.class, R.layout.list_item_chat_coach, databaseReferenceCoaches) {
                 @Override
-                protected void populateView(View v, ChatCoach model, int position) {
+                protected void populateView(View v, Coach model, int position) {
                     // Get references to the views of list_item_chat_coach.xml
                     TextView coachFirstName = (TextView) v.findViewById(R.id.coach_first_name);
                     TextView coachLastName = (TextView) v.findViewById(R.id.coach_last_name);
@@ -125,7 +111,7 @@ public class ChatCoachSelectionActivity extends AppCompatActivity {
         listOfCoaches.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ChatCoach clickedCoach = (ChatCoach)parent.getItemAtPosition(position);
+                Coach clickedCoach = (Coach)parent.getItemAtPosition(position);
                 String clickedCoachId = clickedCoach.getId();
                 System.out.println("NAT TEST clickedCoachId" + clickedCoachId);
                 String clickedCoachFirstName = clickedCoach.getFirstName();

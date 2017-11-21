@@ -26,7 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screenFour" />
+        <activity android:name=".SecondScreenActivity" />
+        <activity android:name=".activity_fourth_screen" />
         <activity android:name=".ThirdScreenActivity" />
         <activity android:name=".CreateUserActivity" />
         <activity android:name=".LoginActivity" />
@@ -37,6 +38,7 @@
         <activity android:name=".GivingBackActivity" />
         <activity
             android:name=".Dashboard"
+            android:label="@string/title_activity_dashboard"
             android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
@@ -45,8 +47,11 @@
         <activity android:name=".cycleActivity" />
         <activity android:name=".cycleActivityPassion" />
         <activity android:name=".cycleActivityContribution" />
-        <activity android:name=".ChatActivity" />
+        <activity
+            android:name=".ChatActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ChatCoachSelectionActivity" />
+        <activity android:name=".viewCoachesActivity"/>
         <activity android:name=".currentCycleActivity">
         </activity>
     </application>

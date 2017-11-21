@@ -1,12 +1,14 @@
 package com.example.natalia.lifemanagementfirst;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-        import android.content.Intent;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.TextView;
+import com.sccomponents.gauges.ScArcGauge;
 
 public class cycleActivityPassion extends AppCompatActivity {
 
@@ -21,8 +23,6 @@ public class cycleActivityPassion extends AppCompatActivity {
 
         element_static_passion = in.getExtras().getString("theelementpassion");
         String[] s = element_static_passion.split(" ");
-
-        System.out.println("queahira element " + element_static_passion);
 
         String s6detail = "";
         String s7detail = "";
@@ -41,24 +41,31 @@ public class cycleActivityPassion extends AppCompatActivity {
         }
 
 
+        ScArcGauge first = (ScArcGauge) findViewById(R.id.gauge_previouscycle_passion);
+        TextView actScore = (TextView) findViewById(R.id.counter_previouscycle_passion);
         TextView g = (TextView) findViewById(R.id.textView3passion);
 
+
         g.setText("\n\n"
-                + " Activity Score: " + "\t " + s[0] + "\n"
-                + " Actual Points:  " + "\t " + s[1] + "\n"
                 + " Activity Name: " + "\t" + s[3] + "\n"
+                + " Actual Points:  " + "\t " + s[1] + "\n"
                 + " Target Points:  " + "\t " + s[5] + "\n"
                 + " Starting Date:  " + "\t " + s7detail + "\n"
                 + " Ending Date:   " + "\t  " + s6detail);
 
-        Button btn = (Button) findViewById(R.id.buttonleavepassion);
+
+        int temp = Integer.parseInt(s[0]);
+
+        actScore.setText(temp+"");
+        first.setHighValue(temp);
+
+        final Button btn = (Button) findViewById(R.id.buttonleavepassion);
         btn.setText("Return");
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btn.setTextColor(Color.WHITE);
                 onBackPressed();
-
-
             }
         });
     }

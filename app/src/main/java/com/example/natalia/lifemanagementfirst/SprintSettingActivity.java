@@ -19,11 +19,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by Natalia on 10/5/2017.
@@ -54,8 +54,8 @@ public class SprintSettingActivity extends FragmentActivity {
     static String sprintJoyid = ""; // id for the newly created joy sprint
     static String activities1joyId = "";
     static String activities2joyId = "";
-    static Activity act1Joy;
-    static Activity act2Joy;
+    static ActivitiesSprint act1Joy;
+    static ActivitiesSprint act2Joy;
     static Map<String,String> arJoySprint;
 
     //PASSION
@@ -63,16 +63,16 @@ public class SprintSettingActivity extends FragmentActivity {
     static Map<String,String> arPassionSprint;
     static String activities1passionId = "";
     static String activities2passionId = "";
-    static Activity act1Passion;
-    static Activity act2Passion;
+    static ActivitiesSprint act1Passion;
+    static ActivitiesSprint act2Passion;
 
     //CONTRIBUTION
     static String sprintContribid = ""; // id for the newly created contribution sprint
     static Map<String,String> arContrSprint;
     static String activities1contribId = "";
     static String activities2contribId = "";
-    static Activity act1Contrib;
-    static Activity act2Contrib;
+    static ActivitiesSprint act1Contrib;
+    static ActivitiesSprint act2Contrib;
 
     //to be saved into Bundle (SprintSettingPage2Fragment) to transfer to Dashboard screen to use it there
     static ArrayList<User> listUsers; //store all users from firebase database
@@ -87,6 +87,15 @@ public class SprintSettingActivity extends FragmentActivity {
     static ArrayList<ActivitiesSprint> activitiesjoyPrevious;
     static ArrayList<ActivitiesSprint> activitiesPassionPrevious;
     static ArrayList<ActivitiesSprint> activitiesContributionPrevious;
+
+    static String userProfileImageName = "";
+    static Map<String,String> profileImagesTotal;
+
+    //COACHES
+    static ArrayList<Coach> coachList;
+
+    DatabaseReference databaseProfileImages;
+    DatabaseReference databaseCoaches;
 
     static ArrayList<ActivitiesSprint> currentJoyActivities; //no need?????
 
@@ -114,9 +123,12 @@ public class SprintSettingActivity extends FragmentActivity {
         });
 
         databaseUsers = FirebaseDatabase.getInstance().getReference("Users");
+        databaseCoaches = FirebaseDatabase.getInstance().getReference("Coaches");
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Categories");
         databaseRefActivities = FirebaseDatabase.getInstance().getReference().child("Activities");
+        databaseProfileImages = FirebaseDatabase.getInstance().getReference("ProfileImgs");
+        profileImagesTotal = new TreeMap<>();
 
         Intent in = getIntent();
         userId = in.getStringExtra("userid");
@@ -138,6 +150,9 @@ public class SprintSettingActivity extends FragmentActivity {
         activitiesjoyPrevious = new ArrayList<>();
         activitiesPassionPrevious = new ArrayList<>();
         activitiesContributionPrevious = new ArrayList<>();
+
+        //COACH
+        coachList = new ArrayList<>();
 
         currentJoyActivities = new ArrayList<>();   // no need????????
 
@@ -180,6 +195,47 @@ public class SprintSettingActivity extends FragmentActivity {
             }
         });
 
+        //coach
+
+        databaseCoaches.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                //iterating through all the nodes
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    //getting artist
+
+                    String str = postSnapshot.getValue().toString();
+
+                    int skills_pos = str.indexOf("skills=");
+                    int firstname_pos = str.indexOf("firstName=");
+                    int lastname_pos = str.indexOf("lastName=");
+                    int rating_pos = str.indexOf("rating=");
+                    int id_pos = str.indexOf("id=");
+                    int email_pos = str.indexOf("email=");
+
+                    String temp1 = str.substring((skills_pos+7),(firstname_pos-2));
+                    String temp2 = str.substring((firstname_pos+10),(lastname_pos-2));
+                    String temp3 = str.substring((lastname_pos+9),(rating_pos-2));
+                    String temp4 = str.substring((rating_pos+7),(id_pos-2));
+                    String temp5 = str.substring((id_pos+3),(email_pos-2));
+                    String temp6 =  str.substring((email_pos+6),(str.length()-1));
+
+                    coachList.add(new Coach(temp1,temp2,temp3,temp4,temp5,temp6));
+
+                    //adding artist to the list
+                    //coachList.add(coach);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
         //check if this user already has categories/sprints in Categories:
         databaseReference.addValueEventListener(new ValueEventListener() {
 
@@ -195,8 +251,8 @@ public class SprintSettingActivity extends FragmentActivity {
                         String userIdTmp = categorySnapshot.child("userId").getValue().toString();
                         System.out.println("TEST LOOP" + userIdTmp);
                         if (userIdTmp.equals(userId)) {
-                        //get that categorySnapshot id, so that we can add new categories there
-                        categoriesId = categorySnapshot.getKey();
+                            //get that categorySnapshot id, so that we can add new categories there
+                            categoriesId = categorySnapshot.getKey();
 
                             /* to check if there exists sprint with same starting date
                             // Before adding new categories for new sprint, check if there already exists categories with the starting date that user entered
@@ -210,7 +266,7 @@ public class SprintSettingActivity extends FragmentActivity {
                                     String startDateTmp = contrSprintSnapshot.child("startingDate").getValue().toString();
                                     System.out.println("TEST LOOP START DATE" + startDateTmp);
                                     if (startDateTmp.equals(startingDate)){
-                                    
+
                                     }
 
                                 }
@@ -450,6 +506,23 @@ public class SprintSettingActivity extends FragmentActivity {
             }
         });
 
+        databaseProfileImages.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot activitySnapshot : dataSnapshot.getChildren()) { //id
+                    int temp = activitySnapshot.getValue().toString().length();
+                    profileImagesTotal.put(activitySnapshot.getKey(),activitySnapshot.getValue().toString().substring(6,temp-1));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
         //retrieve all activities
         databaseRefActivities.addValueEventListener(new ValueEventListener() {
             @Override
@@ -463,20 +536,20 @@ public class SprintSettingActivity extends FragmentActivity {
                     } else{
                         //System.out.println("actifgggg " + activitySnapshot.getKey());
                         String activityId = activitySnapshot.getKey();
-                    String temp[] = new String[(int) activitySnapshot.getChildrenCount()];
-                    int i = 0;
-                    for (DataSnapshot activitySnapshot2 : activitySnapshot.getChildren()) { //ids
+                        String temp[] = new String[(int) activitySnapshot.getChildrenCount()];
+                        int i = 0;
+                        for (DataSnapshot activitySnapshot2 : activitySnapshot.getChildren()) { //ids
 
-                        //System.out.println("actif " + activitySnapshot2.getValue());
+                            //System.out.println("actif " + activitySnapshot2.getValue());
 
-                        temp[i] = activitySnapshot2.getValue().toString();
-                        ++i;
+                            temp[i] = activitySnapshot2.getValue().toString();
+                            ++i;
 
+                        }
+
+                        System.out.println("CURRENT ACTIVITIES  " + temp[0] + " == " + temp[1]);
+                        allActivities.add(new ActivitiesSprint(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], activityId));
                     }
-
-                    System.out.println("CURRENT ACTIVITIES  " + temp[0] + " == " + temp[1]);
-                    allActivities.add(new ActivitiesSprint(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], activityId));
-                }
                 }
 
 
@@ -524,7 +597,7 @@ public class SprintSettingActivity extends FragmentActivity {
         String act1JoyName = CoverFlowAdapter.n.get(0);
 
         //set value
-        act1Joy = new Activity("0","0",categoriesId,act1JoyName,sprintDailyPoints,act1JoyTargetPoints,userId);
+        act1Joy = new ActivitiesSprint("0","0",categoriesId,act1JoyName,sprintDailyPoints,act1JoyTargetPoints,userId);
         databaseRefActivities.child(activities1joyId).setValue(act1Joy);
 
         currentJoyActivities.add(new ActivitiesSprint(act1Joy.getActivityScore(),act1Joy.getActualPoints(),act1Joy.getCategoryId(),act1Joy.getName(),act1Joy.getSprintDailyPoints(),act1Joy.getTargetPoints(),act1Joy.getUserId(),activities1joyId));
@@ -551,7 +624,7 @@ public class SprintSettingActivity extends FragmentActivity {
         String act2JoyName = CoverFlowAdapter.n.get(1);
 
         //set value
-        act2Joy = new Activity("0","0",categoriesId,act2JoyName,sprintDailyPoints,act2JoyTargetPoints,userId);
+        act2Joy = new ActivitiesSprint("0","0",categoriesId,act2JoyName,sprintDailyPoints,act2JoyTargetPoints,userId);
         databaseRefActivities.child(activities2joyId).setValue(act2Joy);
 
         currentJoyActivities.add(new ActivitiesSprint(act2Joy.getActivityScore(),act2Joy.getActualPoints(),act2Joy.getCategoryId(),act2Joy.getName(),act2Joy.getSprintDailyPoints(),act2Joy.getTargetPoints(),act2Joy.getUserId(),activities2joyId));
@@ -567,7 +640,7 @@ public class SprintSettingActivity extends FragmentActivity {
         String act1PassionName = CoverFlowAdapterPassion.n.get(0);
 
         //set value
-        act1Passion = new Activity("0","0",categoriesId,act1PassionName,sprintDailyPoints,act1PassionTargetPoints,userId);
+        act1Passion = new ActivitiesSprint("0","0",categoriesId,act1PassionName,sprintDailyPoints,act1PassionTargetPoints,userId);
         databaseRefActivities.child(activities1passionId).setValue(act1Passion);
 
         //generating unique keys for Passion activity 2
@@ -578,7 +651,7 @@ public class SprintSettingActivity extends FragmentActivity {
         String act2PassionName = CoverFlowAdapterPassion.n.get(1);
 
         //set value
-        act2Passion = new Activity("0","0",categoriesId,act2PassionName,sprintDailyPoints,act2PassionTargetPoints,userId);
+        act2Passion = new ActivitiesSprint("0","0",categoriesId,act2PassionName,sprintDailyPoints,act2PassionTargetPoints,userId);
         databaseRefActivities.child(activities2passionId).setValue(act2Passion);
 
 
@@ -592,7 +665,7 @@ public class SprintSettingActivity extends FragmentActivity {
         String act1ContribName = ActGivingbackAdapter.givBackActSelected.get(0);
 
         //set value
-        act1Contrib = new Activity("0","0",categoriesId,act1ContribName,sprintDailyPoints,act1ContribTargetPoints,userId);
+        act1Contrib = new ActivitiesSprint("0","0",categoriesId,act1ContribName,sprintDailyPoints,act1ContribTargetPoints,userId);
         databaseRefActivities.child(activities1contribId).setValue(act1Contrib);
 
         //generating unique keys for Contribution activity 2
@@ -603,7 +676,7 @@ public class SprintSettingActivity extends FragmentActivity {
         String act2ContribName = ActGivingbackAdapter.givBackActSelected.get(1);
 
         //set value
-        act2Contrib = new Activity("0","0",categoriesId,act2ContribName,sprintDailyPoints,act2ContribTargetPoints,userId);
+        act2Contrib = new ActivitiesSprint("0","0",categoriesId,act2ContribName,sprintDailyPoints,act2ContribTargetPoints,userId);
         databaseRefActivities.child(activities2contribId).setValue(act2Contrib);
 
 
@@ -680,7 +753,12 @@ public class SprintSettingActivity extends FragmentActivity {
         sprintPassionid = databaseReference.child(categoriesId).child("PassionSprints").push().getKey();
         databaseReference.child(categoriesId).child("PassionSprints").child(sprintPassionid).setValue(arPassionSprint);
 
+        for(Map.Entry g: profileImagesTotal.entrySet()){
 
+            if(g.getKey().toString().contains(userId)){
+                userProfileImageName = g.getValue().toString();
+            }
+        }
 
         userActivitiesAll = new ArrayList<>();
         for (int i = 0; i < allActivities.size(); i++) {
@@ -691,7 +769,7 @@ public class SprintSettingActivity extends FragmentActivity {
 
                 userActivitiesAll.add(new ActivitiesSprint(allActivities.get(i).activityScore,
                         allActivities.get(i).actualPoints, allActivities.get(i).categoryId,
-                        allActivities.get(i).activityName, allActivities.get(i).sprintDailyPoints,
+                        allActivities.get(i).name, allActivities.get(i).sprintDailyPoints,
                         allActivities.get(i).targetPoints, allActivities.get(i).userId, allActivities.get(i).activityid));
             }
 
@@ -732,7 +810,7 @@ public class SprintSettingActivity extends FragmentActivity {
 
                     //fake the data for later use (categoryid and userid)
                     activitiesjoyPrevious.add(new ActivitiesSprint(userActivitiesAll.get(k).activityScore,userActivitiesAll.get(k).actualPoints,
-                            splitter[1], userActivitiesAll.get(k).activityName, userActivitiesAll.get(k).sprintDailyPoints,
+                            splitter[1], userActivitiesAll.get(k).name, userActivitiesAll.get(k).sprintDailyPoints,
                             userActivitiesAll.get(k).targetPoints, splitter[2], userActivitiesAll.get(k).activityid));
                     break;
                 }
@@ -772,7 +850,7 @@ public class SprintSettingActivity extends FragmentActivity {
 
                     //fake the data for later use (categoryid and userid)
                     activitiesPassionPrevious.add(new ActivitiesSprint(userActivitiesAll.get(k).activityScore,userActivitiesAll.get(k).actualPoints,
-                            splitter[1], userActivitiesAll.get(k).activityName, userActivitiesAll.get(k).sprintDailyPoints,
+                            splitter[1], userActivitiesAll.get(k).name, userActivitiesAll.get(k).sprintDailyPoints,
                             userActivitiesAll.get(k).targetPoints, splitter[2], userActivitiesAll.get(k).activityid));
                     break;
                 }
@@ -812,7 +890,7 @@ public class SprintSettingActivity extends FragmentActivity {
 
                     //fake the data for later use (categoryid and userid)
                     activitiesContributionPrevious.add(new ActivitiesSprint(userActivitiesAll.get(k).activityScore,userActivitiesAll.get(k).actualPoints,
-                            splitter[1], userActivitiesAll.get(k).activityName, userActivitiesAll.get(k).sprintDailyPoints,
+                            splitter[1], userActivitiesAll.get(k).name, userActivitiesAll.get(k).sprintDailyPoints,
                             userActivitiesAll.get(k).targetPoints, splitter[2], userActivitiesAll.get(k).activityid));
                     break;
                 }
@@ -843,7 +921,7 @@ public class SprintSettingActivity extends FragmentActivity {
         }
     }
 
-     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter{
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter{
         public ScreenSlidePagerAdapter(FragmentManager fm){
             super(fm);
         }
