@@ -22,7 +22,8 @@
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="Please select 2 activities that gives you Passion - \nActivity #1 = Helps satisfy emotional needs.\nActivity #2 = Helps satisfy your psysiological need for security."
+        android:text="Please select 2 activities that gives you Passion - \nActivity #1 = Helps satisfy emotional needs for freedom.
+        \nActivity #2 = Helps satisfy emotional needs for adventure."
         android:textColor="#fff"
         android:textColorLink="@android:color/background_light"
         android:textSize="19.0sp"

@@ -32,6 +32,7 @@
         <activity android:name=".CarouselScreen" />
         <activity android:name=".MainPassionActivity" />
         <activity android:name=".SprintSettingActivity" />
+        <activity android:name=".GivingBackActivity"    />
         <activity
             android:name=".Dashboard"
             android:label="@string/title_activity_dashboard"

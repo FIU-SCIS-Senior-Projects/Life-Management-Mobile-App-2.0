@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:background="#F9604B"
-            android:text="Signup" />
+            android:text="Sign Up" />
 
         <EditText
             android:id="@+id/editText"

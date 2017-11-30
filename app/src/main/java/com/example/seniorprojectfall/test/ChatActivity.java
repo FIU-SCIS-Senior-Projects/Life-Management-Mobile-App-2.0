@@ -13,6 +13,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,7 +46,6 @@ public class ChatActivity extends AppCompatActivity {
 
         databaseReferenceChat = FirebaseDatabase.getInstance().getReference("Chats");
 
-
         Intent in = getIntent();
         userId = in.getStringExtra("userid");
         System.out.println("NAT TEST userId" + userId);
@@ -76,7 +76,8 @@ public class ChatActivity extends AppCompatActivity {
                     databaseReferenceChat.child(chatId).child("coachId").setValue(coachId);
                 }
 
-                databaseReferenceChat.child(chatId).child("ChatMessage").push().setValue(new ChatMessage(input.getText().toString(), firstname));
+                //when coach's username is added to coach model in db, userId can be replaced with user's username
+                databaseReferenceChat.child(chatId).child("ChatMessage").push().setValue(new ChatMessage(input.getText().toString(), userId));
                 input.setText("");
 
 
@@ -140,19 +141,20 @@ public class ChatActivity extends AppCompatActivity {
                     TextView messageTextRight = (TextView) v.findViewById(R.id.message_text_right);
                     TextView messageUserRight = (TextView) v.findViewById(R.id.message_user_right);
 
-                    if(model.getMessageUser().equals(coachFirstName)) {
+                    //when coach's username is added to coach model in db, coach (userId) can be replaced with coach's (user's) usernames
+                    if(model.getMessageUser().equals(coachId)) {
 
 
                         messageText.setText(model.getMessageText());
-                        messageUser.setText(model.getMessageUser());
+                        messageUser.setText(coachFirstName);
                         messageTextRight.setText("");
                         messageUserRight.setText("");
 
                     }
-                    else if(model.getMessageUser().equals(firstname)){
+                    else if(model.getMessageUser().equals(userId)){
 
                         messageTextRight.setText(model.getMessageText());
-                        messageUserRight.setText(model.getMessageUser());
+                        messageUserRight.setText(firstname);
                         messageText.setText("");
                         messageUser.setText("");
                     }
