@@ -43,6 +43,8 @@ import com.squareup.picasso.Picasso;
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+
     //JOY variables
     static ArrayList<ActivitiesSprint> allActivities;
     static ArrayList<ActivitiesSprint> userActivitiesAll;
@@ -96,6 +98,7 @@ public class Dashboard extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         coachesList = new ArrayList<>();
+
 
         //JOY
         allActivities = new ArrayList<>();
@@ -304,6 +307,12 @@ public class Dashboard extends AppCompatActivity
         userJoysprintsHelper = bundle.getParcelableArrayList("userJoysprintHelperList");
         userJoyactivitiesPrevious = bundle.getParcelableArrayList("activitiesJOYPrevious");
 
+        for(int i=0;i<userJoyactivitiesPrevious.size();i++){
+            System.out.println("this is errorr2 " + userJoyactivitiesPrevious.get(i).categoryId + " " + userJoyactivitiesPrevious.get(i).name);
+        }
+
+
+
         //PASSION
         currentPassionCategories = bundle.getParcelableArrayList("categoriesPassionCategories");
         userPassionsprintsHelper = bundle.getParcelableArrayList("userPassionsprintHelperList");
@@ -472,9 +481,32 @@ public class Dashboard extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_signout) {
-            Intent i = new Intent(Dashboard.this, LoginActivity.class);
-            finish();
-            startActivity(i);
+
+            AlertDialog.Builder a_builder = new AlertDialog.Builder(Dashboard.this);
+            a_builder.setMessage("Are you sure you want to sign out?").setCancelable(false)
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent i = new Intent(Dashboard.this, LoginActivity.class);
+                            finish();
+                            startActivity(i);
+
+                        }
+                    })
+
+                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = a_builder.create();
+            alert.show();
+            alert.getButton(alert.BUTTON_POSITIVE).setTextColor(Color.parseColor("#F44336"));
+            alert.getButton(alert.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#F44336"));
+
             return true;
         }
 
@@ -589,5 +621,6 @@ public class Dashboard extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 }

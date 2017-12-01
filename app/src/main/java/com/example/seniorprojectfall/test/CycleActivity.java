@@ -31,7 +31,7 @@ public class cycleActivity extends AppCompatActivity {
         element_static = in.getExtras().getString("theelement");
         String[] s = element_static.split(" ");
 
-       String s6detail = "";
+        String s6detail = "";
         String s7detail = "";
 
         if(s[6].length()==7){

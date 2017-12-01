@@ -147,15 +147,17 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
 
             for (char s : traverseName) {
 
-                if(Character.isSpace(s)){
-                    Toast.makeText(this,"First Name CANNOT contain spaces",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if(!(Character.isLetter(s))){
+                if((Character.isDigit(s))){
                     Toast.makeText(this,"First Name CANNOT Digits/Symbols",Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                if(!Character.isLetter(s)){
+                    Toast.makeText(this,"First Name CANNOT Digits/Symbols",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
             }
 
             //make all first character uppercase for better look in database
@@ -180,12 +182,12 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
 
             for (char s : traverseLast) {
 
-                if(Character.isSpace(s)){
-                    Toast.makeText(this,"Last Name CANNOT contain spaces",Toast.LENGTH_SHORT).show();
+                if((Character.isDigit(s))){
+                    Toast.makeText(this,"Last Name CANNOT Digits/Symbols",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(!(Character.isLetter(s))){
+                if(!Character.isLetter(s)){
                     Toast.makeText(this,"Last Name CANNOT Digits/Symbols",Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -271,6 +273,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
             }
         }
 
+
         //username
         if((TextUtils.isEmpty(currentusername)) || (currentusername.length()<=1)){
             Toast.makeText(this,"Username MUST contain more characters",Toast.LENGTH_SHORT).show();
@@ -288,9 +291,20 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
             }
 
             boolean a = false;
+            boolean b = false;
+            int counter = 0;
             char[] traverseLast = currentusername.toCharArray();
 
             for (char s : traverseLast) {
+
+                if(counter == 0){
+
+                    if(!Character.isLetter(s)) {
+                        Toast.makeText(this, "Username CANNOT start with symbols or numbers", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    ++counter;
+                }
 
                 if(Character.isSpace(s)){
                     Toast.makeText(this,"Username CANNOT contain spaces",Toast.LENGTH_SHORT).show();
@@ -301,14 +315,24 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                     a = true;
                 }
 
+                if(Character.isLetter(s)){
+                    b = true;
+                }
+
                 if((!Character.isLetter(s) && !Character.isDigit(s))){
-                    Toast.makeText(this,"Username CANNOT contain symbols",Toast.LENGTH_SHORT).show();
-                    return;
+                  //  Toast.makeText(this,"Username CANNOT contain symbols",Toast.LENGTH_SHORT).show();
+                    //return;
+                    a= true;
                 }
             }
 
             if(!a){
-                Toast.makeText(this,"Username MUST contain characters and at least a number",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Username MUST contain characters and at least a number or symbol",Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if(!b){
+                Toast.makeText(this,"Username MUST contain characters",Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -342,24 +366,12 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                 return;
             }
 
-            char q = password.charAt(0);
-
-            if(!Character.isUpperCase(q)){
-                Toast.makeText(this,"Password MUST begin with a Capital Letter",Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if(!Character.isLetter(q)){
-                Toast.makeText(this,"Password CANNOT start with numbers or symbols",Toast.LENGTH_SHORT).show();
-                return;
-            }
-
             boolean a = false;
-            boolean b = false;
             boolean c = false;
             char[] traverseLast = password.toCharArray();
 
             for (char s : traverseLast) {
+
 
                 if(Character.isSpace(s)){
                     Toast.makeText(this,"Password CANNOT contain spaces",Toast.LENGTH_SHORT).show();
@@ -375,19 +387,13 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                 }
 
                 if((!Character.isLetter(s) && !Character.isDigit(s))){
-                    b = true;
-                }
-
-                if((!Character.isLetter(s) && !Character.isDigit(s))){
                     Toast.makeText(this,"Password CANNOT contain symbols",Toast.LENGTH_SHORT).show();
                     return;
                 }
+
             }
 
-            if(b){
-                Toast.makeText(this,"Password CANNOT contain symbols",Toast.LENGTH_SHORT).show();
-                return;
-            }
+
 
             if(!a || !c){
                 Toast.makeText(this,"Password MUST contain characters and numbers",Toast.LENGTH_SHORT).show();
