@@ -48,6 +48,7 @@ public class GivingBackActivity extends AppCompatActivity {
                 i.putExtra("userid",userid);
                 i.putExtra("username",username);
                 i.putExtra("password",password);
+                finish();
                 startActivity(i);
             }
         });

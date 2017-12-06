@@ -53,6 +53,7 @@ public class MainJoyActivity extends AppCompatActivity {
                 i.putExtra("userid",userid);
                 i.putExtra("username",username);
                 i.putExtra("password",password);
+                finish();
                 startActivity(i);
             }
         });

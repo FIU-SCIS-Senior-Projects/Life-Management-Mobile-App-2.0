@@ -239,7 +239,7 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
 
                 //bundle.putParcelableArrayList("currentjoyactivitylist", SprintSettingActivity.currentJoyActivities); //total activities (needed for previous cycle)
                 i.putExtras(bundle);
-
+                getActivity().finish();
                 startActivity(i);
 
             }

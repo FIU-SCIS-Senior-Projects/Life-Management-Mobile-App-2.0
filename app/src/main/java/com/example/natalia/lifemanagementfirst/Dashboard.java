@@ -477,9 +477,32 @@ public class Dashboard extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_signout) {
-            Intent i = new Intent(Dashboard.this, LoginActivity.class);
-            finish();
-            startActivity(i);
+
+            AlertDialog.Builder a_builder = new AlertDialog.Builder(Dashboard.this);
+            a_builder.setMessage("Are you sure you want to sign out?").setCancelable(false)
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent i = new Intent(Dashboard.this, LoginActivity.class);
+                            finish();
+                            startActivity(i);
+
+                        }
+                    })
+
+                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = a_builder.create();
+            alert.show();
+            alert.getButton(alert.BUTTON_POSITIVE).setTextColor(Color.parseColor("#F44336"));
+            alert.getButton(alert.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#F44336"));
+
             return true;
         }
 

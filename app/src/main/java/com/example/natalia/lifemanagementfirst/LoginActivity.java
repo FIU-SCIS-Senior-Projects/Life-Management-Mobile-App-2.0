@@ -892,6 +892,7 @@ public class LoginActivity extends AppCompatActivity {
             //profile image
             i.putExtra("profileImageName",userProfileImageName);
 
+            finish();
             this.startActivity(i);
 
         }else{

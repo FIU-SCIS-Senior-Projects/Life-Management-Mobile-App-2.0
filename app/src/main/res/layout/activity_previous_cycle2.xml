@@ -22,7 +22,7 @@
             android:layout_marginTop="70dp"
 
             android:foregroundGravity="center"
-            android:text="         Select any of your activities below:"
+            android:text="      Select any previous activities below:"
             android:textColor="@color/common_google_signin_btn_text_light_pressed"
             android:textSize="20sp"
             android:textStyle="bold"
