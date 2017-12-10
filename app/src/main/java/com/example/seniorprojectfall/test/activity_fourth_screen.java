@@ -56,7 +56,7 @@ public class activity_fourth_screen extends YouTubeBaseActivity {
             @Override
 
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                youTubePlayer.loadVideo("sK70sQDDfDQ");
+                youTubePlayer.loadVideo("OjckuZ82wKk");
             }
 
             @Override
