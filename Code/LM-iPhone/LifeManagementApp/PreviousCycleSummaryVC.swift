@@ -81,6 +81,7 @@ class PreviousCycleSummaryVC: UIViewController {
         setScorePercentage(target1: contributionActivity1.targetPoints, actual1: contributionActivity1.actualPoints, target2: contributionActivity2.targetPoints, actual2: contributionActivity2.actualPoints, option: "Contribution")
     }
     
+    // setup activity label texts with the sprint selected in the previous screen
     func loadLabels(){
         joyActivityScore1Label.text = joyActivity1.actualPoints
         joyActivityScore2Label.text = joyActivity2.actualPoints
@@ -103,6 +104,7 @@ class PreviousCycleSummaryVC: UIViewController {
         sprintDateLabel.text = setDates(startDay: sprint.startingDate, endDay: sprint.endingDate)
     }
     
+    // set date text labels from the sprint selected in the previous screen
     func setDates(startDay: String, endDay: String) -> String{
         let dateFmt = DateFormatter()
         
@@ -118,6 +120,7 @@ class PreviousCycleSummaryVC: UIViewController {
         return "\(startDateStr) - \(endDateStr)"
     }
     
+    // load activity images from the sprint selected in the previous screen
     func loadImages(name1: String, name2: String, option: String){
         //retrieve the images for the specific category for the sprint
         if(option == "Joy"){
@@ -156,6 +159,7 @@ class PreviousCycleSummaryVC: UIViewController {
         }
     }
     
+    // display the scores and percentages for all activites based on activity type
     func setScorePercentage(target1: String, actual1: String, target2: String, actual2: String, option: String){
         let avgScore: String
         var score: Double = ((Double(actual1)! / Double(target1)!) + (Double(actual2)! / Double(target2)!))/2

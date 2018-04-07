@@ -49,7 +49,7 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate, UIImagePicke
         // Do any additional setup after loading the view.
     }
     
-    
+    // upload a new image for user profile pic by using UIImagePickerController
     @IBAction func uploadImagePressed(_ sender: UIButton) {
         
         let image = UIImagePickerController()
@@ -66,10 +66,17 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate, UIImagePicke
         
     }
     
+    // retrieve user profile image from firebase by using ImageManager helper class
     func getUserProfileImg(){
         imageManager.downloadImage(user: delegate.user)
         delegate.userImgProfile = imageManager.downloadedImage
     }
+    
+    /***********************************************************
+     
+                UIImagePickerController Functions
+     
+     ***********************************************************/
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)

@@ -178,6 +178,12 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         return avgScore
     }
+    
+    /***********************************************************
+     
+                     UITableView Functions
+     
+     ***********************************************************/
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.userCategory.joySprints.count

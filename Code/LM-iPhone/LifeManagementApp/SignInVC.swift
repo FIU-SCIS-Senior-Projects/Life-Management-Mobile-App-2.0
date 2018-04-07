@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 
+// dismisses keyboard when any part of the screen is tapped
 extension UITextField{
     func setBottomLine(borderColor: UIColor) {
         

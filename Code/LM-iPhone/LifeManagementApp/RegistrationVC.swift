@@ -11,7 +11,7 @@ import Firebase
 import Foundation
 
 
-class RegistrationVC: UIViewController {
+class RegistrationVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -30,6 +30,11 @@ class RegistrationVC: UIViewController {
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
     let dbRef = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +58,15 @@ class RegistrationVC: UIViewController {
         self.registerButton.layer.masksToBounds = true
         
         setTextFieldEditing()
+        self.usernameTextField.delegate = self
+        self.emailTextField.delegate = self
+        self.firstNameTextField.delegate = self
+        self.lastNameTextField.delegate = self
+        self.dobTextField.delegate = self
+        self.passwordTextField.delegate = self
+        self.reTypePasswordTextField.delegate = self
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: Selector("endEditing:")))
     }
     
     override func viewDidLayoutSubviews() {
@@ -201,6 +215,12 @@ class RegistrationVC: UIViewController {
         })
         return true
     }
+    
+    /***********************************************************
+     
+                    Textfield Validation Functions
+     
+     ***********************************************************/
     
     // username validation
     func checkUsername(username:String) -> Bool{

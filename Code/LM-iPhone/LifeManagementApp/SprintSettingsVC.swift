@@ -80,6 +80,18 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         submitBtn.layer.masksToBounds = true
         
         getSprintActivities()
+        self.joyTargetScore1.delegate = self
+        self.joyTargetScore2.delegate = self
+        self.passionTargetScore1.delegate = self
+        self.passionTargetScore2.delegate = self
+        self.contributionTargetScore1.delegate = self
+        self.contributionTargetScore2.delegate = self
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: Selector("endEditing:")))
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
     }
     
     func loadImages(){

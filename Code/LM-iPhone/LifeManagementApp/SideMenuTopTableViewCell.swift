@@ -26,7 +26,8 @@ class SideMenuTopTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-     func setUserImage(){
+    // UI Modification to the user profile image show in the side 
+    func setUserImage(){
         userProfileImg.layer.masksToBounds = false
         userProfileImg.layer.cornerRadius = userProfileImg.frame.height / 2
         userProfileImg.clipsToBounds = true

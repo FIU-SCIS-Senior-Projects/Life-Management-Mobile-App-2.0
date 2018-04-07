@@ -50,6 +50,7 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
     }
     
+    // retrieve all coaches information from firebase database
     func getCoaches(){
         let coachRef = dbref.child("Coaches")
         coachRef.observe(.value, with: {(snapshot) in
@@ -68,6 +69,7 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         })
     }
     
+    // retrieve all coaches image profile from firebase storage
     func getCoachImage(url: String, cell : ViewCoachTableViewCell){
         let imageRef = storage.reference(forURL: url)
         
@@ -81,6 +83,12 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         })
         
     }
+    
+    /***********************************************************
+     
+                        UITableView Functions
+     
+     ***********************************************************/
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.coachList.count

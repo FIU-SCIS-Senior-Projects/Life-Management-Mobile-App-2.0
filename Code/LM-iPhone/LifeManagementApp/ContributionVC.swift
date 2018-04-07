@@ -526,7 +526,7 @@ class ContributionVC: UIViewController {
 
     /***********************************************************
      
-     Side Menu Functions
+                        Side Menu Functions
      
      ***********************************************************/
     

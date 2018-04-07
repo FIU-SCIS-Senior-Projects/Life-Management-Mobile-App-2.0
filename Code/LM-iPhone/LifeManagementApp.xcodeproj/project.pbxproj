@@ -270,12 +270,12 @@
 			children = (
 				072F86881F6F8121007E5A8A /* SignInVC.swift */,
 				072F86861F6F4D7F007E5A8A /* RegistrationVC.swift */,
-				079265641F7B0636008B5BDE /* JoyVC.swift */,
 				07F6BB111F8DC33B00E5F4E1 /* CategoryTabBarController.swift */,
 				07174FD41F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift */,
 				076E009A1F9DB050004467D0 /* PassionActivitySelectionVC.swift */,
 				076E009C1F9DB078004467D0 /* ContributionActivitySelectionVC.swift */,
 				076E009E1F9EAAF8004467D0 /* SprintSettingsVC.swift */,
+				079265641F7B0636008B5BDE /* JoyVC.swift */,
 				073D89E01FA78E14000DE687 /* PassionVC.swift */,
 				073D89E21FA78E43000DE687 /* ContributionVC.swift */,
 				07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */,

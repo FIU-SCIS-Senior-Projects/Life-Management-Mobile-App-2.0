@@ -20,7 +20,8 @@ class ViewCoachTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        // UI Modification for the image of the coach
         coachImage.layer.cornerRadius = coachImage.frame.size.width / 2
         coachImage.clipsToBounds = true
         coachImage.layer.borderWidth = 2

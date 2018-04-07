@@ -15,8 +15,10 @@ class ImageManager: NSObject{
     var downloadedImage = UIImage()
     var uploadImgName = ""
     
-    func uploadImage(user: User, _ image: UIImage, progressBlock: @escaping (_ percentage: Double) -> Void, completionBlock: @escaping (_ url: URL?, _ errorMessage: String?) -> Void){
+    func uploadImage(user: User, _ image: UIImage, progressBlock: @escaping (_ percentage: Double) -> Void,
+                     completionBlock: @escaping (_ url: URL?, _ errorMessage: String?) -> Void){
         
+        // storage reference pointing to images stored in Firebase
         let storage = Storage.storage()
         let storageReference = storage.reference()
         
@@ -24,6 +26,7 @@ class ImageManager: NSObject{
         self.uploadImgName = "\(user.username).jpg"
         let imagesReference = storageReference.child("userProfileImgs").child(self.uploadImgName)
         
+        // turn the selected image to data bits before uploading to firebase storage
         if let imageData = UIImageJPEGRepresentation(image, 0.8){
             let metaData = StorageMetadata()
             metaData.contentType = "image/jpeg"
@@ -36,6 +39,7 @@ class ImageManager: NSObject{
                     completionBlock(nil, error?.localizedDescription)
                 }
             })
+            // keeps track of the upload to firebase storage completion percentage
             uploadTask.observe(.progress, handler: {(snapshot) in
                 guard let progress = snapshot.progress else {
                     return
@@ -49,6 +53,7 @@ class ImageManager: NSObject{
         }
     }
     
+    // retrieving the image from firebase storage
     func downloadImage(user: User){
         if let profileImageURL = user.imgURL{
             print("IMAGE MANAGER : \(profileImageURL)")
