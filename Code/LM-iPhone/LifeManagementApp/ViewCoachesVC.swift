@@ -34,21 +34,27 @@ extension ViewCoachesVC: UIViewControllerTransitioningDelegate{
 
 class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    // MARK: - ViewController's variables
+    
     let interactor = Interactor()
-    
-    @IBOutlet weak var tableView: UITableView!
-    
     
     var dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     let delegate = UIApplication.shared.delegate as! AppDelegate
     var coachList = [Coach]()
     
+    // MARK: - ViewController's IBOutlet variables
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - ViewController's Life Cycle Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
         getCoaches()
         
     }
+    
+    // MARK: - Retrieve All Coaches information
     
     // retrieve all coaches information from firebase database
     func getCoaches(){
@@ -84,11 +90,7 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
     }
     
-    /***********************************************************
-     
-                        UITableView Functions
-     
-     ***********************************************************/
+    // MARK: - TableView Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.coachList.count
@@ -113,12 +115,7 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    /***********************************************************
-     
-                        Side Menu Functions
-     
-     ***********************************************************/
-    
+    // MARK: - Side Menu Methods
     
     @IBAction func openMenu(_ sender: AnyObject){
         performSegue(withIdentifier: "openMenu", sender: nil)

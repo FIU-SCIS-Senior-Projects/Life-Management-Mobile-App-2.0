@@ -10,6 +10,8 @@ import UIKit
 
 class PreviousCycleSummaryVC: UIViewController {
     
+    // MARK: - ViewController's Variables
+    
     var joyActivity1 = Activity()
     var joyActivity2 = Activity()
     var passionActivity1 = Activity()
@@ -19,6 +21,8 @@ class PreviousCycleSummaryVC: UIViewController {
     
     var sprint = Sprint()
     var delegate = UIApplication.shared.delegate as! AppDelegate
+    
+    // MARK: - ViewController's IBOutlet Variables
     
     // labels for goal and actual scores
     @IBOutlet weak var joyActivityScore1Label: UILabel!
@@ -66,6 +70,7 @@ class PreviousCycleSummaryVC: UIViewController {
     @IBOutlet weak var passionOverallScoreLabel: UILabel!
     @IBOutlet weak var contributionOverallScoreLabel: UILabel!
     
+    // MARK: - ViewController's Life Cycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +85,8 @@ class PreviousCycleSummaryVC: UIViewController {
         setScorePercentage(target1: passionActivity1.targetPoints, actual1: passionActivity1.actualPoints, target2: passionActivity2.targetPoints, actual2: passionActivity2.actualPoints, option: "Passion")
         setScorePercentage(target1: contributionActivity1.targetPoints, actual1: contributionActivity1.actualPoints, target2: contributionActivity2.targetPoints, actual2: contributionActivity2.actualPoints, option: "Contribution")
     }
+    
+    // MARK: - Setup UIView's visual display methods
     
     // setup activity label texts with the sprint selected in the previous screen
     func loadLabels(){

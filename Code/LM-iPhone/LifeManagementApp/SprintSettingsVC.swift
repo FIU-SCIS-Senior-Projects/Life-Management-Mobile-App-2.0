@@ -13,7 +13,8 @@ import Firebase
 class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
-    let dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
+    let dbref = Database.database()
+        .reference(fromURL: "https://life-management-v2.firebaseio.com/")
     var categoryKey = ""
     var weekList = ["1", "2", "3"]
     var weekChoice = ""
@@ -297,7 +298,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     }
     
     @IBAction func moreInfoPressed(_ sender: UIButton) {
-        self.createAlert(titleText: "Info", messageText: "Im about to drop some knowledge on you")
+        self.createAlert(titleText: "Info", messageText: "Based on the number of weeks chosen for the sprint duration./n Type the number of times you want to engage in the activity during the sprint\n Example 2 Weeks chosen then the activity must have a value between 1 - 14")
         print("more info was pressed")
     }
     

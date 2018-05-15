@@ -108,7 +108,6 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         if indexPath.row == 0{
             return 150
         }
-        
         return 55
     }
     

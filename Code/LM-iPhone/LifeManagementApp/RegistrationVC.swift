@@ -51,8 +51,7 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
                                 attributes:[NSForegroundColorAttributeName: UIColor.white])
         self.passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
                                 attributes:[NSForegroundColorAttributeName: UIColor.white])
-        self.reTypePasswordTextField.attributedPlaceholder = NSAttributedString(string: "Confirm Password",
-                                attributes:[NSForegroundColorAttributeName: UIColor.white])
+        self.reTypePasswordTextField.attributedPlaceholder = NSAttributedString(string: "Confirm Password",attributes:[NSForegroundColorAttributeName: UIColor.white])
         
         self.registerButton.layer.cornerRadius = 15
         self.registerButton.layer.masksToBounds = true
@@ -66,6 +65,8 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
         self.passwordTextField.delegate = self
         self.reTypePasswordTextField.delegate = self
         
+        
+        // Replace 'Selector("endEditing:")' with '#selector(UIView.endEditing(_:))
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: Selector("endEditing:")))
     }
     
@@ -228,12 +229,12 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
         var errorMsg = ""
         
         // check the length of username
-        if username.characters.count < 5{
+        if username.count < 5{
             print("Username is too short")
             check = false
             errorMsg = "Username is too short"
             
-        }else if username.characters.count >= 15{
+        }else if username.count >= 15{
             print("Username is too long")
             check = false
             errorMsg = "Username is too long"
@@ -279,11 +280,11 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
         var errorMsg = ""
         
         // check the length of password
-        if password.characters.count >= 16{
+        if password.count >= 16{
             print("Password is too long")
             check = false
             errorMsg = "Password is too long"
-        }else if password.characters.count < 5{
+        }else if password.count < 5{
             print("Password is too short")
             check = false
             errorMsg = "Password is too short"
@@ -360,7 +361,7 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
         var errorMsg = ""
         
         // check length of first or last name
-        if name.characters.count >= 15{
+        if name.count >= 15{
             if option == "first"{
                 print("First name is too long")
                 errorMsg = "First name is too long"

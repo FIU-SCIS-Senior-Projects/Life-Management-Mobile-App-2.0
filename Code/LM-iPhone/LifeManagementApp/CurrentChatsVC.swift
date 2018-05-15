@@ -32,6 +32,8 @@ extension CurrentChatsVC: UIViewControllerTransitioningDelegate{
 
 class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    // MARK: - ViewController's Variables
+    
     let interactor = Interactor()
     var chats = [Chat]()
     var coaches = [Coach]()
@@ -41,6 +43,8 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     var selectedChatId = ""
     var coachImageDict = [String: UIImage]()
     
+    // MARK: - ViewController's IBOutlet Variables
+    
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -48,6 +52,8 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         getChats()
         
     }
+    
+    // MARK: - Chat's Methods
     
     func getChats(){
         let chatRef = dbref.child("Chats")
@@ -100,6 +106,8 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    // MARK: - TableView Methods
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chats.count
     }
@@ -131,12 +139,7 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         performSegue(withIdentifier: "conversationSegue", sender: self)
     }
     
-    /***********************************************************
-     
-                        Side Menu Functions
-     
-     ***********************************************************/
-    
+    // MARK: - Side Menu Methods
     
     @IBAction func openMenu(_ sender: AnyObject){
         performSegue(withIdentifier: "openMenu", sender: nil)

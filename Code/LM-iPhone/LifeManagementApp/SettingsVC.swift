@@ -33,21 +33,26 @@ extension SettingsVC: UIViewControllerTransitioningDelegate{
 
 class SettingsVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    // MARK: - ViewController's Variables
+    
     let interactor = Interactor()
     let delegate = UIApplication.shared.delegate as! AppDelegate
     let dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     var userRef = DatabaseReference()
     let imageManager = ImageManager()
     
+    // MARK: - ViewController's IBOutlet Variables
+    
     @IBOutlet weak var userUploadImage: UIImageView!
     
+    // MARK: - ViewController Life Cycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         userRef = dbref.child("Users/\(delegate.user.id)")
-
-        // Do any additional setup after loading the view.
     }
+    
+    // MARK: - IBAction Methods
     
     // upload a new image for user profile pic by using UIImagePickerController
     @IBAction func uploadImagePressed(_ sender: UIButton) {
@@ -72,11 +77,7 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate, UIImagePicke
         delegate.userImgProfile = imageManager.downloadedImage
     }
     
-    /***********************************************************
-     
-                UIImagePickerController Functions
-     
-     ***********************************************************/
+    // MARK: - UIImagePickerController Methods
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
@@ -118,15 +119,7 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate, UIImagePicke
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    
-    
-    /***********************************************************
-     
-                        Side Menu Functions
-     
-     ***********************************************************/
-    
+    // MARK: - Side Menu Methods
     
     @IBAction func openMenu(_ sender: AnyObject){
         performSegue(withIdentifier: "openMenu", sender: nil)

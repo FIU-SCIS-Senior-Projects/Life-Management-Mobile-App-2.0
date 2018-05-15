@@ -394,7 +394,7 @@ class PassionVC: UIViewController {
         var counter = 0
         
         // setup the sprint daily points
-        for index in dailyPointsStr.characters.indices{
+        for index in dailyPointsStr.indices{
             if dailyPointsStr[index] == "1"{
                 // get the index of the button on display
                 let btnIndex = self.btnIndexes[counter]

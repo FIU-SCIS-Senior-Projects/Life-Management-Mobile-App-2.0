@@ -43,6 +43,8 @@ extension JoyVC: UIViewControllerTransitioningDelegate{
 
 class JoyVC: UIViewController {
     
+    // MARK: - ViewController's Variables
+    
     let interactor = Interactor()
     
     var sprintOnDisplay: Sprint = Sprint()
@@ -56,6 +58,12 @@ class JoyVC: UIViewController {
     
     var passionOverallScore = ""
     var contributionOverallScore = ""
+    
+    var dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
+    
+    var delegate = UIApplication.shared.delegate as! AppDelegate
+    
+    // MARK: - ViewController IBOutlet Variables
     
     @IBOutlet weak var goalScore1: UILabel!
     @IBOutlet weak var goalScore2: UILabel!
@@ -87,11 +95,8 @@ class JoyVC: UIViewController {
 
     @IBOutlet weak var overallScore: KDCircularProgress!
     @IBOutlet weak var overallScoreLabel: UILabel!
-    
-    
-    var dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
-    
-    var delegate = UIApplication.shared.delegate as! AppDelegate
+
+    // ViewController Life Cycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,6 +124,8 @@ class JoyVC: UIViewController {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
     }
+    
+    // MARK: - Setup View Display
     
     func turnLabelToCircle(label: UILabel){
         label.layer.cornerRadius = label.frame.size.width / 2
@@ -409,7 +416,7 @@ class JoyVC: UIViewController {
         var counter = 0
         
         // setup the sprint daily points
-        for index in dailyPointsStr.characters.indices{
+        for index in dailyPointsStr.indices{
             if dailyPointsStr[index] == "1"{
                 // get the index of the button on display
                 let btnIndex = self.btnIndexes[counter]
@@ -494,6 +501,8 @@ class JoyVC: UIViewController {
         })
     }
     
+    // MARK: - IBAction Methods
+    
     @IBAction func topDayBtnPressed(_ sender: UIButton) {
         var newScore: Int
         
@@ -540,14 +549,8 @@ class JoyVC: UIViewController {
         // update the new goals to the database
         updateGoals(goal1: goal1TextField.text!, goal2: goal2TextField.text!, goal3: goal3TextField.text!, goal4: goal4TextField.text!)
     }
-
-
-    /***********************************************************
- 
-                        Side Menu Functions
- 
-    ***********************************************************/
-    
+   
+    // MARK: - Side Menu Methods
     
     @IBAction func openMenu(_ sender: AnyObject){
         performSegue(withIdentifier: "openMenu", sender: nil)

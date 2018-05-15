@@ -23,8 +23,8 @@ struct Message{
     init?(snapshot: DataSnapshot){
         guard let dict = snapshot.value as? [String: String] else{ return nil}
         guard let text = dict["text"] else{ return nil}
-        guard let username = dict["username"] else{ return nil}
-        guard let timestamp = dict["timestamp"] else{ return nil}
+        guard let username = dict["username"] else { return nil}
+        guard let timestamp = dict["timestamp"] else { return nil}
         
         self.text = text
         self.username = username

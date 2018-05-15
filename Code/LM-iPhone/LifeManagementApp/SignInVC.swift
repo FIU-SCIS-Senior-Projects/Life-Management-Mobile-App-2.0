@@ -9,25 +9,6 @@
 import UIKit
 import Firebase
 
-// dismisses keyboard when any part of the screen is tapped
-extension UITextField{
-    func setBottomLine(borderColor: UIColor) {
-        
-        self.borderStyle = UITextBorderStyle.none
-        self.backgroundColor = UIColor.clear
-        
-        let borderLine = UIView()
-        let height = 1.0
-        borderLine.frame = CGRect(x: 0, y: Double(self.frame.height) - height,
-                                  width: Double(self.frame.width),height: height)
-        
-        borderLine.backgroundColor = borderColor
-        self.addSubview(borderLine)
-    }
-    
-}
-
-
 class SignInVC: UIViewController {
 
     
