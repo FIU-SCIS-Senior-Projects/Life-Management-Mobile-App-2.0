@@ -39,12 +39,10 @@ public class previous_cycle extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-
             mMenuId = item.getItemId();
             for (int i = 0; i < navigation.getMenu().size(); i++) {
                 MenuItem menuItem = navigation.getMenu().getItem(i);
                 boolean isChecked = menuItem.getItemId() == item.getItemId();
-                System.out.println("ischecked " + isChecked + " then i: " + i);
                 menuItem.getIcon().setColorFilter(Color.parseColor("#a8a8a8"), PorterDuff.Mode.SRC_IN);
             }
 
@@ -64,23 +62,18 @@ public class previous_cycle extends AppCompatActivity {
             }
             return false;
         }
-
     };
 
-
     public void populateJoy(){
-
 
         elements = new String[Dashboard.userJoyactivitiesPrevious.size()];
         ArrayList<String> tempelementList = new ArrayList<>();
         ArrayList<String> tempList = new ArrayList<>();
         boolean is = false;
-
         elementsHelper = new String[Dashboard.userJoyactivitiesPrevious.size()];
         int pointer = 0;
 
         for(int i=0;i<elements.length;i++) {
-
 
             if (!(Dashboard.userActivityJoyid1.activityid.contains(Dashboard.userJoyactivitiesPrevious.get(i).activityid))
                     && (!(Dashboard.userActivityJoyid2.activityid.contains(Dashboard.userJoyactivitiesPrevious.get(i).activityid)))) {
@@ -102,7 +95,6 @@ public class previous_cycle extends AppCompatActivity {
 
         elements = tempelementList.toArray(new String[tempelementList.size()]);
         elementsHelper = tempList.toArray(new String[tempList.size()]);
-
         list = (ListView) findViewById(R.id.listview);
 
         if(!is){
@@ -115,12 +107,10 @@ public class previous_cycle extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                //Toast.makeText(getBaseContext(),parent.getItemAtPosition(i) + " is selected",Toast.LENGTH_LONG).show();
                 showContentJoy(i);
             }
         });
     }
-
 
     public void populatePassion(){
 
@@ -128,12 +118,10 @@ public class previous_cycle extends AppCompatActivity {
         ArrayList<String> tempelementList = new ArrayList<>();
         ArrayList<String> tempList = new ArrayList<>();
         boolean is = false;
-
         elementsHelper = new String[Dashboard.userPassionactivitiesPrevious.size()];
         int pointer = 0;
 
         for(int i=0;i<elements.length;i++) {
-
 
             if (!(Dashboard.userActivityPassionid1.activityid.contains(Dashboard.userPassionactivitiesPrevious.get(i).activityid))
                     && (!(Dashboard.userActivityPassionid2.activityid.contains(Dashboard.userPassionactivitiesPrevious.get(i).activityid)))) {
@@ -168,12 +156,9 @@ public class previous_cycle extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                //Toast.makeText(getBaseContext(),parent.getItemAtPosition(i) + " is selected",Toast.LENGTH_LONG).show();
                 showContentPassion(i);
             }
         });
-
-
     }
 
     public void populateContribution(){
@@ -190,7 +175,6 @@ public class previous_cycle extends AppCompatActivity {
 
             if (!(Dashboard.userActivityContributionid1.activityid.contains(Dashboard.userContributionactivitiesPrevious.get(i).activityid))
                     && (!(Dashboard.userActivityContributionid2.activityid.contains(Dashboard.userContributionactivitiesPrevious.get(i).activityid)))) {
-
 
 
                 tempelementList.add(Dashboard.userContributionactivitiesPrevious.get(i).name + " " + Dashboard.userContributionactivitiesPrevious.get(i).categoryId
@@ -210,9 +194,7 @@ public class previous_cycle extends AppCompatActivity {
 
         elements = tempelementList.toArray(new String[tempelementList.size()]);
         elementsHelper = tempList.toArray(new String[tempList.size()]);
-
         list = (ListView) findViewById(R.id.listview);
-
 
         if(!res){
             Toast.makeText(this, "No Previous Activities Found",Toast.LENGTH_LONG).show();
@@ -224,12 +206,10 @@ public class previous_cycle extends AppCompatActivity {
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                    //Toast.makeText(getBaseContext(),parent.getItemAtPosition(i) + " is selected",Toast.LENGTH_LONG).show();
                     showContentContribution(i);
                 }
             });
         }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -260,7 +240,6 @@ public class previous_cycle extends AppCompatActivity {
                 tempelementList.add(Dashboard.userJoyactivitiesPrevious.get(i).name + " " + Dashboard.userJoyactivitiesPrevious.get(i).categoryId
                         + " " + Dashboard.userJoyactivitiesPrevious.get(i).userId);
 
-
                 tempList.add(Dashboard.userJoyactivitiesPrevious.get(i).name + " (" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(0, 2)
                         + "/" + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(2, 4) + "/"
                         + Dashboard.userJoyactivitiesPrevious.get(i).categoryId.substring(6) + "-"
@@ -273,8 +252,6 @@ public class previous_cycle extends AppCompatActivity {
 
         elements = tempelementList.toArray(new String[tempelementList.size()]);
         elementsHelper = tempList.toArray(new String[tempList.size()]);
-
-
         list = (ListView) findViewById(R.id.listview);
 
         if(!res){
@@ -283,20 +260,16 @@ public class previous_cycle extends AppCompatActivity {
         }else {
 
             adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, elementsHelper);
-
             list.setAdapter(adapter);
-
 
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                    //Toast.makeText(getBaseContext(),parent.getItemAtPosition(i) + " is selected",Toast.LENGTH_LONG).show();
                     showContentJoy(i);
                 }
             });
 
             final ImageButton goBack = (ImageButton) findViewById(R.id.imageButton_Cycle);
-
             goBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -316,12 +289,9 @@ public class previous_cycle extends AppCompatActivity {
 
         String element = "";
         String[] elementsplitter = elements[i].split(" ");
-        System.out.println("this is the elementsplitter " + elementsplitter[0]);
-        System.out.println("this is the element fella " + elements[i]);
-
         int size = Dashboard.userJoyactivitiesPrevious.size();
-        for(int k=0;k<size;k++){
 
+        for(int k=0;k<size;k++){
 
             if(Dashboard.userJoyactivitiesPrevious.get(k).name.contains(elementsplitter[0]) &&
                     Dashboard.userJoyactivitiesPrevious.get(k).categoryId.contains(elementsplitter[1]) &&
@@ -338,17 +308,13 @@ public class previous_cycle extends AppCompatActivity {
             }
         }
 
-        System.out.println("elementafter " + element);
-
         Intent k = new Intent(previous_cycle.this,cycleActivity.class);
-
 
         //saving all data do we can use it in the next screen
         Bundle bundle = new Bundle();
 
         k.putExtras(bundle);
         k.putExtra("theelement",element);
-
         this.startActivity(k);
     }
 
@@ -360,7 +326,6 @@ public class previous_cycle extends AppCompatActivity {
 
         int size = Dashboard.userPassionactivitiesPrevious.size();
         for(int k=0;k<size;k++){
-
 
             if(Dashboard.userPassionactivitiesPrevious.get(k).name.contains(elementsplitter[0]) &&
                     Dashboard.userPassionactivitiesPrevious.get(k).categoryId.contains(elementsplitter[1]) &&
@@ -384,7 +349,6 @@ public class previous_cycle extends AppCompatActivity {
 
         k.putExtras(bundle);
         k.putExtra("theelementpassion",element);
-
         this.startActivity(k);
     }
 
@@ -420,9 +384,7 @@ public class previous_cycle extends AppCompatActivity {
 
         k.putExtras(bundle);
         k.putExtra("theelementcontribution",element);
-
         this.startActivity(k);
     }
-
 }
 

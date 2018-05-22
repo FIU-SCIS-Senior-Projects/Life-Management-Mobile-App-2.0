@@ -20,9 +20,6 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by lazaro on 9/25/17.
- */
 
     public class CoverFlowAdapter extends BaseAdapter{
 
@@ -146,15 +143,10 @@ import java.util.List;
                                 }
                             });
                         }
-
                     }
-
                     positionSaver = position;
                 }
-
-
             };
-
         }
 
         private static class ViewHolder {
@@ -166,5 +158,4 @@ import java.util.List;
                 gameName = (TextView) v.findViewById(R.id.name);
             }
         }
-
     }

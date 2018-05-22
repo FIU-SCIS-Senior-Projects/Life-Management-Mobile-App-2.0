@@ -8,7 +8,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
-
 import com.google.android.youtube.player.YouTubePlayer.ErrorReason;
 import com.google.android.youtube.player.YouTubePlayer.PlaybackEventListener;
 import com.google.android.youtube.player.YouTubePlayer.PlayerStateChangeListener;
@@ -18,15 +17,11 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
 
-
-
 public class activity_fourth_screen extends YouTubeBaseActivity {
 
     private YouTubePlayerView youTubePlayerView;
     private YouTubePlayer.OnInitializedListener onInitializedListener;
     ImageButton androidRightArrowButton;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +49,6 @@ public class activity_fourth_screen extends YouTubeBaseActivity {
         onInitializedListener = new YouTubePlayer.OnInitializedListener() {
 
             @Override
-
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 youTubePlayer.loadVideo("OjckuZ82wKk");
             }
@@ -67,8 +61,5 @@ public class activity_fourth_screen extends YouTubeBaseActivity {
 
         //the video will display automatically
         youTubePlayerView.initialize("AIzaSyCexMWxn8PykbQqBGbCPRgbGBN1g6-c70A",onInitializedListener);
-
-
-
     }//end of method
 }

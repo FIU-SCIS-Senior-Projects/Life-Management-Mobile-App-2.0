@@ -19,7 +19,6 @@ public class GivingBackActivity extends AppCompatActivity {
     private List<ActGivingback> actGivingbackList = new ArrayList<>();
     static ImageButton nextButton;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

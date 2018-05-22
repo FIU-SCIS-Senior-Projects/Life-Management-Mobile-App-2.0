@@ -16,7 +16,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.view.Menu;
 import com.sccomponents.gauges.ScArcGauge;
-
 import org.w3c.dom.Text;
 
 public class currentCycleActivity extends AppCompatActivity {
@@ -41,8 +40,8 @@ public class currentCycleActivity extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.navigation_joy:
-                    item.getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
 
+                    item.getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
                     populatecurrentJoy();
                     return true;
                 case R.id.navigation_passion:
@@ -51,41 +50,30 @@ public class currentCycleActivity extends AppCompatActivity {
                     populatecurrentPassion();
                     return true;
                 case R.id.navigation_contribution:
+
                     item.getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
                     populatecurrentContribution();
                     return true;
-
             }
-
             return false;
         }
-
     };
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_current_cycle);
-
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
-
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-
-
-
         TextView g = (TextView) findViewById(R.id.textViewcurrentcycle);
 
-        //+ " Activity Score: " + Dashboard.userActivityJoyid1.activityScore + "\n"
         int f = Integer.parseInt(Dashboard.userActivityJoyid1.activityScore);
-
         ScArcGauge first = (ScArcGauge) findViewById(R.id.gauge_currentcycle);
         TextView first2 = (TextView) findViewById(R.id.counter_currentcycle);
-
         first2.setText(f+"");
         first.setHighValue(f);
-
 
         g.setText("\n\n\n"
                 + " Activity Name: " +  Dashboard.userActivityJoyid1.name + "\n"
@@ -94,16 +82,12 @@ public class currentCycleActivity extends AppCompatActivity {
                 + " Starting Date:  " + Dashboard.startingDateFixed + "\n"
                 + " Ending Date:    " +  Dashboard.endingDateFixed);
 
-
         TextView g2 = (TextView) findViewById(R.id.textViewcurrentcycle2);
         int h1 = Integer.parseInt(Dashboard.userActivityJoyid2.activityScore);
-
         ScArcGauge first3 = (ScArcGauge) findViewById(R.id.gauge_currentcycle2);
         TextView first4 = (TextView) findViewById(R.id.counter_currentcycle2);
-
         first4.setText(h1+"");
         first3.setHighValue(h1);
-
 
         g2.setText("\n\n\n"
                 + " Activity #2 Name: " +  Dashboard.userActivityJoyid2.name + "\n"
@@ -114,7 +98,6 @@ public class currentCycleActivity extends AppCompatActivity {
 
 
         ImageButton goBack = (ImageButton) findViewById(R.id.imageButton_currentcycle);
-
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,20 +107,15 @@ public class currentCycleActivity extends AppCompatActivity {
 
     } // end of oncreate
 
-
     public void populatecurrentJoy(){
 
 
         TextView g = (TextView) findViewById(R.id.textViewcurrentcycle);
-
         int f = Integer.parseInt(Dashboard.userActivityJoyid1.activityScore);
-
         ScArcGauge first = (ScArcGauge) findViewById(R.id.gauge_currentcycle);
         TextView first2 = (TextView) findViewById(R.id.counter_currentcycle);
-
         first2.setText(f+"");
         first.setHighValue(f);
-
 
         g.setText("\n\n\n"
                 + " Activity Name: " +  Dashboard.userActivityJoyid1.name + "\n"
@@ -149,13 +127,10 @@ public class currentCycleActivity extends AppCompatActivity {
 
         TextView g2 = (TextView) findViewById(R.id.textViewcurrentcycle2);
         int h1 = Integer.parseInt(Dashboard.userActivityJoyid2.activityScore);
-
         ScArcGauge first3 = (ScArcGauge) findViewById(R.id.gauge_currentcycle2);
         TextView first4 = (TextView) findViewById(R.id.counter_currentcycle2);
-
         first4.setText(h1+"");
         first3.setHighValue(h1);
-
 
         g2.setText("\n\n\n"
                 + " Activity #2 Name: " +  Dashboard.userActivityJoyid2.name + "\n"
@@ -164,23 +139,16 @@ public class currentCycleActivity extends AppCompatActivity {
                 + " Starting Date:  " + Dashboard.startingDateFixed + "\n"
                 + " Ending Date:    " +  Dashboard.endingDateFixed);
 
-
     } //end of method
-
-
 
     public void populatecurrentPassion(){
 
         TextView g = (TextView) findViewById(R.id.textViewcurrentcycle);
-
         int f = Integer.parseInt(Dashboard.userActivityPassionid1.activityScore);
-
         ScArcGauge first = (ScArcGauge) findViewById(R.id.gauge_currentcycle);
         TextView first2 = (TextView) findViewById(R.id.counter_currentcycle);
-
         first2.setText(f+"");
         first.setHighValue(f);
-
 
         g.setText("\n\n\n"
                 + " Activity Name: " +  Dashboard.userActivityPassionid1.name + "\n"
@@ -192,10 +160,8 @@ public class currentCycleActivity extends AppCompatActivity {
 
         TextView g2 = (TextView) findViewById(R.id.textViewcurrentcycle2);
         int h1 = Integer.parseInt(Dashboard.userActivityPassionid2.activityScore);
-
         ScArcGauge first3 = (ScArcGauge) findViewById(R.id.gauge_currentcycle2);
         TextView first4 = (TextView) findViewById(R.id.counter_currentcycle2);
-
         first4.setText(h1+"");
         first3.setHighValue(h1);
 
@@ -211,15 +177,11 @@ public class currentCycleActivity extends AppCompatActivity {
     public void populatecurrentContribution(){
 
         TextView g = (TextView) findViewById(R.id.textViewcurrentcycle);
-
         int f = Integer.parseInt(Dashboard.userActivityContributionid1.activityScore);
-
         ScArcGauge first = (ScArcGauge) findViewById(R.id.gauge_currentcycle);
         TextView first2 = (TextView) findViewById(R.id.counter_currentcycle);
-
         first2.setText(f+"");
         first.setHighValue(f);
-
 
         g.setText("\n\n\n"
                 + " Activity Name: " +  Dashboard.userActivityContributionid1.name + "\n"
@@ -228,13 +190,10 @@ public class currentCycleActivity extends AppCompatActivity {
                 + " Starting Date:  " + Dashboard.startingDateFixed_contribution + "\n"
                 + " Ending Date:    " +  Dashboard.endingDateFixed_contribution);
 
-
         TextView g2 = (TextView) findViewById(R.id.textViewcurrentcycle2);
         int h1 = Integer.parseInt(Dashboard.userActivityContributionid2.activityScore);
-
         ScArcGauge first3 = (ScArcGauge) findViewById(R.id.gauge_currentcycle2);
         TextView first4 = (TextView) findViewById(R.id.counter_currentcycle2);
-
         first4.setText(h1+"");
         first3.setHighValue(h1);
 
@@ -251,7 +210,5 @@ public class currentCycleActivity extends AppCompatActivity {
     public void onBackPressed() {
 
         super.onBackPressed();
-
     }
-
 }

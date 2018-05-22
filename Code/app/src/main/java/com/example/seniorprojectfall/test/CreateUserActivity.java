@@ -36,22 +36,17 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
     private EditText DOB;
     private Button buttonRegister;
     private ProgressDialog progressDialog;
-
     DatabaseReference databaseReference;
     List<User> listUsers2;
 
-//#ff6b6b
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
 
         progressDialog = new ProgressDialog(this);
-
         listUsers2 = new ArrayList<>();
-
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
-
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         repeatPassword = (EditText) findViewById(R.id.editTextRepeatPassword);
@@ -61,7 +56,6 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         DOB = (EditText) findViewById(R.id.editDOB);
         buttonRegister = (Button) findViewById(R.id.buttonSignup);
         buttonRegister.setOnClickListener(this);
-
     }
 
     @Override
@@ -82,7 +76,6 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                     //adding artist to the list
                     listUsers2.add(artist);
                 }
-
             }
 
             @Override
@@ -107,15 +100,12 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         date.setLenient(false);
 
         try{
-
             date.parse(d.trim());
 
         }catch(ParseException p){
             return false;
         }
-
         return true;
-
     }
 
 
@@ -129,8 +119,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         String currentusername = username.getText().toString();
         String Dob = DOB.getText().toString();
 
-        //input validations
-
+        //INPUT VALIDATIONS
 
         //First Name
         if((TextUtils.isEmpty(firstN)) || (firstN.length()<=1)){
@@ -156,15 +145,10 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                     Toast.makeText(this,"First Name CANNOT Digits/Symbols",Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-
             }
 
-            //make all first character uppercase for better look in database
             String temp = firstN.substring(0, 1).toUpperCase();
             firstN = temp + firstN.substring(1);
-            //Toast.makeText(this,"First Name UPPER " + firstN,Toast.LENGTH_SHORT).show();
-
         }
 
         //Last Name
@@ -193,14 +177,11 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                 }
             }
 
-            //make all first character uppercase for better look in database
             String temp = lastN.substring(0, 1).toUpperCase();
             lastN = temp + lastN.substring(1);
-            //Toast.makeText(this,"Last Name UPPER " + lastN,Toast.LENGTH_SHORT).show();
         }
 
         //Email
-
         if((TextUtils.isEmpty(email)) || (email.length()<=1)){
             Toast.makeText(this,"Email MUST contain more characters",Toast.LENGTH_SHORT).show();
             return;
@@ -273,7 +254,6 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
             }
         }
 
-
         //username
         if((TextUtils.isEmpty(currentusername)) || (currentusername.length()<=1)){
             Toast.makeText(this,"Username MUST contain more characters",Toast.LENGTH_SHORT).show();
@@ -320,8 +300,6 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                 }
 
                 if((!Character.isLetter(s) && !Character.isDigit(s))){
-                  //  Toast.makeText(this,"Username CANNOT contain symbols",Toast.LENGTH_SHORT).show();
-                    //return;
                     a= true;
                 }
             }
@@ -350,7 +328,6 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         }
 
         //Password
-
         if((TextUtils.isEmpty(password)) || (password.length()<=1)){
             Toast.makeText(this,"Password MUST contain more characters",Toast.LENGTH_SHORT).show();
             return;
@@ -390,10 +367,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                     Toast.makeText(this,"Password CANNOT contain symbols",Toast.LENGTH_SHORT).show();
                     return;
                 }
-
             }
-
-
 
             if(!a || !c){
                 Toast.makeText(this,"Password MUST contain characters and numbers",Toast.LENGTH_SHORT).show();
@@ -408,7 +382,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
             return;
         }
 
-
+        //register the user
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
 
@@ -416,9 +390,6 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         String id = databaseReference.push().getKey();
 
         User currentUser = new User(email,currentusername,firstN,lastN,Dob,password,false,false,id);
-
-        //push()
-        //databaseReference.push().setValue(currentUser);
         databaseReference.child(id).setValue(currentUser);
         progressDialog.dismiss();
         Toast.makeText(getApplication(),"Saved Successfully",Toast.LENGTH_LONG).show();

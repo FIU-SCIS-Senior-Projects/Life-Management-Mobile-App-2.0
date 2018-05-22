@@ -37,29 +37,25 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
     private EditText q4;
     DatabaseReference databaseUpdateCategories;
     DatabaseReference databaseUpdateActivities;
-
     TextView textActual1;
     TextView textActual2;
-
-    TextView textTarget1; // nat change
-    TextView textTarget2;  // nat change
-    TextView counterJoyActivity1; // nat change
-    ScArcGauge gaugeJoyActivity1; // nat change
-    String activity1ScoreStr; // nat change
-    int activity1ScoreInt;  // nat change
-    TextView counterJoyActivity2; // nat change
-    ScArcGauge gaugeJoyActivity2; // nat change
-    String activity2ScoreStr; // nat change
-    int activity2ScoreInt;  // nat change
-    TextView counterJoyScore; // nat change
-    ScArcGauge gaugeJoyScore; // nat change
-    String joyScoreStr; // nat change
-    int joyScoreInt; // nat change
-    static TextView counterJoyLifeScore; // nat change
-    static ScArcGauge gaugeJoyLifeScore; // nat change
-    static int lifeScoreJoyInt; // nat change
-
-
+    TextView textTarget1;
+    TextView textTarget2;
+    TextView counterJoyActivity1;
+    ScArcGauge gaugeJoyActivity1;
+    String activity1ScoreStr;
+    int activity1ScoreInt;
+    TextView counterJoyActivity2;
+    ScArcGauge gaugeJoyActivity2;
+    String activity2ScoreStr;
+    int activity2ScoreInt;
+    TextView counterJoyScore;
+    ScArcGauge gaugeJoyScore;
+    String joyScoreStr;
+    int joyScoreInt;
+    static TextView counterJoyLifeScore;
+    static ScArcGauge gaugeJoyLifeScore;
+    static int lifeScoreJoyInt;
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -80,16 +76,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
      * @return Return the View for the fragment's UI, or null.
      */
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_joy,container,false);
-
-
-
-        System.out.println("YEYH " + Dashboard.userActivityJoyid1.activityid);
-
 
         final ScrollView scroll = (ScrollView)view.findViewById(R.id.scrollViewId);
         scroll.post(new Runnable() {
@@ -100,16 +90,13 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
         });
 
         TextView textStartingDate = (TextView)view.findViewById(R.id.startingDateBtn);
-        //System.out.println("DATEEE444 " + test);
         textStartingDate.setText(Dashboard.startingDateFixed);
 
         TextView textEndingDate = (TextView)view.findViewById(R.id.endingDateBtn);
         textEndingDate.setText(Dashboard.endingDateFixed);
 
         TextView textAct1 = (TextView)view.findViewById(R.id.textViewAct1);
-        // Assign variable textAct1 the value of static variable activity1Joy (from TestActivity.java)
         textAct1.setText(Dashboard.userActivityJoyid1.name);
-        //textAct1.setText("Inner Peace");
 
         TextView textAct2 = (TextView)view.findViewById(R.id.textViewAct2);
         textAct2.setText(Dashboard.userActivityJoyid2.name);
@@ -123,10 +110,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
         textActual2 = (TextView)view.findViewById(R.id.textViewActual2);
         textActual2.setText(Dashboard.userActivityJoyid2.actualPoints);
 
-        textTarget1 = (TextView)view.findViewById(R.id.textViewTarget1);  // nat cahnge
+        textTarget1 = (TextView)view.findViewById(R.id.textViewTarget1);
         textTarget1.setText(Dashboard.userActivityJoyid1.targetPoints);
 
-        textTarget2 = (TextView)view.findViewById(R.id.textViewTarget2);  // nat change
+        textTarget2 = (TextView)view.findViewById(R.id.textViewTarget2);
         textTarget2.setText(Dashboard.userActivityJoyid2.targetPoints);
 
         TextView mondayDate = (TextView)view.findViewById(R.id.TextViewMonday);
@@ -137,111 +124,78 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
         TextView saturdayDate = (TextView)view.findViewById(R.id.TextViewSaturday);
         TextView sundayDate = (TextView)view.findViewById(R.id.TextViewSunday);
 
-
-        // nat change
-        // Find the components for gaugeJoyActivity1
         counterJoyActivity1 = (TextView) view.findViewById(R.id.counter_joy_activity1);
         gaugeJoyActivity1 = (ScArcGauge) view.findViewById(R.id.gauge_joy_activity1);
         activity1ScoreStr = Dashboard.userActivityJoyid1.activityScore;
-        activity1ScoreInt = Integer.parseInt(activity1ScoreStr); /// Float or double???
+        activity1ScoreInt = Integer.parseInt(activity1ScoreStr);
 
-        // Set the features stroke cap style to rounded
         gaugeJoyActivity1.findFeature(ScArcGauge.BASE_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
         gaugeJoyActivity1.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
 
-        // If you set the value from the xml that not produce an event so I will change the
-        // value from code.
         gaugeJoyActivity1.setHighValue(activity1ScoreInt);
-
-        // Each time I will change the value I must write it inside the counter text.
         gaugeJoyActivity1.setOnEventListener(new ScGauge.OnEventListener() {
             @Override
             public void onValueChange(float lowValue, float highValue) {
                 counterJoyActivity1.setText((int) highValue + "%");
-
             }
         });
 
-        // Find the components for gaugeJoyActivity2
         counterJoyActivity2 = (TextView) view.findViewById(R.id.counter_joy_activity2);
         gaugeJoyActivity2 = (ScArcGauge) view.findViewById(R.id.gauge_joy_activity2);
         activity2ScoreStr = Dashboard.userActivityJoyid2.activityScore;
-        activity2ScoreInt = Integer.parseInt(activity2ScoreStr); /// Float or double???
+        activity2ScoreInt = Integer.parseInt(activity2ScoreStr);
 
-
-        // Set the features stroke cap style to rounded
         gaugeJoyActivity2.findFeature(ScArcGauge.BASE_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
         gaugeJoyActivity2.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
 
-        // If you set the value from the xml that not produce an event so I will change the
-        // value from code.
         gaugeJoyActivity2.setHighValue(activity2ScoreInt);
-
-        // Each time I will change the value I must write it inside the counter text.
         gaugeJoyActivity2.setOnEventListener(new ScGauge.OnEventListener() {
             @Override
             public void onValueChange(float lowValue, float highValue) {
                 counterJoyActivity2.setText((int) highValue + "%");
-
             }
         });
 
-        // Find the components for gaugeJoyScore
         counterJoyScore = (TextView) view.findViewById(R.id.counter_joy_score);
         gaugeJoyScore = (ScArcGauge) view.findViewById(R.id.gauge_joy_score);
         joyScoreStr = Dashboard.userJoySprint.sprintOverallScore;
         joyScoreInt = Integer.parseInt(joyScoreStr);
 
-        // Set the features stroke cap style to rounded
         gaugeJoyScore.findFeature(ScArcGauge.BASE_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
         gaugeJoyScore.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
 
-        // If you set the value from the xml that not produce an event so I will change the
-        // value from code.
         gaugeJoyScore.setHighValue(joyScoreInt);
-
-        // Each time I will change the value I must write it inside the counter text.
         gaugeJoyScore.setOnEventListener(new ScGauge.OnEventListener() {
             @Override
             public void onValueChange(float lowValue, float highValue) {
                 counterJoyScore.setText((int) highValue + "%");
-
             }
         });
 
-        // Find the components for gaugeLifeScore
         counterJoyLifeScore = (TextView) view.findViewById(R.id.counter_life_score);
         gaugeJoyLifeScore = (ScArcGauge) view.findViewById(R.id.gauge_life_score);
         lifeScoreJoyInt = (int)Math.round((((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
                 (Integer.parseInt(Dashboard.userPassionSprint.sprintOverallScore)) +
                 (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3.0));
 
-        // Set the features stroke cap style to rounded
         gaugeJoyLifeScore.findFeature(ScArcGauge.BASE_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
         gaugeJoyLifeScore.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
 
-        // If you set the value from the xml that not produce an event so I will change the
-        // value from code.
         gaugeJoyLifeScore.setHighValue(lifeScoreJoyInt);
-
-        // Each time I will change the value I must write it inside the counter text.
         gaugeJoyLifeScore.setOnEventListener(new ScGauge.OnEventListener() {
             @Override
             public void onValueChange(float lowValue, float highValue) {
                 counterJoyLifeScore.setText((int) highValue + "%");
             }
         });
-
-        // end nat change (moved from the bottom to here)
-
 
         //Buttons for Activity #1
         final Button btCalendarDay1 = (Button)view.findViewById(R.id.bt1);
@@ -268,21 +222,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     btCalendarDay1.setBackgroundColor(Color.LTGRAY);
 
                     Dashboard.userActivityJoyid1.sprintDailyPoints = modify1; //maintain a copy global instead of accessing to database
-
                     String Modifystr = modify1+"";
-
                     int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
                     Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
                     setTextView(countOnes+"");
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
-
 
                 }else{
 
@@ -294,24 +241,15 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     btCalendarDay1.setBackgroundColor(Color.GREEN);
 
                     Dashboard.userActivityJoyid1.sprintDailyPoints = modify;
-
-
                     String Modifystr = modify+"";
-
                     int countOnes = Modifystr.length() - Modifystr.replaceAll("1","").length();
                     Dashboard.userActivityJoyid1.actualPoints = countOnes+"";
                     setTextView(countOnes+"");
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
                 }
-
-                //11001001100100
             }
         });
 
@@ -328,7 +266,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -346,11 +283,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -369,15 +302,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
                 }
-
             }
         });
+
         final Button btCalendarDay3 = (Button)view.findViewById(R.id.bt3);
         btCalendarDay3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -391,7 +320,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -409,11 +337,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -432,16 +356,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
-
-
-
             }
         });
+
         final Button btCalendarDay4 = (Button)view.findViewById(R.id.bt4);
         btCalendarDay4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -455,7 +374,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -473,11 +391,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -496,17 +410,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
                 }
-
-
-
             }
         });
+
         final Button btCalendarDay5 = (Button)view.findViewById(R.id.bt5);
         btCalendarDay5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -520,7 +428,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -538,11 +445,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -561,15 +464,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
-
-
             }
         });
+
         final Button btCalendarDay6 = (Button)view.findViewById(R.id.bt6);
         btCalendarDay6.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -584,7 +483,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -602,11 +500,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -625,15 +519,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
-
-
             }
         });
+
         final Button btCalendarDay7 = (Button)view.findViewById(R.id.bt7);
         btCalendarDay7.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -647,7 +537,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -665,10 +554,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -687,13 +573,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
+
         final Button btCalendarDay8 = (Button)view.findViewById(R.id.bt8);
         btCalendarDay8.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -707,7 +591,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -725,10 +608,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -747,15 +627,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
                 }
-
             }
         });
+
         final Button btCalendarDay9 = (Button)view.findViewById(R.id.bt9);
         btCalendarDay9.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -769,7 +645,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -787,10 +662,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -809,14 +681,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
+
         final Button btCalendarDay10 = (Button)view.findViewById(R.id.bt10);
         btCalendarDay10.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -830,7 +699,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -848,10 +716,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -870,13 +735,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
+
         final Button btCalendarDay11 = (Button)view.findViewById(R.id.bt11);
         btCalendarDay11.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -890,7 +753,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -908,10 +770,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -930,14 +789,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
+
         final Button btCalendarDay12 = (Button)view.findViewById(R.id.bt12);
         btCalendarDay12.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -951,7 +807,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -969,10 +824,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -991,13 +843,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
+
         final Button btCalendarDay13 = (Button)view.findViewById(R.id.bt13);
         btCalendarDay13.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1011,7 +861,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1029,10 +878,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1051,13 +897,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
+
         final Button btCalendarDay14 = (Button)view.findViewById(R.id.bt14);
         btCalendarDay14.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1072,7 +916,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1090,10 +933,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1112,12 +952,8 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
-
             }
         });
 
@@ -1136,7 +972,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1154,10 +989,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1176,14 +1008,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
-
 
         final Button btCalendarDay16 = (Button)view.findViewById(R.id.bt16);
         btCalendarDay16.setOnClickListener(new View.OnClickListener() {
@@ -1198,7 +1026,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1216,10 +1043,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1238,14 +1062,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
-
 
         final Button btCalendarDay17 = (Button)view.findViewById(R.id.bt17);
         btCalendarDay17.setOnClickListener(new View.OnClickListener() {
@@ -1260,7 +1080,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //110010011001001001011
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1278,10 +1097,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1300,14 +1116,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
-
 
         final Button btCalendarDay18 = (Button)view.findViewById(R.id.bt18);
         btCalendarDay18.setOnClickListener(new View.OnClickListener() {
@@ -1323,7 +1135,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //110010011001001001011
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1341,10 +1152,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1363,14 +1171,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
-
 
         final Button btCalendarDay19 = (Button)view.findViewById(R.id.bt19);
         btCalendarDay19.setOnClickListener(new View.OnClickListener() {
@@ -1385,7 +1189,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //110010011001001001011
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1403,10 +1206,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1425,12 +1225,8 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
-
             }
         });
 
@@ -1448,7 +1244,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //110010011001001001011
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1466,10 +1261,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    /// nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1488,15 +1280,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
-
             }
         });
-
 
         final Button btCalendarDay21 = (Button)view.findViewById(R.id.bt21);
         btCalendarDay21.setOnClickListener(new View.OnClickListener() {
@@ -1511,7 +1298,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //110010011001001001011
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1529,10 +1315,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1551,10 +1334,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -1591,10 +1371,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1614,16 +1391,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
-
-
                 }
             }
         });
+
         final Button btCalendarDay23 = (Button)view.findViewById(R.id.bt23);
         btCalendarDay23.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1655,11 +1427,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -1679,14 +1447,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
+
         final Button btCalendarDay24 = (Button)view.findViewById(R.id.bt24);
         btCalendarDay24.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1718,12 +1483,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
-
 
                 }else{
 
@@ -1743,14 +1503,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
+
         final Button btCalendarDay25 = (Button)view.findViewById(R.id.bt25);
         btCalendarDay25.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1782,11 +1539,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -1806,15 +1559,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
-
             }
         });
+
         final Button btCalendarDay26 = (Button)view.findViewById(R.id.bt26);
         btCalendarDay26.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1846,11 +1595,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -1870,14 +1615,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
+
         final Button btCalendarDay27 = (Button)view.findViewById(R.id.bt27);
         btCalendarDay27.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1909,11 +1651,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -1933,19 +1671,15 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
+
         final Button btCalendarDay28 = (Button)view.findViewById(R.id.bt28);
         btCalendarDay28.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-
 
                 String temp = Dashboard.userActivityJoyid2.sprintDailyPoints;
 
@@ -1973,10 +1707,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1996,14 +1727,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
+
         final Button btCalendarDay29 = (Button)view.findViewById(R.id.bt29);
         btCalendarDay29.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2035,11 +1763,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -2059,14 +1783,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
+
         final Button btCalendarDay30 = (Button)view.findViewById(R.id.bt30);
         btCalendarDay30.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2098,11 +1819,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -2122,14 +1839,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
+
         final Button btCalendarDay31 = (Button)view.findViewById(R.id.bt31);
         btCalendarDay31.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2162,11 +1876,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -2186,14 +1896,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
+
         final Button btCalendarDay32 = (Button)view.findViewById(R.id.bt32);
         btCalendarDay32.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2225,11 +1932,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -2249,14 +1952,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
+
         final Button btCalendarDay33 = (Button)view.findViewById(R.id.bt33);
         btCalendarDay33.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2289,12 +1989,8 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
-
+          
                 }else{
 
                     //means the user click this button for first time
@@ -2313,13 +2009,11 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
+
         final Button btCalendarDay34 = (Button)view.findViewById(R.id.bt34);
         btCalendarDay34.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2352,11 +2046,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -2376,11 +2066,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
@@ -2417,11 +2103,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -2441,13 +2123,8 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
-
             }
         });
 
@@ -2483,11 +2160,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -2507,15 +2180,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
-
 
         final Button btCalendarDay37 = (Button)view.findViewById(R.id.bt37);
         btCalendarDay37.setOnClickListener(new View.OnClickListener() {
@@ -2549,11 +2217,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -2573,15 +2237,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
-
 
         final Button btCalendarDay38 = (Button)view.findViewById(R.id.bt38);
         btCalendarDay38.setOnClickListener(new View.OnClickListener() {
@@ -2614,10 +2273,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2637,16 +2293,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
-
             }
         });
-
 
         final Button btCalendarDay39 = (Button)view.findViewById(R.id.bt39);
         btCalendarDay39.setOnClickListener(new View.OnClickListener() {
@@ -2679,11 +2329,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -2703,13 +2349,8 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
-
             }
         });
 
@@ -2745,11 +2386,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -2769,16 +2406,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
-
             }
         });
-
 
         final Button btCalendarDay41 = (Button)view.findViewById(R.id.bt41);
         btCalendarDay41.setOnClickListener(new View.OnClickListener() {
@@ -2812,11 +2443,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -2836,15 +2463,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
-
 
         final Button btCalendarDay42 = (Button)view.findViewById(R.id.bt42);
         btCalendarDay42.setOnClickListener(new View.OnClickListener() {
@@ -2877,11 +2499,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -2901,17 +2519,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityJoyid2.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
                 }
             }
         });
-
-
-        //int d = Dashboard.activitiesJoyMap.size();  //d must be 2
 
         String datearranger = "";
         int numberOfweeks = Integer.parseInt(Dashboard.userJoySprint.numberOfWeeks);
@@ -2936,10 +2547,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             //update the current value from start of the week
             String tempStartingDate = textStartingDate.getText().toString();
             String tempEndingDate = textEndingDate.getText().toString();
-            System.out.println("thisistemp " + tempStartingDate);
-            System.out.println("thisistemp2 " + tempEndingDate);
-
-
 
             try {
 
@@ -2954,18 +2561,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                 int counter = 0;
 
                 for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-                    // Do your job here with `date`.
-                    String[] str = date.toString().split(" ");
 
-                    System.out.println("DATEIS2 completedate " + date.toString());
+                    String[] str = date.toString().split(" ");
 
                     if(counter==7){
                         break;
                     }
 
                     for(int i=0;i<str.length;i++) {
-                        System.out.println("DATEIS2 " + str[2]);
-
 
                         if(counter==0){
                             ++counter;
@@ -3014,16 +2617,12 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                             btCalendarDay28.setText(str[2]);
                             break;
                         }
-
-
                     }
                 }
-
 
             }catch(ParseException e){
                 e.printStackTrace();
             }
-
 
             //put the selected days in dashboard
             String sprintJoyDailypoints = Dashboard.userActivityJoyid1.sprintDailyPoints;
@@ -3045,7 +2644,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                 }else if(sprintJoyDailypoints.substring(6,7).equals("1") && i==6){
                     btCalendarDay7.setBackgroundColor(Color.GREEN);
                 }
-
             } //end of for
 
             //second activity
@@ -3088,8 +2686,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
             } //end of for
 
-
-
         }else if(numberOfweeks==2){
 
             btCalendarDay15.setVisibility(View.GONE);
@@ -3117,20 +2713,14 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                 int counter = 0;
 
                 for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-                    // Do your job here with `date`.
-                    String[] str = date.toString().split(" ");
 
-                    System.out.println("DATEIS2 completedate " + date.toString());
+                    String[] str = date.toString().split(" ");
 
                     if(counter==14){
                         break;
                     }
 
                     for(int i=0;i<str.length;i++) {
-
-                        System.out.println("DATEIS2 completedate0 " + str[0]);
-                        System.out.println("DATEIS2 completedate1 " + str[1]);
-                        System.out.println("DATEIS2 completedate2 " + str[2]);
 
                         if(counter==0){
                             ++counter;
@@ -3228,17 +2818,12 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                             btCalendarDay35.setText(str[2]);
                             break;
                         }
-
-
                     }
                 }
-
 
             }catch(ParseException e){
                 e.printStackTrace();
             }
-
-
 
             //put the selected days in dashboard
             String sprintJoyDailypoints = Dashboard.userActivityJoyid1.sprintDailyPoints;
@@ -3273,9 +2858,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                 }else if(sprintJoyDailypoints.substring(13,14).equals("1") && i==13){
                     btCalendarDay14.setBackgroundColor(Color.GREEN);
                 }
-
             } //end of for
-
 
             btCalendarDay36.setVisibility(View.GONE);
             btCalendarDay37.setVisibility(View.GONE);
@@ -3319,15 +2902,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                 }else if(sprintJoyDailypoints2.substring(13,14).equals("1") && i==13){
                     btCalendarDay35.setBackgroundColor(Color.GREEN);
                 }
-
             } //end of for
-
-
 
         }else{
             //display all of them
-
-
             //update the current value from start of the week
             String tempStartingDate = textStartingDate.getText().toString();
             String tempEndingDate = textEndingDate.getText().toString();
@@ -3345,7 +2923,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                 int counter = 0;
 
                 for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-                    // Do your job here with `date`.
+
                     String[] str = date.toString().split(" ");
 
                     if(counter==21){
@@ -3353,7 +2931,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                     }
 
                     for(int i=0;i<str.length;i++) {
-
 
                         if(counter==0){
                             ++counter;
@@ -3500,15 +3077,12 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                             btCalendarDay42.setText(str[2]);
                             break;
                         }
-
                     }
                 }
-
 
             }catch(ParseException e){
                 e.printStackTrace();
             }
-
 
             //put the selected days in dashboard
             String sprintJoyDailypoints = Dashboard.userActivityJoyid1.sprintDailyPoints;
@@ -3558,9 +3132,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                 }else if(sprintJoyDailypoints.substring(20,21).equals("1") && i==20){
                     btCalendarDay21.setBackgroundColor(Color.GREEN);
                 }
-
             } //end of for
-
 
             //put the selected days in dashboard
             String sprintJoyDailypoints2 = Dashboard.userActivityJoyid2.sprintDailyPoints;
@@ -3610,11 +3182,8 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
                 }else if(sprintJoyDailypoints2.substring(20,21).equals("1") && i==20){
                     btCalendarDay42.setBackgroundColor(Color.GREEN);
                 }
-
             } //end of for
-
         }
-
 
         //traverse circularly to rearrange the names of the buttons
         int position = -1;
@@ -3650,9 +3219,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
         String[] a = {"M","T","W","Th","F","Sa","S"};
 
-
         for (int i = 0; i < a.length; i++) {
-
 
             if(i==0){
 
@@ -3681,14 +3248,10 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             }else {
 
                 sundayDate.setText(a[(i + position) % a.length]);
-
             }
-            //System.out.println(a[(i + position) % a.length]);
         }
 
-
         //GOALS (questionaire)
-
 
         q1 = (EditText)view.findViewById(R.id.q1Goals);
         q2 = (EditText)view.findViewById(R.id.q2Goals);
@@ -3697,11 +3260,8 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
 
 
         submitGoalbtn = (Button)view.findViewById(R.id.submitButtonGoals);
-
         submitGoalbtn.setOnClickListener(this);
-
         return view;
-
     }
 
     public void onButtonClick(Button view){
@@ -3714,10 +3274,7 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
         if(view == submitGoalbtn){
             checkAnswers();
         }
-
     } //end of onClick
-
-
 
     public void checkAnswers(){
 
@@ -3742,8 +3299,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             Toast.makeText(getActivity().getApplicationContext(), "Your fourth answer doesn't have any characters, please try again", Toast.LENGTH_LONG).show();
             return;
         }
-
-
 
         if(answer1.length()>180){
             Toast.makeText(getActivity().getApplicationContext(),"Your first answer has " +
@@ -3774,16 +3329,13 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             databaseUpdateCategories.child(Dashboard.userActivityJoyid1.categoryId).child("JoySprints").child(Dashboard.sprintJoyid).child("goal3").setValue(q3.getText().toString());
             databaseUpdateCategories.child(Dashboard.userActivityJoyid1.categoryId).child("JoySprints").child(Dashboard.sprintJoyid).child("goal4").setValue(q4.getText().toString());
 
-
             q1.setText("");
             q2.setText("");
             q3.setText("");
             q4.setText("");
         }
-
     }
 
-    // nat change
     public void setAct1ProgressIndicator(){
 
         if ((Integer.parseInt(textActual1.getText().toString())) > (Integer.parseInt(textTarget1.getText().toString()))){
@@ -3851,8 +3403,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
             FragmentGivingBack.gaugeContributionLifeScore.setHighValue(FragmentGivingBack.lifeScoreContributionInt);
         }
     }
-    // end nat change
-
 
     /**
      * Called immediately after {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}
@@ -3867,7 +3417,6 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
     }
 
     public void setTextView(String value){
@@ -3877,5 +3426,4 @@ public class FragmentJoy extends Fragment implements View.OnClickListener{
     public void setTextView2(String value){
         textActual2.setText(value);
     }
-
 }

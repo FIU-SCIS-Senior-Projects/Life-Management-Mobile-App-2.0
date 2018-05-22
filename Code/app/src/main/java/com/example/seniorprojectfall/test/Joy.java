@@ -1,9 +1,5 @@
 package com.example.seniorprojectfall.test;
 
-/**
- * Created by lazaro on 9/25/17.
- */
-
 public class Joy {
 
     private String name;

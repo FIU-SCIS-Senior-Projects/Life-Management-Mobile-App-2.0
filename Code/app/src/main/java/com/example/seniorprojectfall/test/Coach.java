@@ -3,10 +3,6 @@ package com.example.seniorprojectfall.test;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by lazaro on 11/13/17.
- */
-
 public class Coach implements Parcelable{
 
     public String email;
@@ -42,7 +38,6 @@ public class Coach implements Parcelable{
         this.rating = in.readString();
         this.id = in.readString();
         this.email = in.readString();
-
     }
 
 

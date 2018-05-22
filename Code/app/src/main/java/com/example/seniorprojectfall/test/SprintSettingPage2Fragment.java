@@ -16,11 +16,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-/**
- * Created by Natalia on 10/10/2017.
- */
-
 public class SprintSettingPage2Fragment extends Fragment implements TextWatcher {
 
     static EditText joyAct1goal;
@@ -30,15 +25,12 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
     static EditText contribAct1goal;
     static EditText contribAct2goal;
     static Button submitSettings;
-
     private TextView joyAct1;
     private TextView joyAct2;
     private TextView passionAct1;
     private TextView passionAct2;
     private TextView contribAct1;
     private TextView contribAct2;
-
-
 
     @Nullable
     @Override
@@ -58,7 +50,6 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
         passionAct2.setText(CoverFlowAdapterPassion.n.get(1));
         contribAct1.setText(ActGivingbackAdapter.givBackActSelected.get(0));
         contribAct2.setText(ActGivingbackAdapter.givBackActSelected.get(1));
-
 
         joyAct1goal = (EditText)rootView.findViewById(R.id.joyAct1Goal);
         joyAct1goal.addTextChangedListener(this);
@@ -134,7 +125,6 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                 i.putExtra("joy_UserJoySprint_startingdate",SprintSettingActivity.arJoySprint.get("startingDate"));
                 i.putExtra("joy_UserJoySprint_userid",SprintSettingActivity.arJoySprint.get("userId"));
 
-
                 //Transfer info for PASSION
                 i.putExtra("passionSprintId",SprintSettingActivity.sprintPassionid);
 
@@ -171,7 +161,6 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                 i.putExtra("passion_activityid2_targetpoints",SprintSettingActivity.act2Passion.getTargetPoints());
                 i.putExtra("passion_activityid2_userid",SprintSettingActivity.act2Passion.getUserId());
                 i.putExtra("passion_activityid2_activityid",SprintSettingActivity.activities2passionId);
-
 
                 //Transfer info for CONTRIBUTION
                 i.putExtra("contributionSprintId",SprintSettingActivity.sprintContribid);
@@ -213,10 +202,8 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                 //profile image
                 i.putExtra("profileImageName",SprintSettingActivity.userProfileImageName);
 
-
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList("mylist", SprintSettingActivity.listUsers);
-
                 bundle.putParcelableArrayList("allActivities", SprintSettingActivity.allActivities);
                 bundle.putParcelableArrayList("userActivitiesAllList",SprintSettingActivity.userActivitiesAll);
                 bundle.putParcelableArrayList("coachesList",SprintSettingActivity.coachList);
@@ -231,7 +218,6 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                 bundle.putParcelableArrayList("userPassionsprintHelperList",SprintSettingActivity.userPassionSprintHelper);
                 bundle.putParcelableArrayList("activitiesPassionPrevious",SprintSettingActivity.activitiesPassionPrevious);
 
-
                 //GIVING BACK
                 bundle.putParcelableArrayList("categoriesContributionCategories",SprintSettingActivity.currentContributionCategories);
                 bundle.putParcelableArrayList("userContributionsprintHelperList",SprintSettingActivity.userContributionSprintHelper);
@@ -239,28 +225,18 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
 
                 //bundle.putParcelableArrayList("currentjoyactivitylist", SprintSettingActivity.currentJoyActivities); //total activities (needed for previous cycle)
                 i.putExtras(bundle);
-
                 startActivity(i);
-
             }
         });
-
-
-
-
-
         return rootView;
-
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count){
-
     }
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after){
-
     }
 
     //user input validations
@@ -278,14 +254,11 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                 if (num < 0 || num > SprintSettingPageFragment.sprintPeriodInDays) {
                     Toast.makeText(getActivity(), "Goal number must be positive and < or = number of days in selected sprint period", Toast.LENGTH_LONG).show();
                     s.clear();
-                    // Block other textviews
                 } else {
                     // Unblock other textviews
                     joyAct2goal.setVisibility(View.VISIBLE);
                 }
             }
-
-
         }
         else if (s == joyAct2goal.getEditableText()) {
             if (TextUtils.isEmpty(s)) {
@@ -298,15 +271,13 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                 if (num < 0 || num > SprintSettingPageFragment.sprintPeriodInDays) {
                     Toast.makeText(getActivity(), "Goal number must be positive and < or = number of days in selected sprint period", Toast.LENGTH_LONG).show();
                     s.clear();
-                    // Block other textviews
                 } else {
                     // Unblock other textviews
                     passionAct1goal.setVisibility(View.VISIBLE);
                 }
             }
-
-
         }
+
         else if (s == passionAct1goal.getEditableText()) {
             if (TextUtils.isEmpty(s)) {
                 Toast.makeText(getActivity(), "Please enter activity goal number", Toast.LENGTH_LONG).show();
@@ -318,14 +289,11 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                 if (num < 0 || num > SprintSettingPageFragment.sprintPeriodInDays) {
                     Toast.makeText(getActivity(), "Goal number must be positive and < or = number of days in selected sprint period", Toast.LENGTH_LONG).show();
                     s.clear();
-                    // Block other textviews
                 } else {
                     // Unblock other textviews
                     passionAct2goal.setVisibility(View.VISIBLE);
                 }
             }
-
-
         }
         else if (s == passionAct2goal.getEditableText()) {
             if (TextUtils.isEmpty(s)) {
@@ -338,14 +306,11 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                 if (num < 0 || num > SprintSettingPageFragment.sprintPeriodInDays) {
                     Toast.makeText(getActivity(), "Goal number must be positive and < or = number of days in selected sprint period", Toast.LENGTH_LONG).show();
                     s.clear();
-                    // Block other textviews
                 } else {
                     // Unblock other textviews
                     contribAct1goal.setVisibility(View.VISIBLE);
                 }
             }
-
-
         }
         else if (s == contribAct1goal.getEditableText()) {
             if (TextUtils.isEmpty(s)) {
@@ -358,14 +323,11 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                 if (num < 0 || num > SprintSettingPageFragment.sprintPeriodInDays) {
                     Toast.makeText(getActivity(), "Goal number must be positive and < or = number of days in selected sprint period", Toast.LENGTH_LONG).show();
                     s.clear();
-                    // Block other textviews
                 } else {
                     // Unblock other textviews
                     contribAct2goal.setVisibility(View.VISIBLE);
                 }
             }
-
-
         }
         else if (s == contribAct2goal.getEditableText()) {
             if (TextUtils.isEmpty(s)) {
@@ -378,7 +340,6 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                 if (num < 0 || num > SprintSettingPageFragment.sprintPeriodInDays) {
                     Toast.makeText(getActivity(), "Goal number must be positive and < or = number of days in selected sprint period", Toast.LENGTH_LONG).show();
                     s.clear();
-                    // Block other textviews
                 } else {
                     joyAct1goal.setKeyListener(null);
                     joyAct2goal.setKeyListener(null);
@@ -389,11 +350,8 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
                     submitSettings.setVisibility(View.VISIBLE);
                 }
             }
-
-
         }
     }
-
 
     /**
      * Called immediately after {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}
@@ -409,5 +367,4 @@ public class SprintSettingPage2Fragment extends Fragment implements TextWatcher 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
-
 }

@@ -1,9 +1,5 @@
 package com.example.seniorprojectfall.test;
 
-/**
- * Created by Natalia on 9/28/2017.
- */
-
 public class ActGivingback {
     private String name;
     private int imageSource;

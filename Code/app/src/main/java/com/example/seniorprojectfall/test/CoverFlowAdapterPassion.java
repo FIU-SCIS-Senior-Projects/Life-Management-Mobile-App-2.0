@@ -140,11 +140,8 @@ public class CoverFlowAdapterPassion extends BaseAdapter{
                                     MainPassionActivity.androidRightArrowButton.setVisibility(View.VISIBLE);
                                 }
                             });
-
                         }
-
                     }
-
                     positionSaver = position;
                 }
             };

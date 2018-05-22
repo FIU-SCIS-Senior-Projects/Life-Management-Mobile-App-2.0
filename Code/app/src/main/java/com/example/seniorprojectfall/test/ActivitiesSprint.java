@@ -3,11 +3,6 @@ package com.example.seniorprojectfall.test;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by lazaro on 10/5/17.
- */
-
-
 public class ActivitiesSprint implements Parcelable{
 
     String activityScore;
@@ -20,7 +15,6 @@ public class ActivitiesSprint implements Parcelable{
     String activityid;
 
     public ActivitiesSprint() {
-
 
         activityScore = "";
         actualPoints = "";
@@ -57,7 +51,6 @@ public class ActivitiesSprint implements Parcelable{
 
     public ActivitiesSprint(Parcel in){
 
-
         this.activityScore = in.readString();
         this.actualPoints = in.readString();
         this.categoryId = in.readString();
@@ -66,7 +59,6 @@ public class ActivitiesSprint implements Parcelable{
         this.targetPoints = in.readString();
         this.userId = in.readString();
         this.activityid = in.readString();
-
     }
 
     public String getActivityid() {
@@ -150,7 +142,6 @@ public class ActivitiesSprint implements Parcelable{
         parcel.writeString(targetPoints);
         parcel.writeString(userId);
         parcel.writeString(activityid);
-
     }
 
     public static final Parcelable.Creator<ActivitiesSprint> CREATOR = new Parcelable.Creator<ActivitiesSprint>() {
@@ -163,6 +154,5 @@ public class ActivitiesSprint implements Parcelable{
             return new ActivitiesSprint[i];
         }
     };
-
 }
 

@@ -1,9 +1,5 @@
 package com.example.seniorprojectfall.test;
 
-/**
- * Created by lazaro on 9/28/17.
- */
-
 public class Passion {
 
     private String name;

@@ -1,6 +1,8 @@
 package com.example.seniorprojectfall.test;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,9 +18,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.*;
 
-
 public class LoginActivity extends AppCompatActivity {
 
+    private SharedPreferences.Editor sample;
+    private SharedPreferences mShared;
 
     //GENERAL
     EditText username,password;
@@ -67,6 +70,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mShared = getSharedPreferences("com.example.seniorprojectfall.test", Context.MODE_PRIVATE);
+        sample = mShared.edit();
+
         //COACH
         coachList = new ArrayList<>();
 
@@ -107,12 +113,10 @@ public class LoginActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //the method is defined below
                 //this method is actually performing the write operation
                 loginUser();
             }
         });
-
 
         registerUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,29 +128,25 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        //attaching value event listener
+
         databaseUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                //clearing the previous artist list
                 listUsers.clear();
 
                 //iterating through all the nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    //getting artist
 
+                    //getting artist
                     User users = postSnapshot.getValue(User.class);
-                    //adding artist to the list
                     listUsers.add(users);
                 }
-
             }
 
             @Override
@@ -155,8 +155,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-        //coach
+        //COACH
 
         databaseCoaches.addValueEventListener(new ValueEventListener() {
             @Override
@@ -164,7 +163,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 //iterating through all the nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    //getting artist
 
                     String str = postSnapshot.getValue().toString();
 
@@ -183,11 +181,7 @@ public class LoginActivity extends AppCompatActivity {
                     String temp6 =  str.substring((email_pos+6),(str.length()-1));
 
                     coachList.add(new Coach(temp1,temp2,temp3,temp4,temp5,temp6));
-
-                    //adding artist to the list
-                    //coachList.add(coach);
                 }
-
             }
 
             @Override
@@ -197,15 +191,13 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
-
         databaseCategories.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                for (DataSnapshot categorySnapshot : dataSnapshot.getChildren()) { //id
+                for (DataSnapshot categorySnapshot : dataSnapshot.getChildren()) {
 
                     if(categorySnapshot.getValue() == null){
                         break;
@@ -216,6 +208,7 @@ public class LoginActivity extends AppCompatActivity {
                     for (int i = separator.length - 1; i >= 0; i--) {
 
                         if (separator[i].length() > 15 && (separator[i].contains("userId"))) {
+
                             //get the userId
                             String temp = separator[i];
                             int g = temp.indexOf("=");
@@ -257,13 +250,10 @@ public class LoginActivity extends AppCompatActivity {
                                 //currentJoycategories will have (endingDate, goal1, goal2, goal3, goal4, NumOfWeeks, sprintActid1, sprintactid2, overallscore, startingDate) for that logged-in user
                                 currentJoyCategories.add(new Category(tempArray[0], tempArray[1], tempArray[2], tempArray[3], tempArray[4], tempArray[5], tempArray[6],
                                         tempArray[7], tempArray[8], tempArray[9], tempArray[10], currentCategoryuserId,JoySprintId));
-                                //System.out.println("hey3 " + activitySnapshot3.getKey()+": "+ activitySnapshot3.getValue(String.class));
-                                //returning = tempArray[5];
                             }
                         }
                         break;
                     } //end of for (outer)
-
 
                     //PASSION
 
@@ -275,7 +265,6 @@ public class LoginActivity extends AppCompatActivity {
                             int g = temp.indexOf("=");
                             ++g;
 
-
                             currentPassionCategoryId = temp.substring(g, temp.length() - 1);
                             DataSnapshot activitiesSnapshottemp = categorySnapshot.child("PassionSprints");
 
@@ -286,10 +275,10 @@ public class LoginActivity extends AppCompatActivity {
                             String[] f = activitiesSnapshottemp.getValue().toString().split("=");
 
                             String temporary = f[0];
-                            String tempId = temporary.substring(1);  //joysprint unique id
+                            String tempId = temporary.substring(1);
 
 
-                            for (DataSnapshot activitySnapshot2 : activitiesSnapshottemp.getChildren()) { //ids
+                            for (DataSnapshot activitySnapshot2 : activitiesSnapshottemp.getChildren()) {
 
                                 if(activitySnapshot2.getValue() == null){
                                     break;
@@ -297,7 +286,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 String[] tempArray = new String[(int) activitySnapshot2.getChildrenCount()];
                                 int k = 0;
-                                for (DataSnapshot activitySnapshot3 : activitySnapshot2.getChildren()) { //branch
+                                for (DataSnapshot activitySnapshot3 : activitySnapshot2.getChildren()) {
 
                                     if(activitySnapshot3.getValue() == null){
                                         break;
@@ -312,8 +301,6 @@ public class LoginActivity extends AppCompatActivity {
                                 //currentJoycategories will have (endingDate, goal1, goal2, goal3, goal4, NumOfWeeks, sprintActid1, sprintactid2, overallscore, startingDate) for that logged-in user
                                 currentPassionCategories.add(new Category(tempArray[0], tempArray[1], tempArray[2], tempArray[3], tempArray[4], tempArray[5], tempArray[6],
                                         tempArray[7], tempArray[8], tempArray[9], tempArray[10], currentPassionCategoryId,passionSprintid));
-                                //System.out.println("hey3 " + activitySnapshot3.getKey()+": "+ activitySnapshot3.getValue(String.class));
-                                //returning = tempArray[5];
                             }
                         }
                         break;
@@ -340,10 +327,10 @@ public class LoginActivity extends AppCompatActivity {
 
                             String[] f = activitiesSnapshottemp.getValue().toString().split("=");
                             String temporary = f[0];
-                            String tempId = temporary.substring(1);  //joysprint unique id
+                            String tempId = temporary.substring(1);
 
 
-                            for (DataSnapshot activitySnapshot2 : activitiesSnapshottemp.getChildren()) { //ids
+                            for (DataSnapshot activitySnapshot2 : activitiesSnapshottemp.getChildren()) {
 
                                 if(activitySnapshot2.getValue() == null){
                                     break;
@@ -351,7 +338,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 String[] tempArray = new String[(int) activitySnapshot2.getChildrenCount()];
                                 int k = 0;
-                                for (DataSnapshot activitySnapshot3 : activitySnapshot2.getChildren()) { //branch
+                                for (DataSnapshot activitySnapshot3 : activitySnapshot2.getChildren()) {
 
                                     if(activitySnapshot3.getValue() == null){
                                         break;
@@ -365,8 +352,6 @@ public class LoginActivity extends AppCompatActivity {
                                 //currentJoycategories will have (endingDate, goal1, goal2, goal3, goal4, NumOfWeeks, sprintActid1, sprintactid2, overallscore, startingDate) for that logged-in user
                                 currentContributionCategories.add(new Category(tempArray[0], tempArray[1], tempArray[2], tempArray[3], tempArray[4], tempArray[5], tempArray[6],
                                         tempArray[7], tempArray[8], tempArray[9], tempArray[10], currentContributionCategoryId,contributionSprintid));
-                                //System.out.println("hey3 " + activitySnapshot3.getKey()+": "+ activitySnapshot3.getValue(String.class));
-                                //returning = tempArray[5];
                             }
                         }
                         break;
@@ -376,7 +361,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
@@ -384,7 +368,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot activitySnapshot : dataSnapshot.getChildren()) { //id
+                for (DataSnapshot activitySnapshot : dataSnapshot.getChildren()) {
                     int temp = activitySnapshot.getValue().toString().length();
                     profileImagesTotal.put(activitySnapshot.getKey(),activitySnapshot.getValue().toString().substring(6,temp-1));
                 }
@@ -392,7 +376,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
@@ -401,12 +384,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot activitySnapshot : dataSnapshot.getChildren()) { //id
+                for (DataSnapshot activitySnapshot : dataSnapshot.getChildren()) {
 
                     String activityId = activitySnapshot.getKey();
                     String temp[] = new String[(int) activitySnapshot.getChildrenCount()];
                     int i = 0;
-                    for (DataSnapshot activitySnapshot2 : activitySnapshot.getChildren()) { //ids
+                    for (DataSnapshot activitySnapshot2 : activitySnapshot.getChildren()) {
 
                         temp[i] = activitySnapshot2.getValue().toString();
                         ++i;
@@ -417,7 +400,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
@@ -438,12 +420,10 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Logged In ", Toast.LENGTH_LONG).show();
                 userId = f.id;
                 isValid = true;
-
             }
         } //end of for
 
         if(isValid) {
-
 
             signIn.setTextColor(Color.WHITE);
 
@@ -469,7 +449,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
 
-
             List<String> tempList = new ArrayList<>(); //list containing all the sprintActivities of the user
 
             //JOY
@@ -480,7 +459,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     tempList.add(currentJoyCategories.get(i).sprintActivityid1 + " " + currentJoyCategories.get(i).startingDate + " " + currentJoyCategories.get(i).endingDate);
                     tempList.add(currentJoyCategories.get(i).sprintActivityid2 + " " + currentJoyCategories.get(i).startingDate + " " + currentJoyCategories.get(i).endingDate);
-
 
                     userJoysprintsHelper.add(new Category(currentJoyCategories.get(i).categoryid, currentJoyCategories.get(i).endingDate,
                             currentJoyCategories.get(i).goal1, currentJoyCategories.get(i).goal2, currentJoyCategories.get(i).goal3,
@@ -548,7 +526,6 @@ public class LoginActivity extends AppCompatActivity {
             } //end of for
 
 
-
             List<String> tempListContribution = new ArrayList<>(); //list containing all the sprintActivities of the user
             //GIVING BACK
             for (int i = 0; i < currentContributionCategories.size(); i++) {
@@ -566,7 +543,6 @@ public class LoginActivity extends AppCompatActivity {
                             currentContributionCategories.get(i).startingDate, currentContributionCategories.get(i).userId,currentContributionCategories.get(i).sprintid));
                 }
             }
-
 
             for (int i = 0; i < tempListContribution.size(); i++) {
 
@@ -600,7 +576,6 @@ public class LoginActivity extends AppCompatActivity {
                 sprintjoyid = entr.getValue();
             }
 
-
             //PASSION
             TreeMap<String,String> passiondateIdentifier = new TreeMap<String,String>();
 
@@ -629,8 +604,6 @@ public class LoginActivity extends AppCompatActivity {
                 contributionleastDate = entr.getKey();
                 sprintcontributionid = entr.getValue();
             }
-
-
 
             //JOY
             Category userJoySprint = new Category();
@@ -742,14 +715,13 @@ public class LoginActivity extends AppCompatActivity {
                             userActivitiesAll.get(i).actualPoints, userActivitiesAll.get(i).categoryId,
                             userActivitiesAll.get(i).name, userActivitiesAll.get(i).sprintDailyPoints,
                             userActivitiesAll.get(i).targetPoints, userActivitiesAll.get(i).userId, userActivitiesAll.get(i).activityid);
-
                 }
             }
 
             //SAVE EVERYTHING IS NEEDED
             Intent i = new Intent(LoginActivity.this,Dashboard.class);
 
-            //saving all data do we can use it in the next screen
+            //saving all data do we can use it in the next activity
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList("mylist", listUsers);
             bundle.putParcelableArrayList("allActivities", allActivities);
@@ -771,7 +743,6 @@ public class LoginActivity extends AppCompatActivity {
             bundle.putParcelableArrayList("categoriesContributionCategories",currentContributionCategories);
             bundle.putParcelableArrayList("userContributionsprintHelperList",userContributionSprintHelper);
             bundle.putParcelableArrayList("activitiesContributionPrevious",activitiesContributionPrevious);
-
 
             i.putExtras(bundle);
             i.putExtra("userNameY",name);
@@ -819,7 +790,6 @@ public class LoginActivity extends AppCompatActivity {
             i.putExtra("joy_activityid2_targetpoints",userActivityJoyid2.targetPoints);
             i.putExtra("joy_activityid2_userid",userActivityJoyid2.userId);
             i.putExtra("joy_activityid2_activityid",userActivityJoyid2.activityid);
-
 
             //PASSION
             i.putExtra("passion_userPassionSprint_categoryid",userPassionSprint.categoryid);
@@ -898,8 +868,16 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Username/Password does not match, Please try again ", Toast.LENGTH_LONG).show();
             name = "";
         }
-
     } //end of method
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+        sample.putString("com.example.seniorprojectfall.test", username.getText().toString());
+        sample.putString("com.example.seniorprojectfall.test", password.getText().toString());
+        sample.apply();
+    }
 } //end of class
 
 

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.sccomponents.gauges.ScArcGauge;
 
 public class cycleActivityContribution extends AppCompatActivity {
@@ -19,13 +18,9 @@ public class cycleActivityContribution extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cycle_contribution);
 
-
                 Intent in = getIntent();
-
-
                 element_static_contribution = in.getExtras().getString("theelementcontribution");
                 String[] s = element_static_contribution.split(" ");
-
                 String s6detail = "";
                 String s7detail = "";
 
@@ -35,13 +30,11 @@ public class cycleActivityContribution extends AppCompatActivity {
                     s6detail = s[6].substring(0, 2) + "/" + s[6].substring(2, 4) + "/" + s[6].substring(6);
                 }
 
-
                 if (s[2].length() == 7) {
                     s7detail = "0" + s[2].substring(1, 2) + "/" + s[2].substring(2, 4) + "/" + s[2].substring(6);
                 } else {
                     s7detail = s[2].substring(0, 2) + "/" + s[2].substring(2, 4) + "/" + s[2].substring(6);
                 }
-
 
                 TextView g = (TextView) findViewById(R.id.textView3contribution);
                 ScArcGauge first = (ScArcGauge) findViewById(R.id.gauge_previouscycle_contribution);
@@ -58,8 +51,6 @@ public class cycleActivityContribution extends AppCompatActivity {
 
                 actScore.setText(t+"");
                 first.setHighValue(t);
-
-
                 final Button btn = (Button) findViewById(R.id.buttonleavecontribution);
                 btn.setText("Return");
                 btn.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +58,6 @@ public class cycleActivityContribution extends AppCompatActivity {
                     public void onClick(View view) {
                         btn.setTextColor(Color.WHITE);
                         onBackPressed();
-
                     }
                 });
             }
@@ -76,6 +66,5 @@ public class cycleActivityContribution extends AppCompatActivity {
             public void onBackPressed() {
 
                 super.onBackPressed();
-
             }
         }

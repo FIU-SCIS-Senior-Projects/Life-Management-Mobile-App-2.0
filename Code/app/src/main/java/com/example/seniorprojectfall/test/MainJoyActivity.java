@@ -12,18 +12,12 @@ import android.widget.Button;
 import java.util.ArrayList;
 import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
 
-
-/**
- * Created by lazaro on 10/12/17.
- */
-
 public class MainJoyActivity extends AppCompatActivity {
 
     private FeatureCoverFlow coverFlow;
     private CoverFlowAdapter adapter;
     private ArrayList<Joy> activitiesJoy;
     static ImageButton androidRightArrowButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +26,16 @@ public class MainJoyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         androidRightArrowButton = (ImageButton) findViewById(R.id.imageButtonActivity2);
-
         coverFlow = (FeatureCoverFlow) findViewById(R.id.coverflow);
-
         settingDummyData();
         adapter = new CoverFlowAdapter(this, activitiesJoy);
         coverFlow.setAdapter(adapter);
         coverFlow.setOnScrollPositionListener(onScrollListener());
 
-
         androidRightArrowButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                //Toast.makeText(MainActivity.this, "It works",Toast.LENGTH_LONG).show();
+
                 Intent in = getIntent();
                 String userid = in.getStringExtra("userid");
                 String username = in.getStringExtra("username");
@@ -88,7 +79,6 @@ public class MainJoyActivity extends AppCompatActivity {
         activitiesJoy.add(new Joy(R.drawable.joy_photography, "Photography"));
         activitiesJoy.add(new Joy(R.drawable.joy_programming, "Programming"));
         activitiesJoy.add(new Joy(R.drawable.joy_reading2, "Reading"));
-
     }
 }
 

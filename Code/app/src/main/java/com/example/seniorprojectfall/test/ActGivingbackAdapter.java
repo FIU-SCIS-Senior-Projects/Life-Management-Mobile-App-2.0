@@ -1,6 +1,5 @@
 package com.example.seniorprojectfall.test;
 
-
 import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +14,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Natalia on 9/28/2017.
- */
 
 public class ActGivingbackAdapter extends BaseAdapter {
 
@@ -136,7 +132,6 @@ public class ActGivingbackAdapter extends BaseAdapter {
                     }
                     v.setBackgroundResource(R.drawable.image_border);
                     clickedActivities.add(v);
-
                 }
 
                 else if (numOfActSelected == 2) {

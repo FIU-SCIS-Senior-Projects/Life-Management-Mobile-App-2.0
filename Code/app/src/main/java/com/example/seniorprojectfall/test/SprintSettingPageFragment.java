@@ -22,12 +22,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.Calendar;
-
-/**
- * Created by Natalia on 10/5/2017.
- */
 
 public class SprintSettingPageFragment extends Fragment implements TextWatcher{
 
@@ -35,7 +30,6 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
     static TextView sprintEndDate;
     private DatePickerDialog.OnDateSetListener mStartDateSetListener;
     private DatePickerDialog.OnDateSetListener mEndDateSetListener;
-
     private RadioGroup radioGroup;
     private RadioButton rb1;
     private RadioButton rb2;
@@ -47,15 +41,9 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
     Calendar edate;
     Calendar calToday;
     private final static long MILLISEC_PER_DAY = 24*60*60*1000;
-
     private EditText sprintGoal;
-
     static long sprintPeriodInDays;
     private TextView swipeText;
-    //KeyListener mKeyListenerSprintPeriod;  // used to disable sprintPeriod EditText to take user input after user successfully selected sprint end date
-    //KeyListener mKeyListenerStartDate;
-
-
 
     @Nullable
     @Override
@@ -64,21 +52,12 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
 
         sprintGoal = (EditText)rootView.findViewById(R.id.sprintGoalA);
         sprintGoal.addTextChangedListener(this);
-
-        /*
-        sprintPeriod = (EditText)rootView.findViewById(R.id.sprintPeriodA);
-        sprintPeriod.setVisibility(View.INVISIBLE);
-        //mKeyListenerSprintPeriod = sprintPeriod.getKeyListener();
-        sprintPeriod.addTextChangedListener(this);
-        */
-
         radioGroup = (RadioGroup)rootView.findViewById(R.id.sprintPeriodButtonsGroup);
         radioGroup.setVisibility(View.INVISIBLE);
+
         rb1 = (RadioButton)rootView.findViewById(R.id.sprintPeriod1);
         rb2 = (RadioButton)rootView.findViewById(R.id.sprintPeriod2);
         rb3 = (RadioButton)rootView.findViewById(R.id.sprintPeriod3);
-
-
 
         rb1.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -86,14 +65,12 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
                 onRadioBtnClicked(rb1);
             }
         });
-
         rb2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 onRadioBtnClicked(rb2);
             }
         });
-
         rb3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -101,13 +78,9 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
             }
         });
 
-
         sprintStartDate = (TextView)rootView.findViewById(R.id.sprintStartDate);
         sprintStartDate.setVisibility(View.INVISIBLE);
         sprintStartDate.addTextChangedListener(this);
-        //mKeyListenerStartDate = sprintStartDate.getKeyListener();
-
-
 
         sprintStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,10 +129,8 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
                     }
                 }
                 sprintStartDate.setText(date);
-
             }
         };
-
 
         sprintEndDate = (TextView)rootView.findViewById(R.id.sprintEndDate);
         sprintEndDate.setVisibility(View.INVISIBLE);
@@ -211,28 +182,22 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
                         }
                     }
                 }
-
                 sprintEndDate.setText(date);
-
             }
         };
-
 
         swipeText = (TextView)rootView.findViewById(R.id.swipe);
         swipeText.setVisibility(View.INVISIBLE);
 
         return rootView;
-
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count){
-
     }
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after){
-
     }
 
     //user input validations
@@ -242,8 +207,6 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
 
             if (TextUtils.isEmpty(s)) {
                 Toast.makeText(getActivity(), "Please enter sprint goal", Toast.LENGTH_LONG).show();
-                // Block other views
-
                 radioGroup.setVisibility(View.INVISIBLE);
 
             } else if (s.length() > 160) {
@@ -253,7 +216,6 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
 
             } else {
                 radioGroup.setVisibility(View.VISIBLE);
-
             }
         }
 
@@ -285,8 +247,7 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
                     s.clear();
                 }
                 else{
-                    // check if difference between start and end date is equal to selected sprint period
-                    // if it's not equal, prompt to choose correct end date
+
                     if(daysDif != sprintPeriodInDays ){
                         Toast.makeText(getActivity(), "Difference between end and start dates must be equal to selected sprint period ", Toast.LENGTH_LONG).show();
                         s.clear();
@@ -309,8 +270,6 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
                         });
                     }
                 }
-
-
             }
         }
     }
@@ -329,25 +288,19 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
         e2.set(Calendar.MILLISECOND,0);
         long dif = e2.getTimeInMillis()-s2.getTimeInMillis();
         long daysDif = dif/MILLISEC_PER_DAY;
-        //return Math.abs(daysDif);
         return daysDif;
     }
 
     public void onRadioBtnClicked(View v){
+
         sprintStartDate.setVisibility(View.VISIBLE);
-
-
-        //to check if the current radio btn is now checked
-        boolean checked = ((RadioButton)v).isChecked();
+        boolean checked = ((RadioButton)v).isChecked(); //to check if the current radio btn is now checked
 
         //check which radio button is selected
         switch (v.getId()){
             case R.id.sprintPeriod1:
                 if(checked) {
                     //if rb1 is selected, set rb1's text to bold, and set sprintPeriod to 1 (week)
-                    //rb1.setTypeface(null, Typeface.BOLD);
-                    //rb2.setTypeface(null, Typeface.NORMAL);
-                    //rb3.setTypeface(null, Typeface.NORMAL);
                     sprintPeriod = "1";
                     int period = Integer.parseInt(sprintPeriod);
                     sprintPeriodInDays = period * 7;
@@ -369,9 +322,6 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
                     sprintPeriodInDays = period * 7;
                 }
                 break;
-
-
-
         }
     }
 
@@ -390,5 +340,4 @@ public class SprintSettingPageFragment extends Fragment implements TextWatcher{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
-
 }

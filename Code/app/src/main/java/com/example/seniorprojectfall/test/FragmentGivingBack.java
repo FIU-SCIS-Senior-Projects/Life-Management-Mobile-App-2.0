@@ -35,31 +35,25 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
     private EditText q4_contribution;
     DatabaseReference databaseUpdateCategories;
     DatabaseReference databaseUpdateActivities;
-
     TextView textActual1;
     TextView textActual2;
-
-    TextView textTarget1; // nat change
-    TextView textTarget2;  // nat change
-    TextView counterContributionActivity1; // nat change
-    ScArcGauge gaugeContributionActivity1; // nat change
-    String activity1ScoreStr; // nat change
-    int activity1ScoreInt;  // nat change
-    TextView counterContributionActivity2; // nat change
-    ScArcGauge gaugeContributionActivity2; // nat change
-    String activity2ScoreStr; // nat change
-    int activity2ScoreInt;  // nat change
-    TextView counterContributionScore; // nat change
-    ScArcGauge gaugeContributionScore; // nat change
-    String contributionScoreStr; // nat change
-    int contributionScoreInt; // nat change
-    static TextView counterContributionLifeScore; // nat change
-    static ScArcGauge gaugeContributionLifeScore; // nat change
-    static int lifeScoreContributionInt; // nat change
-
-    /**
-     * Created by Natalia on 9/20/2017.
-     */
+    TextView textTarget1;
+    TextView textTarget2;
+    TextView counterContributionActivity1;
+    ScArcGauge gaugeContributionActivity1;
+    String activity1ScoreStr;
+    int activity1ScoreInt;
+    TextView counterContributionActivity2;
+    ScArcGauge gaugeContributionActivity2;
+    String activity2ScoreStr;
+    int activity2ScoreInt;
+    TextView counterContributionScore;
+    ScArcGauge gaugeContributionScore;
+    String contributionScoreStr;
+    int contributionScoreInt;
+    static TextView counterContributionLifeScore;
+    static ScArcGauge gaugeContributionLifeScore;
+    static int lifeScoreContributionInt;
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -93,16 +87,13 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         });
 
         TextView textStartingDate = (TextView)view.findViewById(R.id.startingDateBtn);
-        //System.out.println("DATEEE444 " + test);
         textStartingDate.setText(Dashboard.startingDateFixed_contribution);
 
         TextView textEndingDate = (TextView)view.findViewById(R.id.endingDateBtn);
         textEndingDate.setText(Dashboard.endingDateFixed_contribution);
 
         TextView textAct1 = (TextView)view.findViewById(R.id.textViewAct1);
-        // Assign variable textAct1 the value of static variable activity1Joy (from TestActivity.java)
         textAct1.setText(Dashboard.userActivityContributionid1.name);
-        //textAct1.setText("Inner Peace");
 
         TextView textAct2 = (TextView)view.findViewById(R.id.textViewAct2);
         textAct2.setText(Dashboard.userActivityContributionid2.name);
@@ -116,10 +107,10 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         textActual2 = (TextView)view.findViewById(R.id.textViewActual2);
         textActual2.setText(Dashboard.userActivityContributionid2.actualPoints);
 
-        textTarget1 = (TextView)view.findViewById(R.id.textViewTarget1);  // nat change
+        textTarget1 = (TextView)view.findViewById(R.id.textViewTarget1);
         textTarget1.setText(Dashboard.userActivityContributionid1.targetPoints);
 
-        textTarget2 = (TextView)view.findViewById(R.id.textViewTarget2);  // nat change
+        textTarget2 = (TextView)view.findViewById(R.id.textViewTarget2);
         textTarget2.setText(Dashboard.userActivityContributionid2.targetPoints);
 
         TextView mondayDate = (TextView)view.findViewById(R.id.TextViewMonday);
@@ -130,49 +121,35 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         TextView saturdayDate = (TextView)view.findViewById(R.id.TextViewSaturday);
         TextView sundayDate = (TextView)view.findViewById(R.id.TextViewSunday);
 
-        // nat change
-        // Find the components for gaugeContributionActivity1
         counterContributionActivity1 = (TextView) view.findViewById(R.id.counter_joy_activity1);
         gaugeContributionActivity1 = (ScArcGauge) view.findViewById(R.id.gauge_joy_activity1);
         activity1ScoreStr = Dashboard.userActivityContributionid1.activityScore;
-        activity1ScoreInt = Integer.parseInt(activity1ScoreStr); /// Float or double???
+        activity1ScoreInt = Integer.parseInt(activity1ScoreStr);
 
-        // Set the features stroke cap style to rounded
         gaugeContributionActivity1.findFeature(ScArcGauge.BASE_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
         gaugeContributionActivity1.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
 
-        // If you set the value from the xml that not produce an event so I will change the
-        // value from code.
         gaugeContributionActivity1.setHighValue(activity1ScoreInt);
-
-        // Each time I will change the value I must write it inside the counter text.
         gaugeContributionActivity1.setOnEventListener(new ScGauge.OnEventListener() {
             @Override
             public void onValueChange(float lowValue, float highValue) {
                 counterContributionActivity1.setText((int) highValue + "%");
-
             }
         });
 
-        // Find the components for gaugeContributionActivity2
         counterContributionActivity2 = (TextView) view.findViewById(R.id.counter_joy_activity2);
         gaugeContributionActivity2 = (ScArcGauge) view.findViewById(R.id.gauge_joy_activity2);
         activity2ScoreStr = Dashboard.userActivityContributionid2.activityScore;
-        activity2ScoreInt = Integer.parseInt(activity2ScoreStr); /// Float or double???
+        activity2ScoreInt = Integer.parseInt(activity2ScoreStr);
 
-        // Set the features stroke cap style to rounded
         gaugeContributionActivity2.findFeature(ScArcGauge.BASE_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
         gaugeContributionActivity2.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
 
-        // If you set the value from the xml that not produce an event so I will change the
-        // value from code.
         gaugeContributionActivity2.setHighValue(activity2ScoreInt);
-
-        // Each time I will change the value I must write it inside the counter text.
         gaugeContributionActivity2.setOnEventListener(new ScGauge.OnEventListener() {
             @Override
             public void onValueChange(float lowValue, float highValue) {
@@ -181,57 +158,42 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             }
         });
 
-        // Find the components for gaugeContributionScore
         counterContributionScore = (TextView) view.findViewById(R.id.counter_joy_score);
         gaugeContributionScore = (ScArcGauge) view.findViewById(R.id.gauge_joy_score);
         contributionScoreStr = Dashboard.userContributionSprint.sprintOverallScore;
         contributionScoreInt = Integer.parseInt(contributionScoreStr);
 
-        // Set the features stroke cap style to rounded
         gaugeContributionScore.findFeature(ScArcGauge.BASE_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
         gaugeContributionScore.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
 
-        // If you set the value from the xml that not produce an event so I will change the
-        // value from code.
         gaugeContributionScore.setHighValue(contributionScoreInt);
-
-        // Each time I will change the value I must write it inside the counter text.
         gaugeContributionScore.setOnEventListener(new ScGauge.OnEventListener() {
             @Override
             public void onValueChange(float lowValue, float highValue) {
                 counterContributionScore.setText((int) highValue + "%");
-
             }
         });
 
-        // Find the components for gaugeLifeScore
         counterContributionLifeScore = (TextView) view.findViewById(R.id.counter_life_score);
         gaugeContributionLifeScore = (ScArcGauge) view.findViewById(R.id.gauge_life_score);
         lifeScoreContributionInt = (int)Math.round((((Integer.parseInt(Dashboard.userJoySprint.sprintOverallScore)) +
                 (Integer.parseInt(Dashboard.userPassionSprint.sprintOverallScore)) +
                 (Integer.parseInt(Dashboard.userContributionSprint.sprintOverallScore))) / 3.0));
 
-        // Set the features stroke cap style to rounded
         gaugeContributionLifeScore.findFeature(ScArcGauge.BASE_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
         gaugeContributionLifeScore.findFeature(ScArcGauge.PROGRESS_IDENTIFIER)
                 .getPainter().setStrokeCap(Paint.Cap.ROUND);
 
-        // If you set the value from the xml that not produce an event so I will change the
-        // value from code.
         gaugeContributionLifeScore.setHighValue(lifeScoreContributionInt);
-
-        // Each time I will change the value I must write it inside the counter text.
         gaugeContributionLifeScore.setOnEventListener(new ScGauge.OnEventListener() {
             @Override
             public void onValueChange(float lowValue, float highValue) {
                 counterContributionLifeScore.setText((int) highValue + "%");
             }
         });
-        // end nat change
-
 
 
         //Buttons for Activity #1
@@ -268,11 +230,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
 
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
-
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -294,12 +252,8 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
-
-                //11001001100100
             }
         });
 
@@ -316,7 +270,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -336,10 +289,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -360,9 +310,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
 
             }
@@ -380,7 +328,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -400,10 +347,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -424,12 +368,8 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
-
-
 
             }
         });
@@ -446,7 +386,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -466,10 +405,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -490,15 +426,11 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
-
-
-
             }
         });
+
         final Button btCalendarDay5 = (Button)view.findViewById(R.id.bt5);
         btCalendarDay5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -512,7 +444,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -532,10 +463,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -556,9 +484,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
 
 
@@ -578,7 +504,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -598,10 +523,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -622,9 +544,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
 
 
@@ -643,7 +563,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -663,9 +582,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -686,9 +603,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -705,7 +620,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -725,9 +639,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -748,9 +660,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
 
             }
@@ -768,7 +678,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -788,9 +697,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -811,9 +718,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -830,7 +735,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -850,9 +754,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -873,9 +775,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -892,7 +792,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -912,9 +811,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -935,9 +832,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -954,7 +849,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -974,9 +868,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -997,9 +889,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -1016,7 +906,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1036,9 +925,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1059,9 +946,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -1079,7 +964,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1099,9 +983,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1122,9 +1004,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
 
             }
@@ -1136,7 +1016,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             @Override
             public void onClick(View view){
 
-
                 String temp = Dashboard.userActivityContributionid1.sprintDailyPoints;
 
                 int color = 0;
@@ -1145,7 +1024,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1165,9 +1043,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1188,9 +1064,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -1209,7 +1083,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //11001001100100
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1229,9 +1102,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1252,9 +1123,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -1273,7 +1142,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //110010011001001001011
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1293,9 +1161,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1316,9 +1182,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -1338,7 +1202,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //110010011001001001011
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1358,9 +1221,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1381,9 +1242,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -1402,7 +1261,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //110010011001001001011
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1422,9 +1280,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1445,11 +1301,8 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
-
             }
         });
 
@@ -1467,7 +1320,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //110010011001001001011
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1487,9 +1339,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1510,11 +1360,8 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
-
             }
         });
 
@@ -1532,7 +1379,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     color = ((ColorDrawable)backgroundcolor).getColor();
                 }
 
-                //110010011001001001011
                 if(color == Color.GREEN){
 
                     //means its already green so the user wants to DESELECT so update the database
@@ -1552,9 +1398,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1575,9 +1419,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid1.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct1ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -1616,10 +1458,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -1641,11 +1480,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
-
                 }
             }
         });
@@ -1682,10 +1517,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -1707,9 +1539,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -1746,10 +1576,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
-
 
                 }else{
 
@@ -1771,9 +1598,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -1810,9 +1635,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1834,9 +1657,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
 
             }
@@ -1874,9 +1695,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1898,9 +1717,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -1937,9 +1754,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -1961,9 +1776,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -2001,9 +1814,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2025,9 +1836,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -2064,9 +1873,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2088,9 +1895,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -2127,9 +1932,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2151,9 +1954,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -2191,9 +1992,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2215,9 +2014,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -2254,9 +2051,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2278,9 +2073,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -2318,9 +2111,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2342,9 +2133,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -2382,9 +2171,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2406,9 +2193,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -2447,9 +2232,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2471,11 +2254,8 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
-
             }
         });
 
@@ -2513,9 +2293,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2537,9 +2315,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -2549,7 +2325,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         btCalendarDay37.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-
 
                 String temp = Dashboard.userActivityContributionid2.sprintDailyPoints;
 
@@ -2579,9 +2354,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2603,9 +2376,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -2644,9 +2415,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2668,11 +2437,8 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
-
             }
         });
 
@@ -2710,9 +2476,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2734,11 +2498,8 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
-
             }
         });
 
@@ -2776,9 +2537,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2800,11 +2559,8 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
-
             }
         });
 
@@ -2843,9 +2599,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2867,9 +2621,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
@@ -2908,9 +2660,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
 
                 }else{
 
@@ -2932,13 +2682,10 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     databaseUpdateActivities = FirebaseDatabase.getInstance().getReference("Activities");
                     databaseUpdateActivities.child(Dashboard.userActivityContributionid2.activityid).child("actualPoints").setValue(countOnes+"");
 
-                    // nat change
                     setAct2ProgressIndicator();
-                    // end nat change
                 }
             }
         });
-
 
         String datearranger = "";
         int numberOfweeks = Integer.parseInt(Dashboard.userContributionSprint.numberOfWeeks);
@@ -2960,14 +2707,9 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             btCalendarDay20.setVisibility(View.GONE);
             btCalendarDay21.setVisibility(View.GONE);
 
-
             //update the current value from start of the week
             String tempStartingDate = textStartingDate.getText().toString();
             String tempEndingDate = textEndingDate.getText().toString();
-            System.out.println("thisistemp " + tempStartingDate);
-            System.out.println("thisistemp2 " + tempEndingDate);
-
-
 
             try {
 
@@ -2985,15 +2727,11 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     // Do your job here with `date`.
                     String[] str = date.toString().split(" ");
 
-                    System.out.println("DATEIS2 completedate " + date.toString());
-
                     if(counter==7){
                         break;
                     }
 
                     for(int i=0;i<str.length;i++) {
-                        System.out.println("DATEIS2 " + str[2]);
-
 
                         if(counter==0){
                             ++counter;
@@ -3042,11 +2780,8 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                             btCalendarDay28.setText(str[2]);
                             break;
                         }
-
-
                     }
                 }
-
 
             }catch(ParseException e){
                 e.printStackTrace();
@@ -3091,7 +2826,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             btCalendarDay41.setVisibility(View.GONE);
             btCalendarDay42.setVisibility(View.GONE);
 
-
             String sprintJoyDailypoints2 = Dashboard.userActivityContributionid2.sprintDailyPoints;
 
             for(int i=0;i<7;i++){
@@ -3113,8 +2847,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                 }
 
             } //end of for
-
-
 
         }else if(numberOfweeks==2){
 
@@ -3151,8 +2883,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     }
 
                     for(int i=0;i<str.length;i++) {
-
-
 
                         if(counter==0){
                             ++counter;
@@ -3250,16 +2980,12 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                             btCalendarDay35.setText(str[2]);
                             break;
                         }
-
-
                     }
                 }
-
 
             }catch(ParseException e){
                 e.printStackTrace();
             }
-
 
             //put the selected days in dashboard
             String sprintJoyDailypoints = Dashboard.userActivityContributionid1.sprintDailyPoints;
@@ -3296,7 +3022,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                 }
 
             } //end of for
-
 
             btCalendarDay36.setVisibility(View.GONE);
             btCalendarDay37.setVisibility(View.GONE);
@@ -3343,12 +3068,9 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
 
             } //end of for
 
-
-
         }else{
             //display all of them
 
-            //update the current value from start of the week
             //update the current value from start of the week
             String tempStartingDate = textStartingDate.getText().toString();
             String tempEndingDate = textEndingDate.getText().toString();
@@ -3374,7 +3096,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                     }
 
                     for(int i=0;i<str.length;i++) {
-
 
                         if(counter==0){
                             ++counter;
@@ -3523,7 +3244,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                         }
                     }
                 }
-
 
             }catch(ParseException e){
                 e.printStackTrace();
@@ -3700,21 +3420,16 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
                 sundayDate.setText(a[(i + position) % a.length]);
 
             }
-            //System.out.println(a[(i + position) % a.length]);
         }
 
-
         //GOALS (questionaire)
-
 
         q1_contribution = (EditText)view.findViewById(R.id.q1Goals);
         q2_contribution = (EditText)view.findViewById(R.id.q2Goals);
         q3_contribution = (EditText)view.findViewById(R.id.q3Goals);
         q4_contribution = (EditText)view.findViewById(R.id.q4Goals);
 
-
         submitGoalbtn_Contribution = (Button)view.findViewById(R.id.submitButtonGoals);
-
         submitGoalbtn_Contribution.setOnClickListener(this);
 
         return view;
@@ -3733,7 +3448,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         }
 
     } //end of onClick
-
 
 
     public void checkAnswers(){
@@ -3760,7 +3474,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             return;
         }
 
-
         if(answer1.length()>180){
             Toast.makeText(getActivity().getApplicationContext(),"Your first answer has " +
                     answer1.length() + "words. Answers must contain at most 180 characters",Toast.LENGTH_LONG).show();
@@ -3784,12 +3497,10 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
             Toast.makeText(getActivity().getApplicationContext(),"Goal Submitted",Toast.LENGTH_LONG).show();
 
             databaseUpdateCategories = FirebaseDatabase.getInstance().getReference("Categories");
-
             databaseUpdateCategories.child(Dashboard.userActivityContributionid1.categoryId).child("ContributionSprints").child(Dashboard.sprintContributionid).child("goal1").setValue(q1_contribution.getText().toString());
             databaseUpdateCategories.child(Dashboard.userActivityContributionid1.categoryId).child("ContributionSprints").child(Dashboard.sprintContributionid).child("goal2").setValue(q2_contribution.getText().toString());
             databaseUpdateCategories.child(Dashboard.userActivityContributionid1.categoryId).child("ContributionSprints").child(Dashboard.sprintContributionid).child("goal3").setValue(q3_contribution.getText().toString());
             databaseUpdateCategories.child(Dashboard.userActivityContributionid1.categoryId).child("ContributionSprints").child(Dashboard.sprintContributionid).child("goal4").setValue(q4_contribution.getText().toString());
-
 
             q1_contribution.setText("");
             q2_contribution.setText("");
@@ -3798,7 +3509,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         }
     }
 
-    // nat change
     public void setAct1ProgressIndicator(){
 
         if ((Integer.parseInt(textActual1.getText().toString())) > (Integer.parseInt(textTarget1.getText().toString()))){
@@ -3829,7 +3539,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         FragmentJoy.gaugeJoyLifeScore.setHighValue(FragmentJoy.lifeScoreJoyInt);
         FragmentPassion.lifeScorePassionInt = lifeScoreContributionInt;
         FragmentPassion.gaugePassionLifeScore.setHighValue(FragmentPassion.lifeScorePassionInt);
-
     }
 
     public void setAct2ProgressIndicator(){
@@ -3862,11 +3571,7 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
         FragmentJoy.gaugeJoyLifeScore.setHighValue(FragmentJoy.lifeScoreJoyInt);
         FragmentPassion.lifeScorePassionInt = lifeScoreContributionInt;
         FragmentPassion.gaugePassionLifeScore.setHighValue(FragmentPassion.lifeScorePassionInt);
-
     }
-    // end nat change
-
-
 
     /**
      * Called immediately after {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}
@@ -3881,7 +3586,6 @@ public class FragmentGivingBack extends Fragment implements View.OnClickListener
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
     }
 
     public void setTextView(String value){

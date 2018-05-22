@@ -2,7 +2,6 @@ package com.example.seniorprojectfall.test;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import java.util.*;
 
 public class Category implements Parcelable{
@@ -21,8 +20,6 @@ public class Category implements Parcelable{
     String userId;
     String sprintid;
 
-
-
     public Category(){
 
         categoryid = "";
@@ -38,7 +35,6 @@ public class Category implements Parcelable{
         startingDate= "";
         userId = "";
         sprintid = "";
-
     }
 
     public Category(String categoryid, String endingDate, String goal1, String goal2, String goal3, String goal4, String numberOfWeeks, String sprintActivityid1,
@@ -56,7 +52,6 @@ public class Category implements Parcelable{
         this.startingDate = startingDate;
         this.userId = userId;
         this.sprintid = sprintid;
-
     }
 
     public Category(Parcel in){

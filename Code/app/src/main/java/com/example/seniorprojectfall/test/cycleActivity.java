@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Button;
-
 import com.sccomponents.gauges.ScArcGauge;
 
 public class cycleActivity extends AppCompatActivity {
@@ -30,7 +29,6 @@ public class cycleActivity extends AppCompatActivity {
         Intent in = getIntent();
         element_static = in.getExtras().getString("theelement");
         String[] s = element_static.split(" ");
-
         String s6detail = "";
         String s7detail = "";
 
@@ -39,7 +37,6 @@ public class cycleActivity extends AppCompatActivity {
         }else{
                     s6detail = s[6].substring(0,2) + "/" + s[6].substring(2,4) + "/" + s[6].substring(6);
         }
-
 
         if(s[2].length()==7){
             s7detail = "0" + s[2].substring(1,2) + "/" + s[2].substring(2,4) + "/" + s[2].substring(6);
@@ -59,11 +56,8 @@ public class cycleActivity extends AppCompatActivity {
                 + " Ending Date:   " + "\t  "+ s6detail);
 
         int temp = Integer.parseInt(s[0]);
-
         actScore.setText(temp+"");
         first.setHighValue(temp);
-
-
         final Button btn = (Button) findViewById(R.id.buttonleave);
         btn.setText("Return");
         btn.setOnClickListener(new View.OnClickListener() {
@@ -71,8 +65,6 @@ public class cycleActivity extends AppCompatActivity {
             public void onClick(View view) {
                 btn.setTextColor(Color.WHITE);
                 onBackPressed();
-
-
             }
         });
     }
@@ -81,7 +73,6 @@ public class cycleActivity extends AppCompatActivity {
     public void onBackPressed() {
 
         super.onBackPressed();
-
     }
 
 }

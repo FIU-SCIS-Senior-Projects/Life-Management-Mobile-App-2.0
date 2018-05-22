@@ -39,11 +39,9 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 
-//This is dashboard activity
+
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-
 
     //JOY variables
     static ArrayList<ActivitiesSprint> allActivities;
@@ -58,15 +56,12 @@ public class Dashboard extends AppCompatActivity
     static String endingDateFixed;
     static String startingDateFixed;
     static String sprintJoyid;
-
     static String profileName;
     User currentUser; //holds the information of the current logged-in user
     DatabaseReference profilePic;
     static String helper;
 
-
     //PASSION variables
-
     static ArrayList<Category> currentPassionCategories;
     static ArrayList<Category> userPassionsprintsHelper;
     static ArrayList<ActivitiesSprint> userPassionactivitiesPrevious;
@@ -78,7 +73,6 @@ public class Dashboard extends AppCompatActivity
     static String sprintPassionid;
 
     //GIVING BACK variables
-
     static ArrayList<Category> currentContributionCategories;
     static ArrayList<Category> userContributionsprintsHelper;
     static Category userContributionSprint;
@@ -98,7 +92,6 @@ public class Dashboard extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         coachesList = new ArrayList<>();
-
 
         //JOY
         allActivities = new ArrayList<>();
@@ -138,8 +131,6 @@ public class Dashboard extends AppCompatActivity
         tbl_pages.getTabAt(0).setIcon(tabIcons[0]);
         tbl_pages.getTabAt(1).setIcon(tabIcons[1]);
         tbl_pages.getTabAt(2).setIcon(tabIcons[2]);
-
-
         tbl_pages.getTabAt(0).getIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
         tbl_pages.getTabAt(1).getIcon().setColorFilter(Color.parseColor("#a8a8a8"), PorterDuff.Mode.SRC_IN);
         tbl_pages.getTabAt(2).getIcon().setColorFilter(Color.parseColor("#a8a8a8"), PorterDuff.Mode.SRC_IN);
@@ -162,18 +153,12 @@ public class Dashboard extends AppCompatActivity
             }
         });
 
-
-
-        //Lazaro code for DB
-
         Intent in = getIntent();
         String usernameRef = in.getExtras().getString("userNameY");  //has username that the user entered
         String passRef = in.getExtras().getString("passwordY");  //the password that user entered
 
         //JOY
-
         sprintJoyid = in.getExtras().getString("joySprintId");
-
         userJoySprint.categoryid = in.getExtras().getString("joy_userJoySprint_categoryid");
         userJoySprint.endingDate = in.getExtras().getString("joy_userJoySprint_endingdate");
         userJoySprint.goal1 = in.getExtras().getString("joy_userJoySprint_goal1");
@@ -187,7 +172,7 @@ public class Dashboard extends AppCompatActivity
         userJoySprint.startingDate = in.getExtras().getString("joy_UserJoySprint_startingdate");
         userJoySprint.userId = in.getExtras().getString("joy_UserJoySprint_userid");
 
-
+        //id1
         userActivityJoyid1.activityScore = in.getExtras().getString("joy_activityid1_activityscore");
         userActivityJoyid1.actualPoints = in.getExtras().getString("joy_activityid1_actualpoints");
         userActivityJoyid1.categoryId = in.getExtras().getString("joy_activityid1_categoryid");
@@ -197,6 +182,7 @@ public class Dashboard extends AppCompatActivity
         userActivityJoyid1.userId = in.getExtras().getString("joy_activityid1_userid");
         userActivityJoyid1.activityid = in.getExtras().getString("joy_activityid1_activityid");
 
+        //id2
         userActivityJoyid2.activityScore = in.getExtras().getString("joy_activityid2_activityscore");
         userActivityJoyid2.actualPoints = in.getExtras().getString("joy_activityid2_actualpoints");
         userActivityJoyid2.categoryId = in.getExtras().getString("joy_activityid2_categoryid");
@@ -210,7 +196,6 @@ public class Dashboard extends AppCompatActivity
         //PASSION
 
         sprintPassionid = in.getExtras().getString("passionSprintId");
-
         userPassionSprint.categoryid = in.getExtras().getString("passion_userPassionSprint_categoryid");
         userPassionSprint.endingDate = in.getExtras().getString("passion_userPassionSprint_endingdate");
         userPassionSprint.goal1 = in.getExtras().getString("passion_userPassionSprint_goal1");
@@ -224,7 +209,7 @@ public class Dashboard extends AppCompatActivity
         userPassionSprint.startingDate = in.getExtras().getString("passion_userPassionSprint_startingdate");
         userPassionSprint.userId = in.getExtras().getString("passion_userPassionSprint_userid");
 
-
+        //id1 (passion)
         userActivityPassionid1.activityScore = in.getExtras().getString("passion_activityid1_activityscore");
         userActivityPassionid1.actualPoints = in.getExtras().getString("passion_activityid1_actualpoints");
         userActivityPassionid1.categoryId = in.getExtras().getString("passion_activityid1_categoryid");
@@ -234,6 +219,7 @@ public class Dashboard extends AppCompatActivity
         userActivityPassionid1.userId = in.getExtras().getString("passion_activityid1_userid");
         userActivityPassionid1.activityid = in.getExtras().getString("passion_activityid1_activityid");
 
+        //id2 (passion)
         userActivityPassionid2.activityScore = in.getExtras().getString("passion_activityid2_activityscore");
         userActivityPassionid2.actualPoints = in.getExtras().getString("passion_activityid2_actualpoints");
         userActivityPassionid2.categoryId = in.getExtras().getString("passion_activityid2_categoryid");
@@ -243,11 +229,9 @@ public class Dashboard extends AppCompatActivity
         userActivityPassionid2.userId = in.getExtras().getString("passion_activityid2_userid");
         userActivityPassionid2.activityid = in.getExtras().getString("passion_activityid2_activityid");
 
-
         //GIVING BACK
 
         sprintContributionid = in.getExtras().getString("contributionSprintId");
-
         userContributionSprint.categoryid = in.getExtras().getString("contribution_userContributionSprint_categoryid");
         userContributionSprint.endingDate = in.getExtras().getString("contribution_userContributionSprint_endingdate");
         userContributionSprint.goal1 = in.getExtras().getString("contribution_userContributionSprint_goal1");
@@ -261,7 +245,7 @@ public class Dashboard extends AppCompatActivity
         userContributionSprint.startingDate = in.getExtras().getString("contribution_userContributionSprint_startingdate");
         userContributionSprint.userId = in.getExtras().getString("contribution_userContributionSprint_userid");
 
-
+        //id1 (giving back)
         userActivityContributionid1.activityScore = in.getExtras().getString("contribution_activityid1_activityscore");
         userActivityContributionid1.actualPoints = in.getExtras().getString("contribution_activityid1_actualpoints");
         userActivityContributionid1.categoryId = in.getExtras().getString("contribution_activityid1_categoryid");
@@ -271,6 +255,7 @@ public class Dashboard extends AppCompatActivity
         userActivityContributionid1.userId = in.getExtras().getString("contribution_activityid1_userid");
         userActivityContributionid1.activityid = in.getExtras().getString("contribution_activityid1_activityid");
 
+        //id2 (giving back)
         userActivityContributionid2.activityScore = in.getExtras().getString("contribution_activityid2_activityscore");
         userActivityContributionid2.actualPoints = in.getExtras().getString("contribution_activityid2_actualpoints");
         userActivityContributionid2.categoryId = in.getExtras().getString("contribution_activityid2_categoryid");
@@ -280,12 +265,9 @@ public class Dashboard extends AppCompatActivity
         userActivityContributionid2.userId = in.getExtras().getString("contribution_activityid2_userid");
         userActivityContributionid2.activityid = in.getExtras().getString("contribution_activityid2_activityid");
 
-        //temp
         Bundle bundle = getIntent().getExtras();
         ArrayList<User> arr = new ArrayList<>();
-
         arr = bundle.getParcelableArrayList("mylist");
-
 
         for(int i=0; i<arr.size();i++) {
 
@@ -311,8 +293,6 @@ public class Dashboard extends AppCompatActivity
             System.out.println("this is errorr2 " + userJoyactivitiesPrevious.get(i).categoryId + " " + userJoyactivitiesPrevious.get(i).name);
         }
 
-
-
         //PASSION
         currentPassionCategories = bundle.getParcelableArrayList("categoriesPassionCategories");
         userPassionsprintsHelper = bundle.getParcelableArrayList("userPassionsprintHelperList");
@@ -323,49 +303,28 @@ public class Dashboard extends AppCompatActivity
         userContributionsprintsHelper = bundle.getParcelableArrayList("userContributionsprintHelperList");
         userContributionactivitiesPrevious = bundle.getParcelableArrayList("activitiesContributionPrevious");
 
-
-
+        //convert to format mm/dd/yyyy
 
         //JOY
-
-        //convert to format mm/dd/yyyy
         endingDateFixed = userJoySprint.endingDate.substring(0,2) + "/" +
                 userJoySprint.endingDate.substring(2,4) + "/" + userJoySprint.endingDate.substring(4);
-
-        //convert to format mm/dd/yyyy
 
         startingDateFixed = userJoySprint.startingDate.substring(0,2) + "/" +
                 userJoySprint.startingDate.substring(2,4) + "/" + userJoySprint.startingDate.substring(4);
 
-
-
-
         //PASSION
-
-        //convert to format mm/dd/yyyy
         endingDateFixed_passion = userPassionSprint.endingDate.substring(0,2) + "/" +
                 userPassionSprint.endingDate.substring(2,4) + "/" + userPassionSprint.endingDate.substring(4);
-
-        //convert to format mm/dd/yyyy
 
         startingDateFixed_passion = userPassionSprint.startingDate.substring(0,2) + "/" +
                 userPassionSprint.startingDate.substring(2,4) + "/" + userPassionSprint.startingDate.substring(4);
 
-
-
         //GIVING BACK
-
-        //convert to format mm/dd/yyyy
         endingDateFixed_contribution = userContributionSprint.endingDate.substring(0,2) + "/" +
                 userContributionSprint.endingDate.substring(2,4) + "/" + userContributionSprint.endingDate.substring(4);
 
-        //convert to format mm/dd/yyyy
-
         startingDateFixed_contribution = userContributionSprint.startingDate.substring(0,2) + "/" +
                 userContributionSprint.startingDate.substring(2,4) + "/" + userContributionSprint.startingDate.substring(4);
-
-
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -378,8 +337,6 @@ public class Dashboard extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerlayout = navigationView.getHeaderView(0);
-
-
 
         TextView message  = (TextView) headerlayout.findViewById(R.id.welcomeTextview);
         message.setText("Hello " + currentUser.firstName.toString());
@@ -400,16 +357,10 @@ public class Dashboard extends AppCompatActivity
                 }
             });
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
     } //end of onCreate
-
-
 
 
     class FragmentAdapter extends FragmentPagerAdapter {
@@ -451,8 +402,6 @@ public class Dashboard extends AppCompatActivity
 
             }
         }
-
-
     }
 
     @Override
@@ -520,11 +469,11 @@ public class Dashboard extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_new_cycle) {
+
             // Handle new cycle action
             String endDate = userJoySprint.endingDate;
             int monthEnd = Integer.parseInt(endDate.substring(0,2)) - 1;
             int dayEnd = Integer.parseInt(endDate.substring(2,4));
-            //System.out.println("NAT TEST END DATE" + dayEnd);
             int yearEnd = Integer.parseInt(endDate.substring(4));
             Calendar edate = Calendar.getInstance();
             edate.set(Calendar.DAY_OF_MONTH,dayEnd);
@@ -532,13 +481,6 @@ public class Dashboard extends AppCompatActivity
             edate.set(Calendar.YEAR,yearEnd);
 
             Calendar calToday = Calendar.getInstance();
-            //int yearToday = calToday.get(Calendar.YEAR);
-            //int monthToday = calToday.get(Calendar.MONTH) + 1;
-            //int dayToday = calToday.get(Calendar.DAY_OF_MONTH);
-            //calToday.set(Calendar.DAY_OF_MONTH,dayToday);
-            //calToday.set(Calendar.MONTH,monthEnd);
-            //calToday.set(Calendar.YEAR,yearEnd);
-
 
             if(calToday.compareTo(edate) < 0){
 
@@ -553,7 +495,6 @@ public class Dashboard extends AppCompatActivity
                                 i.putExtra("userid", currentUser.id);
                                 i.putExtra("username", currentUser.username);
                                 i.putExtra("password", currentUser.password);
-
                                 startActivity(i);
                             }
                         })
@@ -570,15 +511,12 @@ public class Dashboard extends AppCompatActivity
                 alert.getButton(alert.BUTTON_POSITIVE).setTextColor(Color.parseColor("#11b213"));
                 alert.getButton(alert.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#11b213"));
 
-
-            }
-            else {
+            }else {
                 Intent i = new Intent(Dashboard.this, MainJoyActivity.class);
                 //Save user id, currentusername, password so that we can use it in the following Activity:
                 i.putExtra("userid", currentUser.id);
                 i.putExtra("username", currentUser.username);
                 i.putExtra("password", currentUser.password);
-
                 startActivity(i);
             }
         } else if (id == R.id.nav_current_cycle) {
@@ -599,7 +537,7 @@ public class Dashboard extends AppCompatActivity
             this.startActivity(i);
 
         } else if (id == R.id.nav_share_progress) {
-
+                //no user stories
         }
         else if (id == R.id.nav_chat) {
             Intent i = new Intent(Dashboard.this, ChatCoachSelectionActivity.class);
@@ -608,19 +546,16 @@ public class Dashboard extends AppCompatActivity
             i.putExtra("username", currentUser.username);
             i.putExtra("firstname", currentUser.firstName);
             startActivity(i);
-
         }
         else if (id == R.id.nav_update_calendar) {
-
+                //no user stories
         }
         else if (id == R.id.nav_invite_friend) {
-
+            //no user stories
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 }

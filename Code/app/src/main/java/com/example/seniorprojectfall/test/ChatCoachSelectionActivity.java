@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,9 +17,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-/**
- * Created by Natalia on 11/17/2017.
- */
 
 public class ChatCoachSelectionActivity extends AppCompatActivity {
 
@@ -39,8 +35,6 @@ public class ChatCoachSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_coaches_selection);
 
-
-
         databaseReferenceCoaches = FirebaseDatabase.getInstance().getReference("Coaches");
 
         Intent in = getIntent();
@@ -53,10 +47,8 @@ public class ChatCoachSelectionActivity extends AppCompatActivity {
 
         onStart();
 
-
         //Load chat coaches
         displayCoaches();
-
     }
 
 
@@ -69,15 +61,13 @@ public class ChatCoachSelectionActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot coachSnapshot : dataSnapshot.getChildren()) { //id)
+                for (DataSnapshot coachSnapshot : dataSnapshot.getChildren()) {
                     if (coachSnapshot.getValue() == null) {
                         break;
                     }
                     else{
                         coachId = coachSnapshot.getKey();
-                        //System.out.println("NAT TEST coachId" + coachId);
                         displayCoaches();
-
                     }
                 }
             }
@@ -87,7 +77,6 @@ public class ChatCoachSelectionActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void displayCoaches() {
@@ -107,7 +96,7 @@ public class ChatCoachSelectionActivity extends AppCompatActivity {
             };
             listOfCoaches.setAdapter(adapter);
         }
-        // set on list item on click listener
+
         listOfCoaches.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -126,7 +115,6 @@ public class ChatCoachSelectionActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
     }
 
     @Override

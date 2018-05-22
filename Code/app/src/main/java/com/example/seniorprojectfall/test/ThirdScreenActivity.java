@@ -12,7 +12,6 @@ import android.widget.ImageButton;
 
 public class ThirdScreenActivity extends AppCompatActivity {
 
-
     FloatingActionButton nextButton;
 
     @Override
@@ -33,10 +32,6 @@ public class ThirdScreenActivity extends AppCompatActivity {
         //zoom animation
         Animation zoomAnimation = AnimationUtils.loadAnimation(this, R.anim.zoom);
         nextButton.startAnimation(zoomAnimation);
-
-
     }
-
-
 }
 

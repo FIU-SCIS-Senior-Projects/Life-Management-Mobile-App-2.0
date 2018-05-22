@@ -19,16 +19,13 @@ public class MainPassionActivity extends AppCompatActivity {
     private ArrayList<Passion> activitiesPassion;
     static ImageButton androidRightArrowButton;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_passion);
 
         androidRightArrowButton = (ImageButton) findViewById(R.id.imageButtonActivityPassion);
-
         coverFlow = (FeatureCoverFlow) findViewById(R.id.coverflow);
-
         settingDummyData();
         adapter = new CoverFlowAdapterPassion(this, activitiesPassion);
         coverFlow.setAdapter(adapter);
@@ -38,7 +35,7 @@ public class MainPassionActivity extends AppCompatActivity {
         androidRightArrowButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                //Toast.makeText(MainActivity.this, "It works",Toast.LENGTH_LONG).show();
+
                 Intent in = getIntent();
                 String userid = in.getStringExtra("userid");
                 String username = in.getStringExtra("username");
@@ -83,7 +80,5 @@ public class MainPassionActivity extends AppCompatActivity {
         activitiesPassion.add(new Passion(R.drawable.passion_networking, "Networking"));
         activitiesPassion.add(new Passion(R.drawable.passion_camping, "Camping"));
         activitiesPassion.add(new Passion(R.drawable.passion_traveling, "Traveling"));
-
     }
-
 }

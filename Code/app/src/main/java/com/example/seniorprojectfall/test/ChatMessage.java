@@ -1,8 +1,5 @@
 package com.example.seniorprojectfall.test;
 
-/**
- * Created by Natalia on 11/14/2017.
- */
 
 public class ChatMessage {
     private String messageText;

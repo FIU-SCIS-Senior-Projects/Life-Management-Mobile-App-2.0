@@ -1,1 +1,0 @@
-# Life-Management-Mobile-App-2.0

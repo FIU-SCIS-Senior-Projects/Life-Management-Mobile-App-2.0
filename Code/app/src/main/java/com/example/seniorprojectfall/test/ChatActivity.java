@@ -13,17 +13,12 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-/**
- * Created by Natalia on 11/14/2017.
- */
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -48,21 +43,14 @@ public class ChatActivity extends AppCompatActivity {
 
         Intent in = getIntent();
         userId = in.getStringExtra("userid");
-        System.out.println("NAT TEST userId" + userId);
         username = in.getStringExtra("username");
-        System.out.println("NAT TEST username" + username);
         firstname = in.getStringExtra("firstname");
-        System.out.println("NAT TEST firstname" + firstname);
         coachId = in.getStringExtra("coachid");
         coachFirstName = in.getStringExtra("coachfirstname");
-        System.out.println("NAT TEST coachfirstname" + coachFirstName);
 
         onStart();
 
-
         //check if this user already has chats in Chats.
-
-
         fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -79,42 +67,35 @@ public class ChatActivity extends AppCompatActivity {
                 //when coach's username is added to coach model in db, userId can be replaced with user's username
                 databaseReferenceChat.child(chatId).child("ChatMessage").push().setValue(new ChatMessage(input.getText().toString(), userId));
                 input.setText("");
-
-
-
             }
         });
 
         //Load chat messages
         displayChatMessage();
-
     }
 
     //find User Coach Chats
     @Override
     protected void onStart() {
         super.onStart();
-        //attaching value event listener to read from db
+
         databaseReferenceChat.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot chatSnapshot : dataSnapshot.getChildren()) { //id)
+                for (DataSnapshot chatSnapshot : dataSnapshot.getChildren()) {
                     if ((chatSnapshot.getValue() == null) || (chatSnapshot.child("userId").getValue() == null) || (chatSnapshot.child("coachId").getValue() == null) ) {
                         break;
                     }
                     else{
                         String userIdTmp = chatSnapshot.child("userId").getValue().toString();
                         String coachIdTmp = chatSnapshot.child("coachId").getValue().toString();
-                        System.out.println("NAT TEST userIdTmp" + userIdTmp);
+
                         if ((userIdTmp.equals(userId)) && (coachIdTmp.equals(coachId))) {
                             //get that chatSnapshot id, so that we can add new chats there
                             chatId = chatSnapshot.getKey();
-                            System.out.println("NAT TEST chatId" + chatId);
-
                             displayChatMessage();
-
                         }
                     }
                 }
@@ -122,10 +103,8 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-
     }
 
     private void displayChatMessage() {
@@ -135,7 +114,7 @@ public class ChatActivity extends AppCompatActivity {
             adapter = new FirebaseListAdapter<ChatMessage>(this, ChatMessage.class, R.layout.list_item_chat, databaseReferenceChat.child(chatId).child("ChatMessage")) {
                 @Override
                 protected void populateView(View v, ChatMessage model, int position) {
-                    // Get references to the views of list_item_chat.xml
+
                     TextView messageText = (TextView) v.findViewById(R.id.message_text);
                     TextView messageUser = (TextView) v.findViewById(R.id.message_user);
                     TextView messageTextRight = (TextView) v.findViewById(R.id.message_text_right);
@@ -144,12 +123,10 @@ public class ChatActivity extends AppCompatActivity {
                     //when coach's username is added to coach model in db, coach (userId) can be replaced with coach's (user's) usernames
                     if(model.getMessageUser().equals(coachId)) {
 
-
                         messageText.setText(model.getMessageText());
                         messageUser.setText(coachFirstName);
                         messageTextRight.setText("");
                         messageUserRight.setText("");
-
                     }
                     else if(model.getMessageUser().equals(userId)){
 
@@ -166,7 +143,7 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.chat_message, menu);
         return true;
     }

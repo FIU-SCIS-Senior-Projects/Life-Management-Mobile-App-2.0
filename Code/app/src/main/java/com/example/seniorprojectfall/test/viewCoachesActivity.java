@@ -1,6 +1,5 @@
 package com.example.seniorprojectfall.test;
 
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +17,6 @@ public class viewCoachesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_coaches);
 
-
         ListView list = (ListView) findViewById(R.id.listviewViewCoaches);
         ImageButton backButton = (ImageButton) findViewById(R.id.imageButton_Coaches);
 
@@ -31,11 +29,9 @@ public class viewCoachesActivity extends AppCompatActivity {
                     "Skills: " + Dashboard.coachesList.get(i).skills + "\n"
                     + "Rating: " + Dashboard.coachesList.get(i).rating + "\n";
         }
-//simple_list_item1
+
         adapter = new ArrayAdapter<String>(this, R.layout.sizeadjuster_coaches, elements);
-
         list.setAdapter(adapter);
-
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,7 +39,6 @@ public class viewCoachesActivity extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     public void onBackPressed() {

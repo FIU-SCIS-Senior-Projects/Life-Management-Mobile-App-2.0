@@ -28,14 +28,11 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_main);
 
             androidRightArrowButton = (ImageButton) findViewById(R.id.imageButton);
-
             final CheckedTextView skip = (CheckedTextView) findViewById(R.id.checkedTextView);
-
 
             androidRightArrowButton.setOnClickListener(new View.OnClickListener() {
 
                 public void onClick(View v){
-                    //Toast.makeText(MainActivity.this, "It works",Toast.LENGTH_LONG).show();
                     Intent i = new Intent(MainActivity.this,SecondScreenActivity.class);
                     startActivity(i);
                 }
@@ -53,9 +50,5 @@ public class MainActivity extends AppCompatActivity {
             //zoom animation
             Animation zoomAnimation = AnimationUtils.loadAnimation(this,R.anim.zoom);
             androidRightArrowButton.startAnimation(zoomAnimation);
-
-
-
         }
-
 }

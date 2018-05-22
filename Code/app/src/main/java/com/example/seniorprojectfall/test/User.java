@@ -3,10 +3,6 @@ package com.example.seniorprojectfall.test;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by lazaro on 9/17/17.
- */
-
 public class User implements Parcelable{
 
     //String id;
@@ -53,7 +49,6 @@ public class User implements Parcelable{
         this.lastName = in.readString();
         this.dob = in.readString();
 
-
         int m = 0;
         m = in.readInt();
 
@@ -62,7 +57,6 @@ public class User implements Parcelable{
 
         this.password = in.readString();
         this.id = in.readString();
-
     }
 
     public String getId() {
@@ -155,9 +149,7 @@ public class User implements Parcelable{
         parcel.writeInt((adminFlag) ? 1 : 0);
         parcel.writeString(password);
         parcel.writeString(id);
-
     }
-
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
         public User createFromParcel(Parcel in) {
@@ -169,6 +161,4 @@ public class User implements Parcelable{
             return new User[i];
         }
     };
-
-
 }
