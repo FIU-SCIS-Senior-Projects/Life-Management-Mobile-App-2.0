@@ -10,7 +10,7 @@ package com.example.natalia.lifemanagementfirst;
 
 public class User implements Parcelable{
 
-    //String id;
+    String id;
     String email;
     String username;
     String password;
