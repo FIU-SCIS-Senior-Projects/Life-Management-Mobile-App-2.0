@@ -51,6 +51,7 @@
             android:name=".ChatActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ChatCoachSelectionActivity" />
+        <activity android:name=".SettingsActivity" />
         <activity android:name=".viewCoachesActivity"/>
         <activity android:name=".currentCycleActivity">
         </activity>

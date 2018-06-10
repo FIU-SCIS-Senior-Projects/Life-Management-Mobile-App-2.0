@@ -8,19 +8,31 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:868568540473:android:1cbf4f375c1d4236",
+        "mobilesdk_app_id": "1:868568540473:android:3f994f52a4c03981",
         "android_client_info": {
-          "package_name": "com.example.seniorprojectfall.test"
+          "package_name": "com.example.natalia.lifemanagementfirst"
         }
       },
       "oauth_client": [
         {
-          "client_id": "868568540473-08jc31tn4t3n5m5vpmhn63tlkhvlvcht.apps.googleusercontent.com",
+          "client_id": "868568540473-uk1jj5ksmvs0675ndnqp82e8shp5n21r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.seniorprojectfall.test",
-            "certificate_hash": "2e4a0ac823d6db614ba74478b899c2b8efd1d1f8"
+            "package_name": "com.example.natalia.lifemanagementfirst",
+            "certificate_hash": "30c4ae04d2e624466c0bb316c6687e23d119fd01"
           }
+        },
+        {
+          "client_id": "868568540473-4bbs7uojujlc3155kumhdfgf9cv326oa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.natalia.lifemanagementfirst",
+            "certificate_hash": "0c6d9c64089bf04239611f5630223fbd51cf75fb"
+          }
+        },
+        {
+          "client_id": "868568540473-ph0ahqpf9jdaeussvpil6il47entblqv.apps.googleusercontent.com",
+          "client_type": 3
         },
         {
           "client_id": "868568540473-ph0ahqpf9jdaeussvpil6il47entblqv.apps.googleusercontent.com",
@@ -59,19 +71,23 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:868568540473:android:3f994f52a4c03981",
+        "mobilesdk_app_id": "1:868568540473:android:1cbf4f375c1d4236",
         "android_client_info": {
-          "package_name": "com.example.natalia.lifemanagementfirst"
+          "package_name": "com.example.seniorprojectfall.test"
         }
       },
       "oauth_client": [
         {
-          "client_id": "868568540473-4bbs7uojujlc3155kumhdfgf9cv326oa.apps.googleusercontent.com",
+          "client_id": "868568540473-08jc31tn4t3n5m5vpmhn63tlkhvlvcht.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.natalia.lifemanagementfirst",
-            "certificate_hash": "0c6d9c64089bf04239611f5630223fbd51cf75fb"
+            "package_name": "com.example.seniorprojectfall.test",
+            "certificate_hash": "2e4a0ac823d6db614ba74478b899c2b8efd1d1f8"
           }
+        },
+        {
+          "client_id": "868568540473-ph0ahqpf9jdaeussvpil6il47entblqv.apps.googleusercontent.com",
+          "client_type": 3
         },
         {
           "client_id": "868568540473-ph0ahqpf9jdaeussvpil6il47entblqv.apps.googleusercontent.com",

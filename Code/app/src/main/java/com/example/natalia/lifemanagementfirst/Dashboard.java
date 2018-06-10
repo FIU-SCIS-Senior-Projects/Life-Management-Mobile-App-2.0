@@ -589,6 +589,12 @@ public class Dashboard extends AppCompatActivity
             this.startActivity(i);
 
         } else if (id == R.id.nav_settings) {
+            Intent i = new Intent(Dashboard.this, SettingsActivity.class);
+            //Save user id, currentusername so that we can use it in the following Activity:
+            i.putExtra("userid", currentUser.id);
+            i.putExtra("username", currentUser.username);
+            i.putExtra("firstname", currentUser.firstName);
+            startActivity(i);
 
         } else if (id == R.id.nav_view_coaches) {
             Intent i = new Intent(Dashboard.this,viewCoachesActivity.class);
